@@ -85,7 +85,7 @@ jhipster:
         authentication:
             jwt:
                 # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: MjBjOTZjMjBiN2IyMGI4MTdiMGNhOTdiOTU5ZTVhYjE1MzcyYzIzZTU2N2RkM2YxN2MxYThjZGQ2OGRjYjFkN2EwOWRjYzQyMGNkMTJlOTE1ZmMzYzMzYzhmNmM0YmVhNjFiMTZkODJjNzdkMjMyOGJmNjIxMGI3MjVmYTg3NmY=
+                base64-secret: MGIzY2ZiMDVkMTgyZWY4ODVjMzVjMTI4ZDA5YWNmZDAxYWVkY2JjNDJkZWQ5OTdmMTM4YmM4ZTUzYjk4YTljYTY0NGI1OTI5OGE2ZjlhOWMxZTI3NjIwNzUwZjUzZjM0YWY1NDE2ZmIxODkzYWVlNDhlNDFmNDJlMTgwMDhiMjc=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
