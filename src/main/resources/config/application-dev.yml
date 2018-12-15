@@ -36,9 +36,9 @@ spring:
             indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mariadb://localhost:3306/cmtproject?useLegacyDatetimeCode=false
+        url: jdbc:mariadb://ec2-13-59-157-174.us-east-2.compute.amazonaws.com:3306/cmt?useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
-        password:
+        password: "*Nokia123"
         hikari:
             auto-commit: false
             data-source-properties:
