@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.cmt.myapp",
+      "nativeLanguage": "pt-br"
+    },
+    "jhipsterVersion": "5.7.0",
+    "applicationType": "gateway",
+    "baseName": "cmtproject",
+    "packageName": "com.cmt.myapp",
+    "packageFolder": "com/cmt/myapp",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mariadb",
+    "prodDatabaseType": "mariadb",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MjBjOTZjMjBiN2IyMGI4MTdiMGNhOTdiOTU5ZTVhYjE1MzcyYzIzZTU2N2RkM2YxN2MxYThjZGQ2OGRjYjFkN2EwOWRjYzQyMGNkMTJlOTE1ZmMzYzMzYzhmNmM0YmVhNjFiMTZkODJjNzdkMjMyOGJmNjIxMGI3MjVmYTg3NmY=",
+    "clientFramework": "angularX",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "pt-br",
+    "languages": [
+      "pt-br"
+    ]
+  }
+}
