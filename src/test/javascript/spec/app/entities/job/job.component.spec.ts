@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
-import { MyAppTestModule } from '../../../test.module';
+import { CmtTestModule } from '../../../test.module';
 import { JobComponent } from 'app/entities/job/job.component';
 import { JobService } from 'app/entities/job/job.service';
 import { Job } from 'app/shared/model/job.model';
@@ -17,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [MyAppTestModule],
+                imports: [CmtTestModule],
                 declarations: [JobComponent],
                 providers: [
                     {

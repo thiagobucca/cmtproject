@@ -1,6 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
-import com.mycompany.myapp.MyApp;
+import com.mycompany.myapp.CmtApp;
 
 import com.mycompany.myapp.domain.Department;
 import com.mycompany.myapp.repository.DepartmentRepository;
@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see DepartmentResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MyApp.class)
+@SpringBootTest(classes = CmtApp.class)
 public class DepartmentResourceIntTest {
 
     private static final String DEFAULT_DEPARTMENT_NAME = "AAAAAAAAAA";

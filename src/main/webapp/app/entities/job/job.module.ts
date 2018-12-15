@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MyAppSharedModule } from 'app/shared';
+import { CmtSharedModule } from 'app/shared';
 import {
     JobComponent,
     JobDetailComponent,
@@ -15,9 +15,9 @@ import {
 const ENTITY_STATES = [...jobRoute, ...jobPopupRoute];
 
 @NgModule({
-    imports: [MyAppSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [CmtSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [JobComponent, JobDetailComponent, JobUpdateComponent, JobDeleteDialogComponent, JobDeletePopupComponent],
     entryComponents: [JobComponent, JobUpdateComponent, JobDeleteDialogComponent, JobDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MyAppJobModule {}
+export class CmtJobModule {}

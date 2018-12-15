@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
-import { MyAppTestModule } from '../../../test.module';
+import { CmtTestModule } from '../../../test.module';
 import { LocationComponent } from 'app/entities/location/location.component';
 import { LocationService } from 'app/entities/location/location.service';
 import { Location } from 'app/shared/model/location.model';
@@ -16,7 +16,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [MyAppTestModule],
+                imports: [CmtTestModule],
                 declarations: [LocationComponent],
                 providers: []
             })

@@ -1,6 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
-import com.mycompany.myapp.MyApp;
+import com.mycompany.myapp.CmtApp;
 
 import com.mycompany.myapp.domain.Region;
 import com.mycompany.myapp.repository.RegionRepository;
@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see RegionResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MyApp.class)
+@SpringBootTest(classes = CmtApp.class)
 public class RegionResourceIntTest {
 
     private static final String DEFAULT_REGION_NAME = "AAAAAAAAAA";

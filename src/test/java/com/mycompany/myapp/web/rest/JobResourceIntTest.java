@@ -1,6 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
-import com.mycompany.myapp.MyApp;
+import com.mycompany.myapp.CmtApp;
 
 import com.mycompany.myapp.domain.Job;
 import com.mycompany.myapp.repository.JobRepository;
@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see JobResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MyApp.class)
+@SpringBootTest(classes = CmtApp.class)
 public class JobResourceIntTest {
 
     private static final String DEFAULT_JOB_TITLE = "AAAAAAAAAA";

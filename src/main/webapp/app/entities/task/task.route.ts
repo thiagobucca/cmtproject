@@ -34,7 +34,7 @@ export const taskRoute: Routes = [
         component: TaskComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Tasks'
+            pageTitle: 'cmtApp.task.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,7 +46,7 @@ export const taskRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Tasks'
+            pageTitle: 'cmtApp.task.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -58,7 +58,7 @@ export const taskRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Tasks'
+            pageTitle: 'cmtApp.task.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +70,7 @@ export const taskRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Tasks'
+            pageTitle: 'cmtApp.task.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -85,7 +85,7 @@ export const taskPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Tasks'
+            pageTitle: 'cmtApp.task.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

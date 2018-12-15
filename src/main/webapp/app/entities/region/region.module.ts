@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MyAppSharedModule } from 'app/shared';
+import { CmtSharedModule } from 'app/shared';
 import {
     RegionComponent,
     RegionDetailComponent,
@@ -15,9 +15,9 @@ import {
 const ENTITY_STATES = [...regionRoute, ...regionPopupRoute];
 
 @NgModule({
-    imports: [MyAppSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [CmtSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [RegionComponent, RegionDetailComponent, RegionUpdateComponent, RegionDeleteDialogComponent, RegionDeletePopupComponent],
     entryComponents: [RegionComponent, RegionUpdateComponent, RegionDeleteDialogComponent, RegionDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MyAppRegionModule {}
+export class CmtRegionModule {}

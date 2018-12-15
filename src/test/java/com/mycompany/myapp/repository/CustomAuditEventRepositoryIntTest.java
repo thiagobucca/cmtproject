@@ -1,6 +1,6 @@
 package com.mycompany.myapp.repository;
 
-import com.mycompany.myapp.MyApp;
+import com.mycompany.myapp.CmtApp;
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.config.audit.AuditEventConverter;
 import com.mycompany.myapp.domain.PersistentAuditEvent;
@@ -31,7 +31,7 @@ import static com.mycompany.myapp.repository.CustomAuditEventRepository.EVENT_DA
  * @see CustomAuditEventRepository
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MyApp.class)
+@SpringBootTest(classes = CmtApp.class)
 @Transactional
 public class CustomAuditEventRepositoryIntTest {
 

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { MyAppTestModule } from '../../../test.module';
+import { CmtTestModule } from '../../../test.module';
 import { RegionUpdateComponent } from 'app/entities/region/region-update.component';
 import { RegionService } from 'app/entities/region/region.service';
 import { Region } from 'app/shared/model/region.model';
@@ -16,7 +16,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [MyAppTestModule],
+                imports: [CmtTestModule],
                 declarations: [RegionUpdateComponent]
             })
                 .overrideTemplate(RegionUpdateComponent, '')

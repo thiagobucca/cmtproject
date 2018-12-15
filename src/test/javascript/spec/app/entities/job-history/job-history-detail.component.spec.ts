@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { MyAppTestModule } from '../../../test.module';
+import { CmtTestModule } from '../../../test.module';
 import { JobHistoryDetailComponent } from 'app/entities/job-history/job-history-detail.component';
 import { JobHistory } from 'app/shared/model/job-history.model';
 
@@ -15,7 +15,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [MyAppTestModule],
+                imports: [CmtTestModule],
                 declarations: [JobHistoryDetailComponent],
                 providers: [{ provide: ActivatedRoute, useValue: route }]
             })

@@ -1,6 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
-import com.mycompany.myapp.MyApp;
+import com.mycompany.myapp.CmtApp;
 
 import com.mycompany.myapp.domain.JobHistory;
 import com.mycompany.myapp.repository.JobHistoryRepository;
@@ -40,7 +40,7 @@ import com.mycompany.myapp.domain.enumeration.Language;
  * @see JobHistoryResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MyApp.class)
+@SpringBootTest(classes = CmtApp.class)
 public class JobHistoryResourceIntTest {
 
     private static final Instant DEFAULT_START_DATE = Instant.ofEpochMilli(0L);

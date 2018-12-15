@@ -11,34 +11,36 @@ import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
-import { MyAppSharedModule } from 'app/shared';
-import { MyAppCoreModule } from 'app/core';
-import { MyAppAppRoutingModule } from './app-routing.module';
-import { MyAppHomeModule } from './home/home.module';
-import { MyAppAccountModule } from './account/account.module';
-import { MyAppEntityModule } from './entities/entity.module';
+import { CmtSharedModule } from 'app/shared';
+import { CmtCoreModule } from 'app/core';
+import { CmtAppRoutingModule } from './app-routing.module';
+import { CmtHomeModule } from './home/home.module';
+import { CmtAccountModule } from './account/account.module';
+import { CmtEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
     imports: [
         BrowserModule,
-        MyAppAppRoutingModule,
+        CmtAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
             // set below to true to make alerts look like toast
             alertAsToast: false,
-            alertTimeout: 5000
+            alertTimeout: 5000,
+            i18nEnabled: true,
+            defaultI18nLang: 'pt-br'
         }),
-        MyAppSharedModule.forRoot(),
-        MyAppCoreModule,
-        MyAppHomeModule,
-        MyAppAccountModule,
+        CmtSharedModule.forRoot(),
+        CmtCoreModule,
+        CmtHomeModule,
+        CmtAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
-        MyAppEntityModule
+        CmtEntityModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
@@ -63,7 +65,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
     ],
     bootstrap: [JhiMainComponent]
 })
-export class MyAppAppModule {
+export class CmtAppModule {
     constructor(private dpConfig: NgbDatepickerConfig) {
         this.dpConfig.minDate = { year: moment().year() - 100, month: 1, day: 1 };
     }

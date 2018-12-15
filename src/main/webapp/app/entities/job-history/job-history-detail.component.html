@@ -1,35 +1,35 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="jobHistory">
-            <h2><span>Job History</span> {{jobHistory.id}}</h2>
+            <h2><span jhiTranslate="cmtApp.jobHistory.detail.title">Job History</span> {{jobHistory.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Start Date</span></dt>
+                <dt><span jhiTranslate="cmtApp.jobHistory.startDate">Start Date</span></dt>
                 <dd>
                     <span>{{jobHistory.startDate}}</span>
                 </dd>
-                <dt><span>End Date</span></dt>
+                <dt><span jhiTranslate="cmtApp.jobHistory.endDate">End Date</span></dt>
                 <dd>
                     <span>{{jobHistory.endDate}}</span>
                 </dd>
-                <dt><span>Language</span></dt>
+                <dt><span jhiTranslate="cmtApp.jobHistory.language">Language</span></dt>
                 <dd>
-                    <span>{{jobHistory.language}}</span>
+                    <span jhiTranslate="{{'cmtApp.Language.' + jobHistory.language}}">{{jobHistory.language}}</span>
                 </dd>
-                <dt><span>Job</span></dt>
+                <dt><span jhiTranslate="cmtApp.jobHistory.job">Job</span></dt>
                 <dd>
                     <div *ngIf="jobHistory.job">
                         <a [routerLink]="['/job', jobHistory.job?.id, 'view']">{{jobHistory.job?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Department</span></dt>
+                <dt><span jhiTranslate="cmtApp.jobHistory.department">Department</span></dt>
                 <dd>
                     <div *ngIf="jobHistory.department">
                         <a [routerLink]="['/department', jobHistory.department?.id, 'view']">{{jobHistory.department?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Employee</span></dt>
+                <dt><span jhiTranslate="cmtApp.jobHistory.employee">Employee</span></dt>
                 <dd>
                     <div *ngIf="jobHistory.employee">
                         <a [routerLink]="['/employee', jobHistory.employee?.id, 'view']">{{jobHistory.employee?.id}}</a>
@@ -40,13 +40,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/job-history', jobHistory.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
     </div>

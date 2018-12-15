@@ -1,9 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span>Employees</span>
+        <span jhiTranslate="cmtApp.employee.home.title">Employees</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-employee" [routerLink]="['/employee/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
+            <span  jhiTranslate="cmtApp.employee.home.createLabel">
             Create new Employee
             </span>
         </button>
@@ -14,16 +14,16 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="firstName"><span>First Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lastName"><span>Last Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="email"><span>Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="phoneNumber"><span>Phone Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hireDate"><span>Hire Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="salary"><span>Salary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="commissionPct"><span>Commission Pct</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="department.id"><span>Department</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="manager.id"><span>Manager</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="firstName"><span jhiTranslate="cmtApp.employee.firstName">First Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastName"><span jhiTranslate="cmtApp.employee.lastName">Last Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="cmtApp.employee.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="phoneNumber"><span jhiTranslate="cmtApp.employee.phoneNumber">Phone Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hireDate"><span jhiTranslate="cmtApp.employee.hireDate">Hire Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="salary"><span jhiTranslate="cmtApp.employee.salary">Salary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="commissionPct"><span jhiTranslate="cmtApp.employee.commissionPct">Commission Pct</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="department.id"><span jhiTranslate="cmtApp.employee.department">Department</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="manager.id"><span jhiTranslate="cmtApp.employee.manager">Manager</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -53,13 +53,13 @@
                                 [routerLink]="['/employee', employee.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/employee', employee.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/delete'} }]"
@@ -67,7 +67,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>

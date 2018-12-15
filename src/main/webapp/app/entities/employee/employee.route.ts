@@ -34,7 +34,7 @@ export const employeeRoute: Routes = [
         component: EmployeeComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Employees'
+            pageTitle: 'cmtApp.employee.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,7 +46,7 @@ export const employeeRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Employees'
+            pageTitle: 'cmtApp.employee.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -58,7 +58,7 @@ export const employeeRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Employees'
+            pageTitle: 'cmtApp.employee.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +70,7 @@ export const employeeRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Employees'
+            pageTitle: 'cmtApp.employee.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -85,7 +85,7 @@ export const employeePopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Employees'
+            pageTitle: 'cmtApp.employee.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

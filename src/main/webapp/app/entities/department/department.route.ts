@@ -34,7 +34,7 @@ export const departmentRoute: Routes = [
         component: DepartmentComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Departments'
+            pageTitle: 'cmtApp.department.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,7 +46,7 @@ export const departmentRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Departments'
+            pageTitle: 'cmtApp.department.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -58,7 +58,7 @@ export const departmentRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Departments'
+            pageTitle: 'cmtApp.department.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +70,7 @@ export const departmentRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Departments'
+            pageTitle: 'cmtApp.department.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -85,7 +85,7 @@ export const departmentPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Departments'
+            pageTitle: 'cmtApp.department.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

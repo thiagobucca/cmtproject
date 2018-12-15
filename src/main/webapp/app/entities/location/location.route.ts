@@ -34,7 +34,7 @@ export const locationRoute: Routes = [
         component: LocationComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Locations'
+            pageTitle: 'cmtApp.location.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,7 +46,7 @@ export const locationRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Locations'
+            pageTitle: 'cmtApp.location.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -58,7 +58,7 @@ export const locationRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Locations'
+            pageTitle: 'cmtApp.location.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +70,7 @@ export const locationRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Locations'
+            pageTitle: 'cmtApp.location.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -85,7 +85,7 @@ export const locationPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Locations'
+            pageTitle: 'cmtApp.location.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
