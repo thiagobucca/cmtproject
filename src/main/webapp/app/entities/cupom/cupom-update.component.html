@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cupom-heading" jhiTranslate="cmtprojectApp.cupom.home.createOrEditLabel">Create or edit a Cupom</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cupom.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cupom.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.valor" for="field_valor">Valor</label>
+                    <input type="number" class="form-control" name="valor" id="field_valor"
+                        [(ngModel)]="cupom.valor" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.numero" for="field_numero">Numero</label>
+                    <input type="text" class="form-control" name="numero" id="field_numero"
+                        [(ngModel)]="cupom.numero" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.foto" for="field_foto">Foto</label>
+                    <div>
+                        <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-height: 100px;" *ngIf="cupom.foto" alt="cupom image"/>
+                        <div *ngIf="cupom.foto" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}</span>
+                            <button type="button" (click)="clearInputImage('foto', 'fotoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_foto" (change)="setFileData($event, cupom, 'foto', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="foto" id="field_foto"
+                        [(ngModel)]="cupom.foto" />
+                    <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
+                        [(ngModel)]="cupom.fotoContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercial" for="field_estabelecimentoComercial">Estabelecimento Comercial</label>
+                    <select class="form-control" id="field_estabelecimentoComercial" name="estabelecimentoComercial" [(ngModel)]="cupom.estabelecimentoComercial">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="estabelecimentoComercialOption.id === cupom.estabelecimentoComercial?.id ? cupom.estabelecimentoComercial : estabelecimentoComercialOption" *ngFor="let estabelecimentoComercialOption of estabelecimentocomercials; trackBy: trackEstabelecimentoComercialById">{{estabelecimentoComercialOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

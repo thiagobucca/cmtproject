@@ -1,0 +1,24 @@
+{
+    "cmtprojectApp": {
+        "contatoEstabelecimento": {
+            "home": {
+                "title": "Contato Estabelecimentos",
+                "createLabel": "Criar novo Contato Estabelecimento",
+                "createOrEditLabel": "Criar ou editar Contato Estabelecimento"
+            },
+            "created": "Um novo Contato Estabelecimento foi criado com o identificador {{ param }}",
+            "updated": "Um Contato Estabelecimento foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Contato Estabelecimento foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Contato Estabelecimento {{ id }}?"
+            },
+            "detail": {
+                "title": "Contato Estabelecimento"
+            },
+            "nome": "Nome",
+            "telefone": "Telefone",
+            "email": "Email",
+            "estabelecimentoComercial": "Estabelecimento Comercial"
+        }
+    }
+}

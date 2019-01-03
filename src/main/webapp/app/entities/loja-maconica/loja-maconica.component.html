@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cmtprojectApp.lojaMaconica.home.title">Loja Maconicas</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-loja-maconica" [routerLink]="['/loja-maconica/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="cmtprojectApp.lojaMaconica.home.createLabel">
+            Create new Loja Maconica
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="lojaMaconicas">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj">Cod Cnpj</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.numero">Numero</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo">Bol Ativo</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.contato">Contato</span></th>
+            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.comunicacaoPush">Comunicacao Push</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let lojaMaconica of lojaMaconicas ;trackBy: trackId">
+                <td><a [routerLink]="['/loja-maconica', lojaMaconica.id, 'view' ]">{{lojaMaconica.id}}</a></td>
+                <td>{{lojaMaconica.codCnpj}}</td>
+                <td>{{lojaMaconica.nome}}</td>
+                <td>{{lojaMaconica.endereco}}</td>
+                <td>{{lojaMaconica.telefone}}</td>
+                <td>{{lojaMaconica.numero}}</td>
+                <td>{{lojaMaconica.bolAtivo}}</td>
+                <td>
+                    <div *ngIf="lojaMaconica.contato">
+                        <a [routerLink]="['../contato-loja-maconica', lojaMaconica.contato?.id, 'view' ]" >{{lojaMaconica.contato?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="lojaMaconica.comunicacaoPush">
+                        <a [routerLink]="['../comunicacao-push', lojaMaconica.comunicacaoPush?.id, 'view' ]" >{{lojaMaconica.comunicacaoPush?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/loja-maconica', lojaMaconica.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'loja-maconica/'+ lojaMaconica.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

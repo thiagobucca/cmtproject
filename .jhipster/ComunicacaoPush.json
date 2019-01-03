@@ -1,0 +1,35 @@
+{
+    "name": "ComunicacaoPush",
+    "fields": [
+        {
+            "fieldName": "titulo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "conteudoPush",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tipoPessoa",
+            "fieldType": "TipoPessoa",
+            "fieldValues": "Macom,Dependente"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "lojaMaconica",
+            "otherEntityName": "lojaMaconica",
+            "otherEntityRelationshipName": "comunicacaoPush"
+        }
+    ],
+    "changelogDate": "20190103130356",
+    "entityTableName": "comunicacao_push",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

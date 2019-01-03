@@ -1,0 +1,101 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
+
+import { IPessoa } from 'app/shared/model/pessoa.model';
+import { PessoaService } from './pessoa.service';
+import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
+import { LojaMaconicaService } from 'app/entities/loja-maconica';
+
+@Component({
+    selector: 'jhi-pessoa-update',
+    templateUrl: './pessoa-update.component.html'
+})
+export class PessoaUpdateComponent implements OnInit {
+    pessoa: IPessoa;
+    isSaving: boolean;
+
+    lojamaconicas: ILojaMaconica[];
+
+    pessoas: IPessoa[];
+    dataNascimento: string;
+
+    constructor(
+        private jhiAlertService: JhiAlertService,
+        private pessoaService: PessoaService,
+        private lojaMaconicaService: LojaMaconicaService,
+        private activatedRoute: ActivatedRoute
+    ) {}
+
+    ngOnInit() {
+        this.isSaving = false;
+        this.activatedRoute.data.subscribe(({ pessoa }) => {
+            this.pessoa = pessoa;
+            this.dataNascimento = this.pessoa.dataNascimento != null ? this.pessoa.dataNascimento.format(DATE_TIME_FORMAT) : null;
+        });
+        this.lojaMaconicaService.query({ filter: 'pessoa-is-null' }).subscribe(
+            (res: HttpResponse<ILojaMaconica[]>) => {
+                if (!this.pessoa.lojaMaconica || !this.pessoa.lojaMaconica.id) {
+                    this.lojamaconicas = res.body;
+                } else {
+                    this.lojaMaconicaService.find(this.pessoa.lojaMaconica.id).subscribe(
+                        (subRes: HttpResponse<ILojaMaconica>) => {
+                            this.lojamaconicas = [subRes.body].concat(res.body);
+                        },
+                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    );
+                }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.pessoaService.query().subscribe(
+            (res: HttpResponse<IPessoa[]>) => {
+                this.pessoas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
+    save() {
+        this.isSaving = true;
+        this.pessoa.dataNascimento = this.dataNascimento != null ? moment(this.dataNascimento, DATE_TIME_FORMAT) : null;
+        if (this.pessoa.id !== undefined) {
+            this.subscribeToSaveResponse(this.pessoaService.update(this.pessoa));
+        } else {
+            this.subscribeToSaveResponse(this.pessoaService.create(this.pessoa));
+        }
+    }
+
+    private subscribeToSaveResponse(result: Observable<HttpResponse<IPessoa>>) {
+        result.subscribe((res: HttpResponse<IPessoa>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    private onSaveSuccess() {
+        this.isSaving = false;
+        this.previousState();
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackLojaMaconicaById(index: number, item: ILojaMaconica) {
+        return item.id;
+    }
+
+    trackPessoaById(index: number, item: IPessoa) {
+        return item.id;
+    }
+}

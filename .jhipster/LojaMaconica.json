@@ -1,0 +1,54 @@
+{
+    "name": "LojaMaconica",
+    "fields": [
+        {
+            "fieldName": "codCnpj",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "endereco",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telefone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "bolAtivo",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "contato",
+            "otherEntityName": "contatoLojaMaconica",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "lojaMaconica"
+        },
+        {
+            "relationshipName": "comunicacaoPush",
+            "otherEntityName": "comunicacaoPush",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190103130349",
+    "entityTableName": "loja_maconica",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

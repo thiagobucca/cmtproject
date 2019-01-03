@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pessoa">
+            <h2><span jhiTranslate="cmtprojectApp.pessoa.detail.title">Pessoa</span> {{pessoa.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.nome">Nome</span></dt>
+                <dd>
+                    <span>{{pessoa.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.telefone">Telefone</span></dt>
+                <dd>
+                    <span>{{pessoa.telefone}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.email">Email</span></dt>
+                <dd>
+                    <span>{{pessoa.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.tipoPessoa">Tipo Pessoa</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'cmtprojectApp.TipoPessoa.' + pessoa.tipoPessoa}}">{{pessoa.tipoPessoa}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.senha">Senha</span></dt>
+                <dd>
+                    <span>{{pessoa.senha}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.dataNascimento">Data Nascimento</span></dt>
+                <dd>
+                    <span>{{pessoa.dataNascimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.bolAtivo">Bol Ativo</span></dt>
+                <dd>
+                    <span>{{pessoa.bolAtivo}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.lojaMaconica">Loja Maconica</span></dt>
+                <dd>
+                    <div *ngIf="pessoa.lojaMaconica">
+                        <a [routerLink]="['/loja-maconica', pessoa.lojaMaconica?.id, 'view']">{{pessoa.lojaMaconica?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.dependente">Dependente</span></dt>
+                <dd>
+                    <div *ngIf="pessoa.dependente">
+                        <a [routerLink]="['/pessoa', pessoa.dependente?.id, 'view']">{{pessoa.dependente?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pessoa', pessoa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

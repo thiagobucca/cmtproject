@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cupom">
+            <h2><span jhiTranslate="cmtprojectApp.cupom.detail.title">Cupom</span> {{cupom.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cmtprojectApp.cupom.data">Data</span></dt>
+                <dd>
+                    <span>{{cupom.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.cupom.valor">Valor</span></dt>
+                <dd>
+                    <span>{{cupom.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.cupom.numero">Numero</span></dt>
+                <dd>
+                    <span>{{cupom.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span></dt>
+                <dd>
+                    <div *ngIf="cupom.foto">
+                        <a (click)="openFile(cupom.fotoContentType, cupom.foto)">
+                            <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-width: 100%;" alt="cupom image"/>
+                        </a>
+                        {{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercial">Estabelecimento Comercial</span></dt>
+                <dd>
+                    <div *ngIf="cupom.estabelecimentoComercial">
+                        <a [routerLink]="['/estabelecimento-comercial', cupom.estabelecimentoComercial?.id, 'view']">{{cupom.estabelecimentoComercial?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cupom', cupom.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

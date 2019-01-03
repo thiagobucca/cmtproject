@@ -1,0 +1,69 @@
+{
+    "name": "EstabelecimentoComercial",
+    "fields": [
+        {
+            "fieldName": "bolMatriz",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "codCnpj",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "endereco",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telefone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "logo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "taxaConvenio",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "bolAtivo",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "categoria",
+            "otherEntityName": "categoriaEstabelecimento",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "estabelecimentoComercial"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "contato",
+            "otherEntityName": "contatoEstabelecimento",
+            "otherEntityRelationshipName": "estabelecimentoComercial"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "matriz",
+            "otherEntityName": "estabelecimentoComercial",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190103130350",
+    "entityTableName": "estabelecimento_comercial",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

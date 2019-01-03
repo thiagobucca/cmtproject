@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-loja-maconica-heading" jhiTranslate="cmtprojectApp.lojaMaconica.home.createOrEditLabel">Create or edit a Loja Maconica</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!lojaMaconica.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="lojaMaconica.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj" for="field_codCnpj">Cod Cnpj</label>
+                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj"
+                        [(ngModel)]="lojaMaconica.codCnpj" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                        [(ngModel)]="lojaMaconica.nome" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.endereco" for="field_endereco">Endereco</label>
+                    <input type="text" class="form-control" name="endereco" id="field_endereco"
+                        [(ngModel)]="lojaMaconica.endereco" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.telefone" for="field_telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="field_telefone"
+                        [(ngModel)]="lojaMaconica.telefone" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.numero" for="field_numero">Numero</label>
+                    <input type="number" class="form-control" name="numero" id="field_numero"
+                        [(ngModel)]="lojaMaconica.numero" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
+                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
+                        [(ngModel)]="lojaMaconica.bolAtivo" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.contato" for="field_contato">Contato</label>
+                    <select class="form-control" id="field_contato" name="contato" [(ngModel)]="lojaMaconica.contato">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contatoLojaMaconicaOption.id === lojaMaconica.contato?.id ? lojaMaconica.contato : contatoLojaMaconicaOption" *ngFor="let contatoLojaMaconicaOption of contatoes; trackBy: trackContatoLojaMaconicaById">{{contatoLojaMaconicaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.comunicacaoPush" for="field_comunicacaoPush">Comunicacao Push</label>
+                    <select class="form-control" id="field_comunicacaoPush" name="comunicacaoPush" [(ngModel)]="lojaMaconica.comunicacaoPush" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="comunicacaoPushOption.id === lojaMaconica.comunicacaoPush?.id ? lojaMaconica.comunicacaoPush : comunicacaoPushOption" *ngFor="let comunicacaoPushOption of comunicacaopushes; trackBy: trackComunicacaoPushById">{{comunicacaoPushOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+    "cmtprojectApp": {
+        "lojaMaconica": {
+            "home": {
+                "title": "Loja Maconicas",
+                "createLabel": "Criar novo Loja Maconica",
+                "createOrEditLabel": "Criar ou editar Loja Maconica"
+            },
+            "created": "Um novo Loja Maconica foi criado com o identificador {{ param }}",
+            "updated": "Um Loja Maconica foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Loja Maconica foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Loja Maconica {{ id }}?"
+            },
+            "detail": {
+                "title": "Loja Maconica"
+            },
+            "codCnpj": "Cod Cnpj",
+            "nome": "Nome",
+            "endereco": "Endereco",
+            "telefone": "Telefone",
+            "numero": "Numero",
+            "bolAtivo": "Bol Ativo",
+            "contato": "Contato",
+            "comunicacaoPush": "Comunicacao Push"
+        }
+    }
+}

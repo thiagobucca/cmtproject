@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ContasPagarReceber.
+    -->
+    <changeSet id="20190103130358-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="contas_pagar_receber"
+                                 constraintName="fk_contas_pagar_receber_usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="loja_maconica_id"
+                                 baseTableName="contas_pagar_receber"
+                                 constraintName="fk_contas_pagar_receber_loja_maconica_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="loja_maconica"/>
+
+        <addForeignKeyConstraint baseColumnNames="estabelecimento_comercial_id"
+                                 baseTableName="contas_pagar_receber"
+                                 constraintName="fk_contas_pagar_receber_estabelecimento_comercial_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="estabelecimento_comercial"/>
+
+        <addForeignKeyConstraint baseColumnNames="tipo_operacao_id"
+                                 baseTableName="contas_pagar_receber"
+                                 constraintName="fk_contas_pagar_receber_tipo_operacao_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tipo_operacao"/>
+
+    </changeSet>
+</databaseChangeLog>

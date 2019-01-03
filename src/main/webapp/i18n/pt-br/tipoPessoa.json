@@ -1,0 +1,9 @@
+{
+    "cmtprojectApp": {
+        "TipoPessoa": {
+            "null": "",
+            "Macom": "Macom",
+            "Dependente": "Dependente"
+        }
+    }
+}

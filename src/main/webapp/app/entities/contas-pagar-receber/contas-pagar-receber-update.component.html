@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-contas-pagar-receber-heading" jhiTranslate="cmtprojectApp.contasPagarReceber.home.createOrEditLabel">Create or edit a Contas Pagar Receber</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!contasPagarReceber.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="contasPagarReceber.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.valor" for="field_valor">Valor</label>
+                    <input type="number" class="form-control" name="valor" id="field_valor"
+                        [(ngModel)]="contasPagarReceber.valor" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.tipoLancamento" for="field_tipoLancamento">Tipo Lancamento</label>
+                    <select class="form-control" name="tipoLancamento" [(ngModel)]="contasPagarReceber.tipoLancamento" id="field_tipoLancamento" >
+                        <option value="Credito">{{'cmtprojectApp.TipoLancamento.Credito' | translate}}</option>
+                        <option value="Debito">{{'cmtprojectApp.TipoLancamento.Debito' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento" for="field_statusLancamento">Status Lancamento</label>
+                    <select class="form-control" name="statusLancamento" [(ngModel)]="contasPagarReceber.statusLancamento" id="field_statusLancamento" >
+                        <option value="Aberto">{{'cmtprojectApp.StatusLancamento.Aberto' | translate}}</option>
+                        <option value="Baixado">{{'cmtprojectApp.StatusLancamento.Baixado' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.usuario" for="field_usuario">Usuario</label>
+                    <select class="form-control" id="field_usuario" name="usuario" [(ngModel)]="contasPagarReceber.usuario">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="usuarioOption.id === contasPagarReceber.usuario?.id ? contasPagarReceber.usuario : usuarioOption" *ngFor="let usuarioOption of usuarios; trackBy: trackUsuarioById">{{usuarioOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconica" for="field_lojaMaconica">Loja Maconica</label>
+                    <select class="form-control" id="field_lojaMaconica" name="lojaMaconica" [(ngModel)]="contasPagarReceber.lojaMaconica">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="lojaMaconicaOption.id === contasPagarReceber.lojaMaconica?.id ? contasPagarReceber.lojaMaconica : lojaMaconicaOption" *ngFor="let lojaMaconicaOption of lojamaconicas; trackBy: trackLojaMaconicaById">{{lojaMaconicaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercial" for="field_estabelecimentoComercial">Estabelecimento Comercial</label>
+                    <select class="form-control" id="field_estabelecimentoComercial" name="estabelecimentoComercial" [(ngModel)]="contasPagarReceber.estabelecimentoComercial">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="estabelecimentoComercialOption.id === contasPagarReceber.estabelecimentoComercial?.id ? contasPagarReceber.estabelecimentoComercial : estabelecimentoComercialOption" *ngFor="let estabelecimentoComercialOption of estabelecimentocomercials; trackBy: trackEstabelecimentoComercialById">{{estabelecimentoComercialOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacao" for="field_tipoOperacao">Tipo Operacao</label>
+                    <select class="form-control" id="field_tipoOperacao" name="tipoOperacao" [(ngModel)]="contasPagarReceber.tipoOperacao">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tipoOperacaoOption.id === contasPagarReceber.tipoOperacao?.id ? contasPagarReceber.tipoOperacao : tipoOperacaoOption" *ngFor="let tipoOperacaoOption of tipooperacaos; trackBy: trackTipoOperacaoById">{{tipoOperacaoOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

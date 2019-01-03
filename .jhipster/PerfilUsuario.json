@@ -1,0 +1,23 @@
+{
+    "name": "PerfilUsuario",
+    "fields": [
+        {
+            "fieldName": "nomePerfil",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bolAtivo",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103130347",
+    "entityTableName": "perfil_usuario",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

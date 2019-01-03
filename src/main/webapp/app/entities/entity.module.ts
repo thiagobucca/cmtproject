@@ -8,6 +8,20 @@ import { CmtprojectTaskModule } from './task/task.module';
 import { CmtprojectEmployeeModule } from './employee/employee.module';
 import { CmtprojectJobModule } from './job/job.module';
 import { CmtprojectJobHistoryModule } from './job-history/job-history.module';
+import { CmtprojectCategoriaEstabelecimentoModule } from './categoria-estabelecimento/categoria-estabelecimento.module';
+import { CmtprojectPerfilUsuarioModule } from './perfil-usuario/perfil-usuario.module';
+import { CmtprojectTipoOperacaoModule } from './tipo-operacao/tipo-operacao.module';
+import { CmtprojectLojaMaconicaModule } from './loja-maconica/loja-maconica.module';
+import { CmtprojectEstabelecimentoComercialModule } from './estabelecimento-comercial/estabelecimento-comercial.module';
+import { CmtprojectContatoLojaMaconicaModule } from './contato-loja-maconica/contato-loja-maconica.module';
+import { CmtprojectContatoEstabelecimentoModule } from './contato-estabelecimento/contato-estabelecimento.module';
+import { CmtprojectParametrizacaoModule } from './parametrizacao/parametrizacao.module';
+import { CmtprojectUsuarioModule } from './usuario/usuario.module';
+import { CmtprojectPessoaModule } from './pessoa/pessoa.module';
+import { CmtprojectComunicacaoPushModule } from './comunicacao-push/comunicacao-push.module';
+import { CmtprojectAgendaEventosModule } from './agenda-eventos/agenda-eventos.module';
+import { CmtprojectContasPagarReceberModule } from './contas-pagar-receber/contas-pagar-receber.module';
+import { CmtprojectCupomModule } from './cupom/cupom.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -21,6 +35,20 @@ import { CmtprojectJobHistoryModule } from './job-history/job-history.module';
         CmtprojectEmployeeModule,
         CmtprojectJobModule,
         CmtprojectJobHistoryModule,
+        CmtprojectCategoriaEstabelecimentoModule,
+        CmtprojectPerfilUsuarioModule,
+        CmtprojectTipoOperacaoModule,
+        CmtprojectLojaMaconicaModule,
+        CmtprojectEstabelecimentoComercialModule,
+        CmtprojectContatoLojaMaconicaModule,
+        CmtprojectContatoEstabelecimentoModule,
+        CmtprojectParametrizacaoModule,
+        CmtprojectUsuarioModule,
+        CmtprojectPessoaModule,
+        CmtprojectComunicacaoPushModule,
+        CmtprojectAgendaEventosModule,
+        CmtprojectContasPagarReceberModule,
+        CmtprojectCupomModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

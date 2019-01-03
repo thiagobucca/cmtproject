@@ -1,0 +1,28 @@
+{
+    "name": "TipoOperacao",
+    "fields": [
+        {
+            "fieldName": "nomeOperacao",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tipoLancamento",
+            "fieldType": "TipoLancamento",
+            "fieldValues": "Credito,Debito"
+        },
+        {
+            "fieldName": "bolAtivo",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103130348",
+    "entityTableName": "tipo_operacao",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

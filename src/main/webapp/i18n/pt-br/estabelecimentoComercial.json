@@ -1,0 +1,31 @@
+{
+    "cmtprojectApp": {
+        "estabelecimentoComercial": {
+            "home": {
+                "title": "Estabelecimento Comercials",
+                "createLabel": "Criar novo Estabelecimento Comercial",
+                "createOrEditLabel": "Criar ou editar Estabelecimento Comercial"
+            },
+            "created": "Um novo Estabelecimento Comercial foi criado com o identificador {{ param }}",
+            "updated": "Um Estabelecimento Comercial foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Estabelecimento Comercial foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Estabelecimento Comercial {{ id }}?"
+            },
+            "detail": {
+                "title": "Estabelecimento Comercial"
+            },
+            "bolMatriz": "Bol Matriz",
+            "codCnpj": "Cod Cnpj",
+            "nome": "Nome",
+            "endereco": "Endereco",
+            "telefone": "Telefone",
+            "logo": "Logo",
+            "taxaConvenio": "Taxa Convenio",
+            "bolAtivo": "Bol Ativo",
+            "categoria": "Categoria",
+            "contato": "Contato",
+            "matriz": "Matriz"
+        }
+    }
+}
