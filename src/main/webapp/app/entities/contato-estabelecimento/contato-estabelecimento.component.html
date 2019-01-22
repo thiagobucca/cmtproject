@@ -18,7 +18,7 @@
             <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.nome">Nome</span></th>
             <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.telefone">Telefone</span></th>
             <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.email">Email</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercial">Estabelecimento Comercial</span></th>
+            <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercialId">Estabelecimento Comercial Id</span></th>
             <th></th>
             </tr>
             </thead>
@@ -28,11 +28,7 @@
                 <td>{{contatoEstabelecimento.nome}}</td>
                 <td>{{contatoEstabelecimento.telefone}}</td>
                 <td>{{contatoEstabelecimento.email}}</td>
-                <td>
-                    <div *ngIf="contatoEstabelecimento.estabelecimentoComercial">
-                        <a [routerLink]="['../estabelecimento-comercial', contatoEstabelecimento.estabelecimentoComercial?.id, 'view' ]" >{{contatoEstabelecimento.estabelecimentoComercial?.id}}</a>
-                    </div>
-                </td>
+                <td>{{contatoEstabelecimento.estabelecimentoComercialId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

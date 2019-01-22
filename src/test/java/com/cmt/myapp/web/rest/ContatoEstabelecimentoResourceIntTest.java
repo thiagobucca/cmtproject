@@ -48,6 +48,9 @@ public class ContatoEstabelecimentoResourceIntTest {
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_ESTABELECIMENTO_COMERCIAL_ID = 1L;
+    private static final Long UPDATED_ESTABELECIMENTO_COMERCIAL_ID = 2L;
+
     @Autowired
     private ContatoEstabelecimentoRepository contatoEstabelecimentoRepository;
 
@@ -88,7 +91,8 @@ public class ContatoEstabelecimentoResourceIntTest {
         ContatoEstabelecimento contatoEstabelecimento = new ContatoEstabelecimento()
             .nome(DEFAULT_NOME)
             .telefone(DEFAULT_TELEFONE)
-            .email(DEFAULT_EMAIL);
+            .email(DEFAULT_EMAIL)
+            .estabelecimentoComercialId(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID);
         return contatoEstabelecimento;
     }
 
@@ -115,6 +119,7 @@ public class ContatoEstabelecimentoResourceIntTest {
         assertThat(testContatoEstabelecimento.getNome()).isEqualTo(DEFAULT_NOME);
         assertThat(testContatoEstabelecimento.getTelefone()).isEqualTo(DEFAULT_TELEFONE);
         assertThat(testContatoEstabelecimento.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testContatoEstabelecimento.getEstabelecimentoComercialId()).isEqualTo(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID);
     }
 
     @Test
@@ -149,7 +154,8 @@ public class ContatoEstabelecimentoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(contatoEstabelecimento.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())))
             .andExpect(jsonPath("$.[*].telefone").value(hasItem(DEFAULT_TELEFONE.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].estabelecimentoComercialId").value(hasItem(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID.intValue())));
     }
     
     @Test
@@ -165,7 +171,8 @@ public class ContatoEstabelecimentoResourceIntTest {
             .andExpect(jsonPath("$.id").value(contatoEstabelecimento.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()))
             .andExpect(jsonPath("$.telefone").value(DEFAULT_TELEFONE.toString()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
+            .andExpect(jsonPath("$.estabelecimentoComercialId").value(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID.intValue()));
     }
 
     @Test
@@ -191,7 +198,8 @@ public class ContatoEstabelecimentoResourceIntTest {
         updatedContatoEstabelecimento
             .nome(UPDATED_NOME)
             .telefone(UPDATED_TELEFONE)
-            .email(UPDATED_EMAIL);
+            .email(UPDATED_EMAIL)
+            .estabelecimentoComercialId(UPDATED_ESTABELECIMENTO_COMERCIAL_ID);
 
         restContatoEstabelecimentoMockMvc.perform(put("/api/contato-estabelecimentos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -205,6 +213,7 @@ public class ContatoEstabelecimentoResourceIntTest {
         assertThat(testContatoEstabelecimento.getNome()).isEqualTo(UPDATED_NOME);
         assertThat(testContatoEstabelecimento.getTelefone()).isEqualTo(UPDATED_TELEFONE);
         assertThat(testContatoEstabelecimento.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testContatoEstabelecimento.getEstabelecimentoComercialId()).isEqualTo(UPDATED_ESTABELECIMENTO_COMERCIAL_ID);
     }
 
     @Test

@@ -25,11 +25,9 @@
                 <dd>
                     <span>{{usuario.bolAtivo}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuario.perfil">Perfil</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.usuario.perfilId">Perfil Id</span></dt>
                 <dd>
-                    <div *ngIf="usuario.perfil">
-                        <a [routerLink]="['/perfil-usuario', usuario.perfil?.id, 'view']">{{usuario.perfil?.id}}</a>
-                    </div>
+                    <span>{{usuario.perfilId}}</span>
                 </dd>
             </dl>
 

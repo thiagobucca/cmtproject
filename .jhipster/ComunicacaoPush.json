@@ -15,14 +15,7 @@
             "fieldValues": "Macom,Dependente"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "lojaMaconica",
-            "otherEntityName": "lojaMaconica",
-            "otherEntityRelationshipName": "comunicacaoPush"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20190103130356",
     "entityTableName": "comunicacao_push",
     "dto": "no",

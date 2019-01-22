@@ -21,8 +21,6 @@
             <th><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span></th>
             <th><span jhiTranslate="cmtprojectApp.lojaMaconica.numero">Numero</span></th>
             <th><span jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo">Bol Ativo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.contato">Contato</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.comunicacaoPush">Comunicacao Push</span></th>
             <th></th>
             </tr>
             </thead>
@@ -35,16 +33,6 @@
                 <td>{{lojaMaconica.telefone}}</td>
                 <td>{{lojaMaconica.numero}}</td>
                 <td>{{lojaMaconica.bolAtivo}}</td>
-                <td>
-                    <div *ngIf="lojaMaconica.contato">
-                        <a [routerLink]="['../contato-loja-maconica', lojaMaconica.contato?.id, 'view' ]" >{{lojaMaconica.contato?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="lojaMaconica.comunicacaoPush">
-                        <a [routerLink]="['../comunicacao-push', lojaMaconica.comunicacaoPush?.id, 'view' ]" >{{lojaMaconica.comunicacaoPush?.id}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

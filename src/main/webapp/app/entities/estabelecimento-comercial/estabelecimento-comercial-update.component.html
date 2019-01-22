@@ -61,21 +61,17 @@
                     <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
                         [(ngModel)]="estabelecimentoComercial.bolAtivo" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId" for="field_categoriaEstabelecimentoId">Categoria Estabelecimento Id</label>
+                    <input type="number" class="form-control" name="categoriaEstabelecimentoId" id="field_categoriaEstabelecimentoId"
+                        [(ngModel)]="estabelecimentoComercial.categoriaEstabelecimentoId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId" for="field_estabelecimentoMatrizId">Estabelecimento Matriz Id</label>
+                    <input type="number" class="form-control" name="estabelecimentoMatrizId" id="field_estabelecimentoMatrizId"
+                        [(ngModel)]="estabelecimentoComercial.estabelecimentoMatrizId" />
+                </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoria" for="field_categoria">Categoria</label>
-                    <select class="form-control" id="field_categoria" name="categoria" [(ngModel)]="estabelecimentoComercial.categoria">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="categoriaEstabelecimentoOption.id === estabelecimentoComercial.categoria?.id ? estabelecimentoComercial.categoria : categoriaEstabelecimentoOption" *ngFor="let categoriaEstabelecimentoOption of categorias; trackBy: trackCategoriaEstabelecimentoById">{{categoriaEstabelecimentoOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.matriz" for="field_matriz">Matriz</label>
-                    <select class="form-control" id="field_matriz" name="matriz" [(ngModel)]="estabelecimentoComercial.matriz" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="estabelecimentoComercialOption.id === estabelecimentoComercial.matriz?.id ? estabelecimentoComercial.matriz : estabelecimentoComercialOption" *ngFor="let estabelecimentoComercialOption of estabelecimentocomercials; trackBy: trackEstabelecimentoComercialById">{{estabelecimentoComercialOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

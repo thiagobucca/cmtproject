@@ -33,17 +33,13 @@
                 <dd>
                     <span>{{pessoa.bolAtivo}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.pessoa.lojaMaconica">Loja Maconica</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.pessoaDependenteId">Pessoa Dependente Id</span></dt>
                 <dd>
-                    <div *ngIf="pessoa.lojaMaconica">
-                        <a [routerLink]="['/loja-maconica', pessoa.lojaMaconica?.id, 'view']">{{pessoa.lojaMaconica?.id}}</a>
-                    </div>
+                    <span>{{pessoa.pessoaDependenteId}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.pessoa.dependente">Dependente</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.pessoa.lojaMaconicaId">Loja Maconica Id</span></dt>
                 <dd>
-                    <div *ngIf="pessoa.dependente">
-                        <a [routerLink]="['/pessoa', pessoa.dependente?.id, 'view']">{{pessoa.dependente?.id}}</a>
-                    </div>
+                    <span>{{pessoa.lojaMaconicaId}}</span>
                 </dd>
             </dl>
 

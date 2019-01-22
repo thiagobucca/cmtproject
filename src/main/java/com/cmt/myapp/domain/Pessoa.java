@@ -1,6 +1,5 @@
 package com.cmt.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -45,12 +44,11 @@ public class Pessoa implements Serializable {
     @Column(name = "bol_ativo")
     private Boolean bolAtivo;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private LojaMaconica lojaMaconica;
+    @Column(name = "pessoa_dependente_id")
+    private Long pessoaDependenteId;
 
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private Pessoa dependente;
+    @Column(name = "loja_maconica_id")
+    private Long lojaMaconicaId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -152,30 +150,30 @@ public class Pessoa implements Serializable {
         this.bolAtivo = bolAtivo;
     }
 
-    public LojaMaconica getLojaMaconica() {
-        return lojaMaconica;
+    public Long getPessoaDependenteId() {
+        return pessoaDependenteId;
     }
 
-    public Pessoa lojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconica = lojaMaconica;
+    public Pessoa pessoaDependenteId(Long pessoaDependenteId) {
+        this.pessoaDependenteId = pessoaDependenteId;
         return this;
     }
 
-    public void setLojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconica = lojaMaconica;
+    public void setPessoaDependenteId(Long pessoaDependenteId) {
+        this.pessoaDependenteId = pessoaDependenteId;
     }
 
-    public Pessoa getDependente() {
-        return dependente;
+    public Long getLojaMaconicaId() {
+        return lojaMaconicaId;
     }
 
-    public Pessoa dependente(Pessoa pessoa) {
-        this.dependente = pessoa;
+    public Pessoa lojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
         return this;
     }
 
-    public void setDependente(Pessoa pessoa) {
-        this.dependente = pessoa;
+    public void setLojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -210,6 +208,8 @@ public class Pessoa implements Serializable {
             ", senha='" + getSenha() + "'" +
             ", dataNascimento='" + getDataNascimento() + "'" +
             ", bolAtivo='" + isBolAtivo() + "'" +
+            ", pessoaDependenteId=" + getPessoaDependenteId() +
+            ", lojaMaconicaId=" + getLojaMaconicaId() +
             "}";
     }
 }

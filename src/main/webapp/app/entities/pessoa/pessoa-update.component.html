@@ -48,21 +48,17 @@
                     <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
                         [(ngModel)]="pessoa.bolAtivo" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.pessoaDependenteId" for="field_pessoaDependenteId">Pessoa Dependente Id</label>
+                    <input type="number" class="form-control" name="pessoaDependenteId" id="field_pessoaDependenteId"
+                        [(ngModel)]="pessoa.pessoaDependenteId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.lojaMaconicaId" for="field_lojaMaconicaId">Loja Maconica Id</label>
+                    <input type="number" class="form-control" name="lojaMaconicaId" id="field_lojaMaconicaId"
+                        [(ngModel)]="pessoa.lojaMaconicaId" />
+                </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.lojaMaconica" for="field_lojaMaconica">Loja Maconica</label>
-                    <select class="form-control" id="field_lojaMaconica" name="lojaMaconica" [(ngModel)]="pessoa.lojaMaconica">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="lojaMaconicaOption.id === pessoa.lojaMaconica?.id ? pessoa.lojaMaconica : lojaMaconicaOption" *ngFor="let lojaMaconicaOption of lojamaconicas; trackBy: trackLojaMaconicaById">{{lojaMaconicaOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.dependente" for="field_dependente">Dependente</label>
-                    <select class="form-control" id="field_dependente" name="dependente" [(ngModel)]="pessoa.dependente" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="pessoaOption.id === pessoa.dependente?.id ? pessoa.dependente : pessoaOption" *ngFor="let pessoaOption of pessoas; trackBy: trackPessoaById">{{pessoaOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

@@ -1,5 +1,4 @@
 import { Moment } from 'moment';
-import { IEstabelecimentoComercial } from 'app/shared/model//estabelecimento-comercial.model';
 
 export interface ICupom {
     id?: number;
@@ -8,7 +7,7 @@ export interface ICupom {
     numero?: string;
     fotoContentType?: string;
     foto?: any;
-    estabelecimentoComercial?: IEstabelecimentoComercial;
+    estabelecimentoComercialId?: number;
 }
 
 export class Cupom implements ICupom {
@@ -19,6 +18,6 @@ export class Cupom implements ICupom {
         public numero?: string,
         public fotoContentType?: string,
         public foto?: any,
-        public estabelecimentoComercial?: IEstabelecimentoComercial
+        public estabelecimentoComercialId?: number
     ) {}
 }

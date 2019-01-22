@@ -23,8 +23,8 @@
             <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span></th>
             <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio">Taxa Convenio</span></th>
             <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo">Bol Ativo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoria">Categoria</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.matriz">Matriz</span></th>
+            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria Estabelecimento Id</span></th>
+            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId">Estabelecimento Matriz Id</span></th>
             <th></th>
             </tr>
             </thead>
@@ -44,16 +44,8 @@
                 </td>
                 <td>{{estabelecimentoComercial.taxaConvenio}}</td>
                 <td>{{estabelecimentoComercial.bolAtivo}}</td>
-                <td>
-                    <div *ngIf="estabelecimentoComercial.categoria">
-                        <a [routerLink]="['../categoria-estabelecimento', estabelecimentoComercial.categoria?.id, 'view' ]" >{{estabelecimentoComercial.categoria?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="estabelecimentoComercial.matriz">
-                        <a [routerLink]="['../estabelecimento-comercial', estabelecimentoComercial.matriz?.id, 'view' ]" >{{estabelecimentoComercial.matriz?.id}}</a>
-                    </div>
-                </td>
+                <td>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</td>
+                <td>{{estabelecimentoComercial.estabelecimentoMatrizId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

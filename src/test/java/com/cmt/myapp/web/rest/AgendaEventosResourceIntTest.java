@@ -56,6 +56,9 @@ public class AgendaEventosResourceIntTest {
     private static final Boolean DEFAULT_BOL_ATIVO = false;
     private static final Boolean UPDATED_BOL_ATIVO = true;
 
+    private static final Long DEFAULT_LOJA_MACONICA_ID = 1L;
+    private static final Long UPDATED_LOJA_MACONICA_ID = 2L;
+
     @Autowired
     private AgendaEventosRepository agendaEventosRepository;
 
@@ -98,7 +101,8 @@ public class AgendaEventosResourceIntTest {
             .data(DEFAULT_DATA)
             .local(DEFAULT_LOCAL)
             .descricao(DEFAULT_DESCRICAO)
-            .bolAtivo(DEFAULT_BOL_ATIVO);
+            .bolAtivo(DEFAULT_BOL_ATIVO)
+            .lojaMaconicaId(DEFAULT_LOJA_MACONICA_ID);
         return agendaEventos;
     }
 
@@ -127,6 +131,7 @@ public class AgendaEventosResourceIntTest {
         assertThat(testAgendaEventos.getLocal()).isEqualTo(DEFAULT_LOCAL);
         assertThat(testAgendaEventos.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
         assertThat(testAgendaEventos.isBolAtivo()).isEqualTo(DEFAULT_BOL_ATIVO);
+        assertThat(testAgendaEventos.getLojaMaconicaId()).isEqualTo(DEFAULT_LOJA_MACONICA_ID);
     }
 
     @Test
@@ -163,7 +168,8 @@ public class AgendaEventosResourceIntTest {
             .andExpect(jsonPath("$.[*].data").value(hasItem(DEFAULT_DATA.toString())))
             .andExpect(jsonPath("$.[*].local").value(hasItem(DEFAULT_LOCAL.toString())))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())))
-            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())))
+            .andExpect(jsonPath("$.[*].lojaMaconicaId").value(hasItem(DEFAULT_LOJA_MACONICA_ID.intValue())));
     }
     
     @Test
@@ -181,7 +187,8 @@ public class AgendaEventosResourceIntTest {
             .andExpect(jsonPath("$.data").value(DEFAULT_DATA.toString()))
             .andExpect(jsonPath("$.local").value(DEFAULT_LOCAL.toString()))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO.toString()))
-            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()));
+            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()))
+            .andExpect(jsonPath("$.lojaMaconicaId").value(DEFAULT_LOJA_MACONICA_ID.intValue()));
     }
 
     @Test
@@ -209,7 +216,8 @@ public class AgendaEventosResourceIntTest {
             .data(UPDATED_DATA)
             .local(UPDATED_LOCAL)
             .descricao(UPDATED_DESCRICAO)
-            .bolAtivo(UPDATED_BOL_ATIVO);
+            .bolAtivo(UPDATED_BOL_ATIVO)
+            .lojaMaconicaId(UPDATED_LOJA_MACONICA_ID);
 
         restAgendaEventosMockMvc.perform(put("/api/agenda-eventos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -225,6 +233,7 @@ public class AgendaEventosResourceIntTest {
         assertThat(testAgendaEventos.getLocal()).isEqualTo(UPDATED_LOCAL);
         assertThat(testAgendaEventos.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testAgendaEventos.isBolAtivo()).isEqualTo(UPDATED_BOL_ATIVO);
+        assertThat(testAgendaEventos.getLojaMaconicaId()).isEqualTo(UPDATED_LOJA_MACONICA_ID);
     }
 
     @Test

@@ -1,5 +1,3 @@
-import { IPerfilUsuario } from 'app/shared/model//perfil-usuario.model';
-
 export interface IUsuario {
     id?: number;
     nome?: string;
@@ -7,7 +5,7 @@ export interface IUsuario {
     email?: string;
     senha?: string;
     bolAtivo?: boolean;
-    perfil?: IPerfilUsuario;
+    perfilId?: number;
 }
 
 export class Usuario implements IUsuario {
@@ -18,7 +16,7 @@ export class Usuario implements IUsuario {
         public email?: string,
         public senha?: string,
         public bolAtivo?: boolean,
-        public perfil?: IPerfilUsuario
+        public perfilId?: number
     ) {
         this.bolAtivo = this.bolAtivo || false;
     }

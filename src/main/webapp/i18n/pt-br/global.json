@@ -29,6 +29,7 @@
                 "agendaEventos": "Agenda Eventos",
                 "contasPagarReceber": "Contas Pagar Receber",
                 "cupom": "Cupom",
+                "comunicacaoPushLoja": "Comunicacao Push Loja",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

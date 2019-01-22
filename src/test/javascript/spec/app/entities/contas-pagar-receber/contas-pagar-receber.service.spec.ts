@@ -7,7 +7,7 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { ContasPagarReceberService } from 'app/entities/contas-pagar-receber/contas-pagar-receber.service';
-import { IContasPagarReceber, ContasPagarReceber, TipoLancamento, StatusLancamento } from 'app/shared/model/contas-pagar-receber.model';
+import { IContasPagarReceber, ContasPagarReceber, StatusLancamento } from 'app/shared/model/contas-pagar-receber.model';
 
 describe('Service Tests', () => {
     describe('ContasPagarReceber Service', () => {
@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new ContasPagarReceber(0, currentDate, 0, TipoLancamento.Credito, StatusLancamento.Aberto);
+            elemDefault = new ContasPagarReceber(0, currentDate, 0, StatusLancamento.Aberto, 0, 0, 0, 0);
         });
 
         describe('Service methods', async () => {
@@ -72,8 +72,11 @@ describe('Service Tests', () => {
                     {
                         data: currentDate.format(DATE_TIME_FORMAT),
                         valor: 1,
-                        tipoLancamento: 'BBBBBB',
-                        statusLancamento: 'BBBBBB'
+                        statusLancamento: 'BBBBBB',
+                        usuarioId: 1,
+                        lojaMaconicaId: 1,
+                        estabelecimentoComercialId: 1,
+                        tipoOperacaoId: 1
                     },
                     elemDefault
                 );
@@ -97,8 +100,11 @@ describe('Service Tests', () => {
                     {
                         data: currentDate.format(DATE_TIME_FORMAT),
                         valor: 1,
-                        tipoLancamento: 'BBBBBB',
-                        statusLancamento: 'BBBBBB'
+                        statusLancamento: 'BBBBBB',
+                        usuarioId: 1,
+                        lojaMaconicaId: 1,
+                        estabelecimentoComercialId: 1,
+                        tipoOperacaoId: 1
                     },
                     elemDefault
                 );

@@ -20,7 +20,7 @@
             <th><span jhiTranslate="cmtprojectApp.agendaEventos.local">Local</span></th>
             <th><span jhiTranslate="cmtprojectApp.agendaEventos.descricao">Descricao</span></th>
             <th><span jhiTranslate="cmtprojectApp.agendaEventos.bolAtivo">Bol Ativo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.agendaEventos.lojaMaconica">Loja Maconica</span></th>
+            <th><span jhiTranslate="cmtprojectApp.agendaEventos.lojaMaconicaId">Loja Maconica Id</span></th>
             <th></th>
             </tr>
             </thead>
@@ -32,11 +32,7 @@
                 <td>{{agendaEventos.local}}</td>
                 <td>{{agendaEventos.descricao}}</td>
                 <td>{{agendaEventos.bolAtivo}}</td>
-                <td>
-                    <div *ngIf="agendaEventos.lojaMaconica">
-                        <a [routerLink]="['../loja-maconica', agendaEventos.lojaMaconica?.id, 'view' ]" >{{agendaEventos.lojaMaconica?.id}}</a>
-                    </div>
-                </td>
+                <td>{{agendaEventos.lojaMaconicaId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

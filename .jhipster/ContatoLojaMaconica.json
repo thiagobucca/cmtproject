@@ -12,6 +12,10 @@
         {
             "fieldName": "email",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "lojaMaconicaId",
+            "fieldType": "Long"
         }
     ],
     "relationships": [],

@@ -26,22 +26,7 @@
             "fieldType": "Boolean"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "contato",
-            "otherEntityName": "contatoLojaMaconica",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "lojaMaconica"
-        },
-        {
-            "relationshipName": "comunicacaoPush",
-            "otherEntityName": "comunicacaoPush",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20190103130349",
     "entityTableName": "loja_maconica",
     "dto": "no",

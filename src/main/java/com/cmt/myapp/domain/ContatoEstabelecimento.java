@@ -1,6 +1,5 @@
 package com.cmt.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -29,9 +28,8 @@ public class ContatoEstabelecimento implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
-    @JsonIgnoreProperties("contatoes")
-    private EstabelecimentoComercial estabelecimentoComercial;
+    @Column(name = "estabelecimento_comercial_id")
+    private Long estabelecimentoComercialId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -81,17 +79,17 @@ public class ContatoEstabelecimento implements Serializable {
         this.email = email;
     }
 
-    public EstabelecimentoComercial getEstabelecimentoComercial() {
-        return estabelecimentoComercial;
+    public Long getEstabelecimentoComercialId() {
+        return estabelecimentoComercialId;
     }
 
-    public ContatoEstabelecimento estabelecimentoComercial(EstabelecimentoComercial estabelecimentoComercial) {
-        this.estabelecimentoComercial = estabelecimentoComercial;
+    public ContatoEstabelecimento estabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId = estabelecimentoComercialId;
         return this;
     }
 
-    public void setEstabelecimentoComercial(EstabelecimentoComercial estabelecimentoComercial) {
-        this.estabelecimentoComercial = estabelecimentoComercial;
+    public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId = estabelecimentoComercialId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -122,6 +120,7 @@ public class ContatoEstabelecimento implements Serializable {
             ", nome='" + getNome() + "'" +
             ", telefone='" + getTelefone() + "'" +
             ", email='" + getEmail() + "'" +
+            ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
             "}";
     }
 }

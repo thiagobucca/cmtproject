@@ -22,8 +22,8 @@
             "senha": "Senha",
             "dataNascimento": "Data Nascimento",
             "bolAtivo": "Bol Ativo",
-            "lojaMaconica": "Loja Maconica",
-            "dependente": "Dependente"
+            "pessoaDependenteId": "Pessoa Dependente Id",
+            "lojaMaconicaId": "Loja Maconica Id"
         }
     }
 }

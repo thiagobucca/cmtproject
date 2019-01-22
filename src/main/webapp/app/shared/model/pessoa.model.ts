@@ -1,6 +1,4 @@
 import { Moment } from 'moment';
-import { ILojaMaconica } from 'app/shared/model//loja-maconica.model';
-import { IPessoa } from 'app/shared/model//pessoa.model';
 
 export const enum TipoPessoa {
     Macom = 'Macom',
@@ -16,8 +14,8 @@ export interface IPessoa {
     senha?: string;
     dataNascimento?: Moment;
     bolAtivo?: boolean;
-    lojaMaconica?: ILojaMaconica;
-    dependente?: IPessoa;
+    pessoaDependenteId?: number;
+    lojaMaconicaId?: number;
 }
 
 export class Pessoa implements IPessoa {
@@ -30,8 +28,8 @@ export class Pessoa implements IPessoa {
         public senha?: string,
         public dataNascimento?: Moment,
         public bolAtivo?: boolean,
-        public lojaMaconica?: ILojaMaconica,
-        public dependente?: IPessoa
+        public pessoaDependenteId?: number,
+        public lojaMaconicaId?: number
     ) {
         this.bolAtivo = this.bolAtivo || false;
     }

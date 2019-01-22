@@ -19,7 +19,7 @@
             <th><span jhiTranslate="cmtprojectApp.cupom.valor">Valor</span></th>
             <th><span jhiTranslate="cmtprojectApp.cupom.numero">Numero</span></th>
             <th><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span></th>
-            <th><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercial">Estabelecimento Comercial</span></th>
+            <th><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercialId">Estabelecimento Comercial Id</span></th>
             <th></th>
             </tr>
             </thead>
@@ -35,11 +35,7 @@
                     </a>
                     <span *ngIf="cupom.foto">{{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}</span>
                 </td>
-                <td>
-                    <div *ngIf="cupom.estabelecimentoComercial">
-                        <a [routerLink]="['../estabelecimento-comercial', cupom.estabelecimentoComercial?.id, 'view' ]" >{{cupom.estabelecimentoComercial?.id}}</a>
-                    </div>
-                </td>
+                <td>{{cupom.estabelecimentoComercialId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

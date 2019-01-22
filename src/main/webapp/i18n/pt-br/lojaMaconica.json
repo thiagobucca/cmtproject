@@ -20,9 +20,7 @@
             "endereco": "Endereco",
             "telefone": "Telefone",
             "numero": "Numero",
-            "bolAtivo": "Bol Ativo",
-            "contato": "Contato",
-            "comunicacaoPush": "Comunicacao Push"
+            "bolAtivo": "Bol Ativo"
         }
     }
 }

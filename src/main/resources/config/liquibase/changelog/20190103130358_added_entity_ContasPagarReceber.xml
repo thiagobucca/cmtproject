@@ -30,22 +30,26 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="tipo_lancamento" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="status_lancamento" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="usuario_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_contas_pagar_receber_usuario_id" />
-            </column>            <column name="loja_maconica_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_contas_pagar_receber_loja_maconica_id" />
-            </column>            <column name="estabelecimento_comercial_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_contas_pagar_receber_estabelecimento_comercial_id" />
-            </column>            <column name="tipo_operacao_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_contas_pagar_receber_tipo_operacao_id" />
+                <constraints nullable="true" />
             </column>
+
+            <column name="loja_maconica_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="estabelecimento_comercial_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tipo_operacao_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="contas_pagar_receber" columnName="data" columnDataType="datetime"/>

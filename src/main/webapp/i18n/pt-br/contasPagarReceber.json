@@ -17,12 +17,11 @@
             },
             "data": "Data",
             "valor": "Valor",
-            "tipoLancamento": "Tipo Lancamento",
             "statusLancamento": "Status Lancamento",
-            "usuario": "Usuario",
-            "lojaMaconica": "Loja Maconica",
-            "estabelecimentoComercial": "Estabelecimento Comercial",
-            "tipoOperacao": "Tipo Operacao"
+            "usuarioId": "Usuario Id",
+            "lojaMaconicaId": "Loja Maconica Id",
+            "estabelecimentoComercialId": "Estabelecimento Comercial Id",
+            "tipoOperacaoId": "Tipo Operacao Id"
         }
     }
 }

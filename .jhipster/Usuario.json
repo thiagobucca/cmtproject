@@ -20,18 +20,13 @@
         {
             "fieldName": "bolAtivo",
             "fieldType": "Boolean"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "perfil",
-            "otherEntityName": "perfilUsuario",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "usuario"
+            "fieldName": "perfilId",
+            "fieldType": "Long"
         }
     ],
+    "relationships": [],
     "changelogDate": "20190103130354",
     "entityTableName": "usuario",
     "dto": "no",

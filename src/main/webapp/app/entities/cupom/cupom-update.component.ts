@@ -4,12 +4,10 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiDataUtils } from 'ng-jhipster';
 
 import { ICupom } from 'app/shared/model/cupom.model';
 import { CupomService } from './cupom.service';
-import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
-import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
 
 @Component({
     selector: 'jhi-cupom-update',
@@ -18,15 +16,11 @@ import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-co
 export class CupomUpdateComponent implements OnInit {
     cupom: ICupom;
     isSaving: boolean;
-
-    estabelecimentocomercials: IEstabelecimentoComercial[];
     data: string;
 
     constructor(
         private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
         private cupomService: CupomService,
-        private estabelecimentoComercialService: EstabelecimentoComercialService,
         private elementRef: ElementRef,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -37,21 +31,6 @@ export class CupomUpdateComponent implements OnInit {
             this.cupom = cupom;
             this.data = this.cupom.data != null ? this.cupom.data.format(DATE_TIME_FORMAT) : null;
         });
-        this.estabelecimentoComercialService.query({ filter: 'cupom-is-null' }).subscribe(
-            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
-                if (!this.cupom.estabelecimentoComercial || !this.cupom.estabelecimentoComercial.id) {
-                    this.estabelecimentocomercials = res.body;
-                } else {
-                    this.estabelecimentoComercialService.find(this.cupom.estabelecimentoComercial.id).subscribe(
-                        (subRes: HttpResponse<IEstabelecimentoComercial>) => {
-                            this.estabelecimentocomercials = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     byteSize(field) {
@@ -95,13 +74,5 @@ export class CupomUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackEstabelecimentoComercialById(index: number, item: IEstabelecimentoComercial) {
-        return item.id;
     }
 }

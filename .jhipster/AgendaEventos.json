@@ -20,18 +20,13 @@
         {
             "fieldName": "bolAtivo",
             "fieldType": "Boolean"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "lojaMaconica",
-            "otherEntityName": "lojaMaconica",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "agendaEventos"
+            "fieldName": "lojaMaconicaId",
+            "fieldType": "Long"
         }
     ],
+    "relationships": [],
     "changelogDate": "20190103130357",
     "entityTableName": "agenda_eventos",
     "dto": "no",

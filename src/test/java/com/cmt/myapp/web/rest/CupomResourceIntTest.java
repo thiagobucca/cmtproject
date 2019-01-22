@@ -56,6 +56,9 @@ public class CupomResourceIntTest {
     private static final String DEFAULT_FOTO_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_FOTO_CONTENT_TYPE = "image/png";
 
+    private static final Long DEFAULT_ESTABELECIMENTO_COMERCIAL_ID = 1L;
+    private static final Long UPDATED_ESTABELECIMENTO_COMERCIAL_ID = 2L;
+
     @Autowired
     private CupomRepository cupomRepository;
 
@@ -98,7 +101,8 @@ public class CupomResourceIntTest {
             .valor(DEFAULT_VALOR)
             .numero(DEFAULT_NUMERO)
             .foto(DEFAULT_FOTO)
-            .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE);
+            .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE)
+            .estabelecimentoComercialId(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID);
         return cupom;
     }
 
@@ -127,6 +131,7 @@ public class CupomResourceIntTest {
         assertThat(testCupom.getNumero()).isEqualTo(DEFAULT_NUMERO);
         assertThat(testCupom.getFoto()).isEqualTo(DEFAULT_FOTO);
         assertThat(testCupom.getFotoContentType()).isEqualTo(DEFAULT_FOTO_CONTENT_TYPE);
+        assertThat(testCupom.getEstabelecimentoComercialId()).isEqualTo(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID);
     }
 
     @Test
@@ -163,7 +168,8 @@ public class CupomResourceIntTest {
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.doubleValue())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO.toString())))
             .andExpect(jsonPath("$.[*].fotoContentType").value(hasItem(DEFAULT_FOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].foto").value(hasItem(Base64Utils.encodeToString(DEFAULT_FOTO))));
+            .andExpect(jsonPath("$.[*].foto").value(hasItem(Base64Utils.encodeToString(DEFAULT_FOTO))))
+            .andExpect(jsonPath("$.[*].estabelecimentoComercialId").value(hasItem(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID.intValue())));
     }
     
     @Test
@@ -181,7 +187,8 @@ public class CupomResourceIntTest {
             .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.doubleValue()))
             .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO.toString()))
             .andExpect(jsonPath("$.fotoContentType").value(DEFAULT_FOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.foto").value(Base64Utils.encodeToString(DEFAULT_FOTO)));
+            .andExpect(jsonPath("$.foto").value(Base64Utils.encodeToString(DEFAULT_FOTO)))
+            .andExpect(jsonPath("$.estabelecimentoComercialId").value(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID.intValue()));
     }
 
     @Test
@@ -209,7 +216,8 @@ public class CupomResourceIntTest {
             .valor(UPDATED_VALOR)
             .numero(UPDATED_NUMERO)
             .foto(UPDATED_FOTO)
-            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE);
+            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE)
+            .estabelecimentoComercialId(UPDATED_ESTABELECIMENTO_COMERCIAL_ID);
 
         restCupomMockMvc.perform(put("/api/cupoms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -225,6 +233,7 @@ public class CupomResourceIntTest {
         assertThat(testCupom.getNumero()).isEqualTo(UPDATED_NUMERO);
         assertThat(testCupom.getFoto()).isEqualTo(UPDATED_FOTO);
         assertThat(testCupom.getFotoContentType()).isEqualTo(UPDATED_FOTO_CONTENT_TYPE);
+        assertThat(testCupom.getEstabelecimentoComercialId()).isEqualTo(UPDATED_ESTABELECIMENTO_COMERCIAL_ID);
     }
 
     @Test

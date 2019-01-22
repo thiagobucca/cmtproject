@@ -20,7 +20,7 @@
             <th><span jhiTranslate="cmtprojectApp.usuario.email">Email</span></th>
             <th><span jhiTranslate="cmtprojectApp.usuario.senha">Senha</span></th>
             <th><span jhiTranslate="cmtprojectApp.usuario.bolAtivo">Bol Ativo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.usuario.perfil">Perfil</span></th>
+            <th><span jhiTranslate="cmtprojectApp.usuario.perfilId">Perfil Id</span></th>
             <th></th>
             </tr>
             </thead>
@@ -32,11 +32,7 @@
                 <td>{{usuario.email}}</td>
                 <td>{{usuario.senha}}</td>
                 <td>{{usuario.bolAtivo}}</td>
-                <td>
-                    <div *ngIf="usuario.perfil">
-                        <a [routerLink]="['../perfil-usuario', usuario.perfil?.id, 'view' ]" >{{usuario.perfil?.id}}</a>
-                    </div>
-                </td>
+                <td>{{usuario.perfilId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

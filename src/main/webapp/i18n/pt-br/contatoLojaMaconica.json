@@ -17,7 +17,8 @@
             },
             "nome": "Nome",
             "telefone": "Telefone",
-            "email": "Email"
+            "email": "Email",
+            "lojaMaconicaId": "Loja Maconica Id"
         }
     }
 }

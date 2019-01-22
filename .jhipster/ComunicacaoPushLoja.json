@@ -1,0 +1,23 @@
+{
+    "name": "ComunicacaoPushLoja",
+    "fields": [
+        {
+            "fieldName": "comunicacaoPushId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lojaMaconicaId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190122221925",
+    "entityTableName": "comunicacao_push_loja",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

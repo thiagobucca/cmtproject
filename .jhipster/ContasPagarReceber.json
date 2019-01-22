@@ -10,50 +10,28 @@
             "fieldType": "Double"
         },
         {
-            "fieldName": "tipoLancamento",
-            "fieldType": "TipoLancamento",
-            "fieldValues": "Credito,Debito"
-        },
-        {
             "fieldName": "statusLancamento",
             "fieldType": "StatusLancamento",
             "fieldValues": "Aberto,Baixado"
+        },
+        {
+            "fieldName": "usuarioId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lojaMaconicaId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "estabelecimentoComercialId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "tipoOperacaoId",
+            "fieldType": "Long"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "usuario",
-            "otherEntityName": "usuario",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "contasPagarReceber"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "lojaMaconica",
-            "otherEntityName": "lojaMaconica",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "contasPagarReceber"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "estabelecimentoComercial",
-            "otherEntityName": "estabelecimentoComercial",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "contasPagarReceber"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "tipoOperacao",
-            "otherEntityName": "tipoOperacao",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "contasPagarReceber"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20190103130358",
     "entityTableName": "contas_pagar_receber",
     "dto": "no",

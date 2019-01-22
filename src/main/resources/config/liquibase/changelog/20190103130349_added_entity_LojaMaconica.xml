@@ -45,12 +45,6 @@
             <column name="bol_ativo" type="bit">
                 <constraints nullable="true" />
             </column>
-            <column name="contato_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_loja_maconica_contato_id" />
-            </column>
-            <column name="comunicacao_push_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>

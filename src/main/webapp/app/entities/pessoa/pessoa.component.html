@@ -22,8 +22,8 @@
             <th><span jhiTranslate="cmtprojectApp.pessoa.senha">Senha</span></th>
             <th><span jhiTranslate="cmtprojectApp.pessoa.dataNascimento">Data Nascimento</span></th>
             <th><span jhiTranslate="cmtprojectApp.pessoa.bolAtivo">Bol Ativo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.pessoa.lojaMaconica">Loja Maconica</span></th>
-            <th><span jhiTranslate="cmtprojectApp.pessoa.dependente">Dependente</span></th>
+            <th><span jhiTranslate="cmtprojectApp.pessoa.pessoaDependenteId">Pessoa Dependente Id</span></th>
+            <th><span jhiTranslate="cmtprojectApp.pessoa.lojaMaconicaId">Loja Maconica Id</span></th>
             <th></th>
             </tr>
             </thead>
@@ -37,16 +37,8 @@
                 <td>{{pessoa.senha}}</td>
                 <td>{{pessoa.dataNascimento | date:'medium'}}</td>
                 <td>{{pessoa.bolAtivo}}</td>
-                <td>
-                    <div *ngIf="pessoa.lojaMaconica">
-                        <a [routerLink]="['../loja-maconica', pessoa.lojaMaconica?.id, 'view' ]" >{{pessoa.lojaMaconica?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="pessoa.dependente">
-                        <a [routerLink]="['../pessoa', pessoa.dependente?.id, 'view' ]" >{{pessoa.dependente?.id}}</a>
-                    </div>
-                </td>
+                <td>{{pessoa.pessoaDependenteId}}</td>
+                <td>{{pessoa.lojaMaconicaId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

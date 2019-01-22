@@ -1,5 +1,4 @@
 import { Moment } from 'moment';
-import { ILojaMaconica } from 'app/shared/model//loja-maconica.model';
 
 export interface IAgendaEventos {
     id?: number;
@@ -8,7 +7,7 @@ export interface IAgendaEventos {
     local?: string;
     descricao?: string;
     bolAtivo?: boolean;
-    lojaMaconica?: ILojaMaconica;
+    lojaMaconicaId?: number;
 }
 
 export class AgendaEventos implements IAgendaEventos {
@@ -19,7 +18,7 @@ export class AgendaEventos implements IAgendaEventos {
         public local?: string,
         public descricao?: string,
         public bolAtivo?: boolean,
-        public lojaMaconica?: ILojaMaconica
+        public lojaMaconicaId?: number
     ) {
         this.bolAtivo = this.bolAtivo || false;
     }

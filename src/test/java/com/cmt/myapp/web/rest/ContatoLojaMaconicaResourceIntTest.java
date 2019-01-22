@@ -48,6 +48,9 @@ public class ContatoLojaMaconicaResourceIntTest {
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_LOJA_MACONICA_ID = 1L;
+    private static final Long UPDATED_LOJA_MACONICA_ID = 2L;
+
     @Autowired
     private ContatoLojaMaconicaRepository contatoLojaMaconicaRepository;
 
@@ -88,7 +91,8 @@ public class ContatoLojaMaconicaResourceIntTest {
         ContatoLojaMaconica contatoLojaMaconica = new ContatoLojaMaconica()
             .nome(DEFAULT_NOME)
             .telefone(DEFAULT_TELEFONE)
-            .email(DEFAULT_EMAIL);
+            .email(DEFAULT_EMAIL)
+            .lojaMaconicaId(DEFAULT_LOJA_MACONICA_ID);
         return contatoLojaMaconica;
     }
 
@@ -115,6 +119,7 @@ public class ContatoLojaMaconicaResourceIntTest {
         assertThat(testContatoLojaMaconica.getNome()).isEqualTo(DEFAULT_NOME);
         assertThat(testContatoLojaMaconica.getTelefone()).isEqualTo(DEFAULT_TELEFONE);
         assertThat(testContatoLojaMaconica.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testContatoLojaMaconica.getLojaMaconicaId()).isEqualTo(DEFAULT_LOJA_MACONICA_ID);
     }
 
     @Test
@@ -149,7 +154,8 @@ public class ContatoLojaMaconicaResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(contatoLojaMaconica.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())))
             .andExpect(jsonPath("$.[*].telefone").value(hasItem(DEFAULT_TELEFONE.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].lojaMaconicaId").value(hasItem(DEFAULT_LOJA_MACONICA_ID.intValue())));
     }
     
     @Test
@@ -165,7 +171,8 @@ public class ContatoLojaMaconicaResourceIntTest {
             .andExpect(jsonPath("$.id").value(contatoLojaMaconica.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()))
             .andExpect(jsonPath("$.telefone").value(DEFAULT_TELEFONE.toString()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
+            .andExpect(jsonPath("$.lojaMaconicaId").value(DEFAULT_LOJA_MACONICA_ID.intValue()));
     }
 
     @Test
@@ -191,7 +198,8 @@ public class ContatoLojaMaconicaResourceIntTest {
         updatedContatoLojaMaconica
             .nome(UPDATED_NOME)
             .telefone(UPDATED_TELEFONE)
-            .email(UPDATED_EMAIL);
+            .email(UPDATED_EMAIL)
+            .lojaMaconicaId(UPDATED_LOJA_MACONICA_ID);
 
         restContatoLojaMaconicaMockMvc.perform(put("/api/contato-loja-maconicas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -205,6 +213,7 @@ public class ContatoLojaMaconicaResourceIntTest {
         assertThat(testContatoLojaMaconica.getNome()).isEqualTo(UPDATED_NOME);
         assertThat(testContatoLojaMaconica.getTelefone()).isEqualTo(UPDATED_TELEFONE);
         assertThat(testContatoLojaMaconica.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testContatoLojaMaconica.getLojaMaconicaId()).isEqualTo(UPDATED_LOJA_MACONICA_ID);
     }
 
     @Test

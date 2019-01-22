@@ -2,12 +2,10 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiDataUtils } from 'ng-jhipster';
 
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from './estabelecimento-comercial.service';
-import { ICategoriaEstabelecimento } from 'app/shared/model/categoria-estabelecimento.model';
-import { CategoriaEstabelecimentoService } from 'app/entities/categoria-estabelecimento';
 
 @Component({
     selector: 'jhi-estabelecimento-comercial-update',
@@ -17,15 +15,9 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     estabelecimentoComercial: IEstabelecimentoComercial;
     isSaving: boolean;
 
-    categorias: ICategoriaEstabelecimento[];
-
-    estabelecimentocomercials: IEstabelecimentoComercial[];
-
     constructor(
         private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
-        private categoriaEstabelecimentoService: CategoriaEstabelecimentoService,
         private elementRef: ElementRef,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -35,27 +27,6 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ estabelecimentoComercial }) => {
             this.estabelecimentoComercial = estabelecimentoComercial;
         });
-        this.categoriaEstabelecimentoService.query({ filter: 'estabelecimentocomercial-is-null' }).subscribe(
-            (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
-                if (!this.estabelecimentoComercial.categoria || !this.estabelecimentoComercial.categoria.id) {
-                    this.categorias = res.body;
-                } else {
-                    this.categoriaEstabelecimentoService.find(this.estabelecimentoComercial.categoria.id).subscribe(
-                        (subRes: HttpResponse<ICategoriaEstabelecimento>) => {
-                            this.categorias = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.estabelecimentoComercialService.query().subscribe(
-            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
-                this.estabelecimentocomercials = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     byteSize(field) {
@@ -101,17 +72,5 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackCategoriaEstabelecimentoById(index: number, item: ICategoriaEstabelecimento) {
-        return item.id;
-    }
-
-    trackEstabelecimentoComercialById(index: number, item: IEstabelecimentoComercial) {
-        return item.id;
     }
 }

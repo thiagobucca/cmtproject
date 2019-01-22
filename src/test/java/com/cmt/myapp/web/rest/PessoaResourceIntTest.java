@@ -63,6 +63,12 @@ public class PessoaResourceIntTest {
     private static final Boolean DEFAULT_BOL_ATIVO = false;
     private static final Boolean UPDATED_BOL_ATIVO = true;
 
+    private static final Long DEFAULT_PESSOA_DEPENDENTE_ID = 1L;
+    private static final Long UPDATED_PESSOA_DEPENDENTE_ID = 2L;
+
+    private static final Long DEFAULT_LOJA_MACONICA_ID = 1L;
+    private static final Long UPDATED_LOJA_MACONICA_ID = 2L;
+
     @Autowired
     private PessoaRepository pessoaRepository;
 
@@ -107,7 +113,9 @@ public class PessoaResourceIntTest {
             .tipoPessoa(DEFAULT_TIPO_PESSOA)
             .senha(DEFAULT_SENHA)
             .dataNascimento(DEFAULT_DATA_NASCIMENTO)
-            .bolAtivo(DEFAULT_BOL_ATIVO);
+            .bolAtivo(DEFAULT_BOL_ATIVO)
+            .pessoaDependenteId(DEFAULT_PESSOA_DEPENDENTE_ID)
+            .lojaMaconicaId(DEFAULT_LOJA_MACONICA_ID);
         return pessoa;
     }
 
@@ -138,6 +146,8 @@ public class PessoaResourceIntTest {
         assertThat(testPessoa.getSenha()).isEqualTo(DEFAULT_SENHA);
         assertThat(testPessoa.getDataNascimento()).isEqualTo(DEFAULT_DATA_NASCIMENTO);
         assertThat(testPessoa.isBolAtivo()).isEqualTo(DEFAULT_BOL_ATIVO);
+        assertThat(testPessoa.getPessoaDependenteId()).isEqualTo(DEFAULT_PESSOA_DEPENDENTE_ID);
+        assertThat(testPessoa.getLojaMaconicaId()).isEqualTo(DEFAULT_LOJA_MACONICA_ID);
     }
 
     @Test
@@ -176,7 +186,9 @@ public class PessoaResourceIntTest {
             .andExpect(jsonPath("$.[*].tipoPessoa").value(hasItem(DEFAULT_TIPO_PESSOA.toString())))
             .andExpect(jsonPath("$.[*].senha").value(hasItem(DEFAULT_SENHA.toString())))
             .andExpect(jsonPath("$.[*].dataNascimento").value(hasItem(DEFAULT_DATA_NASCIMENTO.toString())))
-            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())))
+            .andExpect(jsonPath("$.[*].pessoaDependenteId").value(hasItem(DEFAULT_PESSOA_DEPENDENTE_ID.intValue())))
+            .andExpect(jsonPath("$.[*].lojaMaconicaId").value(hasItem(DEFAULT_LOJA_MACONICA_ID.intValue())));
     }
     
     @Test
@@ -196,7 +208,9 @@ public class PessoaResourceIntTest {
             .andExpect(jsonPath("$.tipoPessoa").value(DEFAULT_TIPO_PESSOA.toString()))
             .andExpect(jsonPath("$.senha").value(DEFAULT_SENHA.toString()))
             .andExpect(jsonPath("$.dataNascimento").value(DEFAULT_DATA_NASCIMENTO.toString()))
-            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()));
+            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()))
+            .andExpect(jsonPath("$.pessoaDependenteId").value(DEFAULT_PESSOA_DEPENDENTE_ID.intValue()))
+            .andExpect(jsonPath("$.lojaMaconicaId").value(DEFAULT_LOJA_MACONICA_ID.intValue()));
     }
 
     @Test
@@ -226,7 +240,9 @@ public class PessoaResourceIntTest {
             .tipoPessoa(UPDATED_TIPO_PESSOA)
             .senha(UPDATED_SENHA)
             .dataNascimento(UPDATED_DATA_NASCIMENTO)
-            .bolAtivo(UPDATED_BOL_ATIVO);
+            .bolAtivo(UPDATED_BOL_ATIVO)
+            .pessoaDependenteId(UPDATED_PESSOA_DEPENDENTE_ID)
+            .lojaMaconicaId(UPDATED_LOJA_MACONICA_ID);
 
         restPessoaMockMvc.perform(put("/api/pessoas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -244,6 +260,8 @@ public class PessoaResourceIntTest {
         assertThat(testPessoa.getSenha()).isEqualTo(UPDATED_SENHA);
         assertThat(testPessoa.getDataNascimento()).isEqualTo(UPDATED_DATA_NASCIMENTO);
         assertThat(testPessoa.isBolAtivo()).isEqualTo(UPDATED_BOL_ATIVO);
+        assertThat(testPessoa.getPessoaDependenteId()).isEqualTo(UPDATED_PESSOA_DEPENDENTE_ID);
+        assertThat(testPessoa.getLojaMaconicaId()).isEqualTo(UPDATED_LOJA_MACONICA_ID);
     }
 
     @Test

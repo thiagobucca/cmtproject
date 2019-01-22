@@ -1,6 +1,3 @@
-import { IContatoLojaMaconica } from 'app/shared/model//contato-loja-maconica.model';
-import { IComunicacaoPush } from 'app/shared/model//comunicacao-push.model';
-
 export interface ILojaMaconica {
     id?: number;
     codCnpj?: string;
@@ -9,8 +6,6 @@ export interface ILojaMaconica {
     telefone?: string;
     numero?: number;
     bolAtivo?: boolean;
-    contato?: IContatoLojaMaconica;
-    comunicacaoPush?: IComunicacaoPush;
 }
 
 export class LojaMaconica implements ILojaMaconica {
@@ -21,9 +16,7 @@ export class LojaMaconica implements ILojaMaconica {
         public endereco?: string,
         public telefone?: string,
         public numero?: number,
-        public bolAtivo?: boolean,
-        public contato?: IContatoLojaMaconica,
-        public comunicacaoPush?: IComunicacaoPush
+        public bolAtivo?: boolean
     ) {
         this.bolAtivo = this.bolAtivo || false;
     }

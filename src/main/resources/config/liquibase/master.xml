@@ -27,6 +27,7 @@
     <include file="config/liquibase/changelog/20190103130357_added_entity_AgendaEventos.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190103130358_added_entity_ContasPagarReceber.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190103130359_added_entity_Cupom.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190122221925_added_entity_ComunicacaoPushLoja.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20181215042150_added_entity_constraints_Country.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181215042151_added_entity_constraints_Location.xml" relativeToChangelogFile="false"/>

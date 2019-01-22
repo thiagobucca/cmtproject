@@ -17,12 +17,11 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span></th>
             <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoLancamento">Tipo Lancamento</span></th>
             <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento">Status Lancamento</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuario">Usuario</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconica">Loja Maconica</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercial">Estabelecimento Comercial</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacao">Tipo Operacao</span></th>
+            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuarioId">Usuario Id</span></th>
+            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconicaId">Loja Maconica Id</span></th>
+            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercialId">Estabelecimento Comercial Id</span></th>
+            <th><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacaoId">Tipo Operacao Id</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,28 +30,11 @@
                 <td><a [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'view' ]">{{contasPagarReceber.id}}</a></td>
                 <td>{{contasPagarReceber.data | date:'medium'}}</td>
                 <td>{{contasPagarReceber.valor}}</td>
-                <td jhiTranslate="{{'cmtprojectApp.TipoLancamento.' + contasPagarReceber.tipoLancamento}}">{{contasPagarReceber.tipoLancamento}}</td>
                 <td jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
-                <td>
-                    <div *ngIf="contasPagarReceber.usuario">
-                        <a [routerLink]="['../usuario', contasPagarReceber.usuario?.id, 'view' ]" >{{contasPagarReceber.usuario?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="contasPagarReceber.lojaMaconica">
-                        <a [routerLink]="['../loja-maconica', contasPagarReceber.lojaMaconica?.id, 'view' ]" >{{contasPagarReceber.lojaMaconica?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="contasPagarReceber.estabelecimentoComercial">
-                        <a [routerLink]="['../estabelecimento-comercial', contasPagarReceber.estabelecimentoComercial?.id, 'view' ]" >{{contasPagarReceber.estabelecimentoComercial?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="contasPagarReceber.tipoOperacao">
-                        <a [routerLink]="['../tipo-operacao', contasPagarReceber.tipoOperacao?.id, 'view' ]" >{{contasPagarReceber.tipoOperacao?.id}}</a>
-                    </div>
-                </td>
+                <td>{{contasPagarReceber.usuarioId}}</td>
+                <td>{{contasPagarReceber.lojaMaconicaId}}</td>
+                <td>{{contasPagarReceber.estabelecimentoComercialId}}</td>
+                <td>{{contasPagarReceber.tipoOperacaoId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

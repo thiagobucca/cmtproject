@@ -29,24 +29,17 @@
         {
             "fieldName": "bolAtivo",
             "fieldType": "Boolean"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "lojaMaconica",
-            "otherEntityName": "lojaMaconica",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "pessoa"
         },
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "dependente",
-            "otherEntityName": "pessoa",
-            "otherEntityField": "id"
+            "fieldName": "pessoaDependenteId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lojaMaconicaId",
+            "fieldType": "Long"
         }
     ],
+    "relationships": [],
     "changelogDate": "20190103130355",
     "entityTableName": "pessoa",
     "dto": "no",

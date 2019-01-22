@@ -29,18 +29,6 @@
                 <dd>
                     <span>{{lojaMaconica.bolAtivo}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.contato">Contato</span></dt>
-                <dd>
-                    <div *ngIf="lojaMaconica.contato">
-                        <a [routerLink]="['/contato-loja-maconica', lojaMaconica.contato?.id, 'view']">{{lojaMaconica.contato?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.comunicacaoPush">Comunicacao Push</span></dt>
-                <dd>
-                    <div *ngIf="lojaMaconica.comunicacaoPush">
-                        <a [routerLink]="['/comunicacao-push', lojaMaconica.comunicacaoPush?.id, 'view']">{{lojaMaconica.comunicacaoPush?.id}}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

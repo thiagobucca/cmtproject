@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Pessoa(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', TipoPessoa.Macom, 'AAAAAAA', currentDate, false);
+            elemDefault = new Pessoa(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', TipoPessoa.Macom, 'AAAAAAA', currentDate, false, 0, 0);
         });
 
         describe('Service methods', async () => {
@@ -76,7 +76,9 @@ describe('Service Tests', () => {
                         tipoPessoa: 'BBBBBB',
                         senha: 'BBBBBB',
                         dataNascimento: currentDate.format(DATE_TIME_FORMAT),
-                        bolAtivo: true
+                        bolAtivo: true,
+                        pessoaDependenteId: 1,
+                        lojaMaconicaId: 1
                     },
                     elemDefault
                 );
@@ -104,7 +106,9 @@ describe('Service Tests', () => {
                         tipoPessoa: 'BBBBBB',
                         senha: 'BBBBBB',
                         dataNascimento: currentDate.format(DATE_TIME_FORMAT),
-                        bolAtivo: true
+                        bolAtivo: true,
+                        pessoaDependenteId: 1,
+                        lojaMaconicaId: 1
                     },
                     elemDefault
                 );

@@ -42,17 +42,13 @@
                 <dd>
                     <span>{{estabelecimentoComercial.bolAtivo}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoria">Categoria</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria Estabelecimento Id</span></dt>
                 <dd>
-                    <div *ngIf="estabelecimentoComercial.categoria">
-                        <a [routerLink]="['/categoria-estabelecimento', estabelecimentoComercial.categoria?.id, 'view']">{{estabelecimentoComercial.categoria?.id}}</a>
-                    </div>
+                    <span>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.matriz">Matriz</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId">Estabelecimento Matriz Id</span></dt>
                 <dd>
-                    <div *ngIf="estabelecimentoComercial.matriz">
-                        <a [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.matriz?.id, 'view']">{{estabelecimentoComercial.matriz?.id}}</a>
-                    </div>
+                    <span>{{estabelecimentoComercial.estabelecimentoMatrizId}}</span>
                 </dd>
             </dl>
 

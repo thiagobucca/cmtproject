@@ -28,6 +28,9 @@ public class ContatoLojaMaconica implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "loja_maconica_id")
+    private Long lojaMaconicaId;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -75,6 +78,19 @@ public class ContatoLojaMaconica implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Long getLojaMaconicaId() {
+        return lojaMaconicaId;
+    }
+
+    public ContatoLojaMaconica lojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
+        return this;
+    }
+
+    public void setLojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -104,6 +120,7 @@ public class ContatoLojaMaconica implements Serializable {
             ", nome='" + getNome() + "'" +
             ", telefone='" + getTelefone() + "'" +
             ", email='" + getEmail() + "'" +
+            ", lojaMaconicaId=" + getLojaMaconicaId() +
             "}";
     }
 }

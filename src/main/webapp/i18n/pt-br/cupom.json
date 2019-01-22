@@ -19,7 +19,7 @@
             "valor": "Valor",
             "numero": "Numero",
             "foto": "Foto",
-            "estabelecimentoComercial": "Estabelecimento Comercial"
+            "estabelecimentoComercialId": "Estabelecimento Comercial Id"
         }
     }
 }

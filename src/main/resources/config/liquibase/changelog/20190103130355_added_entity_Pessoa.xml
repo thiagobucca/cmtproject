@@ -49,10 +49,12 @@
             <column name="bol_ativo" type="bit">
                 <constraints nullable="true" />
             </column>
-            <column name="loja_maconica_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_pessoa_loja_maconica_id" />
+
+            <column name="pessoa_dependente_id" type="bigint">
+                <constraints nullable="true" />
             </column>
-            <column name="dependente_id" type="bigint">
+
+            <column name="loja_maconica_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

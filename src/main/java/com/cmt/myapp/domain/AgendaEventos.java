@@ -35,8 +35,8 @@ public class AgendaEventos implements Serializable {
     @Column(name = "bol_ativo")
     private Boolean bolAtivo;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private LojaMaconica lojaMaconica;
+    @Column(name = "loja_maconica_id")
+    private Long lojaMaconicaId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -112,17 +112,17 @@ public class AgendaEventos implements Serializable {
         this.bolAtivo = bolAtivo;
     }
 
-    public LojaMaconica getLojaMaconica() {
-        return lojaMaconica;
+    public Long getLojaMaconicaId() {
+        return lojaMaconicaId;
     }
 
-    public AgendaEventos lojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconica = lojaMaconica;
+    public AgendaEventos lojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
         return this;
     }
 
-    public void setLojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconica = lojaMaconica;
+    public void setLojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -155,6 +155,7 @@ public class AgendaEventos implements Serializable {
             ", local='" + getLocal() + "'" +
             ", descricao='" + getDescricao() + "'" +
             ", bolAtivo='" + isBolAtivo() + "'" +
+            ", lojaMaconicaId=" + getLojaMaconicaId() +
             "}";
     }
 }

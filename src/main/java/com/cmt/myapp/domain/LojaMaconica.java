@@ -1,6 +1,5 @@
 package com.cmt.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -37,13 +36,6 @@ public class LojaMaconica implements Serializable {
 
     @Column(name = "bol_ativo")
     private Boolean bolAtivo;
-
-    @OneToOne    @JoinColumn(unique = true)
-    private ContatoLojaMaconica contato;
-
-    @ManyToOne
-    @JsonIgnoreProperties("lojaMaconicas")
-    private ComunicacaoPush comunicacaoPush;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -130,32 +122,6 @@ public class LojaMaconica implements Serializable {
 
     public void setBolAtivo(Boolean bolAtivo) {
         this.bolAtivo = bolAtivo;
-    }
-
-    public ContatoLojaMaconica getContato() {
-        return contato;
-    }
-
-    public LojaMaconica contato(ContatoLojaMaconica contatoLojaMaconica) {
-        this.contato = contatoLojaMaconica;
-        return this;
-    }
-
-    public void setContato(ContatoLojaMaconica contatoLojaMaconica) {
-        this.contato = contatoLojaMaconica;
-    }
-
-    public ComunicacaoPush getComunicacaoPush() {
-        return comunicacaoPush;
-    }
-
-    public LojaMaconica comunicacaoPush(ComunicacaoPush comunicacaoPush) {
-        this.comunicacaoPush = comunicacaoPush;
-        return this;
-    }
-
-    public void setComunicacaoPush(ComunicacaoPush comunicacaoPush) {
-        this.comunicacaoPush = comunicacaoPush;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

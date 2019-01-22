@@ -20,7 +20,7 @@
             "email": "Email",
             "senha": "Senha",
             "bolAtivo": "Bol Ativo",
-            "perfil": "Perfil"
+            "perfilId": "Perfil Id"
         }
     }
 }

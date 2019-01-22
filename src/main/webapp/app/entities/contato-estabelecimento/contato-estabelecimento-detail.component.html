@@ -17,11 +17,9 @@
                 <dd>
                     <span>{{contatoEstabelecimento.email}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercial">Estabelecimento Comercial</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercialId">Estabelecimento Comercial Id</span></dt>
                 <dd>
-                    <div *ngIf="contatoEstabelecimento.estabelecimentoComercial">
-                        <a [routerLink]="['/estabelecimento-comercial', contatoEstabelecimento.estabelecimentoComercial?.id, 'view']">{{contatoEstabelecimento.estabelecimentoComercial?.id}}</a>
-                    </div>
+                    <span>{{contatoEstabelecimento.estabelecimentoComercialId}}</span>
                 </dd>
             </dl>
 
