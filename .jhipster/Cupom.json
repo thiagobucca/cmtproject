@@ -27,7 +27,7 @@
     "changelogDate": "20190103130359",
     "entityTableName": "cupom",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

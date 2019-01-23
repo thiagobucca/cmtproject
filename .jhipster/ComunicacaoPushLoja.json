@@ -14,7 +14,7 @@
     "changelogDate": "20190122221925",
     "entityTableName": "comunicacao_push_loja",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

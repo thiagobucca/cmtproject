@@ -35,7 +35,7 @@
     "changelogDate": "20190103130358",
     "entityTableName": "contas_pagar_receber",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

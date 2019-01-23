@@ -43,7 +43,7 @@
     "changelogDate": "20190103130355",
     "entityTableName": "pessoa",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

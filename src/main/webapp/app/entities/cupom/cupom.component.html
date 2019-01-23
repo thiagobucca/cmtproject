@@ -13,13 +13,13 @@
     <div class="table-responsive" *ngIf="cupoms">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="cmtprojectApp.cupom.data">Data</span></th>
-            <th><span jhiTranslate="cmtprojectApp.cupom.valor">Valor</span></th>
-            <th><span jhiTranslate="cmtprojectApp.cupom.numero">Numero</span></th>
-            <th><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span></th>
-            <th><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercialId">Estabelecimento Comercial Id</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.cupom.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.cupom.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numero"><span jhiTranslate="cmtprojectApp.cupom.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foto"><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estabelecimentoComercialId"><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercialId">Estabelecimento Comercial Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -63,5 +63,13 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="cupoms && cupoms.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
     </div>
 </div>

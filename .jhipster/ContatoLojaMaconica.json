@@ -22,7 +22,7 @@
     "changelogDate": "20190103130351",
     "entityTableName": "contato_loja_maconica",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

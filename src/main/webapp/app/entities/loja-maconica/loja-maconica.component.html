@@ -13,14 +13,14 @@
     <div class="table-responsive" *ngIf="lojaMaconicas">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj">Cod Cnpj</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.numero">Numero</span></th>
-            <th><span jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo">Bol Ativo</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="codCnpj"><span jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj">Cod Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="endereco"><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numero"><span jhiTranslate="cmtprojectApp.lojaMaconica.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo"><span jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo">Bol Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -60,5 +60,13 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="lojaMaconicas && lojaMaconicas.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
     </div>
 </div>

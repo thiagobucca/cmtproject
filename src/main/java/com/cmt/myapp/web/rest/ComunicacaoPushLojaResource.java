@@ -5,9 +5,14 @@ import com.cmt.myapp.domain.ComunicacaoPushLoja;
 import com.cmt.myapp.repository.ComunicacaoPushLojaRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
+import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,13 +84,16 @@ public class ComunicacaoPushLojaResource {
     /**
      * GET  /comunicacao-push-lojas : get all the comunicacaoPushLojas.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of comunicacaoPushLojas in body
      */
     @GetMapping("/comunicacao-push-lojas")
     @Timed
-    public List<ComunicacaoPushLoja> getAllComunicacaoPushLojas() {
-        log.debug("REST request to get all ComunicacaoPushLojas");
-        return comunicacaoPushLojaRepository.findAll();
+    public ResponseEntity<List<ComunicacaoPushLoja>> getAllComunicacaoPushLojas(Pageable pageable) {
+        log.debug("REST request to get a page of ComunicacaoPushLojas");
+        Page<ComunicacaoPushLoja> page = comunicacaoPushLojaRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comunicacao-push-lojas");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

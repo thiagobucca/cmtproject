@@ -5,9 +5,14 @@ import com.cmt.myapp.domain.ContatoEstabelecimento;
 import com.cmt.myapp.repository.ContatoEstabelecimentoRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
+import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,13 +84,16 @@ public class ContatoEstabelecimentoResource {
     /**
      * GET  /contato-estabelecimentos : get all the contatoEstabelecimentos.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of contatoEstabelecimentos in body
      */
     @GetMapping("/contato-estabelecimentos")
     @Timed
-    public List<ContatoEstabelecimento> getAllContatoEstabelecimentos() {
-        log.debug("REST request to get all ContatoEstabelecimentos");
-        return contatoEstabelecimentoRepository.findAll();
+    public ResponseEntity<List<ContatoEstabelecimento>> getAllContatoEstabelecimentos(Pageable pageable) {
+        log.debug("REST request to get a page of ContatoEstabelecimentos");
+        Page<ContatoEstabelecimento> page = contatoEstabelecimentoRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contato-estabelecimentos");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

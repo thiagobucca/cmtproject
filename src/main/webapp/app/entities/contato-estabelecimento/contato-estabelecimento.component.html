@@ -13,12 +13,12 @@
     <div class="table-responsive" *ngIf="contatoEstabelecimentos">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.nome">Nome</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.telefone">Telefone</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.email">Email</span></th>
-            <th><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercialId">Estabelecimento Comercial Id</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estabelecimentoComercialId"><span jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercialId">Estabelecimento Comercial Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -56,5 +56,13 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="contatoEstabelecimentos && contatoEstabelecimentos.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
     </div>
 </div>

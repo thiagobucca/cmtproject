@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IPessoa } from 'app/shared/model/pessoa.model';
 import { Principal } from 'app/core';
+
+import { ITEMS_PER_PAGE } from 'app/shared';
 import { PessoaService } from './pessoa.service';
 
 @Component({
@@ -12,24 +15,80 @@ import { PessoaService } from './pessoa.service';
     templateUrl: './pessoa.component.html'
 })
 export class PessoaComponent implements OnInit, OnDestroy {
-    pessoas: IPessoa[];
     currentAccount: any;
+    pessoas: IPessoa[];
+    error: any;
+    success: any;
     eventSubscriber: Subscription;
+    routeData: any;
+    links: any;
+    totalItems: any;
+    queryCount: any;
+    itemsPerPage: any;
+    page: any;
+    predicate: any;
+    previousPage: any;
+    reverse: any;
 
     constructor(
         private pessoaService: PessoaService,
+        private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
-        private eventManager: JhiEventManager,
-        private principal: Principal
-    ) {}
+        private principal: Principal,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
+        private eventManager: JhiEventManager
+    ) {
+        this.itemsPerPage = ITEMS_PER_PAGE;
+        this.routeData = this.activatedRoute.data.subscribe(data => {
+            this.page = data.pagingParams.page;
+            this.previousPage = data.pagingParams.page;
+            this.reverse = data.pagingParams.ascending;
+            this.predicate = data.pagingParams.predicate;
+        });
+    }
 
     loadAll() {
-        this.pessoaService.query().subscribe(
-            (res: HttpResponse<IPessoa[]>) => {
-                this.pessoas = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.pessoaService
+            .query({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort()
+            })
+            .subscribe(
+                (res: HttpResponse<IPessoa[]>) => this.paginatePessoas(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    loadPage(page: number) {
+        if (page !== this.previousPage) {
+            this.previousPage = page;
+            this.transition();
+        }
+    }
+
+    transition() {
+        this.router.navigate(['/pessoa'], {
+            queryParams: {
+                page: this.page,
+                size: this.itemsPerPage,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        });
+        this.loadAll();
+    }
+
+    clear() {
+        this.page = 0;
+        this.router.navigate([
+            '/pessoa',
+            {
+                page: this.page,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        ]);
+        this.loadAll();
     }
 
     ngOnInit() {
@@ -50,6 +109,21 @@ export class PessoaComponent implements OnInit, OnDestroy {
 
     registerChangeInPessoas() {
         this.eventSubscriber = this.eventManager.subscribe('pessoaListModification', response => this.loadAll());
+    }
+
+    sort() {
+        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        if (this.predicate !== 'id') {
+            result.push('id');
+        }
+        return result;
+    }
+
+    private paginatePessoas(data: IPessoa[], headers: HttpHeaders) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+        this.queryCount = this.totalItems;
+        this.pessoas = data;
     }
 
     private onError(errorMessage: string) {

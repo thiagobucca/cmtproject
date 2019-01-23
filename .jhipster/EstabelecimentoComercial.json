@@ -47,7 +47,7 @@
     "changelogDate": "20190103130350",
     "entityTableName": "estabelecimento_comercial",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
