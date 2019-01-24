@@ -17,22 +17,17 @@
             "fieldName": "foto",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "estabelecimentoComercial",
-            "otherEntityName": "estabelecimentoComercial",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "cupom"
+            "fieldName": "estabelecimentoComercialId",
+            "fieldType": "Long"
         }
     ],
+    "relationships": [],
     "changelogDate": "20190103130359",
     "entityTableName": "cupom",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

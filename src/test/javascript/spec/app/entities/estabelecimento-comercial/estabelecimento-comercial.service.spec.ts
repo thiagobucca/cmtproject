@@ -31,7 +31,9 @@ describe('Service Tests', () => {
                 'image/png',
                 'AAAAAAA',
                 0,
-                false
+                false,
+                0,
+                0
             );
         });
 
@@ -73,7 +75,9 @@ describe('Service Tests', () => {
                         telefone: 'BBBBBB',
                         logo: 'BBBBBB',
                         taxaConvenio: 1,
-                        bolAtivo: true
+                        bolAtivo: true,
+                        categoriaEstabelecimentoId: 1,
+                        estabelecimentoMatrizId: 1
                     },
                     elemDefault
                 );
@@ -97,7 +101,9 @@ describe('Service Tests', () => {
                         telefone: 'BBBBBB',
                         logo: 'BBBBBB',
                         taxaConvenio: 1,
-                        bolAtivo: true
+                        bolAtivo: true,
+                        categoriaEstabelecimentoId: 1,
+                        estabelecimentoMatrizId: 1
                     },
                     elemDefault
                 );

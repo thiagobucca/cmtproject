@@ -26,11 +26,9 @@
                         {{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercial">Estabelecimento Comercial</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercialId">Estabelecimento Comercial Id</span></dt>
                 <dd>
-                    <div *ngIf="cupom.estabelecimentoComercial">
-                        <a [routerLink]="['/estabelecimento-comercial', cupom.estabelecimentoComercial?.id, 'view']">{{cupom.estabelecimentoComercial?.id}}</a>
-                    </div>
+                    <span>{{cupom.estabelecimentoComercialId}}</span>
                 </dd>
             </dl>
 

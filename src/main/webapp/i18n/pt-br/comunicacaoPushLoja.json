@@ -1,0 +1,22 @@
+{
+    "cmtprojectApp": {
+        "comunicacaoPushLoja": {
+            "home": {
+                "title": "Comunicacao Push Lojas",
+                "createLabel": "Criar novo Comunicacao Push Loja",
+                "createOrEditLabel": "Criar ou editar Comunicacao Push Loja"
+            },
+            "created": "Um novo Comunicacao Push Loja foi criado com o identificador {{ param }}",
+            "updated": "Um Comunicacao Push Loja foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Comunicacao Push Loja foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Comunicacao Push Loja {{ id }}?"
+            },
+            "detail": {
+                "title": "Comunicacao Push Loja"
+            },
+            "comunicacaoPushId": "Comunicacao Push Id",
+            "lojaMaconicaId": "Loja Maconica Id"
+        }
+    }
+}

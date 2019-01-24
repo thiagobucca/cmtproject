@@ -20,7 +20,7 @@
             "local": "Local",
             "descricao": "Descricao",
             "bolAtivo": "Bol Ativo",
-            "lojaMaconica": "Loja Maconica"
+            "lojaMaconicaId": "Loja Maconica Id"
         }
     }
 }

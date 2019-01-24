@@ -12,20 +12,17 @@
         {
             "fieldName": "email",
             "fieldType": "String"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipName": "estabelecimentoComercial",
-            "otherEntityName": "estabelecimentoComercial",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "fieldName": "estabelecimentoComercialId",
+            "fieldType": "Long"
         }
     ],
+    "relationships": [],
     "changelogDate": "20190103130352",
     "entityTableName": "contato_estabelecimento",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

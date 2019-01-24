@@ -66,6 +66,12 @@ public class EstabelecimentoComercialResourceIntTest {
     private static final Boolean DEFAULT_BOL_ATIVO = false;
     private static final Boolean UPDATED_BOL_ATIVO = true;
 
+    private static final Long DEFAULT_CATEGORIA_ESTABELECIMENTO_ID = 1L;
+    private static final Long UPDATED_CATEGORIA_ESTABELECIMENTO_ID = 2L;
+
+    private static final Long DEFAULT_ESTABELECIMENTO_MATRIZ_ID = 1L;
+    private static final Long UPDATED_ESTABELECIMENTO_MATRIZ_ID = 2L;
+
     @Autowired
     private EstabelecimentoComercialRepository estabelecimentoComercialRepository;
 
@@ -112,7 +118,9 @@ public class EstabelecimentoComercialResourceIntTest {
             .logo(DEFAULT_LOGO)
             .logoContentType(DEFAULT_LOGO_CONTENT_TYPE)
             .taxaConvenio(DEFAULT_TAXA_CONVENIO)
-            .bolAtivo(DEFAULT_BOL_ATIVO);
+            .bolAtivo(DEFAULT_BOL_ATIVO)
+            .categoriaEstabelecimentoId(DEFAULT_CATEGORIA_ESTABELECIMENTO_ID)
+            .estabelecimentoMatrizId(DEFAULT_ESTABELECIMENTO_MATRIZ_ID);
         return estabelecimentoComercial;
     }
 
@@ -145,6 +153,8 @@ public class EstabelecimentoComercialResourceIntTest {
         assertThat(testEstabelecimentoComercial.getLogoContentType()).isEqualTo(DEFAULT_LOGO_CONTENT_TYPE);
         assertThat(testEstabelecimentoComercial.getTaxaConvenio()).isEqualTo(DEFAULT_TAXA_CONVENIO);
         assertThat(testEstabelecimentoComercial.isBolAtivo()).isEqualTo(DEFAULT_BOL_ATIVO);
+        assertThat(testEstabelecimentoComercial.getCategoriaEstabelecimentoId()).isEqualTo(DEFAULT_CATEGORIA_ESTABELECIMENTO_ID);
+        assertThat(testEstabelecimentoComercial.getEstabelecimentoMatrizId()).isEqualTo(DEFAULT_ESTABELECIMENTO_MATRIZ_ID);
     }
 
     @Test
@@ -185,7 +195,9 @@ public class EstabelecimentoComercialResourceIntTest {
             .andExpect(jsonPath("$.[*].logoContentType").value(hasItem(DEFAULT_LOGO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].logo").value(hasItem(Base64Utils.encodeToString(DEFAULT_LOGO))))
             .andExpect(jsonPath("$.[*].taxaConvenio").value(hasItem(DEFAULT_TAXA_CONVENIO.doubleValue())))
-            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())))
+            .andExpect(jsonPath("$.[*].categoriaEstabelecimentoId").value(hasItem(DEFAULT_CATEGORIA_ESTABELECIMENTO_ID.intValue())))
+            .andExpect(jsonPath("$.[*].estabelecimentoMatrizId").value(hasItem(DEFAULT_ESTABELECIMENTO_MATRIZ_ID.intValue())));
     }
     
     @Test
@@ -207,7 +219,9 @@ public class EstabelecimentoComercialResourceIntTest {
             .andExpect(jsonPath("$.logoContentType").value(DEFAULT_LOGO_CONTENT_TYPE))
             .andExpect(jsonPath("$.logo").value(Base64Utils.encodeToString(DEFAULT_LOGO)))
             .andExpect(jsonPath("$.taxaConvenio").value(DEFAULT_TAXA_CONVENIO.doubleValue()))
-            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()));
+            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()))
+            .andExpect(jsonPath("$.categoriaEstabelecimentoId").value(DEFAULT_CATEGORIA_ESTABELECIMENTO_ID.intValue()))
+            .andExpect(jsonPath("$.estabelecimentoMatrizId").value(DEFAULT_ESTABELECIMENTO_MATRIZ_ID.intValue()));
     }
 
     @Test
@@ -239,7 +253,9 @@ public class EstabelecimentoComercialResourceIntTest {
             .logo(UPDATED_LOGO)
             .logoContentType(UPDATED_LOGO_CONTENT_TYPE)
             .taxaConvenio(UPDATED_TAXA_CONVENIO)
-            .bolAtivo(UPDATED_BOL_ATIVO);
+            .bolAtivo(UPDATED_BOL_ATIVO)
+            .categoriaEstabelecimentoId(UPDATED_CATEGORIA_ESTABELECIMENTO_ID)
+            .estabelecimentoMatrizId(UPDATED_ESTABELECIMENTO_MATRIZ_ID);
 
         restEstabelecimentoComercialMockMvc.perform(put("/api/estabelecimento-comercials")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -259,6 +275,8 @@ public class EstabelecimentoComercialResourceIntTest {
         assertThat(testEstabelecimentoComercial.getLogoContentType()).isEqualTo(UPDATED_LOGO_CONTENT_TYPE);
         assertThat(testEstabelecimentoComercial.getTaxaConvenio()).isEqualTo(UPDATED_TAXA_CONVENIO);
         assertThat(testEstabelecimentoComercial.isBolAtivo()).isEqualTo(UPDATED_BOL_ATIVO);
+        assertThat(testEstabelecimentoComercial.getCategoriaEstabelecimentoId()).isEqualTo(UPDATED_CATEGORIA_ESTABELECIMENTO_ID);
+        assertThat(testEstabelecimentoComercial.getEstabelecimentoMatrizId()).isEqualTo(UPDATED_ESTABELECIMENTO_MATRIZ_ID);
     }
 
     @Test

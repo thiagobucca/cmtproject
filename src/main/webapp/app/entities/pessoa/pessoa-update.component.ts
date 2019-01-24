@@ -4,12 +4,9 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiAlertService } from 'ng-jhipster';
 
 import { IPessoa } from 'app/shared/model/pessoa.model';
 import { PessoaService } from './pessoa.service';
-import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
-import { LojaMaconicaService } from 'app/entities/loja-maconica';
 
 @Component({
     selector: 'jhi-pessoa-update',
@@ -18,18 +15,9 @@ import { LojaMaconicaService } from 'app/entities/loja-maconica';
 export class PessoaUpdateComponent implements OnInit {
     pessoa: IPessoa;
     isSaving: boolean;
-
-    lojamaconicas: ILojaMaconica[];
-
-    pessoas: IPessoa[];
     dataNascimento: string;
 
-    constructor(
-        private jhiAlertService: JhiAlertService,
-        private pessoaService: PessoaService,
-        private lojaMaconicaService: LojaMaconicaService,
-        private activatedRoute: ActivatedRoute
-    ) {}
+    constructor(private pessoaService: PessoaService, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -37,27 +25,6 @@ export class PessoaUpdateComponent implements OnInit {
             this.pessoa = pessoa;
             this.dataNascimento = this.pessoa.dataNascimento != null ? this.pessoa.dataNascimento.format(DATE_TIME_FORMAT) : null;
         });
-        this.lojaMaconicaService.query({ filter: 'pessoa-is-null' }).subscribe(
-            (res: HttpResponse<ILojaMaconica[]>) => {
-                if (!this.pessoa.lojaMaconica || !this.pessoa.lojaMaconica.id) {
-                    this.lojamaconicas = res.body;
-                } else {
-                    this.lojaMaconicaService.find(this.pessoa.lojaMaconica.id).subscribe(
-                        (subRes: HttpResponse<ILojaMaconica>) => {
-                            this.lojamaconicas = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.pessoaService.query().subscribe(
-            (res: HttpResponse<IPessoa[]>) => {
-                this.pessoas = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     previousState() {
@@ -85,17 +52,5 @@ export class PessoaUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackLojaMaconicaById(index: number, item: ILojaMaconica) {
-        return item.id;
-    }
-
-    trackPessoaById(index: number, item: IPessoa) {
-        return item.id;
     }
 }

@@ -1,12 +1,9 @@
 package com.cmt.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 import com.cmt.myapp.domain.enumeration.TipoPessoa;
@@ -34,8 +31,6 @@ public class ComunicacaoPush implements Serializable {
     @Column(name = "tipo_pessoa")
     private TipoPessoa tipoPessoa;
 
-    @OneToMany(mappedBy = "comunicacaoPush")
-    private Set<LojaMaconica> lojaMaconicas = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -82,31 +77,6 @@ public class ComunicacaoPush implements Serializable {
 
     public void setTipoPessoa(TipoPessoa tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
-    }
-
-    public Set<LojaMaconica> getLojaMaconicas() {
-        return lojaMaconicas;
-    }
-
-    public ComunicacaoPush lojaMaconicas(Set<LojaMaconica> lojaMaconicas) {
-        this.lojaMaconicas = lojaMaconicas;
-        return this;
-    }
-
-    public ComunicacaoPush addLojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconicas.add(lojaMaconica);
-        lojaMaconica.setComunicacaoPush(this);
-        return this;
-    }
-
-    public ComunicacaoPush removeLojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconicas.remove(lojaMaconica);
-        lojaMaconica.setComunicacaoPush(null);
-        return this;
-    }
-
-    public void setLojaMaconicas(Set<LojaMaconica> lojaMaconicas) {
-        this.lojaMaconicas = lojaMaconicas;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

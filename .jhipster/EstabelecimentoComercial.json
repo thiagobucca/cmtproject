@@ -33,34 +33,21 @@
         {
             "fieldName": "bolAtivo",
             "fieldType": "Boolean"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "categoria",
-            "otherEntityName": "categoriaEstabelecimento",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "estabelecimentoComercial"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "contato",
-            "otherEntityName": "contatoEstabelecimento",
-            "otherEntityRelationshipName": "estabelecimentoComercial"
+            "fieldName": "categoriaEstabelecimentoId",
+            "fieldType": "Long"
         },
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "matriz",
-            "otherEntityName": "estabelecimentoComercial",
-            "otherEntityField": "id"
+            "fieldName": "estabelecimentoMatrizId",
+            "fieldType": "Long"
         }
     ],
+    "relationships": [],
     "changelogDate": "20190103130350",
     "entityTableName": "estabelecimento_comercial",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

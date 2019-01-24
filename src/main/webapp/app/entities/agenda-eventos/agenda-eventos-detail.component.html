@@ -25,11 +25,9 @@
                 <dd>
                     <span>{{agendaEventos.bolAtivo}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.agendaEventos.lojaMaconica">Loja Maconica</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.agendaEventos.lojaMaconicaId">Loja Maconica Id</span></dt>
                 <dd>
-                    <div *ngIf="agendaEventos.lojaMaconica">
-                        <a [routerLink]="['/loja-maconica', agendaEventos.lojaMaconica?.id, 'view']">{{agendaEventos.lojaMaconica?.id}}</a>
-                    </div>
+                    <span>{{agendaEventos.lojaMaconicaId}}</span>
                 </dd>
             </dl>
 

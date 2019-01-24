@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Cupom(0, currentDate, 0, 'AAAAAAA', 'image/png', 'AAAAAAA');
+            elemDefault = new Cupom(0, currentDate, 0, 'AAAAAAA', 'image/png', 'AAAAAAA', 0);
         });
 
         describe('Service methods', async () => {
@@ -73,7 +73,8 @@ describe('Service Tests', () => {
                         data: currentDate.format(DATE_TIME_FORMAT),
                         valor: 1,
                         numero: 'BBBBBB',
-                        foto: 'BBBBBB'
+                        foto: 'BBBBBB',
+                        estabelecimentoComercialId: 1
                     },
                     elemDefault
                 );
@@ -98,7 +99,8 @@ describe('Service Tests', () => {
                         data: currentDate.format(DATE_TIME_FORMAT),
                         valor: 1,
                         numero: 'BBBBBB',
-                        foto: 'BBBBBB'
+                        foto: 'BBBBBB',
+                        estabelecimentoComercialId: 1
                     },
                     elemDefault
                 );

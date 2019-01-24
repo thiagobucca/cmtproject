@@ -1,13 +1,9 @@
 package com.cmt.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -51,14 +47,11 @@ public class EstabelecimentoComercial implements Serializable {
     @Column(name = "bol_ativo")
     private Boolean bolAtivo;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private CategoriaEstabelecimento categoria;
+    @Column(name = "categoria_estabelecimento_id")
+    private Long categoriaEstabelecimentoId;
 
-    @OneToMany(mappedBy = "estabelecimentoComercial")
-    private Set<ContatoEstabelecimento> contatoes = new HashSet<>();
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private EstabelecimentoComercial matriz;
+    @Column(name = "estabelecimento_matriz_id")
+    private Long estabelecimentoMatrizId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -186,55 +179,30 @@ public class EstabelecimentoComercial implements Serializable {
         this.bolAtivo = bolAtivo;
     }
 
-    public CategoriaEstabelecimento getCategoria() {
-        return categoria;
+    public Long getCategoriaEstabelecimentoId() {
+        return categoriaEstabelecimentoId;
     }
 
-    public EstabelecimentoComercial categoria(CategoriaEstabelecimento categoriaEstabelecimento) {
-        this.categoria = categoriaEstabelecimento;
+    public EstabelecimentoComercial categoriaEstabelecimentoId(Long categoriaEstabelecimentoId) {
+        this.categoriaEstabelecimentoId = categoriaEstabelecimentoId;
         return this;
     }
 
-    public void setCategoria(CategoriaEstabelecimento categoriaEstabelecimento) {
-        this.categoria = categoriaEstabelecimento;
+    public void setCategoriaEstabelecimentoId(Long categoriaEstabelecimentoId) {
+        this.categoriaEstabelecimentoId = categoriaEstabelecimentoId;
     }
 
-    public Set<ContatoEstabelecimento> getContatoes() {
-        return contatoes;
+    public Long getEstabelecimentoMatrizId() {
+        return estabelecimentoMatrizId;
     }
 
-    public EstabelecimentoComercial contatoes(Set<ContatoEstabelecimento> contatoEstabelecimentos) {
-        this.contatoes = contatoEstabelecimentos;
+    public EstabelecimentoComercial estabelecimentoMatrizId(Long estabelecimentoMatrizId) {
+        this.estabelecimentoMatrizId = estabelecimentoMatrizId;
         return this;
     }
 
-    public EstabelecimentoComercial addContato(ContatoEstabelecimento contatoEstabelecimento) {
-        this.contatoes.add(contatoEstabelecimento);
-        contatoEstabelecimento.setEstabelecimentoComercial(this);
-        return this;
-    }
-
-    public EstabelecimentoComercial removeContato(ContatoEstabelecimento contatoEstabelecimento) {
-        this.contatoes.remove(contatoEstabelecimento);
-        contatoEstabelecimento.setEstabelecimentoComercial(null);
-        return this;
-    }
-
-    public void setContatoes(Set<ContatoEstabelecimento> contatoEstabelecimentos) {
-        this.contatoes = contatoEstabelecimentos;
-    }
-
-    public EstabelecimentoComercial getMatriz() {
-        return matriz;
-    }
-
-    public EstabelecimentoComercial matriz(EstabelecimentoComercial estabelecimentoComercial) {
-        this.matriz = estabelecimentoComercial;
-        return this;
-    }
-
-    public void setMatriz(EstabelecimentoComercial estabelecimentoComercial) {
-        this.matriz = estabelecimentoComercial;
+    public void setEstabelecimentoMatrizId(Long estabelecimentoMatrizId) {
+        this.estabelecimentoMatrizId = estabelecimentoMatrizId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -271,6 +239,8 @@ public class EstabelecimentoComercial implements Serializable {
             ", logoContentType='" + getLogoContentType() + "'" +
             ", taxaConvenio=" + getTaxaConvenio() +
             ", bolAtivo='" + isBolAtivo() + "'" +
+            ", categoriaEstabelecimentoId=" + getCategoriaEstabelecimentoId() +
+            ", estabelecimentoMatrizId=" + getEstabelecimentoMatrizId() +
             "}";
     }
 }

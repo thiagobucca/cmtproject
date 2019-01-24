@@ -13,14 +13,14 @@
     <div class="table-responsive" *ngIf="usuarios">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="cmtprojectApp.usuario.nome">Nome</span></th>
-            <th><span jhiTranslate="cmtprojectApp.usuario.telefone">Telefone</span></th>
-            <th><span jhiTranslate="cmtprojectApp.usuario.email">Email</span></th>
-            <th><span jhiTranslate="cmtprojectApp.usuario.senha">Senha</span></th>
-            <th><span jhiTranslate="cmtprojectApp.usuario.bolAtivo">Bol Ativo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.usuario.perfil">Perfil</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.usuario.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.usuario.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="cmtprojectApp.usuario.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="senha"><span jhiTranslate="cmtprojectApp.usuario.senha">Senha</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo"><span jhiTranslate="cmtprojectApp.usuario.bolAtivo">Bol Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="perfilId"><span jhiTranslate="cmtprojectApp.usuario.perfilId">Perfil Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -32,11 +32,7 @@
                 <td>{{usuario.email}}</td>
                 <td>{{usuario.senha}}</td>
                 <td>{{usuario.bolAtivo}}</td>
-                <td>
-                    <div *ngIf="usuario.perfil">
-                        <a [routerLink]="['../perfil-usuario', usuario.perfil?.id, 'view' ]" >{{usuario.perfil?.id}}</a>
-                    </div>
-                </td>
+                <td>{{usuario.perfilId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -64,5 +60,13 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="usuarios && usuarios.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
     </div>
 </div>

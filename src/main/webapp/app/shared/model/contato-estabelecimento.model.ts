@@ -1,11 +1,9 @@
-import { IEstabelecimentoComercial } from 'app/shared/model//estabelecimento-comercial.model';
-
 export interface IContatoEstabelecimento {
     id?: number;
     nome?: string;
     telefone?: string;
     email?: string;
-    estabelecimentoComercial?: IEstabelecimentoComercial;
+    estabelecimentoComercialId?: number;
 }
 
 export class ContatoEstabelecimento implements IContatoEstabelecimento {
@@ -14,6 +12,6 @@ export class ContatoEstabelecimento implements IContatoEstabelecimento {
         public nome?: string,
         public telefone?: string,
         public email?: string,
-        public estabelecimentoComercial?: IEstabelecimentoComercial
+        public estabelecimentoComercialId?: number
     ) {}
 }

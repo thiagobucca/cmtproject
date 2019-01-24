@@ -18,7 +18,7 @@
             "nome": "Nome",
             "telefone": "Telefone",
             "email": "Email",
-            "estabelecimentoComercial": "Estabelecimento Comercial"
+            "estabelecimentoComercialId": "Estabelecimento Comercial Id"
         }
     }
 }

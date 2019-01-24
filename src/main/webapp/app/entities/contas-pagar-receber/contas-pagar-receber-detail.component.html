@@ -13,37 +13,25 @@
                 <dd>
                     <span>{{contasPagarReceber.valor}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoLancamento">Tipo Lancamento</span></dt>
-                <dd>
-                    <span jhiTranslate="{{'cmtprojectApp.TipoLancamento.' + contasPagarReceber.tipoLancamento}}">{{contasPagarReceber.tipoLancamento}}</span>
-                </dd>
                 <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento">Status Lancamento</span></dt>
                 <dd>
                     <span jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuario">Usuario</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuarioId">Usuario Id</span></dt>
                 <dd>
-                    <div *ngIf="contasPagarReceber.usuario">
-                        <a [routerLink]="['/usuario', contasPagarReceber.usuario?.id, 'view']">{{contasPagarReceber.usuario?.id}}</a>
-                    </div>
+                    <span>{{contasPagarReceber.usuarioId}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconica">Loja Maconica</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconicaId">Loja Maconica Id</span></dt>
                 <dd>
-                    <div *ngIf="contasPagarReceber.lojaMaconica">
-                        <a [routerLink]="['/loja-maconica', contasPagarReceber.lojaMaconica?.id, 'view']">{{contasPagarReceber.lojaMaconica?.id}}</a>
-                    </div>
+                    <span>{{contasPagarReceber.lojaMaconicaId}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercial">Estabelecimento Comercial</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercialId">Estabelecimento Comercial Id</span></dt>
                 <dd>
-                    <div *ngIf="contasPagarReceber.estabelecimentoComercial">
-                        <a [routerLink]="['/estabelecimento-comercial', contasPagarReceber.estabelecimentoComercial?.id, 'view']">{{contasPagarReceber.estabelecimentoComercial?.id}}</a>
-                    </div>
+                    <span>{{contasPagarReceber.estabelecimentoComercialId}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacao">Tipo Operacao</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacaoId">Tipo Operacao Id</span></dt>
                 <dd>
-                    <div *ngIf="contasPagarReceber.tipoOperacao">
-                        <a [routerLink]="['/tipo-operacao', contasPagarReceber.tipoOperacao?.id, 'view']">{{contasPagarReceber.tipoOperacao?.id}}</a>
-                    </div>
+                    <span>{{contasPagarReceber.tipoOperacaoId}}</span>
                 </dd>
             </dl>
 

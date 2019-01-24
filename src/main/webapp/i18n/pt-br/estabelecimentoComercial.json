@@ -23,9 +23,8 @@
             "logo": "Logo",
             "taxaConvenio": "Taxa Convenio",
             "bolAtivo": "Bol Ativo",
-            "categoria": "Categoria",
-            "contato": "Contato",
-            "matriz": "Matriz"
+            "categoriaEstabelecimentoId": "Categoria Estabelecimento Id",
+            "estabelecimentoMatrizId": "Estabelecimento Matriz Id"
         }
     }
 }

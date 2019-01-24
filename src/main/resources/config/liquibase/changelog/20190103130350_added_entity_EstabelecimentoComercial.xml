@@ -56,10 +56,12 @@
             <column name="bol_ativo" type="bit">
                 <constraints nullable="true" />
             </column>
-            <column name="categoria_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_estabelecimento_comercial_categoria_id" />
+
+            <column name="categoria_estabelecimento_id" type="bigint">
+                <constraints nullable="true" />
             </column>
-            <column name="matriz_id" type="bigint">
+
+            <column name="estabelecimento_matriz_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

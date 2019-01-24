@@ -24,14 +24,12 @@
                     <input type="text" class="form-control" name="email" id="field_email"
                         [(ngModel)]="contatoEstabelecimento.email" />
                 </div>
-
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercial" for="field_estabelecimentoComercial">Estabelecimento Comercial</label>
-                    <select class="form-control" id="field_estabelecimentoComercial" name="estabelecimentoComercial" [(ngModel)]="contatoEstabelecimento.estabelecimentoComercial" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="estabelecimentoComercialOption.id === contatoEstabelecimento.estabelecimentoComercial?.id ? contatoEstabelecimento.estabelecimentoComercial : estabelecimentoComercialOption" *ngFor="let estabelecimentoComercialOption of estabelecimentocomercials; trackBy: trackEstabelecimentoComercialById">{{estabelecimentoComercialOption.id}}</option>
-                    </select>
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contatoEstabelecimento.estabelecimentoComercialId" for="field_estabelecimentoComercialId">Estabelecimento Comercial Id</label>
+                    <input type="number" class="form-control" name="estabelecimentoComercialId" id="field_estabelecimentoComercialId"
+                        [(ngModel)]="contatoEstabelecimento.estabelecimentoComercialId" />
                 </div>
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

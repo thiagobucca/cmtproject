@@ -32,7 +32,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.cmt.myapp.domain.enumeration.TipoLancamento;
 import com.cmt.myapp.domain.enumeration.StatusLancamento;
 /**
  * Test class for the ContasPagarReceberResource REST controller.
@@ -49,11 +48,20 @@ public class ContasPagarReceberResourceIntTest {
     private static final Double DEFAULT_VALOR = 1D;
     private static final Double UPDATED_VALOR = 2D;
 
-    private static final TipoLancamento DEFAULT_TIPO_LANCAMENTO = TipoLancamento.Credito;
-    private static final TipoLancamento UPDATED_TIPO_LANCAMENTO = TipoLancamento.Debito;
-
     private static final StatusLancamento DEFAULT_STATUS_LANCAMENTO = StatusLancamento.Aberto;
     private static final StatusLancamento UPDATED_STATUS_LANCAMENTO = StatusLancamento.Baixado;
+
+    private static final Long DEFAULT_USUARIO_ID = 1L;
+    private static final Long UPDATED_USUARIO_ID = 2L;
+
+    private static final Long DEFAULT_LOJA_MACONICA_ID = 1L;
+    private static final Long UPDATED_LOJA_MACONICA_ID = 2L;
+
+    private static final Long DEFAULT_ESTABELECIMENTO_COMERCIAL_ID = 1L;
+    private static final Long UPDATED_ESTABELECIMENTO_COMERCIAL_ID = 2L;
+
+    private static final Long DEFAULT_TIPO_OPERACAO_ID = 1L;
+    private static final Long UPDATED_TIPO_OPERACAO_ID = 2L;
 
     @Autowired
     private ContasPagarReceberRepository contasPagarReceberRepository;
@@ -95,8 +103,11 @@ public class ContasPagarReceberResourceIntTest {
         ContasPagarReceber contasPagarReceber = new ContasPagarReceber()
             .data(DEFAULT_DATA)
             .valor(DEFAULT_VALOR)
-            .tipoLancamento(DEFAULT_TIPO_LANCAMENTO)
-            .statusLancamento(DEFAULT_STATUS_LANCAMENTO);
+            .statusLancamento(DEFAULT_STATUS_LANCAMENTO)
+            .usuarioId(DEFAULT_USUARIO_ID)
+            .lojaMaconicaId(DEFAULT_LOJA_MACONICA_ID)
+            .estabelecimentoComercialId(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID)
+            .tipoOperacaoId(DEFAULT_TIPO_OPERACAO_ID);
         return contasPagarReceber;
     }
 
@@ -122,8 +133,11 @@ public class ContasPagarReceberResourceIntTest {
         ContasPagarReceber testContasPagarReceber = contasPagarReceberList.get(contasPagarReceberList.size() - 1);
         assertThat(testContasPagarReceber.getData()).isEqualTo(DEFAULT_DATA);
         assertThat(testContasPagarReceber.getValor()).isEqualTo(DEFAULT_VALOR);
-        assertThat(testContasPagarReceber.getTipoLancamento()).isEqualTo(DEFAULT_TIPO_LANCAMENTO);
         assertThat(testContasPagarReceber.getStatusLancamento()).isEqualTo(DEFAULT_STATUS_LANCAMENTO);
+        assertThat(testContasPagarReceber.getUsuarioId()).isEqualTo(DEFAULT_USUARIO_ID);
+        assertThat(testContasPagarReceber.getLojaMaconicaId()).isEqualTo(DEFAULT_LOJA_MACONICA_ID);
+        assertThat(testContasPagarReceber.getEstabelecimentoComercialId()).isEqualTo(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID);
+        assertThat(testContasPagarReceber.getTipoOperacaoId()).isEqualTo(DEFAULT_TIPO_OPERACAO_ID);
     }
 
     @Test
@@ -158,8 +172,11 @@ public class ContasPagarReceberResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(contasPagarReceber.getId().intValue())))
             .andExpect(jsonPath("$.[*].data").value(hasItem(DEFAULT_DATA.toString())))
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.doubleValue())))
-            .andExpect(jsonPath("$.[*].tipoLancamento").value(hasItem(DEFAULT_TIPO_LANCAMENTO.toString())))
-            .andExpect(jsonPath("$.[*].statusLancamento").value(hasItem(DEFAULT_STATUS_LANCAMENTO.toString())));
+            .andExpect(jsonPath("$.[*].statusLancamento").value(hasItem(DEFAULT_STATUS_LANCAMENTO.toString())))
+            .andExpect(jsonPath("$.[*].usuarioId").value(hasItem(DEFAULT_USUARIO_ID.intValue())))
+            .andExpect(jsonPath("$.[*].lojaMaconicaId").value(hasItem(DEFAULT_LOJA_MACONICA_ID.intValue())))
+            .andExpect(jsonPath("$.[*].estabelecimentoComercialId").value(hasItem(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID.intValue())))
+            .andExpect(jsonPath("$.[*].tipoOperacaoId").value(hasItem(DEFAULT_TIPO_OPERACAO_ID.intValue())));
     }
     
     @Test
@@ -175,8 +192,11 @@ public class ContasPagarReceberResourceIntTest {
             .andExpect(jsonPath("$.id").value(contasPagarReceber.getId().intValue()))
             .andExpect(jsonPath("$.data").value(DEFAULT_DATA.toString()))
             .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.doubleValue()))
-            .andExpect(jsonPath("$.tipoLancamento").value(DEFAULT_TIPO_LANCAMENTO.toString()))
-            .andExpect(jsonPath("$.statusLancamento").value(DEFAULT_STATUS_LANCAMENTO.toString()));
+            .andExpect(jsonPath("$.statusLancamento").value(DEFAULT_STATUS_LANCAMENTO.toString()))
+            .andExpect(jsonPath("$.usuarioId").value(DEFAULT_USUARIO_ID.intValue()))
+            .andExpect(jsonPath("$.lojaMaconicaId").value(DEFAULT_LOJA_MACONICA_ID.intValue()))
+            .andExpect(jsonPath("$.estabelecimentoComercialId").value(DEFAULT_ESTABELECIMENTO_COMERCIAL_ID.intValue()))
+            .andExpect(jsonPath("$.tipoOperacaoId").value(DEFAULT_TIPO_OPERACAO_ID.intValue()));
     }
 
     @Test
@@ -202,8 +222,11 @@ public class ContasPagarReceberResourceIntTest {
         updatedContasPagarReceber
             .data(UPDATED_DATA)
             .valor(UPDATED_VALOR)
-            .tipoLancamento(UPDATED_TIPO_LANCAMENTO)
-            .statusLancamento(UPDATED_STATUS_LANCAMENTO);
+            .statusLancamento(UPDATED_STATUS_LANCAMENTO)
+            .usuarioId(UPDATED_USUARIO_ID)
+            .lojaMaconicaId(UPDATED_LOJA_MACONICA_ID)
+            .estabelecimentoComercialId(UPDATED_ESTABELECIMENTO_COMERCIAL_ID)
+            .tipoOperacaoId(UPDATED_TIPO_OPERACAO_ID);
 
         restContasPagarReceberMockMvc.perform(put("/api/contas-pagar-recebers")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -216,8 +239,11 @@ public class ContasPagarReceberResourceIntTest {
         ContasPagarReceber testContasPagarReceber = contasPagarReceberList.get(contasPagarReceberList.size() - 1);
         assertThat(testContasPagarReceber.getData()).isEqualTo(UPDATED_DATA);
         assertThat(testContasPagarReceber.getValor()).isEqualTo(UPDATED_VALOR);
-        assertThat(testContasPagarReceber.getTipoLancamento()).isEqualTo(UPDATED_TIPO_LANCAMENTO);
         assertThat(testContasPagarReceber.getStatusLancamento()).isEqualTo(UPDATED_STATUS_LANCAMENTO);
+        assertThat(testContasPagarReceber.getUsuarioId()).isEqualTo(UPDATED_USUARIO_ID);
+        assertThat(testContasPagarReceber.getLojaMaconicaId()).isEqualTo(UPDATED_LOJA_MACONICA_ID);
+        assertThat(testContasPagarReceber.getEstabelecimentoComercialId()).isEqualTo(UPDATED_ESTABELECIMENTO_COMERCIAL_ID);
+        assertThat(testContasPagarReceber.getTipoOperacaoId()).isEqualTo(UPDATED_TIPO_OPERACAO_ID);
     }
 
     @Test

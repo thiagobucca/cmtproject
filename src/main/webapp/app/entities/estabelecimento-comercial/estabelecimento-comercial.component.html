@@ -13,18 +13,18 @@
     <div class="table-responsive" *ngIf="estabelecimentoComercials">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolMatriz">Bol Matriz</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.codCnpj">Cod Cnpj</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco">Endereco</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone">Telefone</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio">Taxa Convenio</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo">Bol Ativo</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoria">Categoria</span></th>
-            <th><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.matriz">Matriz</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolMatriz"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolMatriz">Bol Matriz</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="codCnpj"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.codCnpj">Cod Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="endereco"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="logo"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="taxaConvenio"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio">Taxa Convenio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo">Bol Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="categoriaEstabelecimentoId"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria Estabelecimento Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estabelecimentoMatrizId"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId">Estabelecimento Matriz Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -44,16 +44,8 @@
                 </td>
                 <td>{{estabelecimentoComercial.taxaConvenio}}</td>
                 <td>{{estabelecimentoComercial.bolAtivo}}</td>
-                <td>
-                    <div *ngIf="estabelecimentoComercial.categoria">
-                        <a [routerLink]="['../categoria-estabelecimento', estabelecimentoComercial.categoria?.id, 'view' ]" >{{estabelecimentoComercial.categoria?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="estabelecimentoComercial.matriz">
-                        <a [routerLink]="['../estabelecimento-comercial', estabelecimentoComercial.matriz?.id, 'view' ]" >{{estabelecimentoComercial.matriz?.id}}</a>
-                    </div>
-                </td>
+                <td>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</td>
+                <td>{{estabelecimentoComercial.estabelecimentoMatrizId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -81,5 +73,13 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="estabelecimentoComercials && estabelecimentoComercials.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
     </div>
 </div>

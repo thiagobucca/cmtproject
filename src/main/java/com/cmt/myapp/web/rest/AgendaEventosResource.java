@@ -5,9 +5,14 @@ import com.cmt.myapp.domain.AgendaEventos;
 import com.cmt.myapp.repository.AgendaEventosRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
+import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,13 +84,16 @@ public class AgendaEventosResource {
     /**
      * GET  /agenda-eventos : get all the agendaEventos.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of agendaEventos in body
      */
     @GetMapping("/agenda-eventos")
     @Timed
-    public List<AgendaEventos> getAllAgendaEventos() {
-        log.debug("REST request to get all AgendaEventos");
-        return agendaEventosRepository.findAll();
+    public ResponseEntity<List<AgendaEventos>> getAllAgendaEventos(Pageable pageable) {
+        log.debug("REST request to get a page of AgendaEventos");
+        Page<AgendaEventos> page = agendaEventosRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/agenda-eventos");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

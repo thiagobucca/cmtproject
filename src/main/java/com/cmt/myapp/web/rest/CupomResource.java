@@ -5,9 +5,14 @@ import com.cmt.myapp.domain.Cupom;
 import com.cmt.myapp.repository.CupomRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
+import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,13 +84,16 @@ public class CupomResource {
     /**
      * GET  /cupoms : get all the cupoms.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of cupoms in body
      */
     @GetMapping("/cupoms")
     @Timed
-    public List<Cupom> getAllCupoms() {
-        log.debug("REST request to get all Cupoms");
-        return cupomRepository.findAll();
+    public ResponseEntity<List<Cupom>> getAllCupoms(Pageable pageable) {
+        log.debug("REST request to get a page of Cupoms");
+        Page<Cupom> page = cupomRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

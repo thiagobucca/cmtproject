@@ -41,9 +41,11 @@
             <column name="bol_ativo" type="bit">
                 <constraints nullable="true" />
             </column>
+
             <column name="loja_maconica_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_agenda_eventos_loja_maconica_id" />
+                <constraints nullable="true" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="agenda_eventos" columnName="data" columnDataType="datetime"/>

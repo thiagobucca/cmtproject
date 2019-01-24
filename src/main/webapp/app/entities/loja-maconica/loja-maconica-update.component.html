@@ -40,20 +40,6 @@
                         [(ngModel)]="lojaMaconica.bolAtivo" />
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.contato" for="field_contato">Contato</label>
-                    <select class="form-control" id="field_contato" name="contato" [(ngModel)]="lojaMaconica.contato">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="contatoLojaMaconicaOption.id === lojaMaconica.contato?.id ? lojaMaconica.contato : contatoLojaMaconicaOption" *ngFor="let contatoLojaMaconicaOption of contatoes; trackBy: trackContatoLojaMaconicaById">{{contatoLojaMaconicaOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.comunicacaoPush" for="field_comunicacaoPush">Comunicacao Push</label>
-                    <select class="form-control" id="field_comunicacaoPush" name="comunicacaoPush" [(ngModel)]="lojaMaconica.comunicacaoPush" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="comunicacaoPushOption.id === lojaMaconica.comunicacaoPush?.id ? lojaMaconica.comunicacaoPush : comunicacaoPushOption" *ngFor="let comunicacaoPushOption of comunicacaopushes; trackBy: trackComunicacaoPushById">{{comunicacaoPushOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

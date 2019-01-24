@@ -40,9 +40,11 @@
             <column name="foto_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="estabelecimento_comercial_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_cupom_estabelecimento_comercial_id" />
+                <constraints nullable="true" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="cupom" columnName="data" columnDataType="datetime"/>

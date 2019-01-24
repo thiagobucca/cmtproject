@@ -54,6 +54,9 @@ public class UsuarioResourceIntTest {
     private static final Boolean DEFAULT_BOL_ATIVO = false;
     private static final Boolean UPDATED_BOL_ATIVO = true;
 
+    private static final Long DEFAULT_PERFIL_ID = 1L;
+    private static final Long UPDATED_PERFIL_ID = 2L;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -96,7 +99,8 @@ public class UsuarioResourceIntTest {
             .telefone(DEFAULT_TELEFONE)
             .email(DEFAULT_EMAIL)
             .senha(DEFAULT_SENHA)
-            .bolAtivo(DEFAULT_BOL_ATIVO);
+            .bolAtivo(DEFAULT_BOL_ATIVO)
+            .perfilId(DEFAULT_PERFIL_ID);
         return usuario;
     }
 
@@ -125,6 +129,7 @@ public class UsuarioResourceIntTest {
         assertThat(testUsuario.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testUsuario.getSenha()).isEqualTo(DEFAULT_SENHA);
         assertThat(testUsuario.isBolAtivo()).isEqualTo(DEFAULT_BOL_ATIVO);
+        assertThat(testUsuario.getPerfilId()).isEqualTo(DEFAULT_PERFIL_ID);
     }
 
     @Test
@@ -161,7 +166,8 @@ public class UsuarioResourceIntTest {
             .andExpect(jsonPath("$.[*].telefone").value(hasItem(DEFAULT_TELEFONE.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].senha").value(hasItem(DEFAULT_SENHA.toString())))
-            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].bolAtivo").value(hasItem(DEFAULT_BOL_ATIVO.booleanValue())))
+            .andExpect(jsonPath("$.[*].perfilId").value(hasItem(DEFAULT_PERFIL_ID.intValue())));
     }
     
     @Test
@@ -179,7 +185,8 @@ public class UsuarioResourceIntTest {
             .andExpect(jsonPath("$.telefone").value(DEFAULT_TELEFONE.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.senha").value(DEFAULT_SENHA.toString()))
-            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()));
+            .andExpect(jsonPath("$.bolAtivo").value(DEFAULT_BOL_ATIVO.booleanValue()))
+            .andExpect(jsonPath("$.perfilId").value(DEFAULT_PERFIL_ID.intValue()));
     }
 
     @Test
@@ -207,7 +214,8 @@ public class UsuarioResourceIntTest {
             .telefone(UPDATED_TELEFONE)
             .email(UPDATED_EMAIL)
             .senha(UPDATED_SENHA)
-            .bolAtivo(UPDATED_BOL_ATIVO);
+            .bolAtivo(UPDATED_BOL_ATIVO)
+            .perfilId(UPDATED_PERFIL_ID);
 
         restUsuarioMockMvc.perform(put("/api/usuarios")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -223,6 +231,7 @@ public class UsuarioResourceIntTest {
         assertThat(testUsuario.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testUsuario.getSenha()).isEqualTo(UPDATED_SENHA);
         assertThat(testUsuario.isBolAtivo()).isEqualTo(UPDATED_BOL_ATIVO);
+        assertThat(testUsuario.getPerfilId()).isEqualTo(UPDATED_PERFIL_ID);
     }
 
     @Test

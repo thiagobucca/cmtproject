@@ -36,8 +36,8 @@ public class Cupom implements Serializable {
     @Column(name = "foto_content_type")
     private String fotoContentType;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private EstabelecimentoComercial estabelecimentoComercial;
+    @Column(name = "estabelecimento_comercial_id")
+    private Long estabelecimentoComercialId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -113,17 +113,17 @@ public class Cupom implements Serializable {
         this.fotoContentType = fotoContentType;
     }
 
-    public EstabelecimentoComercial getEstabelecimentoComercial() {
-        return estabelecimentoComercial;
+    public Long getEstabelecimentoComercialId() {
+        return estabelecimentoComercialId;
     }
 
-    public Cupom estabelecimentoComercial(EstabelecimentoComercial estabelecimentoComercial) {
-        this.estabelecimentoComercial = estabelecimentoComercial;
+    public Cupom estabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId = estabelecimentoComercialId;
         return this;
     }
 
-    public void setEstabelecimentoComercial(EstabelecimentoComercial estabelecimentoComercial) {
-        this.estabelecimentoComercial = estabelecimentoComercial;
+    public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId = estabelecimentoComercialId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -156,6 +156,7 @@ public class Cupom implements Serializable {
             ", numero='" + getNumero() + "'" +
             ", foto='" + getFoto() + "'" +
             ", fotoContentType='" + getFotoContentType() + "'" +
+            ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
             "}";
     }
 }

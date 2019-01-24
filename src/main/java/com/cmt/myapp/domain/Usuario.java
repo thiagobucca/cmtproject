@@ -34,8 +34,8 @@ public class Usuario implements Serializable {
     @Column(name = "bol_ativo")
     private Boolean bolAtivo;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private PerfilUsuario perfil;
+    @Column(name = "perfil_id")
+    private Long perfilId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -111,17 +111,17 @@ public class Usuario implements Serializable {
         this.bolAtivo = bolAtivo;
     }
 
-    public PerfilUsuario getPerfil() {
-        return perfil;
+    public Long getPerfilId() {
+        return perfilId;
     }
 
-    public Usuario perfil(PerfilUsuario perfilUsuario) {
-        this.perfil = perfilUsuario;
+    public Usuario perfilId(Long perfilId) {
+        this.perfilId = perfilId;
         return this;
     }
 
-    public void setPerfil(PerfilUsuario perfilUsuario) {
-        this.perfil = perfilUsuario;
+    public void setPerfilId(Long perfilId) {
+        this.perfilId = perfilId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -154,6 +154,7 @@ public class Usuario implements Serializable {
             ", email='" + getEmail() + "'" +
             ", senha='" + getSenha() + "'" +
             ", bolAtivo='" + isBolAtivo() + "'" +
+            ", perfilId=" + getPerfilId() +
             "}";
     }
 }

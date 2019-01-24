@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import com.cmt.myapp.domain.enumeration.TipoLancamento;
-
 import com.cmt.myapp.domain.enumeration.StatusLancamento;
 
 /**
@@ -31,24 +29,20 @@ public class ContasPagarReceber implements Serializable {
     private Double valor;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_lancamento")
-    private TipoLancamento tipoLancamento;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "status_lancamento")
     private StatusLancamento statusLancamento;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private Usuario usuario;
+    @Column(name = "usuario_id")
+    private Long usuarioId;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private LojaMaconica lojaMaconica;
+    @Column(name = "loja_maconica_id")
+    private Long lojaMaconicaId;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private EstabelecimentoComercial estabelecimentoComercial;
+    @Column(name = "estabelecimento_comercial_id")
+    private Long estabelecimentoComercialId;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private TipoOperacao tipoOperacao;
+    @Column(name = "tipo_operacao_id")
+    private Long tipoOperacaoId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -85,19 +79,6 @@ public class ContasPagarReceber implements Serializable {
         this.valor = valor;
     }
 
-    public TipoLancamento getTipoLancamento() {
-        return tipoLancamento;
-    }
-
-    public ContasPagarReceber tipoLancamento(TipoLancamento tipoLancamento) {
-        this.tipoLancamento = tipoLancamento;
-        return this;
-    }
-
-    public void setTipoLancamento(TipoLancamento tipoLancamento) {
-        this.tipoLancamento = tipoLancamento;
-    }
-
     public StatusLancamento getStatusLancamento() {
         return statusLancamento;
     }
@@ -111,56 +92,56 @@ public class ContasPagarReceber implements Serializable {
         this.statusLancamento = statusLancamento;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public ContasPagarReceber usuario(Usuario usuario) {
-        this.usuario = usuario;
+    public ContasPagarReceber usuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
         return this;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
-    public LojaMaconica getLojaMaconica() {
-        return lojaMaconica;
+    public Long getLojaMaconicaId() {
+        return lojaMaconicaId;
     }
 
-    public ContasPagarReceber lojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconica = lojaMaconica;
+    public ContasPagarReceber lojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
         return this;
     }
 
-    public void setLojaMaconica(LojaMaconica lojaMaconica) {
-        this.lojaMaconica = lojaMaconica;
+    public void setLojaMaconicaId(Long lojaMaconicaId) {
+        this.lojaMaconicaId = lojaMaconicaId;
     }
 
-    public EstabelecimentoComercial getEstabelecimentoComercial() {
-        return estabelecimentoComercial;
+    public Long getEstabelecimentoComercialId() {
+        return estabelecimentoComercialId;
     }
 
-    public ContasPagarReceber estabelecimentoComercial(EstabelecimentoComercial estabelecimentoComercial) {
-        this.estabelecimentoComercial = estabelecimentoComercial;
+    public ContasPagarReceber estabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId = estabelecimentoComercialId;
         return this;
     }
 
-    public void setEstabelecimentoComercial(EstabelecimentoComercial estabelecimentoComercial) {
-        this.estabelecimentoComercial = estabelecimentoComercial;
+    public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId = estabelecimentoComercialId;
     }
 
-    public TipoOperacao getTipoOperacao() {
-        return tipoOperacao;
+    public Long getTipoOperacaoId() {
+        return tipoOperacaoId;
     }
 
-    public ContasPagarReceber tipoOperacao(TipoOperacao tipoOperacao) {
-        this.tipoOperacao = tipoOperacao;
+    public ContasPagarReceber tipoOperacaoId(Long tipoOperacaoId) {
+        this.tipoOperacaoId = tipoOperacaoId;
         return this;
     }
 
-    public void setTipoOperacao(TipoOperacao tipoOperacao) {
-        this.tipoOperacao = tipoOperacao;
+    public void setTipoOperacaoId(Long tipoOperacaoId) {
+        this.tipoOperacaoId = tipoOperacaoId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -190,8 +171,11 @@ public class ContasPagarReceber implements Serializable {
             "id=" + getId() +
             ", data='" + getData() + "'" +
             ", valor=" + getValor() +
-            ", tipoLancamento='" + getTipoLancamento() + "'" +
             ", statusLancamento='" + getStatusLancamento() + "'" +
+            ", usuarioId=" + getUsuarioId() +
+            ", lojaMaconicaId=" + getLojaMaconicaId() +
+            ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
+            ", tipoOperacaoId=" + getTipoOperacaoId() +
             "}";
     }
 }

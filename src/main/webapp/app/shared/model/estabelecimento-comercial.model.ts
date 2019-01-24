@@ -1,7 +1,3 @@
-import { ICategoriaEstabelecimento } from 'app/shared/model//categoria-estabelecimento.model';
-import { IContatoEstabelecimento } from 'app/shared/model//contato-estabelecimento.model';
-import { IEstabelecimentoComercial } from 'app/shared/model//estabelecimento-comercial.model';
-
 export interface IEstabelecimentoComercial {
     id?: number;
     bolMatriz?: boolean;
@@ -13,9 +9,8 @@ export interface IEstabelecimentoComercial {
     logo?: any;
     taxaConvenio?: number;
     bolAtivo?: boolean;
-    categoria?: ICategoriaEstabelecimento;
-    contatoes?: IContatoEstabelecimento[];
-    matriz?: IEstabelecimentoComercial;
+    categoriaEstabelecimentoId?: number;
+    estabelecimentoMatrizId?: number;
 }
 
 export class EstabelecimentoComercial implements IEstabelecimentoComercial {
@@ -30,9 +25,8 @@ export class EstabelecimentoComercial implements IEstabelecimentoComercial {
         public logo?: any,
         public taxaConvenio?: number,
         public bolAtivo?: boolean,
-        public categoria?: ICategoriaEstabelecimento,
-        public contatoes?: IContatoEstabelecimento[],
-        public matriz?: IEstabelecimentoComercial
+        public categoriaEstabelecimentoId?: number,
+        public estabelecimentoMatrizId?: number
     ) {
         this.bolMatriz = this.bolMatriz || false;
         this.bolAtivo = this.bolAtivo || false;

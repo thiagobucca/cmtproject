@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new AgendaEventos(0, 'AAAAAAA', currentDate, 'AAAAAAA', 'AAAAAAA', false);
+            elemDefault = new AgendaEventos(0, 'AAAAAAA', currentDate, 'AAAAAAA', 'AAAAAAA', false, 0);
         });
 
         describe('Service methods', async () => {
@@ -74,7 +74,8 @@ describe('Service Tests', () => {
                         data: currentDate.format(DATE_TIME_FORMAT),
                         local: 'BBBBBB',
                         descricao: 'BBBBBB',
-                        bolAtivo: true
+                        bolAtivo: true,
+                        lojaMaconicaId: 1
                     },
                     elemDefault
                 );
@@ -100,7 +101,8 @@ describe('Service Tests', () => {
                         data: currentDate.format(DATE_TIME_FORMAT),
                         local: 'BBBBBB',
                         descricao: 'BBBBBB',
-                        bolAtivo: true
+                        bolAtivo: true,
+                        lojaMaconicaId: 1
                     },
                     elemDefault
                 );

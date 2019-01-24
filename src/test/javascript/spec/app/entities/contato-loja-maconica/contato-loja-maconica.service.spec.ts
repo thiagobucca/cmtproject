@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(ContatoLojaMaconicaService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new ContatoLojaMaconica(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new ContatoLojaMaconica(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
         });
 
         describe('Service methods', async () => {
@@ -57,7 +57,8 @@ describe('Service Tests', () => {
                     {
                         nome: 'BBBBBB',
                         telefone: 'BBBBBB',
-                        email: 'BBBBBB'
+                        email: 'BBBBBB',
+                        lojaMaconicaId: 1
                     },
                     elemDefault
                 );
@@ -76,7 +77,8 @@ describe('Service Tests', () => {
                     {
                         nome: 'BBBBBB',
                         telefone: 'BBBBBB',
-                        email: 'BBBBBB'
+                        email: 'BBBBBB',
+                        lojaMaconicaId: 1
                     },
                     elemDefault
                 );

@@ -22,6 +22,7 @@ import { CmtprojectComunicacaoPushModule } from './comunicacao-push/comunicacao-
 import { CmtprojectAgendaEventosModule } from './agenda-eventos/agenda-eventos.module';
 import { CmtprojectContasPagarReceberModule } from './contas-pagar-receber/contas-pagar-receber.module';
 import { CmtprojectCupomModule } from './cupom/cupom.module';
+import { CmtprojectComunicacaoPushLojaModule } from './comunicacao-push-loja/comunicacao-push-loja.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -49,6 +50,7 @@ import { CmtprojectCupomModule } from './cupom/cupom.module';
         CmtprojectAgendaEventosModule,
         CmtprojectContasPagarReceberModule,
         CmtprojectCupomModule,
+        CmtprojectComunicacaoPushLojaModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
