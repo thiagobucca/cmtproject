@@ -11,7 +11,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190122221925",
+    "changelogDate": "20190124194745",
     "entityTableName": "comunicacao_push_loja",
     "dto": "no",
     "pagination": "pagination",
