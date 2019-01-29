@@ -38,6 +38,11 @@ public class Cupom implements Serializable {
 
     @Column(name = "estabelecimento_comercial_id")
     private Long estabelecimentoComercialId;
+    
+    //objeto categoria STEP 1 - CRIAR o relacionamento dos obejetos pelo coluna de FK
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false)
+    private EstabelecimentoComercial estabelecimentoComercial;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -125,6 +130,20 @@ public class Cupom implements Serializable {
     public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
         this.estabelecimentoComercialId = estabelecimentoComercialId;
     }
+    
+  //STEP 2 - Criar o get do atributo que deseja retornar no json o nome fica igual ao da assinatura removendo o prefixo 'get'
+    //getNome da categoria pro swagger
+    public String getEstabelecimento() {
+        return estabelecimentoComercial.getNome();
+    }
+    
+    //STEP 3 - criar o set do objeto q vem no select do banco
+    //set categoria do fetch do banco
+    public Cupom estabelecimento(EstabelecimentoComercial estabelecimento) {
+        this.estabelecimentoComercial = estabelecimento;
+        return this;
+    }
+    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
