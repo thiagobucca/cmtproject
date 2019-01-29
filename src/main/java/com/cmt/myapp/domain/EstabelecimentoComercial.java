@@ -49,6 +49,12 @@ public class EstabelecimentoComercial implements Serializable {
 
     @Column(name = "categoria_estabelecimento_id")
     private Long categoriaEstabelecimentoId;
+    
+    //objeto categoria STEP 1 - CRIAR o relacionamento dos obejetos pelo coluna de FK
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoria_estabelecimento_id", insertable = false, updatable = false)
+    private CategoriaEstabelecimento categoria;
+    
 
     @Column(name = "estabelecimento_matriz_id")
     private Long estabelecimentoMatrizId;
@@ -61,6 +67,20 @@ public class EstabelecimentoComercial implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    //STEP 2 - Criar o get do atributo que deseja retornar no json o nome fica igual ao da assinatura removendo o prefixo 'get'
+    //getNome da categoria pro swagger
+    public String getCategoria() {
+        return categoria.getNome();
+    }
+    
+    //STEP 3 - criar o set do objeto q vem no select do banco
+    //set categoria do fetch do banco
+    public EstabelecimentoComercial categoria(CategoriaEstabelecimento categoria) {
+        this.categoria = categoria;
+        return this;
+    }
+    
 
     public Boolean isBolMatriz() {
         return bolMatriz;
