@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-cupom-heading" jhiTranslate="cmtprojectApp.cupom.home.createOrEditLabel">Create or edit a Cupom</h2>
+            <h2 id="jhi-cupom-heading" >{{cupom.id>0?"Editar":"Criar"}} Cupom</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!cupom.id">
@@ -13,7 +13,7 @@
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.data" for="field_data">Data</label>
                     <div class="d-flex">
                         <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data"
-                        />
+                        required/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -44,17 +44,20 @@
                         [(ngModel)]="cupom.fotoContentType" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercialId" for="field_estabelecimentoComercialId">Estabelecimento Comercial Id</label>
-                    <input type="number" class="form-control" name="estabelecimentoComercialId" id="field_estabelecimentoComercialId"
-                        [(ngModel)]="cupom.estabelecimentoComercialId" />
-                </div>
+                        <label class="form-control-label" for="field_estabelecimentoComercialId">Estabelecimento Comercial</label>
+                        <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
+                            [(ngModel)]="cupom.estabelecimentoComercialId">
+                            <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                            <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackEstabelecimentoComercialId">{{item.nome}}</option>
+                        </select>
+                    </div>               
 
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

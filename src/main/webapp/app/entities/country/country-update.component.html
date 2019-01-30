@@ -19,7 +19,7 @@
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.country.region" for="field_region">Region</label>
                     <select class="form-control" id="field_region" name="region" [(ngModel)]="country.region">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="regionOption.id === country.region?.id ? country.region : regionOption" *ngFor="let regionOption of regions; trackBy: trackRegionById">{{regionOption.id}}</option>
+                        <option [ngValue]="regionOption.id === country.region?.id ? country.region : regionOption" *ngFor="let regionOption of regions; trackBy: trackRegionById">{{regionOption.regionName}}</option>
                     </select>
                 </div>
             </div>

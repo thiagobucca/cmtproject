@@ -9,6 +9,8 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { AgendaEventosService } from './agenda-eventos.service';
+import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
+import { LojaMaconicaService } from 'app/entities/loja-maconica';
 
 @Component({
     selector: 'jhi-agenda-eventos',
@@ -37,7 +39,8 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private lojaMaconicaService: LojaMaconicaService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -96,6 +99,7 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
+
         this.registerChangeInAgendaEventos();
     }
 
@@ -123,6 +127,7 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
+        debugger;
         this.agendaEventos = data;
     }
 

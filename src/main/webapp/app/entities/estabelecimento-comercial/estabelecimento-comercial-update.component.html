@@ -1,83 +1,92 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-estabelecimento-comercial-heading" jhiTranslate="cmtprojectApp.estabelecimentoComercial.home.createOrEditLabel">Create or edit a Estabelecimento Comercial</h2>
+            <h2 id="jhi-estabelecimento-comercial-heading">{{estabelecimentoComercial.id>0?"Editar":"Criar"}}
+                Estabelecimento Comercial</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!estabelecimentoComercial.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="estabelecimentoComercial.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="estabelecimentoComercial.id"
+                        readonly />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolMatriz" for="field_bolMatriz">Bol Matriz</label>
-                    <input type="checkbox" class="form-control" name="bolMatriz" id="field_bolMatriz"
-                        [(ngModel)]="estabelecimentoComercial.bolMatriz" />
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="bolMatriz" id="field_bolMatriz" 
+                    [(ngModel)]="estabelecimentoComercial.bolMatriz" />
+                    <label class="form-check-label" for="field_bolMatriz">Matriz</label>
                 </div>
+
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.codCnpj" for="field_codCnpj">Cod Cnpj</label>
-                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj"
-                        [(ngModel)]="estabelecimentoComercial.codCnpj" />
+                    <label class="form-control-label"  for="field_codCnpj">CNPJ</label>
+                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" [(ngModel)]="estabelecimentoComercial.codCnpj" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome" for="field_nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="field_nome"
-                        [(ngModel)]="estabelecimentoComercial.nome" />
+                    <input type="text" class="form-control" name="nome" id="field_nome" [(ngModel)]="estabelecimentoComercial.nome" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco" for="field_endereco">Endereco</label>
-                    <input type="text" class="form-control" name="endereco" id="field_endereco"
-                        [(ngModel)]="estabelecimentoComercial.endereco" />
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco"
+                        for="field_endereco">Endereco</label>
+                    <input type="text" class="form-control" name="endereco" id="field_endereco" [(ngModel)]="estabelecimentoComercial.endereco" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone" for="field_telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="field_telefone"
-                        [(ngModel)]="estabelecimentoComercial.telefone" />
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone"
+                        for="field_telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="estabelecimentoComercial.telefone" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo" for="field_logo">Logo</label>
                     <div>
-                        <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo" style="max-height: 100px;" *ngIf="estabelecimentoComercial.logo" alt="estabelecimentoComercial image"/>
+                        <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
+                            style="max-height: 100px;" *ngIf="estabelecimentoComercial.logo" alt="estabelecimentoComercial image" />
                         <div *ngIf="estabelecimentoComercial.logo" class="form-text text-danger clearfix">
-                            <span class="pull-left">{{estabelecimentoComercial.logoContentType}}, {{byteSize(estabelecimentoComercial.logo)}}</span>
-                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                            <span class="pull-left">{{estabelecimentoComercial.logoContentType}},
+                                {{byteSize(estabelecimentoComercial.logo)}}</span>
+                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')"
+                                class="btn btn-secondary btn-xs pull-right">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>
                         </div>
-                        <input type="file" id="file_logo" (change)="setFileData($event, estabelecimentoComercial, 'logo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                        <input type="file" id="file_logo" (change)="setFileData($event, estabelecimentoComercial, 'logo', true)"
+                            accept="image/*" jhiTranslate="entity.action.addimage" />
                     </div>
-                    <input type="hidden" class="form-control" name="logo" id="field_logo"
-                        [(ngModel)]="estabelecimentoComercial.logo" />
+                    <input type="hidden" class="form-control" name="logo" id="field_logo" [(ngModel)]="estabelecimentoComercial.logo" />
                     <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
                         [(ngModel)]="estabelecimentoComercial.logoContentType" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio" for="field_taxaConvenio">Taxa Convenio</label>
-                    <input type="number" class="form-control" name="taxaConvenio" id="field_taxaConvenio"
-                        [(ngModel)]="estabelecimentoComercial.taxaConvenio" />
-                </div>
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio"
+                        for="field_taxaConvenio">Taxa Convenio</label>
+                    <input type="number" class="form-control" name="taxaConvenio" id="field_taxaConvenio" [(ngModel)]="estabelecimentoComercial.taxaConvenio" />
+                </div>                
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
-                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
-                        [(ngModel)]="estabelecimentoComercial.bolAtivo" />
+                        <label class="form-control-label"  for="field_categoriaEstabelecimentoId">Loja Maçonica</label>
+                        <select class="form-control" id="field_categoriaEstabelecimentoId" name="categoriaEstabelecimentoId" 
+                        [(ngModel)]="estabelecimentoComercial.categoriaEstabelecimentoId">
+                            <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                            <option [ngValue]="item.id" *ngFor="let item of categorias; trackBy: trackById">{{item.nome}}</option>
+                        </select>
+                    </div>	
+                    <div class="form-group">
+                            <label class="form-control-label"  for="field_estabelecimentoMatrizId">Matriz</label>
+                            <select class="form-control" id="field_estabelecimentoMatrizId" name="estabelecimentoMatrizId" 
+                            [(ngModel)]="estabelecimentoComercial.estabelecimentoMatrizId"
+                            [disabled]="estabelecimentoComercial.bolMatriz"
+                            [required]="!estabelecimentoComercial.bolMatriz">
+                                <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                                <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
+                            </select>
+                        </div>	
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo" [(ngModel)]="estabelecimentoComercial.bolAtivo" />
+                    <label class="form-check-label" for="field_bolAtivo">Ativo</label>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId" for="field_categoriaEstabelecimentoId">Categoria Estabelecimento Id</label>
-                    <input type="number" class="form-control" name="categoriaEstabelecimentoId" id="field_categoriaEstabelecimentoId"
-                        [(ngModel)]="estabelecimentoComercial.categoriaEstabelecimentoId" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId" for="field_estabelecimentoMatrizId">Estabelecimento Matriz Id</label>
-                    <input type="number" class="form-control" name="estabelecimentoMatrizId" id="field_estabelecimentoMatrizId"
-                        [(ngModel)]="estabelecimentoComercial.estabelecimentoMatrizId" />
-                </div>
-
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

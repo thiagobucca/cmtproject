@@ -1,11 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="cmtprojectApp.tipoOperacao.home.title">Tipo Operacaos</span>
+        <span >Tipo Operação</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tipo-operacao" [routerLink]="['/tipo-operacao/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cmtprojectApp.tipoOperacao.home.createLabel">
-            Create new Tipo Operacao
-            </span>
+            Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
@@ -14,10 +12,10 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="nomeOperacao"><span jhiTranslate="cmtprojectApp.tipoOperacao.nomeOperacao">Nome Operacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tipoLancamento"><span jhiTranslate="cmtprojectApp.tipoOperacao.tipoLancamento">Tipo Lancamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo"><span jhiTranslate="cmtprojectApp.tipoOperacao.bolAtivo">Bol Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nomeOperacao"><span >Nome Operação</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipoLancamento"><span >Tipo Lançamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo">Ativo <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -26,28 +24,29 @@
                 <td><a [routerLink]="['/tipo-operacao', tipoOperacao.id, 'view' ]">{{tipoOperacao.id}}</a></td>
                 <td>{{tipoOperacao.nomeOperacao}}</td>
                 <td jhiTranslate="{{'cmtprojectApp.TipoLancamento.' + tipoOperacao.tipoLancamento}}">{{tipoOperacao.tipoLancamento}}</td>
-                <td>{{tipoOperacao.bolAtivo}}</td>
+                <td>{{tipoOperacao.bolAtivo?"Ativo":"Inativo"}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/tipo-operacao', tipoOperacao.id, 'view' ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-sm"
+                                title="Visualizar">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/tipo-operacao', tipoOperacao.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm"
+                                title="Editar"
+                                >
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'tipo-operacao/'+ tipoOperacao.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm"
+                                title="Deletar">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>

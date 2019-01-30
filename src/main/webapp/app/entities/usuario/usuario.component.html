@@ -1,11 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="cmtprojectApp.usuario.home.title">Usuarios</span>
+        <span >Usuário</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-usuario" [routerLink]="['/usuario/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cmtprojectApp.usuario.home.createLabel">
-            Create new Usuario
-            </span>
+            Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
@@ -14,12 +12,11 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.usuario.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.usuario.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="email"><span jhiTranslate="cmtprojectApp.usuario.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="senha"><span jhiTranslate="cmtprojectApp.usuario.senha">Senha</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo"><span jhiTranslate="cmtprojectApp.usuario.bolAtivo">Bol Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="cmtprojectApp.usuario.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>            
+            <th jhiSortBy="bolAtivo">Ativo<fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="perfilId"><span jhiTranslate="cmtprojectApp.usuario.perfilId">Perfil Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -30,31 +27,28 @@
                 <td>{{usuario.nome}}</td>
                 <td>{{usuario.telefone}}</td>
                 <td>{{usuario.email}}</td>
-                <td>{{usuario.senha}}</td>
-                <td>{{usuario.bolAtivo}}</td>
+                <td>{{usuario.bolAtivo?"Ativo":"Inativo"}}</td>
                 <td>{{usuario.perfilId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/usuario', usuario.id, 'view' ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-sm"
+                                title="Visualizar">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/usuario', usuario.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                                class="btn btn-primary btn-sm"
+                                title="Editar">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon> </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'usuario/'+ usuario.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                                class="btn btn-danger btn-sm"
+                                title="Deletar">
+                            <fa-icon [icon]="'times'"></fa-icon></button>
                     </div>
                 </td>
             </tr>

@@ -1,17 +1,17 @@
-<div class="row justify-content-center">
+<div class="row">
     <div class="col-8">
         <div *ngIf="contasPagarReceber">
-            <h2><span jhiTranslate="cmtprojectApp.contasPagarReceber.detail.title">Contas Pagar Receber</span> {{contasPagarReceber.id}}</h2>
+            <h2><span >Contas a Pagar/Receber</span> {{contasPagarReceber.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span></dt>
                 <dd>
-                    <span>{{contasPagarReceber.data}}</span>
+                    <span>{{contasPagarReceber.data | date: 'dd/MM/yyyy'}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span></dt>
                 <dd>
-                    <span>{{contasPagarReceber.valor}}</span>
+                    <span>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento">Status Lancamento</span></dt>
                 <dd>

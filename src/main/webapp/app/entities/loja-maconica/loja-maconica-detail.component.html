@@ -1,11 +1,11 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <div *ngIf="lojaMaconica">
             <h2><span jhiTranslate="cmtprojectApp.lojaMaconica.detail.title">Loja Maconica</span> {{lojaMaconica.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj">Cod Cnpj</span></dt>
+                <dt>CNPJ</dt>
                 <dd>
                     <span>{{lojaMaconica.codCnpj}}</span>
                 </dd>
@@ -13,7 +13,7 @@
                 <dd>
                     <span>{{lojaMaconica.nome}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span></dt>
+                <dt>Endereço</dt>
                 <dd>
                     <span>{{lojaMaconica.endereco}}</span>
                 </dd>
@@ -25,9 +25,10 @@
                 <dd>
                     <span>{{lojaMaconica.numero}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo">Bol Ativo</span></dt>
+                <dt>
+                    Ativo</dt>
                 <dd>
-                    <span>{{lojaMaconica.bolAtivo}}</span>
+                    <span>{{lojaMaconica.bolAtivo?"Ativo":"Inativo"}}</span>
                 </dd>
             </dl>
 

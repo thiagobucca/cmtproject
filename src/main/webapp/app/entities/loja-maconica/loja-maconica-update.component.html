@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-loja-maconica-heading" jhiTranslate="cmtprojectApp.lojaMaconica.home.createOrEditLabel">Create or edit a Loja Maconica</h2>
+            <h2 id="jhi-loja-maconica-heading" >{{lojaMaconica.id>0?"Editar":"Criar"}} Loja Maçonica</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!lojaMaconica.id">
@@ -10,7 +10,7 @@
                         [(ngModel)]="lojaMaconica.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj" for="field_codCnpj">Cod Cnpj</label>
+                    <label class="form-control-label"  for="field_codCnpj">CNPJ</label>
                     <input type="text" class="form-control" name="codCnpj" id="field_codCnpj"
                         [(ngModel)]="lojaMaconica.codCnpj" />
                 </div>
@@ -20,7 +20,7 @@
                         [(ngModel)]="lojaMaconica.nome" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.endereco" for="field_endereco">Endereco</label>
+                    <label class="form-control-label"  for="field_endereco">Endereço</label>
                     <input type="text" class="form-control" name="endereco" id="field_endereco"
                         [(ngModel)]="lojaMaconica.endereco" />
                 </div>
@@ -33,19 +33,19 @@
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.numero" for="field_numero">Numero</label>
                     <input type="number" class="form-control" name="numero" id="field_numero"
                         [(ngModel)]="lojaMaconica.numero" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
-                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
+                </div>                
+                <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo"
                         [(ngModel)]="lojaMaconica.bolAtivo" />
-                </div>
+                        <label class="form-check-label"  for="field_bolAtivo">Ativo</label>
+                    </div>
 
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

@@ -6,6 +6,10 @@ import { Observable } from 'rxjs';
 import { IUsuario } from 'app/shared/model/usuario.model';
 import { UsuarioService } from './usuario.service';
 
+import { JhiAlertService } from 'ng-jhipster';
+import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { PerfilUsuarioService } from 'app/entities/perfil-usuario';
+
 @Component({
     selector: 'jhi-usuario-update',
     templateUrl: './usuario-update.component.html'
@@ -13,14 +17,26 @@ import { UsuarioService } from './usuario.service';
 export class UsuarioUpdateComponent implements OnInit {
     usuario: IUsuario;
     isSaving: boolean;
-
-    constructor(private usuarioService: UsuarioService, private activatedRoute: ActivatedRoute) {}
+    perfis: IPerfilUsuario[];
+    constructor(
+        private usuarioService: UsuarioService,
+        private activatedRoute: ActivatedRoute,
+        private perfilUsuarioService: PerfilUsuarioService,
+        private jhiAlertService: JhiAlertService
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ usuario }) => {
             this.usuario = usuario;
         });
+
+        this.perfilUsuarioService.query({ filter: 'perfilUsuario-is-null' }).subscribe(
+            (res: HttpResponse<IPerfilUsuario[]>) => {
+                this.perfis = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -47,5 +63,8 @@ export class UsuarioUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
     }
 }

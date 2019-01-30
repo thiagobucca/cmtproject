@@ -1,15 +1,15 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <div *ngIf="estabelecimentoComercial">
-            <h2><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.detail.title">Estabelecimento Comercial</span> {{estabelecimentoComercial.id}}</h2>
+            <h2><span >Estabelecimento Comercial</span> {{estabelecimentoComercial.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolMatriz">Bol Matriz</span></dt>
+                <dt><span >Matriz</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.bolMatriz}}</span>
+                    <span>{{estabelecimentoComercial.bolMatriz?"Sim":"Não"}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.codCnpj">Cod Cnpj</span></dt>
+                <dt>CNPJ</dt>
                 <dd>
                     <span>{{estabelecimentoComercial.codCnpj}}</span>
                 </dd>
@@ -17,7 +17,7 @@
                 <dd>
                     <span>{{estabelecimentoComercial.nome}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco">Endereco</span></dt>
+                <dt><span >Endereço</span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.endereco}}</span>
                 </dd>
@@ -34,13 +34,13 @@
                         {{estabelecimentoComercial.logoContentType}}, {{byteSize(estabelecimentoComercial.logo)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio">Taxa Convenio</span></dt>
+                <dt><span >Taxa Convênio</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.taxaConvenio}}</span>
+                    <span>{{estabelecimentoComercial.taxaConvenio}}%</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo">Bol Ativo</span></dt>
+                <dt><span >Ativo</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.bolAtivo}}</span>
+                    <span>{{estabelecimentoComercial.bolAtivo?"Ativo":"Inativo"}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria Estabelecimento Id</span></dt>
                 <dd>

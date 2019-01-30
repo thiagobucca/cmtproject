@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <div *ngIf="categoriaEstabelecimento">
             <h2><span jhiTranslate="cmtprojectApp.categoriaEstabelecimento.detail.title">Categoria Estabelecimento</span> {{categoriaEstabelecimento.id}}</h2>
@@ -9,9 +9,9 @@
                 <dd>
                     <span>{{categoriaEstabelecimento.nome}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.categoriaEstabelecimento.bolAtivo">Bol Ativo</span></dt>
+                <dt><span jhiTranslate="cmtprojectApp.categoriaEstabelecimento.bolAtivo">Ativo</span></dt>
                 <dd>
-                    <span>{{categoriaEstabelecimento.bolAtivo}}</span>
+                    <span>{{categoriaEstabelecimento.bolAtivo?"Ativo":"Inativo"}}</span>
                 </dd>
             </dl>
 

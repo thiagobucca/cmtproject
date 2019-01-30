@@ -7,19 +7,27 @@ import { JhiDataUtils } from 'ng-jhipster';
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from './estabelecimento-comercial.service';
 
+import { JhiAlertService } from 'ng-jhipster';
+
+import { ICategoriaEstabelecimento } from 'app/shared/model/categoria-estabelecimento.model';
+import { CategoriaEstabelecimentoService } from 'app/entities/categoria-estabelecimento';
+
 @Component({
     selector: 'jhi-estabelecimento-comercial-update',
     templateUrl: './estabelecimento-comercial-update.component.html'
 })
 export class EstabelecimentoComercialUpdateComponent implements OnInit {
     estabelecimentoComercial: IEstabelecimentoComercial;
+    estabelecimentos: IEstabelecimentoComercial[];
     isSaving: boolean;
-
+    categorias: ICategoriaEstabelecimento[];
     constructor(
         private dataUtils: JhiDataUtils,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
         private elementRef: ElementRef,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private jhiAlertService: JhiAlertService,
+        private categoriaEstabelecimentoService: CategoriaEstabelecimentoService
     ) {}
 
     ngOnInit() {
@@ -27,6 +35,18 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ estabelecimentoComercial }) => {
             this.estabelecimentoComercial = estabelecimentoComercial;
         });
+        this.categoriaEstabelecimentoService.query({ filter: 'estabelecimentoComercial-is-null' }).subscribe(
+            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                this.estabelecimentos = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.categoriaEstabelecimentoService.query({ filter: 'categoriaEstabelecimento-is-null' }).subscribe(
+            (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
+                this.categorias = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     byteSize(field) {
@@ -72,5 +92,8 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
     }
 }
