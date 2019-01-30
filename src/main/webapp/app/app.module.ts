@@ -18,6 +18,11 @@ import { CmtprojectHomeModule } from './home/home.module';
 import { CmtprojectAccountModule } from './account/account.module';
 import { CmtprojectEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AccordionModule, RatingModule, CalendarModule, ButtonModule } from 'primeng/primeng';
+
+import { DragDropModule } from 'primeng/dragdrop';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
     JhiMainComponent,
@@ -46,7 +51,13 @@ import {
         CmtprojectHomeModule,
         CmtprojectAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
-        CmtprojectEntityModule
+        CmtprojectEntityModule,
+        BrowserAnimationsModule,
+        AccordionModule,
+        RatingModule,
+        CalendarModule,
+        ButtonModule,
+        DragDropModule
     ],
     declarations: [
         JhiMainComponent,
