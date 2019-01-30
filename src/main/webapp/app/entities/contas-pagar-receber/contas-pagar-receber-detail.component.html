@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contasPagarReceber">
+            <h2><span jhiTranslate="cmtprojectApp.contasPagarReceber.detail.title">Contas Pagar Receber</span> {{contasPagarReceber.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span></dt>
+                <dd>
+                    <span>{{contasPagarReceber.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span></dt>
+                <dd>
+                    <span>{{contasPagarReceber.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento">Status Lancamento</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuarioId">Usuario Id</span></dt>
+                <dd>
+                    <span>{{contasPagarReceber.usuarioId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconicaId">Loja Maconica Id</span></dt>
+                <dd>
+                    <span>{{contasPagarReceber.lojaMaconicaId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercialId">Estabelecimento Comercial Id</span></dt>
+                <dd>
+                    <span>{{contasPagarReceber.estabelecimentoComercialId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacaoId">Tipo Operacao Id</span></dt>
+                <dd>
+                    <span>{{contasPagarReceber.tipoOperacaoId}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+    "name": "ComunicacaoPush",
+    "fields": [
+        {
+            "fieldName": "titulo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "conteudoPush",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tipoPessoa",
+            "fieldType": "TipoPessoa",
+            "fieldValues": "Macom,Dependente"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103130356",
+    "entityTableName": "comunicacao_push",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

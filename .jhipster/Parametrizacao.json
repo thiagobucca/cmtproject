@@ -1,0 +1,23 @@
+{
+    "name": "Parametrizacao",
+    "fields": [
+        {
+            "fieldName": "diaCobrancaConvenio",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "diaPagamentoLoja",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103130353",
+    "entityTableName": "parametrizacao",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

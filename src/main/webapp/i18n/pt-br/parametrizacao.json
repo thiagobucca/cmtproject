@@ -1,0 +1,22 @@
+{
+    "cmtprojectApp": {
+        "parametrizacao": {
+            "home": {
+                "title": "Parametrizacaos",
+                "createLabel": "Criar novo Parametrizacao",
+                "createOrEditLabel": "Criar ou editar Parametrizacao"
+            },
+            "created": "Um novo Parametrizacao foi criado com o identificador {{ param }}",
+            "updated": "Um Parametrizacao foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Parametrizacao foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Parametrizacao {{ id }}?"
+            },
+            "detail": {
+                "title": "Parametrizacao"
+            },
+            "diaCobrancaConvenio": "Dia Cobranca Convenio",
+            "diaPagamentoLoja": "Dia Pagamento Loja"
+        }
+    }
+}

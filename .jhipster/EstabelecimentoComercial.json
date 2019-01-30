@@ -1,0 +1,56 @@
+{
+    "name": "EstabelecimentoComercial",
+    "fields": [
+        {
+            "fieldName": "bolMatriz",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "codCnpj",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "endereco",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telefone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "logo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "taxaConvenio",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "bolAtivo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "categoriaEstabelecimentoId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "estabelecimentoMatrizId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103130350",
+    "entityTableName": "estabelecimento_comercial",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

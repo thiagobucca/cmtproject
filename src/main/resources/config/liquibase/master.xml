@@ -13,6 +13,21 @@
     <include file="config/liquibase/changelog/20181215042154_added_entity_Employee.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181215042155_added_entity_Job.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181215042156_added_entity_JobHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130346_added_entity_CategoriaEstabelecimento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130347_added_entity_PerfilUsuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130348_added_entity_TipoOperacao.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130349_added_entity_LojaMaconica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130350_added_entity_EstabelecimentoComercial.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130351_added_entity_ContatoLojaMaconica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130352_added_entity_ContatoEstabelecimento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130353_added_entity_Parametrizacao.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130354_added_entity_Usuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130355_added_entity_Pessoa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130356_added_entity_ComunicacaoPush.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130357_added_entity_AgendaEventos.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130358_added_entity_ContasPagarReceber.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130359_added_entity_Cupom.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190124194745_added_entity_ComunicacaoPushLoja.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20181215042150_added_entity_constraints_Country.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181215042151_added_entity_constraints_Location.xml" relativeToChangelogFile="false"/>
@@ -20,5 +35,13 @@
     <include file="config/liquibase/changelog/20181215042154_added_entity_constraints_Employee.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181215042155_added_entity_constraints_Job.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181215042156_added_entity_constraints_JobHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130349_added_entity_constraints_LojaMaconica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130350_added_entity_constraints_EstabelecimentoComercial.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130352_added_entity_constraints_ContatoEstabelecimento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130354_added_entity_constraints_Usuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130355_added_entity_constraints_Pessoa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130357_added_entity_constraints_AgendaEventos.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130358_added_entity_constraints_ContasPagarReceber.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190103130359_added_entity_constraints_Cupom.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

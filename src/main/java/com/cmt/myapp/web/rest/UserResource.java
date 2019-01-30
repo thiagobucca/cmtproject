@@ -2,6 +2,7 @@ package com.cmt.myapp.web.rest;
 
 import com.cmt.myapp.config.Constants;
 import com.cmt.myapp.domain.User;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.UserRepository;
 import com.cmt.myapp.security.AuthoritiesConstants;
 import com.cmt.myapp.service.MailService;
@@ -186,5 +187,19 @@ public class UserResource {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+    }
+    
+    /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/users/tipo/{tipoPessoa}")
+    @Timed
+    public ResponseEntity<List<User>> getAllUsersByTipo(@PathVariable TipoPessoa tipoPessoa, Pageable pageable) {
+        final Page<User> page = userRepository.findAllByTipoPessoa(pageable, tipoPessoa);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

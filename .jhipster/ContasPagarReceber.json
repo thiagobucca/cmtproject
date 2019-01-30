@@ -1,0 +1,44 @@
+{
+    "name": "ContasPagarReceber",
+    "fields": [
+        {
+            "fieldName": "data",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "statusLancamento",
+            "fieldType": "StatusLancamento",
+            "fieldValues": "Aberto,Baixado"
+        },
+        {
+            "fieldName": "usuarioId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lojaMaconicaId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "estabelecimentoComercialId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "tipoOperacaoId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103130358",
+    "entityTableName": "contas_pagar_receber",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

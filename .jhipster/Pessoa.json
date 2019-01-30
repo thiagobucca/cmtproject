@@ -1,0 +1,52 @@
+{
+    "name": "Pessoa",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telefone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tipoPessoa",
+            "fieldType": "TipoPessoa",
+            "fieldValues": "Macom,Dependente"
+        },
+        {
+            "fieldName": "senha",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dataNascimento",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "bolAtivo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "pessoaDependenteId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lojaMaconicaId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103130355",
+    "entityTableName": "pessoa",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

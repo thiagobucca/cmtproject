@@ -1,6 +1,7 @@
 package com.cmt.myapp.repository;
 
 import com.cmt.myapp.domain.User;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,4 +38,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmail(String email);
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
+    
+    Page<User> findAllByTipoPessoa(Pageable pageable, TipoPessoa tipoPessoa);
 }

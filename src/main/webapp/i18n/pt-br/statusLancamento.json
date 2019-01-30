@@ -1,0 +1,9 @@
+{
+    "cmtprojectApp": {
+        "StatusLancamento": {
+            "null": "",
+            "Aberto": "Aberto",
+            "Baixado": "Baixado"
+        }
+    }
+}

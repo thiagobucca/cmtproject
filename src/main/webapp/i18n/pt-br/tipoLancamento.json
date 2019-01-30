@@ -1,0 +1,9 @@
+{
+    "cmtprojectApp": {
+        "TipoLancamento": {
+            "null": "",
+            "Credito": "Credito",
+            "Debito": "Debito"
+        }
+    }
+}

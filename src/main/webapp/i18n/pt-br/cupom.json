@@ -1,0 +1,25 @@
+{
+    "cmtprojectApp": {
+        "cupom": {
+            "home": {
+                "title": "Cupoms",
+                "createLabel": "Criar novo Cupom",
+                "createOrEditLabel": "Criar ou editar Cupom"
+            },
+            "created": "Um novo Cupom foi criado com o identificador {{ param }}",
+            "updated": "Um Cupom foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Cupom foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Cupom {{ id }}?"
+            },
+            "detail": {
+                "title": "Cupom"
+            },
+            "data": "Data",
+            "valor": "Valor",
+            "numero": "Numero",
+            "foto": "Foto",
+            "estabelecimentoComercialId": "Estabelecimento Comercial Id"
+        }
+    }
+}

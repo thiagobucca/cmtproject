@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-pessoa-heading" jhiTranslate="cmtprojectApp.pessoa.home.createOrEditLabel">Create or edit a Pessoa</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!pessoa.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="pessoa.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                        [(ngModel)]="pessoa.nome" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.telefone" for="field_telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="field_telefone"
+                        [(ngModel)]="pessoa.telefone" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="pessoa.email" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.tipoPessoa" for="field_tipoPessoa">Tipo Pessoa</label>
+                    <select class="form-control" name="tipoPessoa" [(ngModel)]="pessoa.tipoPessoa" id="field_tipoPessoa" >
+                        <option value="Macom">{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
+                        <option value="Dependente">{{'cmtprojectApp.TipoPessoa.Dependente' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.senha" for="field_senha">Senha</label>
+                    <input type="text" class="form-control" name="senha" id="field_senha"
+                        [(ngModel)]="pessoa.senha" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.dataNascimento" for="field_dataNascimento">Data Nascimento</label>
+                    <div class="d-flex">
+                        <input id="field_dataNascimento" type="datetime-local" class="form-control" name="dataNascimento" [(ngModel)]="dataNascimento"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
+                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
+                        [(ngModel)]="pessoa.bolAtivo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.pessoaDependenteId" for="field_pessoaDependenteId">Pessoa Dependente Id</label>
+                    <input type="number" class="form-control" name="pessoaDependenteId" id="field_pessoaDependenteId"
+                        [(ngModel)]="pessoa.pessoaDependenteId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.pessoa.lojaMaconicaId" for="field_lojaMaconicaId">Loja Maconica Id</label>
+                    <input type="number" class="form-control" name="lojaMaconicaId" id="field_lojaMaconicaId"
+                        [(ngModel)]="pessoa.lojaMaconicaId" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

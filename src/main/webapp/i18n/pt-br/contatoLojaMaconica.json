@@ -1,0 +1,24 @@
+{
+    "cmtprojectApp": {
+        "contatoLojaMaconica": {
+            "home": {
+                "title": "Contato Loja Maconicas",
+                "createLabel": "Criar novo Contato Loja Maconica",
+                "createOrEditLabel": "Criar ou editar Contato Loja Maconica"
+            },
+            "created": "Um novo Contato Loja Maconica foi criado com o identificador {{ param }}",
+            "updated": "Um Contato Loja Maconica foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Contato Loja Maconica foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Contato Loja Maconica {{ id }}?"
+            },
+            "detail": {
+                "title": "Contato Loja Maconica"
+            },
+            "nome": "Nome",
+            "telefone": "Telefone",
+            "email": "Email",
+            "lojaMaconicaId": "Loja Maconica Id"
+        }
+    }
+}

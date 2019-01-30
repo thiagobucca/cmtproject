@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="estabelecimentoComercial">
+            <h2><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.detail.title">Estabelecimento Comercial</span> {{estabelecimentoComercial.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolMatriz">Bol Matriz</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.bolMatriz}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.codCnpj">Cod Cnpj</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.codCnpj}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco">Endereco</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.endereco}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone">Telefone</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.telefone}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span></dt>
+                <dd>
+                    <div *ngIf="estabelecimentoComercial.logo">
+                        <a (click)="openFile(estabelecimentoComercial.logoContentType, estabelecimentoComercial.logo)">
+                            <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo" style="max-width: 100%;" alt="estabelecimentoComercial image"/>
+                        </a>
+                        {{estabelecimentoComercial.logoContentType}}, {{byteSize(estabelecimentoComercial.logo)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio">Taxa Convenio</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.taxaConvenio}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo">Bol Ativo</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.bolAtivo}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria Estabelecimento Id</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId">Estabelecimento Matriz Id</span></dt>
+                <dd>
+                    <span>{{estabelecimentoComercial.estabelecimentoMatrizId}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

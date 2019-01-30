@@ -1,0 +1,27 @@
+{
+    "cmtprojectApp": {
+        "contasPagarReceber": {
+            "home": {
+                "title": "Contas Pagar Recebers",
+                "createLabel": "Criar novo Contas Pagar Receber",
+                "createOrEditLabel": "Criar ou editar Contas Pagar Receber"
+            },
+            "created": "Um novo Contas Pagar Receber foi criado com o identificador {{ param }}",
+            "updated": "Um Contas Pagar Receber foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Contas Pagar Receber foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Contas Pagar Receber {{ id }}?"
+            },
+            "detail": {
+                "title": "Contas Pagar Receber"
+            },
+            "data": "Data",
+            "valor": "Valor",
+            "statusLancamento": "Status Lancamento",
+            "usuarioId": "Usuario Id",
+            "lojaMaconicaId": "Loja Maconica Id",
+            "estabelecimentoComercialId": "Estabelecimento Comercial Id",
+            "tipoOperacaoId": "Tipo Operacao Id"
+        }
+    }
+}

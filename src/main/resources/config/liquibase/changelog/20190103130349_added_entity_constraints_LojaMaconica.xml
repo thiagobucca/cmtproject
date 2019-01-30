@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity LojaMaconica.
+    -->
+    <changeSet id="20190103130349-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="contato_id"
+                                 baseTableName="loja_maconica"
+                                 constraintName="fk_loja_maconica_contato_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contato_loja_maconica"/>
+
+        <addForeignKeyConstraint baseColumnNames="comunicacao_push_id"
+                                 baseTableName="loja_maconica"
+                                 constraintName="fk_loja_maconica_comunicacao_push_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comunicacao_push"/>
+
+    </changeSet>
+</databaseChangeLog>
