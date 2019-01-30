@@ -202,4 +202,19 @@ public class UserResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/users/status/{bolAtivo}")
+    @Timed
+    public ResponseEntity<List<User>> getAllUsersByStatus(@PathVariable boolean bolAtivo, Pageable pageable) {
+        final Page<User> page = userRepository.findAllByActivated(pageable, bolAtivo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
 }
