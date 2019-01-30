@@ -4,10 +4,13 @@ import com.cmt.myapp.config.Constants;
 
 import com.cmt.myapp.domain.Authority;
 import com.cmt.myapp.domain.User;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -51,6 +54,16 @@ public class UserDTO {
 
     private Instant lastModifiedDate;
 
+    private String telefone;
+
+    private Long pessoaDependenteId;
+
+    private Long lojaMaconicaId;
+
+    private Instant dataNascimento;
+
+    private TipoPessoa tipoPessoa;
+
     private Set<String> authorities;
 
     public UserDTO() {
@@ -73,6 +86,10 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        this.telefone = user.getTelefone();
+        this.lojaMaconicaId = user.getLojaMaconicaId();
+        this.dataNascimento = user.getDataNascimento();
+        this.tipoPessoa = user.getTipoPessoa();
     }
 
     public Long getId() {
@@ -178,8 +195,48 @@ public class UserDTO {
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
+    
+    public String getTelefone() {
+		return telefone;
+	}
 
-    @Override
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Long getPessoaDependenteId() {
+		return pessoaDependenteId;
+	}
+
+	public void setPessoaDependenteId(Long pessoaDependenteId) {
+		this.pessoaDependenteId = pessoaDependenteId;
+	}
+
+	public Long getLojaMaconicaId() {
+		return lojaMaconicaId;
+	}
+
+	public void setLojaMaconicaId(Long lojaMaconicaId) {
+		this.lojaMaconicaId = lojaMaconicaId;
+	}
+
+	public Instant getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Instant dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
+	}
+
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+
+	@Override
     public String toString() {
         return "UserDTO{" +
             "login='" + login + '\'' +

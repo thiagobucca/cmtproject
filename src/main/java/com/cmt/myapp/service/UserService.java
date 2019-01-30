@@ -3,6 +3,7 @@ package com.cmt.myapp.service;
 import com.cmt.myapp.config.Constants;
 import com.cmt.myapp.domain.Authority;
 import com.cmt.myapp.domain.User;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.AuthorityRepository;
 import com.cmt.myapp.repository.UserRepository;
 import com.cmt.myapp.security.AuthoritiesConstants;
@@ -232,6 +233,7 @@ public class UserService {
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
+    
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {

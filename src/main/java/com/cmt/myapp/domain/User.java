@@ -1,7 +1,7 @@
 package com.cmt.myapp.domain;
 
 import com.cmt.myapp.config.Constants;
-
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
@@ -81,6 +81,23 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date")
     private Instant resetDate = null;
+
+
+    @Column(name = "telefone")
+    private String telefone;
+
+    @Column(name = "pessoa_dependente_id")
+    private Long pessoaDependenteId;
+
+    @Column(name = "loja_maconica_id")
+    private Long lojaMaconicaId;
+
+    @Column(name = "data_nascimento")
+    private Instant dataNascimento;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_pessoa")
+    private TipoPessoa tipoPessoa;
 
     @JsonIgnore
     @ManyToMany
@@ -196,6 +213,48 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
+    
+    public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Long getPessoaDependenteId() {
+		return pessoaDependenteId;
+	}
+
+	public void setPessoaDependenteId(Long pessoaDependenteId) {
+		this.pessoaDependenteId = pessoaDependenteId;
+	}
+
+	public Long getLojaMaconicaId() {
+		return lojaMaconicaId;
+	}
+
+	public void setLojaMaconicaId(Long lojaMaconicaId) {
+		this.lojaMaconicaId = lojaMaconicaId;
+	}
+
+	public Instant getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Instant dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
+	}
+
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+	
+	
 
     @Override
     public boolean equals(Object o) {
@@ -210,7 +269,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return !(user.getId() == null || getId() == null) && Objects.equals(getId(), user.getId());
     }
 
-    @Override
+    
+
+	@Override
     public int hashCode() {
         return Objects.hashCode(getId());
     }
