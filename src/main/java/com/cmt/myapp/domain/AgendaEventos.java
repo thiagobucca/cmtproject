@@ -37,6 +37,11 @@ public class AgendaEventos implements Serializable {
 
     @Column(name = "loja_maconica_id")
     private Long lojaMaconicaId;
+    
+    //objeto categoria STEP 1 - CRIAR o relacionamento dos obejetos pelo coluna de FK
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "loja_maconica_id", insertable = false, updatable = false)
+    private LojaMaconica loja;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -123,6 +128,19 @@ public class AgendaEventos implements Serializable {
 
     public void setLojaMaconicaId(Long lojaMaconicaId) {
         this.lojaMaconicaId = lojaMaconicaId;
+    }
+    
+    //STEP 2 - Criar o get do atributo que deseja retornar no json o nome fica igual ao da assinatura removendo o prefixo 'get'
+    //getNome da Loja Maconica pro swagger
+    public String getLoja() {
+        return loja.getNome();
+    }
+    
+    //STEP 3 - criar o set do objeto q vem no select do banco
+    //set Loja Maconica do fetch do banco
+    public AgendaEventos loja(LojaMaconica loja) {
+        this.loja = loja;
+        return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
