@@ -37,12 +37,24 @@ public class ContasPagarReceber implements Serializable {
 
     @Column(name = "loja_maconica_id")
     private Long lojaMaconicaId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "loja_maconica_id", insertable = false, updatable = false, nullable = true)
+	private LojaMaconica loja;
 
     @Column(name = "estabelecimento_comercial_id")
     private Long estabelecimentoComercialId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
+    private EstabelecimentoComercial estabelecimento;
 
     @Column(name = "tipo_operacao_id")
     private Long tipoOperacaoId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "tipo_operacao_id", insertable = false, updatable = false, nullable = true)
+    private TipoOperacao tipoOperacao;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -143,6 +155,33 @@ public class ContasPagarReceber implements Serializable {
     public void setTipoOperacaoId(Long tipoOperacaoId) {
         this.tipoOperacaoId = tipoOperacaoId;
     }
+    
+    public String getEstabelecimento() {
+        return estabelecimento == null ? null : estabelecimento.getNome();
+    }
+    
+    public ContasPagarReceber matriz(EstabelecimentoComercial estabelecimento) {
+        this.estabelecimento = estabelecimento;
+        return this;
+    }
+    
+    public String getLojaMaconica() {
+		return loja == null ? null : loja.getNome();
+	}
+
+	public ContasPagarReceber categoria(LojaMaconica loja) {
+		this.loja = loja;
+		return this;
+	}
+	
+	public String getTipoOperacao() {
+		return tipoOperacao == null ? null : tipoOperacao.getNomeOperacao();
+	}
+
+	public ContasPagarReceber categoria(TipoOperacao tipoOperacao) {
+		this.tipoOperacao = tipoOperacao;
+		return this;
+	}
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

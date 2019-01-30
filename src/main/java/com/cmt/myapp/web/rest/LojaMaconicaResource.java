@@ -2,6 +2,7 @@ package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.LojaMaconica;
+import com.cmt.myapp.domain.User;
 import com.cmt.myapp.repository.LojaMaconicaRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
@@ -123,5 +124,19 @@ public class LojaMaconicaResource {
 
         lojaMaconicaRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    /**
+     * GET /users : get all lojas-maconicas.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/loja-maconicas/status/{bolAtivo}")
+    @Timed
+    public ResponseEntity<List<LojaMaconica>> getAllUsersByStatus(@PathVariable boolean bolAtivo, Pageable pageable) {
+        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable, bolAtivo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas/status/");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

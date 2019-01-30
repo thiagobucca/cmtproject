@@ -226,10 +226,22 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
+            <exclusions>
+         <exclusion>
+             <artifactId>jboss-logging</artifactId>
+             <groupId>org.jboss.logging</groupId>
+         </exclusion>
+     </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
+            <exclusions>
+         <exclusion>
+             <artifactId>jboss-logging</artifactId>
+             <groupId>org.jboss.logging</groupId>
+         </exclusion>
+     </exclusions>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -268,6 +280,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <exclusions>
+         <exclusion>
+             <artifactId>jboss-logging</artifactId>
+             <groupId>org.jboss.logging</groupId>
+         </exclusion>
+     </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
