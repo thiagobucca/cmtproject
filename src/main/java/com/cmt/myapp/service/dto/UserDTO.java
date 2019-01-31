@@ -65,6 +65,10 @@ public class UserDTO {
     private TipoPessoa tipoPessoa;
 
     private Set<String> authorities;
+    
+    private String dependente;
+    
+    private String loja;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -90,6 +94,8 @@ public class UserDTO {
         this.lojaMaconicaId = user.getLojaMaconicaId();
         this.dataNascimento = user.getDataNascimento();
         this.tipoPessoa = user.getTipoPessoa();
+        this.loja = user.getLojaMaconica();
+        this.dependente = user.getDependente();
     }
 
     public Long getId() {
@@ -234,6 +240,25 @@ public class UserDTO {
 
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
+	}
+
+	
+	
+	
+	public String getDependente() {
+		return dependente;
+	}
+
+	public void setDependente(String dependente) {
+		this.dependente = dependente;
+	}
+
+	public String getLoja() {
+		return loja;
+	}
+
+	public void setLoja(String loja) {
+		this.loja = loja;
 	}
 
 	@Override
