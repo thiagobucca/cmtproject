@@ -124,4 +124,18 @@ public class CupomResource {
         cupomRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+           /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/cupoms/usuario/{usuario_id}")
+    @Timed
+    public ResponseEntity<List<Cupom>> getAllUsersByTipo(@PathVariable Long usuario_id, Pageable pageable) {
+        final Page<Cupom> page = cupomRepository.findAllByUsuarioId(pageable, usuario_id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }
