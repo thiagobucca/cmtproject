@@ -67,4 +67,7 @@ export class ContatoLojaMaconicaUpdateComponent implements OnInit {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+    trackById(index: number, item: any) {
+        return item.id;
+    }
 }

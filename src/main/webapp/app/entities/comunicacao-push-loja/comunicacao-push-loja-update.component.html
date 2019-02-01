@@ -13,14 +13,14 @@
                     <label class="form-control-label"  for="field_lojaMaconicaId">Comunicação Push</label>
                     <select class="form-control" id="field_comunicacaoPushId" name="comunicacaoPushId" [(ngModel)]="comunicacaoPushLoja.comunicacaoPushId" required >
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="comunicacao.id" *ngFor="let comunicacao of comunicacoes; trackBy: trackcomunicacaoPushId">{{comunicacao.titulo}}</option>
+                        <option [ngValue]="comunicacao.id" *ngFor="let comunicacao of comunicacoes; trackBy: trackById">{{comunicacao.titulo}}</option>
                     </select>
                 </div>				
                 <div class="form-group">
                     <label class="form-control-label"  for="field_lojaMaconicaId">Loja Maçonica</label>
                     <select class="form-control" id="field_lojaMaconicaId" name="lojaMaconica" [(ngModel)]="comunicacaoPushLoja.lojaMaconicaId" required>
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackLojaMaconicaById">{{loja.nome}}</option>
+                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
                     </select>
                 </div>				
 				

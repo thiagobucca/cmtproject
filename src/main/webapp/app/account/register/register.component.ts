@@ -6,13 +6,6 @@ import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
 import { LoginModalService } from 'app/core';
 import { Register } from './register.service';
 
-import { JhiAlertService } from 'ng-jhipster';
-
-import { IPessoa } from 'app/shared/model/pessoa.model';
-import { PessoaService } from 'app/entities/pessoa/pessoa.service';
-import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
-import { LojaMaconicaService } from 'app/entities/loja-maconica';
-
 @Component({
     selector: 'jhi-register',
     templateUrl: './register.component.html'
@@ -26,31 +19,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     registerAccount: any;
     success: boolean;
     modalRef: NgbModalRef;
-    lojas: ILojaMaconica[];
-    macons: IPessoa[];
     constructor(
         private languageService: JhiLanguageService,
         private loginModalService: LoginModalService,
         private registerService: Register,
         private elementRef: ElementRef,
-        private renderer: Renderer,
-        private pessoaService: PessoaService,
-        private lojaMaconicaService: LojaMaconicaService,
-        private jhiAlertService: JhiAlertService
-    ) {
-        this.lojaMaconicaService.findByStatus(true).subscribe(
-            (res: HttpResponse<ILojaMaconica[]>) => {
-                this.lojas = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.pessoaService.query({ filter: 'pessoa-is-null' }).subscribe(
-            (res: HttpResponse<IPessoa[]>) => {
-                this.macons = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
+        private renderer: Renderer
+    ) {}
 
     ngOnInit() {
         this.success = false;
@@ -94,8 +69,5 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         } else {
             this.error = 'ERROR';
         }
-    }
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
     }
 }

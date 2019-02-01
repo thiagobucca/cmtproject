@@ -27,7 +27,7 @@
                     <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
                         [(ngModel)]="contatoEstabelecimento.estabelecimentoComercialId">
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackEstabelecimentoComercialId">{{item.nome}}</option>
+                        <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
                     </select>
                 </div>
 

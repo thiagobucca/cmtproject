@@ -41,7 +41,7 @@
                     <label class="form-control-label"  for="field_lojaMaconicaId">Loja Maçonica</label>
                     <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="agendaEventos.lojaMaconicaId">
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackLojaMaconicaById">{{loja.nome}}</option>
+                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
                     </select>
                 </div>
 

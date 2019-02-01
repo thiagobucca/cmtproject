@@ -20,6 +20,8 @@ export interface IUser {
     pessoaDependenteId?: number;
     telefone?: string;
     tipoPessoa?: TipoPessoa;
+    dependente?: string;
+    loja?: string;
 }
 
 export class User implements IUser {
@@ -41,7 +43,9 @@ export class User implements IUser {
         public lojaMaconicaId?: number,
         public pessoaDependenteId?: number,
         public telefone?: string,
-        public tipoPessoa?: TipoPessoa
+        public tipoPessoa?: TipoPessoa,
+        public dependente?: string,
+        public loja?: string
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;

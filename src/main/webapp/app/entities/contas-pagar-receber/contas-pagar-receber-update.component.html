@@ -35,14 +35,14 @@
                     <label class="form-control-label" for="field_usuarioId">Usuário</label>
                     <select class="form-control" id="field_usuarioId" name="usuarioId" [(ngModel)]="contasPagarReceber.usuarioId">
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="item.id" *ngFor="let item of usuarios; trackBy: trackUsuarioId">{{item.firstName}} {{item.lastName}}</option>
+                        <option [ngValue]="item.id" *ngFor="let item of usuarios; trackBy: trackById">{{item.firstName}} {{item.lastName}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçonica</label>
                     <select class="form-control" id="field_lojaMaconicaId" name="lojaMaconicaId" [(ngModel)]="contasPagarReceber.lojaMaconicaId">
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackLojaMaconicaById">{{loja.nome}}</option>
+                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -50,14 +50,14 @@
                     <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
                         [(ngModel)]="contasPagarReceber.estabelecimentoComercialId">
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackEstabelecimentoComercialId">{{item.nome}}</option>
+                        <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_tipoOperacaoId">Tipo Operação</label>
                     <select class="form-control" id="field_tipoOperacaoId" name="tipoOperacaoId" [(ngModel)]="contasPagarReceber.tipoOperacaoId">
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="item.id" *ngFor="let item of tipoOperacoes; trackBy: trackTipoOperacaoId">{{item.nomeOperacao}}</option>
+                        <option [ngValue]="item.id" *ngFor="let item of tipoOperacoes; trackBy: trackById">{{item.nomeOperacao}}</option>
                     </select>
                 </div>
             </div>
