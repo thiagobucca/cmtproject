@@ -58,6 +58,10 @@ public class EstabelecimentoComercial implements Serializable {
 
     @Column(name = "estabelecimento_matriz_id")
     private Long estabelecimentoMatrizId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "estabelecimento_matriz_id", insertable = false, updatable = false, nullable = true)
+    private EstabelecimentoComercial matriz;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -78,6 +82,18 @@ public class EstabelecimentoComercial implements Serializable {
     //set categoria do fetch do banco
     public EstabelecimentoComercial categoria(CategoriaEstabelecimento categoria) {
         this.categoria = categoria;
+        return this;
+    }
+    
+    public String getMatriz() {
+    	if(matriz == null) return null;
+        return matriz.getNome();
+    }
+    
+    //STEP 3 - criar o set do objeto q vem no select do banco
+    //set categoria do fetch do banco
+    public EstabelecimentoComercial matriz(EstabelecimentoComercial matriz) {
+        this.matriz = matriz;
         return this;
     }
     

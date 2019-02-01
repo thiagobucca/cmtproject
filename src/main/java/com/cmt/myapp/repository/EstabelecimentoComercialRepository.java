@@ -1,6 +1,10 @@
 package com.cmt.myapp.repository;
 
 import com.cmt.myapp.domain.EstabelecimentoComercial;
+import com.cmt.myapp.domain.LojaMaconica;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EstabelecimentoComercialRepository extends JpaRepository<EstabelecimentoComercial, Long> {
 
+	
+
+    Page<EstabelecimentoComercial> findAllByBolAtivo(Pageable pageable, boolean bolAtivo);
 }
