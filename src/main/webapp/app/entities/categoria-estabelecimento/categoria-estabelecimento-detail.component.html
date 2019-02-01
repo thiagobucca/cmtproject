@@ -8,11 +8,13 @@
                 <dt><span jhiTranslate="cmtprojectApp.categoriaEstabelecimento.nome">Nome</span></dt>
                 <dd>
                     <span>{{categoriaEstabelecimento.nome}}</span>
+                    <jhi-boolean
+                        [value]="categoriaEstabelecimento.bolAtivo"
+                        [textTrue]="'Ativo'"
+                        [textFalse]="'Inativo'">
+                    </jhi-boolean>	
                 </dd>
-                <dt><span >Status</span></dt>
-                <dd>
-                    <span>{{categoriaEstabelecimento.bolAtivo?"Ativo":"Inativo"}}</span>
-                </dd>
+                
             </dl>
 
             <button type="submit"

@@ -27,21 +27,16 @@
                     <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone">Telefone</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="logo"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span>
-                        <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
+                    
                     <th jhiSortBy="taxaConvenio">Tx. Convênio <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="bolAtivo">Ativo <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
                     <th jhiSortBy="categoriaEstabelecimentoId"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria
-                            Estabelecimento Id</span>
+                        Estabelecimento Id</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="estabelecimentoMatrizId"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId">Estabelecimento
-                            Matriz Id</span>
-                        <fa-icon [icon]="'sort'"></fa-icon>
+                    <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
+                    
                     <th></th>
                 </tr>
             </thead>
@@ -52,19 +47,14 @@
                     <td>{{estabelecimentoComercial.codCnpj}}</td>
                     <td>{{estabelecimentoComercial.nome}}</td>
                     <td>{{estabelecimentoComercial.endereco}}</td>
-                    <td>{{estabelecimentoComercial.telefone}}</td>
-                    <td>
-                        <a *ngIf="estabelecimentoComercial.logo" (click)="openFile(estabelecimentoComercial.logoContentType, estabelecimentoComercial.logo)">
-                            <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
-                                style="max-height: 30px;" alt="estabelecimentoComercial image" />
-                        </a>
-                        <span *ngIf="estabelecimentoComercial.logo">{{estabelecimentoComercial.logoContentType}},
-                            {{byteSize(estabelecimentoComercial.logo)}}</span>
-                    </td>
+                    <td>{{estabelecimentoComercial.telefone}}</td>                    
                     <td class="text-center">{{estabelecimentoComercial.taxaConvenio}}%</td>
-                    <td>{{estabelecimentoComercial.bolAtivo?"Ativo":"Inativo"}}</td>
                     <td>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</td>
-                    <td>{{estabelecimentoComercial.estabelecimentoMatrizId}}</td>
+                    <td> <jhi-boolean
+                        [value]="tipoOperacao.bolAtivo"
+                        [textTrue]="'Ativo'"
+                        [textFalse]="'Inativo'">
+                    </jhi-boolean></td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit" [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ]"

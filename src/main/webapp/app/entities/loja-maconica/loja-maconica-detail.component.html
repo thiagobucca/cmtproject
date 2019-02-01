@@ -5,13 +5,18 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt>CNPJ</dt>
-                <dd>
-                    <span>{{lojaMaconica.codCnpj}}</span>
-                </dd>
                 <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span></dt>
                 <dd>
                     <span>{{lojaMaconica.nome}}</span>
+                    <jhi-boolean
+                    [value]="lojaMaconica.bolAtivo"
+                    [textTrue]="'Ativo'"
+                    [textFalse]="'Inativo'">
+                </jhi-boolean>	
+                </dd>
+                <dt>CNPJ</dt>
+                <dd>
+                    <span>{{lojaMaconica.codCnpj}}</span>
                 </dd>
                 <dt>Endereço</dt>
                 <dd>
@@ -25,11 +30,7 @@
                 <dd>
                     <span>{{lojaMaconica.numero}}</span>
                 </dd>
-                <dt>
-                    Ativo</dt>
-                <dd>
-                    <span>{{lojaMaconica.bolAtivo?"Ativo":"Inativo"}}</span>
-                </dd>
+                
             </dl>
 
             <button type="submit"

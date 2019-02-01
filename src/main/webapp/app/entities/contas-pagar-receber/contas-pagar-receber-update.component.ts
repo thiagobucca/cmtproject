@@ -15,8 +15,7 @@ import { LojaMaconicaService } from 'app/entities/loja-maconica';
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
 
-import { IUsuario } from 'app/shared/model/usuario.model';
-import { UsuarioService } from 'app/entities/usuario';
+import { UserService, IUser } from 'app/core';
 
 import { ITipoOperacao } from 'app/shared/model/tipo-operacao.model';
 import { TipoOperacaoService } from 'app/entities/tipo-operacao';
@@ -31,7 +30,7 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
     data: string;
     lojas: ILojaMaconica[];
     estabelecimentos: IEstabelecimentoComercial[];
-    usuarios: IUsuario[];
+    usuarios: IUser[];
     tipoOperacoes: ITipoOperacao[];
 
     constructor(
@@ -39,7 +38,7 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private lojaMaconicaService: LojaMaconicaService,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
-        private usuarioService: UsuarioService,
+        private userService: UserService,
         private tipoOperacaoService: TipoOperacaoService,
         private jhiAlertService: JhiAlertService
     ) {}
@@ -65,8 +64,8 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.usuarioService.query({ filter: 'usuario-is-null' }).subscribe(
-            (res: HttpResponse<IUsuario[]>) => {
+        this.userService.findByStatus(true).subscribe(
+            (res: HttpResponse<IUser[]>) => {
                 this.usuarios = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)

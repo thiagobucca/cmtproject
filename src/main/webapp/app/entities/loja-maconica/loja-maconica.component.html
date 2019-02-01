@@ -18,7 +18,7 @@
             <th jhiSortBy="endereco"><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="numero"><span jhiTranslate="cmtprojectApp.lojaMaconica.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo">Ativo <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -30,7 +30,10 @@
                 <td>{{lojaMaconica.endereco}}</td>
                 <td>{{lojaMaconica.telefone}}</td>
                 <td>{{lojaMaconica.numero}}</td>
-                <td>{{lojaMaconica.bolAtivo?"Ativo":"Inativo"}}</td>
+                <td><jhi-boolean
+                    [value]="lojaMaconica.bolAtivo"
+                    [textTrue]="'Ativo'"
+                    [textFalse]="'Inativo'"></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

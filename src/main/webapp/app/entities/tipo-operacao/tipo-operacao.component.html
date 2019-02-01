@@ -15,7 +15,7 @@
             <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nomeOperacao"><span >Nome Operação</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tipoLancamento"><span >Tipo Lançamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo">Ativo <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -24,7 +24,11 @@
                 <td><a [routerLink]="['/tipo-operacao', tipoOperacao.id, 'view' ]">{{tipoOperacao.id}}</a></td>
                 <td>{{tipoOperacao.nomeOperacao}}</td>
                 <td jhiTranslate="{{'cmtprojectApp.TipoLancamento.' + tipoOperacao.tipoLancamento}}">{{tipoOperacao.tipoLancamento}}</td>
-                <td>{{tipoOperacao.bolAtivo?"Ativo":"Inativo"}}</td>
+                <td> <jhi-boolean
+                    [value]="tipoOperacao.bolAtivo"
+                    [textTrue]="'Ativo'"
+                    [textFalse]="'Inativo'">
+                </jhi-boolean></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

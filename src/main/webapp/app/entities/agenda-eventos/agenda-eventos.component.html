@@ -29,7 +29,11 @@
                 <td>{{agendaEventos.data | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{agendaEventos.local}}</td>
                 <td>{{agendaEventos.descricao}}</td>
-                <td>{{agendaEventos.bolAtivo?"Ativo":"Inativo"}}</td>               
+                <td><jhi-boolean
+                    [value]="agendaEventos.bolAtivo"
+                    [textTrue]="'Ativo'"
+                    [textFalse]="'Inativo'">
+                </jhi-boolean>	</td>               
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

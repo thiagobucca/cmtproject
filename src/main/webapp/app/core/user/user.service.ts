@@ -28,6 +28,9 @@ export class UserService {
     findByTipo(tipo: TipoPessoa): Observable<EntityArrayResponseType> {
         return this.http.get<IUser[]>(`${this.resourceUrl}/tipo/${tipo}`, { observe: 'response' });
     }
+    findByStatus(status: boolean): Observable<EntityArrayResponseType> {
+        return this.http.get<IUser[]>(`${this.resourceUrl}/status/${status}`, { observe: 'response' });
+    }
 
     query(req?: any): Observable<HttpResponse<IUser[]>> {
         const options = createRequestOption(req);

@@ -39,7 +39,7 @@ export class CupomUpdateComponent implements OnInit {
             this.data = this.cupom.data != null ? this.cupom.data.format(DATE_TIME_FORMAT) : null;
         });
 
-        this.estabelecimentoComercialService.query({ filter: 'estabelecimentoComercial-is-null' }).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
             },

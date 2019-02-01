@@ -35,12 +35,14 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ estabelecimentoComercial }) => {
             this.estabelecimentoComercial = estabelecimentoComercial;
         });
-        this.categoriaEstabelecimentoService.query({ filter: 'estabelecimentoComercial-is-null' }).subscribe(
+
+        this.estabelecimentoComercialService.findByStatus(true).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+
         this.categoriaEstabelecimentoService.query({ filter: 'categoriaEstabelecimento-is-null' }).subscribe(
             (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
                 this.categorias = res.body;

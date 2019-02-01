@@ -8,6 +8,11 @@
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.titulo">Titulo</span></dt>
                 <dd>
                     <span>{{agendaEventos.titulo}}</span>
+                    <jhi-boolean
+                        [value]="agendaEventos.bolAtivo"
+                        [textTrue]="'Ativo'"
+                        [textFalse]="'Inativo'">
+                    </jhi-boolean>	
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.data">Data</span></dt>
                 <dd>
@@ -20,11 +25,7 @@
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.descricao">Descricao</span></dt>
                 <dd>
                     <span>{{agendaEventos.descricao}}</span>
-                </dd>
-                <dt>Status</dt>
-                <dd>
-                    <span>{{agendaEventos.bolAtivo?"Ativo":"Inativo"}}</span>
-                </dd>
+                </dd>               
                 <dt><span >Loja Maçonica</span></dt>
                 <dd>
                     <span>{{agendaEventos.lojaMaconica}}</span>

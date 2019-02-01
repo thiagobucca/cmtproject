@@ -16,9 +16,6 @@
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="statusLancamento">Status <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="usuarioId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuarioId">Usuario Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lojaMaconicaId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconicaId">Loja Maconica Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="estabelecimentoComercialId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercialId">Estabelecimento Comercial Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tipoOperacaoId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacaoId">Tipo Operacao Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -29,10 +26,7 @@
                 <td>{{contasPagarReceber.data | date: 'dd/MM/yyyy'}}</td>
                 <td>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</td>
                 <td jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
-                <td>{{contasPagarReceber.usuarioId}}</td>
-                <td>{{contasPagarReceber.lojaMaconicaId}}</td>
-                <td>{{contasPagarReceber.estabelecimentoComercialId}}</td>
-                <td>{{contasPagarReceber.tipoOperacaoId}}</td>
+                <td>{{contasPagarReceber.tipoOperacao}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -31,7 +31,7 @@ export class ContatoEstabelecimentoUpdateComponent implements OnInit {
             this.contatoEstabelecimento = contatoEstabelecimento;
         });
 
-        this.estabelecimentoComercialService.query({ filter: 'estabelecimentoComercial-is-null' }).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
             },

@@ -51,7 +51,7 @@ export const ROUTES: RouteInfo[] = [
         class: '',
         pathGlobal: 'global.menu.entities.contatoLojaMaconica'
     },
-    { path: 'perfil-usuario', title: 'Perfil', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.perfilUsuario' },
+
     { path: 'tipo-operacao', title: 'Tipo Operação', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.tipoOperacao' },
     { path: 'loja-maconica', title: 'Loja Maçonica', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.lojaMaconica' },
     {
@@ -62,8 +62,7 @@ export const ROUTES: RouteInfo[] = [
         pathGlobal: 'global.menu.entities.estabelecimentoComercial'
     },
     { path: 'parametrizacao', title: 'Parametrização', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.parametrizacao' },
-    { path: 'usuario', title: 'Usuário', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.usuario' },
-    { path: 'pessoa', title: 'Pessoa', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.pessoa' },
+
     { path: 'cupom', title: 'Cupom', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.cupom' }
 ];
 

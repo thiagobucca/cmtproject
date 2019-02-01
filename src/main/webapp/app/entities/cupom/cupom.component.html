@@ -16,24 +16,17 @@
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.cupom.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.cupom.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="numero">Nº Cupom <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="foto"><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="estabelecimentoComercialId"><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercialId">Estabelecimento Comercial Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estabelecimentoComercialId"><span >Estabelecimento Comercial</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let cupom of cupoms ;trackBy: trackId">
                 <td><a [routerLink]="['/cupom', cupom.id, 'view' ]">{{cupom.id}}</a></td>
-                <td>{{cupom.data | date:'medium'}}</td>
-                <td>{{cupom.valor}}</td>
-                <td>{{cupom.numero}}</td>
-                <td>
-                    <a *ngIf="cupom.foto" (click)="openFile(cupom.fotoContentType, cupom.foto)">
-                        <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-height: 30px;" alt="cupom image"/>
-                    </a>
-                    <span *ngIf="cupom.foto">{{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}</span>
-                </td>
-                <td>{{cupom.estabelecimentoComercialId}}</td>
+                <td>{{cupom.data | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{cupom.valor | currency:'BRL':true:'1.2-2'}}</td>
+                <td>{{cupom.numero}}</td>                
+                <td>{{cupom.estabelecimento}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

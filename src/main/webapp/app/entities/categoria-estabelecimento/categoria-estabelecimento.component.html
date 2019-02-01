@@ -24,7 +24,11 @@
             <tr *ngFor="let categoriaEstabelecimento of categoriaEstabelecimentos ;trackBy: trackId">
                 <td><a [routerLink]="['/categoria-estabelecimento', categoriaEstabelecimento.id, 'view' ]">{{categoriaEstabelecimento.id}}</a></td>
                 <td >{{categoriaEstabelecimento.nome}}</td>
-                <td>  {{categoriaEstabelecimento.bolAtivo?"Ativo":"Inativo"}}</td>
+                <td>  <jhi-boolean
+                    [value]="categoriaEstabelecimento.bolAtivo"
+                    [textTrue]="'Ativo'"
+                    [textFalse]="'Inativo'">
+                </jhi-boolean></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

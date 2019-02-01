@@ -5,29 +5,24 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span >Nome Operação</span></dt>
+                <dt><span>Nome Operação</span></dt>
                 <dd>
                     <span>{{tipoOperacao.nomeOperacao}}</span>
+                    <jhi-boolean [value]="tipoOperacao.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                    </jhi-boolean>
                 </dd>
-                <dt><span >Tipo Lançamento</span></dt>
+                <dt><span>Tipo Lançamento</span></dt>
                 <dd>
                     <span jhiTranslate="{{'cmtprojectApp.TipoLancamento.' + tipoOperacao.tipoLancamento}}">{{tipoOperacao.tipoLancamento}}</span>
                 </dd>
-                <dt>Ativo</dt>
-                <dd>
-                    <span>{{tipoOperacao.bolAtivo?"Ativo":"Inativo"}}</span>
-                </dd>
+
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/tipo-operacao', tipoOperacao.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/tipo-operacao', tipoOperacao.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
