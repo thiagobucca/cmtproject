@@ -169,7 +169,7 @@ public class ContasPagarReceber implements Serializable {
 		return loja == null ? null : loja.getNome();
 	}
 
-	public ContasPagarReceber categoria(LojaMaconica loja) {
+	public ContasPagarReceber loja(LojaMaconica loja) {
 		this.loja = loja;
 		return this;
 	}

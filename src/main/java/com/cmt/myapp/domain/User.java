@@ -88,9 +88,17 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "pessoa_dependente_id")
     private Long pessoaDependenteId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "pessoa_dependente_id", insertable = false, updatable = false, nullable = true)
+	private User dependente;
 
     @Column(name = "loja_maconica_id")
     private Long lojaMaconicaId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "loja_maconica_id", insertable = false, updatable = false, nullable = true)
+	private LojaMaconica loja;
 
     @Column(name = "data_nascimento")
     private Instant dataNascimento;
@@ -254,9 +262,24 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.tipoPessoa = tipoPessoa;
 	}
 	
+	public String getLojaMaconica() {
+		return loja == null ? null : loja.getNome();
+	}
+
+	public void setLoja(LojaMaconica loja) {
+		this.loja = loja;
+	}
 	
 
-    @Override
+    public String getDependente() {
+    	return dependente == null ? null : dependente.getFirstName();
+	}
+
+	public void setDependente(User dependente) {
+		this.dependente = dependente;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
