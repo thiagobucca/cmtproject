@@ -54,6 +54,9 @@ public class ComunicacaoPushResource {
             throw new BadRequestAlertException("A new comunicacaoPush cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ComunicacaoPush result = comunicacaoPushRepository.save(comunicacaoPush);
+
+
+
         return ResponseEntity.created(new URI("/api/comunicacao-pushes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
