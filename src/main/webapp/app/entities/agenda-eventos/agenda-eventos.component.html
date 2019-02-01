@@ -17,8 +17,8 @@
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.agendaEventos.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="local"><span jhiTranslate="cmtprojectApp.agendaEventos.local">Local</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="descricao"><span jhiTranslate="cmtprojectApp.agendaEventos.descricao">Descrição</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo">Ativo <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lojaMaconicaId">Loja Maçonica<fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon></th>
+            
             <th></th>
             </tr>
             </thead>
@@ -29,10 +29,7 @@
                 <td>{{agendaEventos.data | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{agendaEventos.local}}</td>
                 <td>{{agendaEventos.descricao}}</td>
-                <td>{{agendaEventos.bolAtivo?"Ativo":"Inativo"}}</td>
-                <td>
-                        
-                    {{agendaEventos.lojaMaconicaId}}</td>
+                <td>{{agendaEventos.bolAtivo?"Ativo":"Inativo"}}</td>               
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -34,7 +34,7 @@ export class ComunicacaoPushLojaUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ comunicacaoPushLoja }) => {
             this.comunicacaoPushLoja = comunicacaoPushLoja;
         });
-        this.lojaMaconicaService.query({ filter: 'lojaMaconica-is-null' }).subscribe(
+        this.lojaMaconicaService.findByStatus(true).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
             },

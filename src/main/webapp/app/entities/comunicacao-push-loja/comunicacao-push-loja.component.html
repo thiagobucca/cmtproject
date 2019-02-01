@@ -13,8 +13,8 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="comunicacaoPushId"><span jhiTranslate="cmtprojectApp.comunicacaoPushLoja.comunicacaoPushId">Comunicacao Push Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lojaMaconicaId"><span jhiTranslate="cmtprojectApp.comunicacaoPushLoja.lojaMaconicaId">Loja Maconica Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="comunicacaoPushId"><span >Comunicação Push</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lojaMaconicaId"><span >Loja Maçonica</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -22,7 +22,7 @@
             <tr *ngFor="let comunicacaoPushLoja of comunicacaoPushLojas ;trackBy: trackId">
                 <td><a [routerLink]="['/comunicacao-push-loja', comunicacaoPushLoja.id, 'view' ]">{{comunicacaoPushLoja.id}}</a></td>
                 <td>{{comunicacaoPushLoja.comunicacaoPushId}}</td>
-                <td>{{comunicacaoPushLoja.lojaMaconicaId}}</td>
+                <td>{{comunicacaoPushLoja.lojaMaconica}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

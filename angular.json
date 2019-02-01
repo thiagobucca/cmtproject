@@ -8,17 +8,8 @@
             "sourceRoot": "src/main/webapp",
             "projectType": "application",
             "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
-                    "options": {
-
-                        "styles": [
-                            "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
-                            "src/assets/scss/material-dashboard.scss",
-                            "src/assets/css/demo.css"
-                        ]
-                    }
-                }
+               
+                
             }
         },
         "defaultProject": "cmtproject",

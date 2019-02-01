@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AccordionModule, RatingModule, CalendarModule, ButtonModule } from 'primeng/primeng';
-
-import { DragDropModule } from 'primeng/dragdrop';
 
 @Component({
     selector: 'jhi-footer',

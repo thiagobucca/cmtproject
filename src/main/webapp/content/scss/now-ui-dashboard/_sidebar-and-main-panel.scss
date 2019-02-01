@@ -26,7 +26,6 @@ $sidebar-green: #055028;
         overflow: auto;
         width: 260px;
         z-index: 4;
-        padding-bottom: 100px;
 
         .dropdown .dropdown-backdrop {
             display: none !important;
@@ -38,15 +37,11 @@ $sidebar-green: #055028;
     }
 
     .logo-img {
-        width: 35px;
-        height: 35px;
+        width: 127px;
         display: block;
-        margin-left: 2px;
+        margin-left: -37px;
         position: absolute;
-        top: 12px;
-        img {
-            width: 35px;
-        }
+        top: -23px;
     }
 
     .navbar-minimize {
@@ -184,6 +179,7 @@ $sidebar-green: #055028;
         }
 
         a.logo-normal {
+            margin-left: 72px;
             display: block;
             opacity: 1;
             @include transform-translate-x(0px);
