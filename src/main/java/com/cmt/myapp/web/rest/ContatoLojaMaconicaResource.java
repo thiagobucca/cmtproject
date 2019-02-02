@@ -124,4 +124,18 @@ public class ContatoLojaMaconicaResource {
         contatoLojaMaconicaRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+               /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/contato-loja-maconicas/lojamaconica/{loja_maconica_id}")
+    @Timed
+    public ResponseEntity<List<ContatoLojaMaconica>> getAllUsersByTipo(@PathVariable Long loja_maconica_id, Pageable pageable) {
+        final Page<ContatoLojaMaconica> page = contatoLojaMaconicaRepository.findAllByLojaMaconicaId(pageable, loja_maconica_id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contato-loja-maconicas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }
