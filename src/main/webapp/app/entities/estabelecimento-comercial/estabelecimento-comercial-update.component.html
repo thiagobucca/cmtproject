@@ -89,7 +89,7 @@
                         </div>
                         <div class="card-body">
                             <form name="editFormContato" role="form" novalidate (ngSubmit)="saveItem()" #editForm="ngForm">
-                                <div class="form-group" [hidden]="!contatoEstabelecimento.id">
+                                <div class="form-group" [hidden]="true">
                                     <label for="id">ID</label>
                                     <input type="text" class="form-control" id="contatoEstabelecimento_id" name="contatoEstabelecimento_id"
                                         [(ngModel)]="contatoEstabelecimento.id" readonly />

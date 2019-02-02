@@ -30,6 +30,29 @@
                 <dd>
                     <span>{{lojaMaconica.numero}}</span>
                 </dd>
+                <dt><span>contato</span></dt>
+                <dd>
+                    <div class="table-responsive" *ngIf="contatolojas">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th><span>Nome</span> </th>
+                                    <th><span>Telefone</span> </th>
+                                    <th><span>Email</span> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of contatolojas ;trackBy: trackById; let i = index">
+
+                                    <td>{{item.nome}} </td>
+                                    <td>{{item.telefone}}</td>
+                                    <td>{{item.email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </dd>
                 
             </dl>
 

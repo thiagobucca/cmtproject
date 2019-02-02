@@ -46,6 +46,14 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ estabelecimentoComercial }) => {
             this.estabelecimentoComercial = estabelecimentoComercial;
             this.contatoEstabelecimento = new ContatoEstabelecimento();
+            if (this.estabelecimentoComercial.id !== undefined) {
+                this.contatoEstabelecimentoService.findByEstabelecimento(this.estabelecimentoComercial.id).subscribe(
+                    (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                        this.contatoEstabelecimentos = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
         });
 
         this.estabelecimentoComercialService.findByStatus(true).subscribe(

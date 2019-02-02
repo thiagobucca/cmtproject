@@ -12,6 +12,7 @@ export interface IEstabelecimentoComercial {
     categoriaEstabelecimentoId?: number;
     categoria?: string;
     estabelecimentoMatrizId?: number;
+    matriz?: string;
 }
 
 export class EstabelecimentoComercial implements IEstabelecimentoComercial {
@@ -28,7 +29,8 @@ export class EstabelecimentoComercial implements IEstabelecimentoComercial {
         public bolAtivo?: boolean,
         public categoriaEstabelecimentoId?: number,
         public estabelecimentoMatrizId?: number,
-        public categoria?: string
+        public categoria?: string,
+        public matriz?: string
     ) {
         this.bolMatriz = this.bolMatriz || false;
         this.bolAtivo = this.bolAtivo || false;
