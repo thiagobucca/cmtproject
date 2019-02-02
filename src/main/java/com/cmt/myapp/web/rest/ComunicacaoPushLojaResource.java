@@ -124,4 +124,18 @@ public class ComunicacaoPushLojaResource {
         comunicacaoPushLojaRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+               /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/comunicacao-push-lojas/lojamaconica/{loja_maconica_id}")
+    @Timed
+    public ResponseEntity<List<ComunicacaoPushLoja>> getAllUsersByTipo(@PathVariable Long loja_maconica_id, Pageable pageable) {
+        final Page<ComunicacaoPushLoja> page = comunicacaoPushLojaRepository.findAllByLojaMaconicaId(pageable, loja_maconica_id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comunicacao-push-lojas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }

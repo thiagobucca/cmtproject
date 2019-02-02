@@ -35,6 +35,10 @@ public class ContasPagarReceber implements Serializable {
     @Column(name = "usuario_id")
     private Long usuarioId;
 
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "usuario_id", insertable = false, updatable = false, nullable = true)
+	private User user;
+
     @Column(name = "loja_maconica_id")
     private Long lojaMaconicaId;
     
@@ -180,6 +184,15 @@ public class ContasPagarReceber implements Serializable {
 
 	public ContasPagarReceber categoria(TipoOperacao tipoOperacao) {
 		this.tipoOperacao = tipoOperacao;
+		return this;
+    }
+    
+    public String getUsuario() {
+		return user == null ? null : user.getFirstName();
+	}
+
+	public ContasPagarReceber user(User user) {
+		this.user = user;
 		return this;
 	}
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

@@ -38,10 +38,17 @@ public class Cupom implements Serializable {
 
     @Column(name = "estabelecimento_comercial_id")
     private Long estabelecimentoComercialId;
+
+    @Column(name = "usuario_id")
+    private Long usuarioId;
     
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
     private EstabelecimentoComercial estabelecimento;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "usuario_id", insertable = false, updatable = false, nullable = true)
+    private User usuario;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -117,6 +124,15 @@ public class Cupom implements Serializable {
         this.fotoContentType = fotoContentType;
     }
 
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public Cupom usuarioId(Long usuarioid) {
+        this.usuarioId = usuarioid;
+        return this;
+    }
+
     public Long getEstabelecimentoComercialId() {
         return estabelecimentoComercialId;
     }
@@ -133,9 +149,18 @@ public class Cupom implements Serializable {
     public String getEstabelecimento() {
         return estabelecimento == null ? null : estabelecimento.getNome();
     }
+
+    public String getUsuario() {
+        return usuario == null ? null : usuario.getFirstName();
+    }
     
     public Cupom matriz(EstabelecimentoComercial estabelecimento) {
         this.estabelecimento = estabelecimento;
+        return this;
+    }
+
+    public Cupom usuario(User usuario) {
+        this.usuario = usuario;
         return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
