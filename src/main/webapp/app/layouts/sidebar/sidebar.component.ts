@@ -8,21 +8,29 @@ declare interface RouteInfo {
     pathGlobal: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: 'agenda-eventos', title: 'Agenda Eventos', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.agendaEventos' },
     {
-        path: 'categoria-estabelecimento',
-        title: 'Categoria Estabelecimento',
-        icon: 'design_app',
+        path: 'agenda-eventos',
+        title: 'Agenda Eventos',
+        icon: 'ui-1_calendar-60',
         class: '',
-        pathGlobal: 'global.menu.entities.categoriaEstabelecimento'
+        pathGlobal: 'global.menu.entities.agendaEventos'
     },
-    // {
-    //     path: 'comunicacao-push',
-    //     title: 'Comunicação Push',
-    //     icon: 'design_app',
-    //     class: '',
-    //     pathGlobal: 'global.menu.entities.comunicacaoPush'
-    // },
+    { path: 'cupom', title: 'Cupom', icon: 'shopping_tag-content', class: '', pathGlobal: 'global.menu.entities.cupom' },
+
+    {
+        path: 'comunicacao-push',
+        title: 'Comunicação Push',
+        icon: 'tech_mobile',
+        class: '',
+        pathGlobal: 'global.menu.entities.comunicacaoPush'
+    },
+    {
+        path: 'estabelecimento-comercial',
+        title: 'Estabelecimento Comercial',
+        icon: 'shopping_shop',
+        class: '',
+        pathGlobal: 'global.menu.entities.estabelecimentoComercial'
+    },
     // {
     //     path: 'comunicacao-push-loja',
     //     title: 'Comunicação Push Loja',
@@ -30,13 +38,14 @@ export const ROUTES: RouteInfo[] = [
     //     class: '',
     //     pathGlobal: 'global.menu.entities.comunicacaoPushLoja'
     // },
-    // {
-    //     path: 'contas-pagar-receber',
-    //     title: 'Contas a Pagar/Receber',
-    //     icon: 'design_app',
-    //     class: '',
-    //     pathGlobal: 'global.menu.entities.contasPagarReceber'
-    // },
+    {
+        path: 'contas-pagar-receber',
+        title: 'Contas a Pagar/Receber',
+        icon: 'business_money-coins',
+        class: '',
+        pathGlobal: 'global.menu.entities.contasPagarReceber'
+    },
+    { path: 'loja-maconica', title: 'Loja Maçonica', icon: 'travel_istanbul', class: '', pathGlobal: 'global.menu.entities.lojaMaconica' },
     // {
     //     path: 'contato-estabelecimento',
     //     title: 'Contato Estabelecimento',
@@ -52,18 +61,16 @@ export const ROUTES: RouteInfo[] = [
     //     pathGlobal: 'global.menu.entities.contatoLojaMaconica'
     // },
 
-    // { path: 'tipo-operacao', title: 'Tipo Operação', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.tipoOperacao' },
-    // { path: 'loja-maconica', title: 'Loja Maçonica', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.lojaMaconica' },
-    // {
-    //     path: 'estabelecimento-comercial',
-    //     title: 'Estabelecimento Comercial',
-    //     icon: 'design_app',
-    //     class: '',
-    //     pathGlobal: 'global.menu.entities.estabelecimentoComercial'
-    // },
-    { path: 'parametrizacao', title: 'Parametrização', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.parametrizacao' },
+    { path: 'tipo-operacao', title: 'Tipo Operação', icon: 'design_vector', class: '', pathGlobal: 'global.menu.entities.tipoOperacao' },
 
-    { path: 'cupom', title: 'Cupom', icon: 'design_app', class: '', pathGlobal: 'global.menu.entities.cupom' }
+    { path: 'parametrizacao', title: 'Parametrização', icon: 'loader_gear', class: '', pathGlobal: 'global.menu.entities.parametrizacao' },
+    {
+        path: 'categoria-estabelecimento',
+        title: 'Categoria Estabelecimento',
+        icon: 'design_app',
+        class: '',
+        pathGlobal: 'global.menu.entities.categoriaEstabelecimento'
+    }
 ];
 
 @Component({

@@ -14,11 +14,7 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
-                    <th jhiSortBy="bolMatriz">Matriz <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
-                    <th jhiSortBy="codCnpj">CNPJ <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
+                    </th> 
                     <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
@@ -30,8 +26,7 @@
                     
                     <th jhiSortBy="taxaConvenio">Tx. Convênio <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="categoriaEstabelecimentoId"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria
-                        Estabelecimento Id</span>
+                    <th jhiSortBy="categoria"><span >Categoria</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
@@ -42,14 +37,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let estabelecimentoComercial of estabelecimentoComercials ;trackBy: trackId">
-                    <td><a [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ]">{{estabelecimentoComercial.id}}</a></td>
-                    <td class="text-center">{{estabelecimentoComercial.bolMatriz?"Sim":"Não"}}</td>
-                    <td>{{estabelecimentoComercial.codCnpj}}</td>
+                    <td><a [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ]">{{estabelecimentoComercial.id}}</a></td>                   
                     <td>{{estabelecimentoComercial.nome}}</td>
                     <td>{{estabelecimentoComercial.endereco}}</td>
                     <td>{{estabelecimentoComercial.telefone}}</td>                    
                     <td class="text-center">{{estabelecimentoComercial.taxaConvenio}}%</td>
-                    <td>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</td>
+                    <td>{{estabelecimentoComercial.categoria}}</td>
                     <td> <jhi-boolean
                         [value]="estabelecimentoComercial.bolAtivo"
                         [textTrue]="'Ativo'"
