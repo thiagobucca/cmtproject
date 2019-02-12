@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
-import PerfectScrollbar from 'perfect-scrollbar';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
+//import PerfectScrollbar from 'perfect-scrollbar';
+import { JhiLanguageHelper, LoginModalService, LoginService } from 'app/core';
 
 @Component({
     selector: 'jhi-main',
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
-    constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router, private principal: Principal) {}
+    constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'cmtprojectApp';
@@ -36,10 +36,10 @@ export class JhiMainComponent implements OnInit {
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
         const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
 
-        if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
-            let ps = new PerfectScrollbar(elemMainPanel);
-            ps = new PerfectScrollbar(elemSidebar);
-        }
+        // if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+        //     let ps = new PerfectScrollbar(elemMainPanel);
+        //     ps = new PerfectScrollbar(elemSidebar);
+        // }
     }
     isMac(): boolean {
         let bool = false;
@@ -50,6 +50,7 @@ export class JhiMainComponent implements OnInit {
     }
 
     isAuthenticated() {
-        return this.principal.isAuthenticated();
+        //return this.principal.isAuthenticated();
+        return true;
     }
 }
