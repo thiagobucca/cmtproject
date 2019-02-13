@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.cmt.myapp.domain.enumeration.StatusLancamento;
+import com.cmt.myapp.domain.enumeration.TipoLancamento;
 
 /**
  * A ContasPagarReceber.
@@ -180,7 +181,12 @@ public class ContasPagarReceber implements Serializable {
 	
 	public String getTipoOperacao() {
 		return tipoOperacao == null ? null : tipoOperacao.getNomeOperacao();
+    }
+    
+    public TipoLancamento getTipoLancamento() {
+		return tipoOperacao == null ? null : tipoOperacao.getTipoLancamento();
 	}
+
 
 	public ContasPagarReceber categoria(TipoOperacao tipoOperacao) {
 		this.tipoOperacao = tipoOperacao;

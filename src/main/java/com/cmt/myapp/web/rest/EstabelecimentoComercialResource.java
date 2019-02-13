@@ -139,5 +139,19 @@ public class EstabelecimentoComercialResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials/status/");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+          /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/estabelecimento-comercials/nome/{nome}")
+    @Timed
+    public ResponseEntity<List<EstabelecimentoComercial>> getAllUsersByTipo(@PathVariable String nome, Pageable pageable) {
+        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findByNomeContaining(pageable, nome);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
     
 }
