@@ -5,9 +5,7 @@ import { AuthServerProvider } from '../auth/auth-jwt.service';
 import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-    constructor(public principal: Principal, private authServerProvider: AuthServerProvider, private auxService: AuxiliarService) {
-        debugger;
-    }
+    constructor(public principal: Principal, private authServerProvider: AuthServerProvider, private auxService: AuxiliarService) {}
 
     login(credentials, callback?) {
         const cb = callback || function() {};
