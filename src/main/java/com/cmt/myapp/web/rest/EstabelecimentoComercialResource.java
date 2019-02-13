@@ -90,9 +90,25 @@ public class EstabelecimentoComercialResource {
      */
     @GetMapping("/estabelecimento-comercials")
     @Timed
-    public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoComercials(Pageable pageable) {
+    public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoComercials(Pageable pageable, @RequestParam(value="nome",required = false) String nome, @RequestParam(value="categoria_id",required = false) Long categoria_id) {
         log.debug("REST request to get a page of EstabelecimentoComercials");
-        Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAll(pageable);
+
+
+        Page<EstabelecimentoComercial> page = null;
+
+        if(nome==null && categoria_id==null)
+        {
+            page = estabelecimentoComercialRepository.findAll(pageable);
+        }
+        else if(nome==null && categoria_id != null) 
+        {
+            page = estabelecimentoComercialRepository.findAllByCategoriaId(pageable, categoria_id);
+        }
+        else
+        {
+            page = estabelecimentoComercialRepository.findByNomeContaining(pageable, nome);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
