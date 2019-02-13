@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContatoLojaMaconicaRepository extends JpaRepository<ContatoLojaMaconica, Long> {
 
-    public Page<ContatoLojaMaconica> findAllByLojaMaconicaId(Pageable pageable,Long loja_maconica_id);
+    public Page<ContatoLojaMaconica> findAllByLojaMaconicaId(Pageable pageable,Long loja_maconica_id
+    
+    );
 
 }
