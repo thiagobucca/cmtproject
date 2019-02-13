@@ -9,6 +9,8 @@ export interface ICupom {
     foto?: any;
     estabelecimentoComercialId?: number;
     estabelecimento?: string;
+    usuarioId?: number;
+    usuario?: string;
 }
 
 export class Cupom implements ICupom {
@@ -20,6 +22,8 @@ export class Cupom implements ICupom {
         public fotoContentType?: string,
         public foto?: any,
         public estabelecimentoComercialId?: number,
-        public estabelecimento?: string
+        public estabelecimento?: string,
+        public usuarioId?: number,
+        public usuario?: string
     ) {}
 }

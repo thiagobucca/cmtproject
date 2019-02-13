@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { Principal } from '../auth/principal.service';
 import { AuthServerProvider } from '../auth/auth-jwt.service';
-
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-    constructor(public principal: Principal, private authServerProvider: AuthServerProvider) {
+    constructor(public principal: Principal, private authServerProvider: AuthServerProvider, private auxService: AuxiliarService) {
         debugger;
     }
 
@@ -17,6 +17,7 @@ export class LoginService {
                 data => {
                     this.principal.identity(true).then(account => {
                         resolve(data);
+                        this.auxService.isAutenticado = true;
                     });
                     return cb();
                 },
@@ -36,5 +37,6 @@ export class LoginService {
     logout() {
         this.authServerProvider.logout().subscribe();
         this.principal.authenticate(null);
+        this.auxService.isAutenticado = false;
     }
 }

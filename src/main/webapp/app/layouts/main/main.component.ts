@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 //import PerfectScrollbar from 'perfect-scrollbar';
 import { JhiLanguageHelper, LoginModalService, LoginService } from 'app/core';
-
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 @Component({
     selector: 'jhi-main',
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
-    constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router) {}
+    constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router, private auxService: AuxiliarService) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'cmtprojectApp';
@@ -51,6 +51,6 @@ export class JhiMainComponent implements OnInit {
 
     isAuthenticated() {
         //return this.principal.isAuthenticated();
-        return true;
+        return this.auxService.isAutenticado;
     }
 }
