@@ -7,10 +7,14 @@ import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
 import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +22,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -136,6 +143,23 @@ public class CupomResource {
     public ResponseEntity<List<Cupom>> getAllUsersByTipo(@PathVariable Long usuario_id, Pageable pageable) {
         final Page<Cupom> page = cupomRepository.findAllByUsuarioId(pageable, usuario_id);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+           /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/cupoms/filter/")
+    @Timed
+    public ResponseEntity<List<Cupom>> getAllFilter(@RequestParam(value="data_inicial",  required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dataInicial, @RequestParam(value="data_final", required = false)  @DateTimeFormat(pattern="yyyy-MM-dd") Date dataFinal, Pageable pageable) {
+        
+        final Page<Cupom> page = cupomRepository.findByDataAfter(pageable, OffsetDateTime.now());
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms/filter");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }
