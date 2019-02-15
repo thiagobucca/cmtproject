@@ -2,6 +2,7 @@ package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.ContasPagarReceber;
+import com.cmt.myapp.domain.enumeration.TipoLancamento;
 import com.cmt.myapp.repository.ContasPagarReceberRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -123,5 +125,36 @@ public class ContasPagarReceberResource {
 
         contasPagarReceberRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/contas-pagar-recebers/filter/")
+    @Timed
+    public ResponseEntity<List<ContasPagarReceber>> getAllFilter(@RequestParam(value="data_inicial") @DateTimeFormat(pattern="yyyy-MM-dd") Date dataInicial,
+     @RequestParam(value="data_final")  @DateTimeFormat(pattern="yyyy-MM-dd") Date dataFinal,
+     @RequestParam( value = "tipoOperacaoId", required = false) Long tipoOperacaoId,
+     @RequestParam( value = "tipoLancamento", required = false) TipoLancamento tipoLancamento, Pageable pageable) {
+        dataFinal.setHours(23);
+        dataFinal.setMinutes(59);
+        dataFinal.setSeconds(59);
+        Page<ContasPagarReceber> page=  null;
+
+
+        if(tipoOperacaoId != null)
+            page = contasPagarReceberRepository.findByDataBetweenAndTipoOperacaoId(pageable, dataInicial.toInstant(),
+                                dataFinal.toInstant(), tipoOperacaoId);
+        else if(tipoLancamento != null)
+            page = contasPagarReceberRepository.findByDataBetweenAndTipoOperacaoTipoLancamento(pageable, dataInicial.toInstant(), dataFinal.toInstant(), tipoLancamento);
+        else                            
+            page = contasPagarReceberRepository.findByDataBetween(pageable, dataInicial.toInstant(), dataFinal.toInstant());
+
+        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contas-pagar-recebers/filter");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }
