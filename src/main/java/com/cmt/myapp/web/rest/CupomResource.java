@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -155,7 +152,8 @@ public class CupomResource {
     @Timed
     public ResponseEntity<List<Cupom>> getAllFilter(@RequestParam(value="data_inicial") @DateTimeFormat(pattern="yyyy-MM-dd") Date dataInicial,
      @RequestParam(value="data_final")  @DateTimeFormat(pattern="yyyy-MM-dd") Date dataFinal,
-     @RequestParam( value = "estabelecimentoId", required = false) Long estabelecimentoId, Pageable pageable) {
+     @RequestParam( value = "estabelecimentoId", required = false) Long estabelecimentoId,
+     @RequestParam( value = "lojaMaconicaId", required = false) Long lojaId, Pageable pageable) {
         dataFinal.setHours(23);
         dataFinal.setMinutes(59);
         dataFinal.setSeconds(59);
@@ -166,6 +164,8 @@ public class CupomResource {
         if(estabelecimentoId != null)
             page = cupomRepository.findByDataBetweenAndEstabelecimentoComercialId(pageable, dataInicial.toInstant(),
                                 dataFinal.toInstant(), estabelecimentoId);
+        else if(lojaId != null)
+            page = cupomRepository.findByDataBetweenAndUsuarioLojaMaconicaId(pageable, dataInicial.toInstant(), dataFinal.toInstant(), lojaId);
         else                            
             page = cupomRepository.findByDataBetween(pageable, dataInicial.toInstant(), dataFinal.toInstant());
 

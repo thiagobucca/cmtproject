@@ -101,6 +101,16 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
+
+            if(userDTO.getTipoPessoa() == TipoPessoa.Dependente){
+                Optional<User> macom = userRepository.findById(userDTO.getPessoaDependenteId());
+
+                if(macom.get() != null){
+                    userDTO.setLojaMaconicaId(macom.get().getLojaMaconicaId());
+                }else
+                    throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
+            }
+            
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))

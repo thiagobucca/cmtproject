@@ -27,6 +27,8 @@ public interface CupomRepository extends JpaRepository<Cupom, Long> {
 
     public Page<Cupom> findByDataBetweenAndEstabelecimentoComercialId(Pageable pageable, Instant dataInicial, Instant dataFinal, Long estabelecimentoId);
     
+    public Page<Cupom> findByDataBetweenAndUsuarioLojaMaconicaId(Pageable pageable, Instant dataInicial, Instant dataFinal, Long lojaMaconicaId);
+    
 }
 
 
