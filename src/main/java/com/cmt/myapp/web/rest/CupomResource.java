@@ -8,8 +8,6 @@ import com.cmt.myapp.web.rest.util.HeaderUtil;
 import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -155,10 +153,23 @@ public class CupomResource {
      */
     @GetMapping("/cupoms/filter/")
     @Timed
-    public ResponseEntity<List<Cupom>> getAllFilter(@RequestParam(value="data_inicial",  required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dataInicial, @RequestParam(value="data_final", required = false)  @DateTimeFormat(pattern="yyyy-MM-dd") Date dataFinal, Pageable pageable) {
-        
-        final Page<Cupom> page = cupomRepository.findByDataAfter(pageable, OffsetDateTime.now());
+    public ResponseEntity<List<Cupom>> getAllFilter(@RequestParam(value="data_inicial") @DateTimeFormat(pattern="yyyy-MM-dd") Date dataInicial,
+     @RequestParam(value="data_final")  @DateTimeFormat(pattern="yyyy-MM-dd") Date dataFinal,
+     @RequestParam( value = "estabelecimentoId", required = false) Long estabelecimentoId, Pageable pageable) {
+        dataFinal.setHours(23);
+        dataFinal.setMinutes(59);
+        dataFinal.setSeconds(59);
+        Page<Cupom> page=  null;
 
+        System.out.println("estabelecimento"+estabelecimentoId);
+
+        if(estabelecimentoId != null)
+            page = cupomRepository.findByDataBetweenAndEstabelecimentoComercialId(pageable, dataInicial.toInstant(),
+                                dataFinal.toInstant(), estabelecimentoId);
+        else                            
+            page = cupomRepository.findByDataBetween(pageable, dataInicial.toInstant(), dataFinal.toInstant());
+
+        
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms/filter");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
