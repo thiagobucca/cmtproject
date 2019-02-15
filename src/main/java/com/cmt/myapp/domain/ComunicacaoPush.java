@@ -24,6 +24,9 @@ public class ComunicacaoPush implements Serializable {
     @Column(name = "titulo")
     private String titulo;
 
+    @Column(name = "subtitulo")
+    private String subTitulo;
+
     @Column(name = "conteudo_push")
     private String conteudoPush;
 
@@ -75,9 +78,17 @@ public class ComunicacaoPush implements Serializable {
         return this;
     }
 
-    public void setTipoPessoa(TipoPessoa tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
+    public String  getSubTitulo() {
+        return this.subTitulo;
     }
+
+    public ComunicacaoPush subTitulo(String subtitulo) {
+        this.subTitulo = subtitulo;
+        return this;
+    }
+
+    
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

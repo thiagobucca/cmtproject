@@ -26,6 +26,9 @@ export class ContatoLojaMaconicaService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IContatoLojaMaconica>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+    findByLoja(id: number): Observable<EntityArrayResponseType> {
+        return this.http.get<IContatoLojaMaconica[]>(`${this.resourceUrl}/lojamaconica/${id}`, { observe: 'response' });
+    }
 
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);

@@ -1,11 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="cmtprojectApp.agendaEventos.home.title">Agenda Eventos</span>
+        <span >Agenda Evento</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-agenda-eventos" [routerLink]="['/agenda-eventos/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cmtprojectApp.agendaEventos.home.createLabel">
-            Create new Agenda Eventos
-            </span>
+           Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
@@ -14,13 +12,13 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="titulo"><span jhiTranslate="cmtprojectApp.agendaEventos.titulo">Titulo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id">ID<fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="titulo"><span jhiTranslate="cmtprojectApp.agendaEventos.titulo">Título</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.agendaEventos.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="local"><span jhiTranslate="cmtprojectApp.agendaEventos.local">Local</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="descricao"><span jhiTranslate="cmtprojectApp.agendaEventos.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo"><span jhiTranslate="cmtprojectApp.agendaEventos.bolAtivo">Bol Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lojaMaconicaId"><span jhiTranslate="cmtprojectApp.agendaEventos.lojaMaconicaId">Loja Maconica Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="descricao"><span jhiTranslate="cmtprojectApp.agendaEventos.descricao">Descrição</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon></th>
+            
             <th></th>
             </tr>
             </thead>
@@ -28,33 +26,32 @@
             <tr *ngFor="let agendaEventos of agendaEventos ;trackBy: trackId">
                 <td><a [routerLink]="['/agenda-eventos', agendaEventos.id, 'view' ]">{{agendaEventos.id}}</a></td>
                 <td>{{agendaEventos.titulo}}</td>
-                <td>{{agendaEventos.data | date:'medium'}}</td>
+                <td>{{agendaEventos.data | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{agendaEventos.local}}</td>
                 <td>{{agendaEventos.descricao}}</td>
-                <td>{{agendaEventos.bolAtivo}}</td>
-                <td>{{agendaEventos.lojaMaconicaId}}</td>
+                <td><jhi-boolean
+                    [value]="agendaEventos.bolAtivo"
+                    [textTrue]="'Ativo'"
+                    [textFalse]="'Inativo'">
+                </jhi-boolean>	</td>               
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/agenda-eventos', agendaEventos.id, 'view' ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-sm" title="Visualizar">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/agenda-eventos', agendaEventos.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm" title="Editar">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'agenda-eventos/'+ agendaEventos.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                                class="btn btn-danger btn-sm" title="Deletar">
+                            <fa-icon [icon]="'times'"></fa-icon></button>
                     </div>
                 </td>
             </tr>

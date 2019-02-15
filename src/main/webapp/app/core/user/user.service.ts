@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IUser } from './user.model';
+import { TipoPessoa } from 'app/shared/model/pessoa.model';
 
+type EntityArrayResponseType = HttpResponse<IUser[]>;
 @Injectable({ providedIn: 'root' })
 export class UserService {
     public resourceUrl = SERVER_API_URL + 'api/users';
@@ -22,6 +24,12 @@ export class UserService {
 
     find(login: string): Observable<HttpResponse<IUser>> {
         return this.http.get<IUser>(`${this.resourceUrl}/${login}`, { observe: 'response' });
+    }
+    findByTipo(tipo: TipoPessoa): Observable<EntityArrayResponseType> {
+        return this.http.get<IUser[]>(`${this.resourceUrl}/tipo/${tipo}`, { observe: 'response' });
+    }
+    findByStatus(status: boolean): Observable<EntityArrayResponseType> {
+        return this.http.get<IUser[]>(`${this.resourceUrl}/status/${status}`, { observe: 'response' });
     }
 
     query(req?: any): Observable<HttpResponse<IUser[]>> {

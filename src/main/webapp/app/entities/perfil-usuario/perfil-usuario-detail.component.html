@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <div *ngIf="perfilUsuario">
-            <h2><span jhiTranslate="cmtprojectApp.perfilUsuario.detail.title">Perfil Usuario</span> {{perfilUsuario.id}}</h2>
+            <h2><span >Perfil Usuário</span> {{perfilUsuario.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -9,9 +9,9 @@
                 <dd>
                     <span>{{perfilUsuario.nomePerfil}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.perfilUsuario.bolAtivo">Bol Ativo</span></dt>
+                <dt>Ativo</dt>
                 <dd>
-                    <span>{{perfilUsuario.bolAtivo}}</span>
+                    <span>{{perfilUsuario.bolAtivo ?"Ativo":"Inativo"}}</span>
                 </dd>
             </dl>
 

@@ -1,51 +1,121 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-loja-maconica-heading" jhiTranslate="cmtprojectApp.lojaMaconica.home.createOrEditLabel">Create or edit a Loja Maconica</h2>
+            <h2 id="jhi-loja-maconica-heading">{{lojaMaconica.id>0?"Editar":"Criar"}} Loja Maçonica</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!lojaMaconica.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="lojaMaconica.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="lojaMaconica.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj" for="field_codCnpj">Cod Cnpj</label>
-                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj"
-                        [(ngModel)]="lojaMaconica.codCnpj" />
+                    <label class="form-control-label" for="field_codCnpj">CNPJ</label>
+                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" [(ngModel)]="lojaMaconica.codCnpj" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.nome" for="field_nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="field_nome"
-                        [(ngModel)]="lojaMaconica.nome" />
+                    <input type="text" class="form-control" name="nome" id="field_nome" [(ngModel)]="lojaMaconica.nome" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.endereco" for="field_endereco">Endereco</label>
-                    <input type="text" class="form-control" name="endereco" id="field_endereco"
-                        [(ngModel)]="lojaMaconica.endereco" />
+                    <label class="form-control-label" for="field_endereco">Endereço</label>
+                    <input type="text" class="form-control" name="endereco" id="field_endereco" [(ngModel)]="lojaMaconica.endereco" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.telefone" for="field_telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="field_telefone"
-                        [(ngModel)]="lojaMaconica.telefone" />
+                    <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="lojaMaconica.telefone" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.numero" for="field_numero">Numero</label>
-                    <input type="number" class="form-control" name="numero" id="field_numero"
-                        [(ngModel)]="lojaMaconica.numero" />
+                    <input type="number" class="form-control" name="numero" id="field_numero" [(ngModel)]="lojaMaconica.numero" />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
-                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
-                        [(ngModel)]="lojaMaconica.bolAtivo" />
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo" [(ngModel)]="lojaMaconica.bolAtivo" />
+                    <label class="form-check-label" for="field_bolAtivo">Ativo</label>
+                </div>
+                <div class="row " style="    margin-left: 10px;">
+                    <div class="col-md-12 card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Contato
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form name="editFormContato" role="form" novalidate (ngSubmit)="saveItem()" #editForm="ngForm">
+                                <div class="form-group" [hidden]="true">
+                                    <label for="id">ID</label>
+                                    <input type="text" class="form-control" id="contatoloja_id" name="contatoloja_id"
+                                        [(ngModel)]="contatoloja.id" readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="field_nome">Nome</label>
+                                    <input type="text" class="form-control" name="contatoloja_nome" id="field_contatoloja_nome"
+                                        [(ngModel)]="contatoloja.nome" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="field_telefone">Telefone</label>
+                                    <input type="text" class="form-control" name="contatoloja_telefone" id="field_contatoloja_telefone"
+                                        [(ngModel)]="contatoloja.telefone" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="field_email">Email</label>
+                                    <input type="text" class="form-control" name="contatoloja_email" id="field_contatoloja_email"
+                                        [(ngModel)]="contatoloja.email" />
+                                </div>
+                                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancelar()"
+                                    title="Cancelar">
+                                    <fa-icon [icon]="'ban'"></fa-icon>
+                                </button>
+                                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                                    class="btn btn-success" title="Salvar/Editar">
+                                    <fa-icon [icon]="'plus'"></fa-icon>
+                                </button>
+
+                            </form>
+                            <br>
+                            <div class="table-responsive" *ngIf="contatolojas">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+
+                                            <th><span>Nome</span> </th>
+                                            <th><span>Telefone</span> </th>
+                                            <th><span>Email</span> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of contatolojas ;trackBy: trackById; let i = index">
+
+                                            <td>{{item.nome}} </td>
+                                            <td>{{item.telefone}}</td>
+                                            <td>{{item.email}}</td>
+
+                                            <td class="text-right">
+                                                <div class="btn-group flex-btn-group-container">
+
+                                                    <button type="button" (click)="editarItem(i)" class="btn btn-primary btn-sm"
+                                                        title="Editar">
+                                                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                                    </button>
+                                                    <button type="button" (click)="deletar(i)" replaceUrl="true"
+                                                        queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                                        <fa-icon [icon]="'times'"></fa-icon>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

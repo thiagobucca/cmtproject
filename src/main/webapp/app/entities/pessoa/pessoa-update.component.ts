@@ -7,6 +7,10 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IPessoa } from 'app/shared/model/pessoa.model';
 import { PessoaService } from './pessoa.service';
+import { JhiAlertService } from 'ng-jhipster';
+
+import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
+import { LojaMaconicaService } from 'app/entities/loja-maconica';
 
 @Component({
     selector: 'jhi-pessoa-update',
@@ -16,8 +20,14 @@ export class PessoaUpdateComponent implements OnInit {
     pessoa: IPessoa;
     isSaving: boolean;
     dataNascimento: string;
-
-    constructor(private pessoaService: PessoaService, private activatedRoute: ActivatedRoute) {}
+    lojas: ILojaMaconica[];
+    macons: IPessoa[];
+    constructor(
+        private pessoaService: PessoaService,
+        private activatedRoute: ActivatedRoute,
+        private lojaMaconicaService: LojaMaconicaService,
+        private jhiAlertService: JhiAlertService
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -25,6 +35,18 @@ export class PessoaUpdateComponent implements OnInit {
             this.pessoa = pessoa;
             this.dataNascimento = this.pessoa.dataNascimento != null ? this.pessoa.dataNascimento.format(DATE_TIME_FORMAT) : null;
         });
+        this.lojaMaconicaService.query({ filter: 'lojaMaconica-is-null' }).subscribe(
+            (res: HttpResponse<ILojaMaconica[]>) => {
+                this.lojas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.pessoaService.query({ filter: 'pessoa-is-null' }).subscribe(
+            (res: HttpResponse<IPessoa[]>) => {
+                this.macons = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -52,5 +74,12 @@ export class PessoaUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+    trackById(index: number, item: any) {
+        return item.id;
     }
 }

@@ -6,6 +6,10 @@ import { Observable } from 'rxjs';
 import { IContatoEstabelecimento } from 'app/shared/model/contato-estabelecimento.model';
 import { ContatoEstabelecimentoService } from './contato-estabelecimento.service';
 
+import { JhiAlertService } from 'ng-jhipster';
+import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
+import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
+
 @Component({
     selector: 'jhi-contato-estabelecimento-update',
     templateUrl: './contato-estabelecimento-update.component.html'
@@ -13,14 +17,26 @@ import { ContatoEstabelecimentoService } from './contato-estabelecimento.service
 export class ContatoEstabelecimentoUpdateComponent implements OnInit {
     contatoEstabelecimento: IContatoEstabelecimento;
     isSaving: boolean;
-
-    constructor(private contatoEstabelecimentoService: ContatoEstabelecimentoService, private activatedRoute: ActivatedRoute) {}
+    estabelecimentos: IEstabelecimentoComercial[];
+    constructor(
+        private contatoEstabelecimentoService: ContatoEstabelecimentoService,
+        private activatedRoute: ActivatedRoute,
+        private estabelecimentoComercialService: EstabelecimentoComercialService,
+        private jhiAlertService: JhiAlertService
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ contatoEstabelecimento }) => {
             this.contatoEstabelecimento = contatoEstabelecimento;
         });
+
+        this.estabelecimentoComercialService.findByStatus(true).subscribe(
+            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                this.estabelecimentos = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -50,5 +66,12 @@ export class ContatoEstabelecimentoUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+    trackById(index: number, item: any) {
+        return item.id;
     }
 }

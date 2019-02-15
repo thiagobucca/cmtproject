@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row">
     <div class="col-8">
         <div *ngIf="pessoa">
-            <h2><span jhiTranslate="cmtprojectApp.pessoa.detail.title">Pessoa</span> {{pessoa.id}}</h2>
+            <h2><span >Pessoa</span> {{pessoa.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -27,11 +27,11 @@
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.pessoa.dataNascimento">Data Nascimento</span></dt>
                 <dd>
-                    <span>{{pessoa.dataNascimento}}</span>
+                    <span>{{pessoa.dataNascimento| date: 'dd/MM/yyyy HH:mm'}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.pessoa.bolAtivo">Bol Ativo</span></dt>
                 <dd>
-                    <span>{{pessoa.bolAtivo}}</span>
+                    <span>{{pessoa.bolAtivo?"Ativo":"Inativo"}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.pessoa.pessoaDependenteId">Pessoa Dependente Id</span></dt>
                 <dd>

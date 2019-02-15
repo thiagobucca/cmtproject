@@ -5,6 +5,12 @@ import { Observable } from 'rxjs';
 
 import { IComunicacaoPushLoja } from 'app/shared/model/comunicacao-push-loja.model';
 import { ComunicacaoPushLojaService } from './comunicacao-push-loja.service';
+import { JhiAlertService } from 'ng-jhipster';
+import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
+import { LojaMaconicaService } from 'app/entities/loja-maconica';
+
+import { IComunicacaoPush } from 'app/shared/model/comunicacao-push.model';
+import { ComunicacaoPushService } from 'app/entities/comunicacao-push';
 
 @Component({
     selector: 'jhi-comunicacao-push-loja-update',
@@ -13,14 +19,33 @@ import { ComunicacaoPushLojaService } from './comunicacao-push-loja.service';
 export class ComunicacaoPushLojaUpdateComponent implements OnInit {
     comunicacaoPushLoja: IComunicacaoPushLoja;
     isSaving: boolean;
-
-    constructor(private comunicacaoPushLojaService: ComunicacaoPushLojaService, private activatedRoute: ActivatedRoute) {}
+    lojas: ILojaMaconica[];
+    comunicacoes: IComunicacaoPush[];
+    constructor(
+        private comunicacaoPushLojaService: ComunicacaoPushLojaService,
+        private activatedRoute: ActivatedRoute,
+        private lojaMaconicaService: LojaMaconicaService,
+        private comunicacaoPushService: ComunicacaoPushService,
+        private jhiAlertService: JhiAlertService
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ comunicacaoPushLoja }) => {
             this.comunicacaoPushLoja = comunicacaoPushLoja;
         });
+        this.lojaMaconicaService.findByStatus(true).subscribe(
+            (res: HttpResponse<ILojaMaconica[]>) => {
+                this.lojas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.comunicacaoPushService.query({ filter: 'comunicacaoPush-is-null' }).subscribe(
+            (res: HttpResponse<IComunicacaoPush[]>) => {
+                this.comunicacoes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -47,5 +72,11 @@ export class ComunicacaoPushLojaUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+    trackById(index: number, item: any) {
+        return item.id;
     }
 }

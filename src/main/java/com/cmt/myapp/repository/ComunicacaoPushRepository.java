@@ -1,6 +1,10 @@
 package com.cmt.myapp.repository;
 
 import com.cmt.myapp.domain.ComunicacaoPush;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +15,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ComunicacaoPushRepository extends JpaRepository<ComunicacaoPush, Long> {
-
+    public Page<ComunicacaoPush> findAllByTipoPessoa(Pageable pageable, TipoPessoa tipoPessoa);
 }

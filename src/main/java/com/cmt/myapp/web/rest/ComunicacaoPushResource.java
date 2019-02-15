@@ -2,6 +2,7 @@ package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.ComunicacaoPush;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.ComunicacaoPushRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
@@ -126,5 +127,20 @@ public class ComunicacaoPushResource {
 
         comunicacaoPushRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /comunicacao-pushes : get all the comunicacaoPushes.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of comunicacaoPushes in body
+     */
+    @GetMapping("/comunicacao-pushes/tipoPessoa/{tipoPessoa}")
+    @Timed
+    public ResponseEntity<List<ComunicacaoPush>> getAllComunicacaoPushesByTipoPessoa(Pageable pageable, @PathVariable TipoPessoa tipoPessoa) {
+        log.debug("REST request to get a page of ComunicacaoPushes");
+        Page<ComunicacaoPush> page = comunicacaoPushRepository.findAllByTipoPessoa(pageable, tipoPessoa);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comunicacao-pushes/tipoPessoa");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 }

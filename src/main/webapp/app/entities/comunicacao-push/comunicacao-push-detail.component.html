@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <div *ngIf="comunicacaoPush">
-            <h2><span jhiTranslate="cmtprojectApp.comunicacaoPush.detail.title">Comunicacao Push</span> {{comunicacaoPush.id}}</h2>
+            <h2><span >Comunicação Push</span> {{comunicacaoPush.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -16,6 +16,25 @@
                 <dt><span jhiTranslate="cmtprojectApp.comunicacaoPush.tipoPessoa">Tipo Pessoa</span></dt>
                 <dd>
                     <span jhiTranslate="{{'cmtprojectApp.TipoPessoa.' + comunicacaoPush.tipoPessoa}}">{{comunicacaoPush.tipoPessoa}}</span>
+                </dd>
+                <dt><span>Lojas</span></dt>
+                <dd>
+                    <div class="table-responsive" *ngIf="pushLoja">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th><span>Nome</span> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of pushLoja ;trackBy: trackById; let i = index">
+
+                                    <td>{{item.lojaMaconica}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </dd>
             </dl>
 

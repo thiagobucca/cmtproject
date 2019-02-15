@@ -1,3 +1,6 @@
+import { TipoPessoa } from 'app/shared/model/comunicacao-push.model';
+import { Moment } from 'moment';
+
 export interface IUser {
     id?: any;
     login?: string;
@@ -12,6 +15,13 @@ export interface IUser {
     lastModifiedBy?: string;
     lastModifiedDate?: Date;
     password?: string;
+    dataNascimento?: Date;
+    lojaMaconicaId?: number;
+    pessoaDependenteId?: number;
+    telefone?: string;
+    tipoPessoa?: TipoPessoa;
+    dependente?: string;
+    loja?: string;
 }
 
 export class User implements IUser {
@@ -28,7 +38,14 @@ export class User implements IUser {
         public createdDate?: Date,
         public lastModifiedBy?: string,
         public lastModifiedDate?: Date,
-        public password?: string
+        public password?: string,
+        public dataNascimento?: Date,
+        public lojaMaconicaId?: number,
+        public pessoaDependenteId?: number,
+        public telefone?: string,
+        public tipoPessoa?: TipoPessoa,
+        public dependente?: string,
+        public loja?: string
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;
@@ -43,5 +60,11 @@ export class User implements IUser {
         this.lastModifiedBy = lastModifiedBy ? lastModifiedBy : null;
         this.lastModifiedDate = lastModifiedDate ? lastModifiedDate : null;
         this.password = password ? password : null;
+
+        this.dataNascimento = dataNascimento ? dataNascimento : null;
+        this.lojaMaconicaId = lojaMaconicaId ? lojaMaconicaId : null;
+        this.pessoaDependenteId = pessoaDependenteId ? pessoaDependenteId : null;
+        this.telefone = telefone ? telefone : null;
+        this.tipoPessoa = tipoPessoa ? tipoPessoa : null;
     }
 }

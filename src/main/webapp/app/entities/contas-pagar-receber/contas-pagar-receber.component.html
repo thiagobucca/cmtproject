@@ -1,11 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="cmtprojectApp.contasPagarReceber.home.title">Contas Pagar Recebers</span>
+        <span >Contas a Pagar/Receber</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-contas-pagar-receber" [routerLink]="['/contas-pagar-receber/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cmtprojectApp.contasPagarReceber.home.createLabel">
-            Create new Contas Pagar Receber
-            </span>
+            Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
@@ -14,13 +12,10 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="statusLancamento"><span jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento">Status Lancamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="usuarioId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuarioId">Usuario Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lojaMaconicaId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconicaId">Loja Maconica Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="estabelecimentoComercialId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercialId">Estabelecimento Comercial Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="statusLancamento">Status <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tipoOperacaoId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacaoId">Tipo Operacao Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -28,34 +23,31 @@
             <tbody>
             <tr *ngFor="let contasPagarReceber of contasPagarRecebers ;trackBy: trackId">
                 <td><a [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'view' ]">{{contasPagarReceber.id}}</a></td>
-                <td>{{contasPagarReceber.data | date:'medium'}}</td>
-                <td>{{contasPagarReceber.valor}}</td>
+                <td>{{contasPagarReceber.data | date: 'dd/MM/yyyy'}}</td>
+                <td>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</td>
                 <td jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
-                <td>{{contasPagarReceber.usuarioId}}</td>
-                <td>{{contasPagarReceber.lojaMaconicaId}}</td>
-                <td>{{contasPagarReceber.estabelecimentoComercialId}}</td>
-                <td>{{contasPagarReceber.tipoOperacaoId}}</td>
+                <td>{{contasPagarReceber.tipoOperacao}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                class="btn btn-info btn-sm"
+                                title="Visualizar">
+                            <fa-icon [icon]="'eye'"></fa-icon>                            
                         </button>
                         <button type="submit"
                                 [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm"
+                                title="Editar">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'contas-pagar-receber/'+ contasPagarReceber.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm"
+                                title="Deletar">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>
