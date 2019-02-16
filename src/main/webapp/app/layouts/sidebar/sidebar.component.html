@@ -1,0 +1,22 @@
+<div class="logo">
+    <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+        <div class="logo-img">
+            <img src="../../../content/images/logocmt150x150.png" />
+        </div>
+    </a>
+    <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+        CMT
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">            
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a [routerLink]="[menuItem.path]">
+                <i class="now-ui-icons {{menuItem.icon}}"></i>
+                <span jhiTranslate="{{menuItem.pathGlobal}}">{{menuItem.title}}</span>
+                <p></p>
+            </a>
+        </li>
+        
+    </ul>
+</div>

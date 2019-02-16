@@ -6,8 +6,13 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils } from 'ng-jhipster';
 
+import { JhiAlertService } from 'ng-jhipster';
+
 import { ICupom } from 'app/shared/model/cupom.model';
 import { CupomService } from './cupom.service';
+
+import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
+import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
 
 @Component({
     selector: 'jhi-cupom-update',
@@ -17,12 +22,14 @@ export class CupomUpdateComponent implements OnInit {
     cupom: ICupom;
     isSaving: boolean;
     data: string;
-
+    estabelecimentos: IEstabelecimentoComercial[];
     constructor(
         private dataUtils: JhiDataUtils,
         private cupomService: CupomService,
         private elementRef: ElementRef,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private estabelecimentoComercialService: EstabelecimentoComercialService,
+        private jhiAlertService: JhiAlertService
     ) {}
 
     ngOnInit() {
@@ -31,6 +38,13 @@ export class CupomUpdateComponent implements OnInit {
             this.cupom = cupom;
             this.data = this.cupom.data != null ? this.cupom.data.format(DATE_TIME_FORMAT) : null;
         });
+
+        this.estabelecimentoComercialService.findByStatus(true).subscribe(
+            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                this.estabelecimentos = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     byteSize(field) {
@@ -74,5 +88,12 @@ export class CupomUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+    trackById(index: number, item: any) {
+        return item.id;
     }
 }

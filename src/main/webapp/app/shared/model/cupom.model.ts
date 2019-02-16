@@ -8,6 +8,7 @@ export interface ICupom {
     fotoContentType?: string;
     foto?: any;
     estabelecimentoComercialId?: number;
+    estabelecimento?: string;
 }
 
 export class Cupom implements ICupom {
@@ -18,6 +19,7 @@ export class Cupom implements ICupom {
         public numero?: string,
         public fotoContentType?: string,
         public foto?: any,
-        public estabelecimentoComercialId?: number
+        public estabelecimentoComercialId?: number,
+        public estabelecimento?: string
     ) {}
 }

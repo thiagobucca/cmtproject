@@ -1,15 +1,15 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <div *ngIf="estabelecimentoComercial">
-            <h2><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.detail.title">Estabelecimento Comercial</span> {{estabelecimentoComercial.id}}</h2>
+            <h2><span>Estabelecimento Comercial</span> {{estabelecimentoComercial.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolMatriz">Bol Matriz</span></dt>
+                <dt><span>Matriz</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.bolMatriz}}</span>
+                    <span>{{estabelecimentoComercial.bolMatriz?"Sim":"Não"}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.codCnpj">Cod Cnpj</span></dt>
+                <dt>CNPJ</dt>
                 <dd>
                     <span>{{estabelecimentoComercial.codCnpj}}</span>
                 </dd>
@@ -17,7 +17,7 @@
                 <dd>
                     <span>{{estabelecimentoComercial.nome}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco">Endereco</span></dt>
+                <dt><span>Endereço</span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.endereco}}</span>
                 </dd>
@@ -29,38 +29,59 @@
                 <dd>
                     <div *ngIf="estabelecimentoComercial.logo">
                         <a (click)="openFile(estabelecimentoComercial.logoContentType, estabelecimentoComercial.logo)">
-                            <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo" style="max-width: 100%;" alt="estabelecimentoComercial image"/>
+                            <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
+                                style="max-width: 100%;" alt="estabelecimentoComercial image" />
                         </a>
                         {{estabelecimentoComercial.logoContentType}}, {{byteSize(estabelecimentoComercial.logo)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio">Taxa Convenio</span></dt>
+                <dt><span>Taxa Convênio</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.taxaConvenio}}</span>
+                    <span>{{estabelecimentoComercial.taxaConvenio}}%</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo">Bol Ativo</span></dt>
+                <dt><span>Ativo</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.bolAtivo}}</span>
+                    <span>{{estabelecimentoComercial.bolAtivo?"Ativo":"Inativo"}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria Estabelecimento Id</span></dt>
+                <dt><span>Categoria Estabelecimento </span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</span>
+                    <span>{{estabelecimentoComercial.categoria}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId">Estabelecimento Matriz Id</span></dt>
+                <dt><span>Matriz</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.estabelecimentoMatrizId}}</span>
+                    <span>{{estabelecimentoComercial.matriz}}</span>
+                </dd>
+                <dt><span>contato</span></dt>
+                <dd>
+                    <div class="table-responsive" *ngIf="contatoEstabelecimentos">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th><span>Nome</span> </th>
+                                    <th><span>Telefone</span> </th>
+                                    <th><span>Email</span> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of contatoEstabelecimentos ;trackBy: trackById; let i = index">
+
+                                    <td>{{item.nome}} </td>
+                                    <td>{{item.telefone}}</td>
+                                    <td>{{item.email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'edit']"
+                class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-agenda-eventos-heading" jhiTranslate="cmtprojectApp.agendaEventos.home.createOrEditLabel">Create or edit a Agenda Eventos</h2>
+            <h2 id="jhi-agenda-eventos-heading" >{{agendaEventos.id>0?"Editar":"Criar"}} Agenda Evento</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!agendaEventos.id">
@@ -11,35 +11,38 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.titulo" for="field_titulo">Titulo</label>
-                    <input type="text" class="form-control" name="titulo" id="field_titulo"
+                    <input type="text" class="form-control" name="titulo" id="field_titulo" required
                         [(ngModel)]="agendaEventos.titulo" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.data" for="field_data">Data</label>
                     <div class="d-flex">
-                        <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data"
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data " required
                         />
+                       
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.local" for="field_local">Local</label>
                     <input type="text" class="form-control" name="local" id="field_local"
-                        [(ngModel)]="agendaEventos.local" />
+                        [(ngModel)]="agendaEventos.local" required/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.descricao" for="field_descricao">Descricao</label>
-                    <input type="text" class="form-control" name="descricao" id="field_descricao"
-                        [(ngModel)]="agendaEventos.descricao" />
+                    <textarea class="form-control" name="descricao" id="field_descricao"
+                    [(ngModel)]="agendaEventos.descricao" rows="3"></textarea>
                 </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo"
+                    [(ngModel)]="agendaEventos.bolAtivo" />
+                    <label class="form-check-label"  for="field_bolAtivo">Ativo</label>
+                </div>                
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
-                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
-                        [(ngModel)]="agendaEventos.bolAtivo" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.lojaMaconicaId" for="field_lojaMaconicaId">Loja Maconica Id</label>
-                    <input type="number" class="form-control" name="lojaMaconicaId" id="field_lojaMaconicaId"
-                        [(ngModel)]="agendaEventos.lojaMaconicaId" />
+                    <label class="form-control-label"  for="field_lojaMaconicaId">Loja Maçonica</label>
+                    <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="agendaEventos.lojaMaconicaId">
+                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
+                    </select>
                 </div>
 
             </div>
@@ -47,7 +50,7 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

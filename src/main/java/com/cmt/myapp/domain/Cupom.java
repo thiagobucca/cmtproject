@@ -150,6 +150,18 @@ public class Cupom implements Serializable {
         return estabelecimento == null ? null : estabelecimento.getNome();
     }
 
+    public Double getValorCMT() {
+        return estabelecimento == null ? null : (this.valor * (this.estabelecimento.getTaxaConvenio()/100))/2;
+    }
+
+    public Double getValorLoja() {
+        return estabelecimento == null ? null : (this.valor * (this.estabelecimento.getTaxaConvenio()/100))/2;
+    }
+
+    public Double getTaxaConvenio() {
+        return estabelecimento == null ? null : this.estabelecimento.getTaxaConvenio();
+    }
+
     public String getUsuario() {
         return usuario == null ? null : usuario.getFirstName();
     }

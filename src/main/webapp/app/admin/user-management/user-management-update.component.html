@@ -1,8 +1,8 @@
-<div class="row justify-content-center">
+<div class="row">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="myUserLabel" jhiTranslate="userManagement.home.createOrEditLabel">
-                Create or edit a User
+            <h2 id="myUserLabel" >
+                    {{user.id>0?"Editar":"Criar"}} Usuário
             </h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -110,12 +110,45 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group">
+                    <label class="form-control-label" for="field_telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="user.telefone" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipoPessoa">Tipo Pessoa</label>
+                    <select class="form-control" name="tipoPessoa" [(ngModel)]="user.tipoPessoa" id="field_tipoPessoa"
+                        required>
+                        <option value="Macom">{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
+                        <option value="Dependente">{{'cmtprojectApp.TipoPessoa.Dependente' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataNascimento">Data Nascimento</label>
+                    <div class="d-flex">
+                        <input id="field_dataNascimento" type="date" class="form-control" name="dataNascimento"
+                            [(ngModel)]="user.dataNascimento" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pessoaDependenteId">Maçom</label>
+                    <select class="form-control" id="field_pessoaDependenteId" name="pessoaDependenteId" [(ngModel)]="user.pessoaDependenteId">
+                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                        <option [ngValue]="item.id" *ngFor="let item of macons; trackBy: trackById">{{item.firstName}} {{item.lastName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçonica</label>
+                    <select class="form-control" id="field_lojaMaconicaId" name="lojaMaconicaId" [(ngModel)]="user.lojaMaconicaId">
+                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                        <option [ngValue]="item.id" *ngFor="let item of lojas; trackBy: trackById">{{item.nome}}</option>
+                    </select>
+                </div>
             <div>
                 <button type="button" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
                     jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

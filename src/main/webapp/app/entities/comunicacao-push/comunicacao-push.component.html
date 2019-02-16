@@ -1,11 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="cmtprojectApp.comunicacaoPush.home.title">Comunicacao Pushes</span>
+        <span j>Comunicação Push</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-comunicacao-push" [routerLink]="['/comunicacao-push/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cmtprojectApp.comunicacaoPush.home.createLabel">
-            Create new Comunicacao Push
-            </span>
+            Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
@@ -14,9 +12,9 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="titulo"><span jhiTranslate="cmtprojectApp.comunicacaoPush.titulo">Titulo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="conteudoPush"><span jhiTranslate="cmtprojectApp.comunicacaoPush.conteudoPush">Conteudo Push</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="conteudoPush">Conteúdo Push <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tipoPessoa"><span jhiTranslate="cmtprojectApp.comunicacaoPush.tipoPessoa">Tipo Pessoa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -31,24 +29,21 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/comunicacao-push', comunicacaoPush.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+                                class="btn btn-info btn-sm"
+                                title="Visualizar">
+                            <fa-icon [icon]="'eye'"></fa-icon></button>
                         <button type="submit"
                                 [routerLink]="['/comunicacao-push', comunicacaoPush.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                                class="btn btn-primary btn-sm"
+                                title="Editar">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon></button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'comunicacao-push/'+ comunicacaoPush.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                                class="btn btn-danger btn-sm"
+                                title="Deletar">
+                            <fa-icon [icon]="'times'"></fa-icon></button>
                     </div>
                 </td>
             </tr>

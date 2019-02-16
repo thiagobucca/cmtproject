@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-tipo-operacao-heading" jhiTranslate="cmtprojectApp.tipoOperacao.home.createOrEditLabel">Create or edit a Tipo Operacao</h2>
+            <h2 id="jhi-tipo-operacao-heading" >{{tipoOperacao.id>0?"Editar":"Criar"}} Tipo Operação</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!tipoOperacao.id">
@@ -10,29 +10,29 @@
                         [(ngModel)]="tipoOperacao.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.tipoOperacao.nomeOperacao" for="field_nomeOperacao">Nome Operacao</label>
+                    <label class="form-control-label"  for="field_nomeOperacao">Nome Operação</label>
                     <input type="text" class="form-control" name="nomeOperacao" id="field_nomeOperacao"
                         [(ngModel)]="tipoOperacao.nomeOperacao" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.tipoOperacao.tipoLancamento" for="field_tipoLancamento">Tipo Lancamento</label>
+                    <label class="form-control-label" for="field_tipoLancamento">Tipo Lançamento</label>
                     <select class="form-control" name="tipoLancamento" [(ngModel)]="tipoOperacao.tipoLancamento" id="field_tipoLancamento" >
                         <option value="Credito">{{'cmtprojectApp.TipoLancamento.Credito' | translate}}</option>
                         <option value="Debito">{{'cmtprojectApp.TipoLancamento.Debito' | translate}}</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.tipoOperacao.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
-                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
+                </div>                
+                <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo"
                         [(ngModel)]="tipoOperacao.bolAtivo" />
-                </div>
+                        <label class="form-check-label"  for="field_bolAtivo">Ativo</label>
+                    </div>
 
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

@@ -1,17 +1,22 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <div *ngIf="agendaEventos">
-            <h2><span jhiTranslate="cmtprojectApp.agendaEventos.detail.title">Agenda Eventos</span> {{agendaEventos.id}}</h2>
+            <h2><span jhiTranslate="cmtprojectApp.agendaEventos.detail.title">Agenda Evento</span> {{agendaEventos.titulo}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.titulo">Titulo</span></dt>
                 <dd>
                     <span>{{agendaEventos.titulo}}</span>
+                    <jhi-boolean
+                        [value]="agendaEventos.bolAtivo"
+                        [textTrue]="'Ativo'"
+                        [textFalse]="'Inativo'">
+                    </jhi-boolean>	
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.data">Data</span></dt>
                 <dd>
-                    <span>{{agendaEventos.data}}</span>
+                    <span>{{agendaEventos.data | date: 'dd/MM/yyyy HH:mm'}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.local">Local</span></dt>
                 <dd>
@@ -20,14 +25,10 @@
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.descricao">Descricao</span></dt>
                 <dd>
                     <span>{{agendaEventos.descricao}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.agendaEventos.bolAtivo">Bol Ativo</span></dt>
+                </dd>               
+                <dt><span >Loja Maçonica</span></dt>
                 <dd>
-                    <span>{{agendaEventos.bolAtivo}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.agendaEventos.lojaMaconicaId">Loja Maconica Id</span></dt>
-                <dd>
-                    <span>{{agendaEventos.lojaMaconicaId}}</span>
+                    <span>{{agendaEventos.lojaMaconica}}</span>
                 </dd>
             </dl>
 

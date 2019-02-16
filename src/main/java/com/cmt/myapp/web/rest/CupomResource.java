@@ -7,10 +7,12 @@ import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
 import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,5 +140,37 @@ public class CupomResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-   
+
+
+           /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/cupoms/filter/")
+    @Timed
+    public ResponseEntity<List<Cupom>> getAllFilter(@RequestParam(value="data_inicial") @DateTimeFormat(pattern="yyyy-MM-dd") Date dataInicial,
+     @RequestParam(value="data_final")  @DateTimeFormat(pattern="yyyy-MM-dd") Date dataFinal,
+     @RequestParam( value = "estabelecimentoId", required = false) Long estabelecimentoId,
+     @RequestParam( value = "lojaMaconicaId", required = false) Long lojaId, Pageable pageable) {
+        dataFinal.setHours(23);
+        dataFinal.setMinutes(59);
+        dataFinal.setSeconds(59);
+        Page<Cupom> page=  null;
+
+        System.out.println("estabelecimento"+estabelecimentoId);
+
+        if(estabelecimentoId != null)
+            page = cupomRepository.findByDataBetweenAndEstabelecimentoComercialId(pageable, dataInicial.toInstant(),
+                                dataFinal.toInstant(), estabelecimentoId);
+        else if(lojaId != null)
+            page = cupomRepository.findByDataBetweenAndUsuarioLojaMaconicaId(pageable, dataInicial.toInstant(), dataFinal.toInstant(), lojaId);
+        else                            
+            page = cupomRepository.findByDataBetween(pageable, dataInicial.toInstant(), dataFinal.toInstant());
+
+        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms/filter");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }

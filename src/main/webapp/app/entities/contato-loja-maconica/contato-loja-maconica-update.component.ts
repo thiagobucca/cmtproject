@@ -6,6 +6,10 @@ import { Observable } from 'rxjs';
 import { IContatoLojaMaconica } from 'app/shared/model/contato-loja-maconica.model';
 import { ContatoLojaMaconicaService } from './contato-loja-maconica.service';
 
+import { JhiAlertService } from 'ng-jhipster';
+import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
+import { LojaMaconicaService } from 'app/entities/loja-maconica';
+
 @Component({
     selector: 'jhi-contato-loja-maconica-update',
     templateUrl: './contato-loja-maconica-update.component.html'
@@ -13,14 +17,25 @@ import { ContatoLojaMaconicaService } from './contato-loja-maconica.service';
 export class ContatoLojaMaconicaUpdateComponent implements OnInit {
     contatoLojaMaconica: IContatoLojaMaconica;
     isSaving: boolean;
-
-    constructor(private contatoLojaMaconicaService: ContatoLojaMaconicaService, private activatedRoute: ActivatedRoute) {}
+    lojas: ILojaMaconica[];
+    constructor(
+        private contatoLojaMaconicaService: ContatoLojaMaconicaService,
+        private activatedRoute: ActivatedRoute,
+        private lojaMaconicaService: LojaMaconicaService,
+        private jhiAlertService: JhiAlertService
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ contatoLojaMaconica }) => {
             this.contatoLojaMaconica = contatoLojaMaconica;
         });
+        this.lojaMaconicaService.findByStatus(true).subscribe(
+            (res: HttpResponse<ILojaMaconica[]>) => {
+                this.lojas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -47,5 +62,12 @@ export class ContatoLojaMaconicaUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+    trackById(index: number, item: any) {
+        return item.id;
     }
 }

@@ -8,6 +8,7 @@ export interface IAgendaEventos {
     descricao?: string;
     bolAtivo?: boolean;
     lojaMaconicaId?: number;
+    lojaMaconica?: string;
 }
 
 export class AgendaEventos implements IAgendaEventos {
@@ -18,7 +19,8 @@ export class AgendaEventos implements IAgendaEventos {
         public local?: string,
         public descricao?: string,
         public bolAtivo?: boolean,
-        public lojaMaconicaId?: number
+        public lojaMaconicaId?: number,
+        public lojaMaconica?: string
     ) {
         this.bolAtivo = this.bolAtivo || false;
     }
