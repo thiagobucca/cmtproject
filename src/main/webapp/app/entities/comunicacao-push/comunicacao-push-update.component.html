@@ -16,11 +16,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.comunicacaoPush.conteudoPush" for="field_conteudoPush">Conteudo Push</label>
-                    <input type="text" class="form-control" name="conteudoPush" id="field_conteudoPush"
-                        [(ngModel)]="comunicacaoPush.conteudoPush" />
+                    <textarea rows="4" cols="50" [(ngModel)]="comunicacaoPush.conteudoPush" class="form-control" name="conteudoPush" id="field_conteudoPush"
+                    maxlength="1000" ></textarea>
+                    
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.comunicacaoPush.tipoPessoa" for="field_tipoPessoa">Tipo Pessoa</label>
+                    <label class="form-control-label" for="field_tipoPessoa">Selecionar Público</label>
                     <select class="form-control" name="tipoPessoa" [(ngModel)]="comunicacaoPush.tipoPessoa" id="field_tipoPessoa" >
                         <option value="Macom">{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
                         <option value="Dependente">{{'cmtprojectApp.TipoPessoa.Dependente' | translate}}</option>

@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit {
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
         this.router.events.subscribe(event => {
             this.sidebarClose();
-            var $layer: any = document.getElementsByClassName('close-layer')[0];
+            const $layer: any = document.getElementsByClassName('close-layer')[0];
             if ($layer) {
                 $layer.remove();
                 this.mobile_menu_visible = 0;
@@ -96,7 +96,6 @@ export class NavbarComponent implements OnInit {
     }
 
     collapse() {
-        debugger;
         this.isCollapsed = !this.isCollapsed;
         const navbar = document.getElementsByTagName('nav')[0];
         console.log(navbar);
@@ -139,10 +138,9 @@ export class NavbarComponent implements OnInit {
         html.classList.remove('nav-open');
     }
     sidebarToggle() {
-        debugger;
         // const toggleButton = this.toggleButton;
         // const html = document.getElementsByTagName('html')[0];
-        var $toggle = document.getElementsByClassName('navbar-toggler')[0];
+        const $toggle = document.getElementsByClassName('navbar-toggler')[0];
 
         if (this.sidebarVisible === false) {
             this.sidebarOpen();
@@ -151,7 +149,8 @@ export class NavbarComponent implements OnInit {
         }
         const html = document.getElementsByTagName('html')[0];
 
-        if (this.mobile_menu_visible == 1) {
+        const $layer = document.createElement('div');
+        if (this.mobile_menu_visible === 1) {
             // $('html').removeClass('nav-open');
             html.classList.remove('nav-open');
             if ($layer) {
@@ -167,7 +166,6 @@ export class NavbarComponent implements OnInit {
                 $toggle.classList.add('toggled');
             }, 430);
 
-            var $layer = document.createElement('div');
             $layer.setAttribute('class', 'close-layer');
 
             if (html.querySelectorAll('.main-panel')) {
@@ -181,7 +179,7 @@ export class NavbarComponent implements OnInit {
             }, 100);
 
             $layer.onclick = function() {
-                //asign a function
+                // asign a function
                 html.classList.remove('nav-open');
                 this.mobile_menu_visible = 0;
                 $layer.classList.remove('visible');
