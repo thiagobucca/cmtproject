@@ -1,7 +1,8 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,15 +21,18 @@ public class ContatoLojaMaconica implements Serializable {
     private Long id;
 
     @Column(name = "nome")
+    @NotBlank(message = "Informe o nome do contato")
     private String nome;
 
     @Column(name = "telefone")
     private String telefone;
 
     @Column(name = "email")
+    @NotBlank(message = "Informe o email do contato")
     private String email;
 
     @Column(name = "loja_maconica_id")
+    @NotNull(message="Informe a loja maconica para vincular ao contato")
     private Long lojaMaconicaId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

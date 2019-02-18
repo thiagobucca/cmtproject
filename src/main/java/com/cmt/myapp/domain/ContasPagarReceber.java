@@ -1,7 +1,8 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -24,16 +25,20 @@ public class ContasPagarReceber implements Serializable {
     private Long id;
 
     @Column(name = "data")
+    @NotNull(message="Informe a data do evento contas/pagar receber")
     private Instant data;
 
     @Column(name = "valor")
+    @NotNull(message="Informe o valor do evento contas/pagar receber")
     private Double valor;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_lancamento")
+    @NotBlank(message = "Informe o status do lancamento do evento contas/pagar receber")
     private StatusLancamento statusLancamento;
 
     @Column(name = "usuario_id")
+    @NotNull(message="Informe o usuario para criacao do evento contas/pagar receber")
     private Long usuarioId;
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
@@ -55,6 +60,7 @@ public class ContasPagarReceber implements Serializable {
     private EstabelecimentoComercial estabelecimento;
 
     @Column(name = "tipo_operacao_id")
+    @NotNull(message="Informe o tipo de operacao do evento contas/pagar receber")
     private Long tipoOperacaoId;
     
     @OneToOne(fetch = FetchType.EAGER, optional = true)

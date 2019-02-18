@@ -1,7 +1,7 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,6 +20,7 @@ public class CategoriaEstabelecimento implements Serializable {
     private Long id;
 
     @Column(name = "nome")
+    @NotBlank(message = "Informe o nome da categoria")
     private String nome;
 
     @Column(name = "bol_ativo")

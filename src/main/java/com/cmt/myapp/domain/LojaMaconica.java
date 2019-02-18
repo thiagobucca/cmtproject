@@ -1,7 +1,7 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,18 +20,23 @@ public class LojaMaconica implements Serializable {
     private Long id;
 
     @Column(name = "cod_cnpj")
+    @NotBlank(message = "Informe o CNPJ da loja maconica")
     private String codCnpj;
 
     @Column(name = "nome")
+    @NotBlank(message = "Informe o nome da loja maconica")
     private String nome;
 
     @Column(name = "endereco")
+    @NotBlank(message = "Informe o endereco da loja maconica")
     private String endereco;
 
     @Column(name = "telefone")
+    @NotBlank(message = "Informe o telefone da loja maconica")
     private String telefone;
 
     @Column(name = "numero")
+    @NotBlank(message = "Informe o numero da loja maconica")
     private Integer numero;
 
     @Column(name = "bol_ativo")
