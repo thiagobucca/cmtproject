@@ -4,7 +4,14 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class AuxiliarService {
-    isAutenticado: boolean;
+    private _storage: any = sessionStorage;
 
     constructor() {}
+
+    get isAutenticado(): boolean {
+        return this._storage.getItem('isAutenticado') ? this._storage.getItem('isAutenticado') : false;
+    }
+    set isAutenticado(value: boolean) {
+        this._storage.setItem('isAutenticado', value);
+    }
 }

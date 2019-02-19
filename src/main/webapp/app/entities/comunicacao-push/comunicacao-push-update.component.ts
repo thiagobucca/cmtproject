@@ -35,15 +35,17 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ comunicacaoPush }) => {
             this.comunicacaoPush = comunicacaoPush;
-            this.comunicacaoPushLojaService.findByIdPush(this.comunicacaoPush.id).subscribe(
-                (res: HttpResponse<IComunicacaoPushLoja[]>) => {
-                    this.pushLoja = res.body;
-                    this.pushLoja.forEach(element => {
-                        this.lojasSelecionadas.push(element.lojaMaconicaId);
-                    });
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            if (this.comunicacaoPush.id !== undefined) {
+                this.comunicacaoPushLojaService.findByIdPush(this.comunicacaoPush.id).subscribe(
+                    (res: HttpResponse<IComunicacaoPushLoja[]>) => {
+                        this.pushLoja = res.body;
+                        this.pushLoja.forEach(element => {
+                            this.lojasSelecionadas.push(element.lojaMaconicaId);
+                        });
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
         });
         this.lojaMaconicaService.findByStatus(true).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
@@ -69,7 +71,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
     private subscribeToSaveResponse(result: Observable<HttpResponse<IComunicacaoPush>>) {
         result.subscribe(
             (res: HttpResponse<ILojaMaconica>) => {
-                let dados = res.body;
+                const dados = res.body;
                 if (this.lojasSelecionadas != null && this.lojasSelecionadas.length > 0) {
                     if (this.pushLoja != null && this.pushLoja.length > 0) {
                         this.pushLoja.forEach(element => {
@@ -79,11 +81,9 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                         });
                     }
                     this.lojasSelecionadas.forEach(element => {
-                        let comunicacao = new ComunicacaoPushLoja();
+                        const comunicacao = new ComunicacaoPushLoja();
                         comunicacao.comunicacaoPushId = dados.id;
                         comunicacao.lojaMaconicaId = element;
-                        element.lojaMaconicaId = dados.id;
-
                         this.comunicacaoPushService.create(comunicacao);
                     });
                 }

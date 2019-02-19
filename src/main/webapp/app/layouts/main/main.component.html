@@ -1,7 +1,7 @@
 <jhi-page-ribbon></jhi-page-ribbon>
 <div class="wrapper" [ngSwitch]="isAuthenticated()">
 
-    <div class="sidebar" data-color="green" data-background-color="white" *ngSwitchCase="true">
+    <div class="sidebar" data-color="green" data-background-color="white" *ngSwitchCase="'true'">
         <router-outlet name="sidebar"></router-outlet>        
     </div>
     <div [ngClass]="isAuthenticated()?'main-panel':'container-fluid'">

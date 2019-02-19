@@ -33,6 +33,6 @@ export class EstabelecimentoComercial implements IEstabelecimentoComercial {
         public matriz?: string
     ) {
         this.bolMatriz = this.bolMatriz || false;
-        this.bolAtivo = this.bolAtivo || false;
+        this.bolAtivo = this.bolAtivo || true;
     }
 }

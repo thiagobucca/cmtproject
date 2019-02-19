@@ -14,7 +14,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { ICategoriaEstabelecimento } from 'app/shared/model/categoria-estabelecimento.model';
 import { CategoriaEstabelecimentoService } from 'app/entities/categoria-estabelecimento';
-import { debug } from 'util';
+
+import { GenericValidator } from 'app/shared/util/validacoes';
 
 @Component({
     selector: 'jhi-estabelecimento-comercial-update',
@@ -29,6 +30,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     indexEdit: number;
     contatoEstabelecimentos: IContatoEstabelecimento[];
     contatoEstabelecimentosDel: IContatoEstabelecimento[];
+    validacoes: GenericValidator;
     constructor(
         private dataUtils: JhiDataUtils,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
@@ -39,6 +41,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         private contatoEstabelecimentoService: ContatoEstabelecimentoService
     ) {
         this.indexEdit = -1;
+        this.validacoes = new GenericValidator();
     }
 
     ngOnInit() {
@@ -93,15 +96,31 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.estabelecimentoComercial.id !== undefined) {
-            this.subscribeToSaveResponse(this.estabelecimentoComercialService.update(this.estabelecimentoComercial));
+        if (this.validar()) {
+            if (this.estabelecimentoComercial.id !== undefined) {
+                this.subscribeToSaveResponse(this.estabelecimentoComercialService.update(this.estabelecimentoComercial));
+            } else {
+                this.subscribeToSaveResponse(this.estabelecimentoComercialService.create(this.estabelecimentoComercial));
+            }
         } else {
-            this.subscribeToSaveResponse(this.estabelecimentoComercialService.create(this.estabelecimentoComercial));
+            this.isSaving = false;
         }
     }
 
+    validar(): boolean {
+        let isValido = true;
+        if (!this.validacoes.isValidCnpj(this.estabelecimentoComercial.codCnpj)) {
+            this.onError('Informe um CNPJ válido');
+            isValido = false;
+        }
+        if (this.estabelecimentoComercial.taxaConvenio === undefined || this.estabelecimentoComercial.taxaConvenio <= 0) {
+            this.onError('A taxa do convênio deve ser maior que zero');
+            isValido = false;
+        }
+        return isValido;
+    }
     saveItem() {
-        if (this.contatoEstabelecimentos === null) {
+        if (this.contatoEstabelecimentos === undefined) {
             this.contatoEstabelecimentos = [];
         }
 

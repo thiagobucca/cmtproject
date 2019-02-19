@@ -40,7 +40,7 @@
                     <td><a [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ]">{{estabelecimentoComercial.id}}</a></td>                   
                     <td>{{estabelecimentoComercial.nome}}</td>
                     <td>{{estabelecimentoComercial.endereco}}</td>
-                    <td>{{estabelecimentoComercial.telefone}}</td>                    
+                    <td>{{estabelecimentoComercial.telefone| mask: '(00) 0 0000-0000'}}</td>                    
                     <td class="text-center">{{estabelecimentoComercial.taxaConvenio}}%</td>
                     <td>{{estabelecimentoComercial.categoria}}</td>
                     <td> <jhi-boolean

@@ -8,8 +8,15 @@ export interface IComunicacaoPush {
     titulo?: string;
     conteudoPush?: string;
     tipoPessoa?: TipoPessoa;
+    subTitulo?: string;
 }
 
 export class ComunicacaoPush implements IComunicacaoPush {
-    constructor(public id?: number, public titulo?: string, public conteudoPush?: string, public tipoPessoa?: TipoPessoa) {}
+    constructor(
+        public id?: number,
+        public titulo?: string,
+        public conteudoPush?: string,
+        public tipoPessoa?: TipoPessoa,
+        public subTitulo?: string
+    ) {}
 }

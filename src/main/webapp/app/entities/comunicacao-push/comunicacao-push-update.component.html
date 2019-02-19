@@ -15,10 +15,15 @@
                         [(ngModel)]="comunicacaoPush.titulo" required />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" for="field_subTitulo">Subtítulo</label>
+                    <input type="text" class="form-control" name="subTitulo" id="field_subTitulo"
+                        [(ngModel)]="comunicacaoPush.subTitulo" required maxlength="100" />                 
+                    
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.comunicacaoPush.conteudoPush" for="field_conteudoPush">Conteudo Push</label>
                     <textarea rows="4" cols="50" [(ngModel)]="comunicacaoPush.conteudoPush" class="form-control" name="conteudoPush" id="field_conteudoPush"
                     maxlength="1000" ></textarea>
-                    
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_tipoPessoa">Selecionar Público</label>
