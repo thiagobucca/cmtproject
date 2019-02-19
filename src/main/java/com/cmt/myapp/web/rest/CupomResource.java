@@ -73,9 +73,9 @@ public class CupomResource {
         try{
 
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8)+System.currentTimeMillis(), "jpg");
-            Files.write(Paths.get("/home/cmt/storage/"+name), cupom.getFoto().getBytes());
+            Files.write(Paths.get("/home/cmt/storage/"+name), Base64.getDecoder().decode(cupom.getFoto()));
 
-            cupom.setFoto("http://cmtweb.ddns.net/resource/"+name);
+            cupom.setFoto("http://cmtweb.ddns.net/resources/"+name);
 
 
         Cupom result = cupomRepository.save(cupom);
