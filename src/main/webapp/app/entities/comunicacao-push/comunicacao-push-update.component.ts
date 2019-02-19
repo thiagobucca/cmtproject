@@ -76,7 +76,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                     if (this.pushLoja != null && this.pushLoja.length > 0) {
                         this.pushLoja.forEach(element => {
                             if (element.id !== undefined) {
-                                this.comunicacaoPushService.delete(element.id);
+                                this.comunicacaoPushService.delete(element.id).subscribe();
                             }
                         });
                     }
@@ -84,7 +84,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                         const comunicacao = new ComunicacaoPushLoja();
                         comunicacao.comunicacaoPushId = dados.id;
                         comunicacao.lojaMaconicaId = element;
-                        this.comunicacaoPushService.create(comunicacao);
+                        this.comunicacaoPushService.create(comunicacao).subscribe();
                     });
                 }
                 this.onSaveSuccess();

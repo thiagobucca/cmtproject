@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span >Loja Maçonica</span>
+        <span >Loja Maçônica</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-loja-maconica" [routerLink]="['/loja-maconica/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             Novo
@@ -13,7 +13,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="codCnpj"><span jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj">Cod Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="codCnpj"><span >Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="endereco"><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -25,10 +25,10 @@
             <tbody>
             <tr *ngFor="let lojaMaconica of lojaMaconicas ;trackBy: trackId">
                 <td><a [routerLink]="['/loja-maconica', lojaMaconica.id, 'view' ]">{{lojaMaconica.id}}</a></td>
-                <td>{{lojaMaconica.codCnpj}}</td>
+                <td>{{lojaMaconica.codCnpj | mask: '00.000.000/0000-00'}}</td>
                 <td>{{lojaMaconica.nome}}</td>
                 <td>{{lojaMaconica.endereco}}</td>
-                <td>{{lojaMaconica.telefone}}</td>
+                <td>{{lojaMaconica.telefone | mask: '(00) 0 0000-0000'}}</td>
                 <td>{{lojaMaconica.numero}}</td>
                 <td><jhi-boolean
                     [value]="lojaMaconica.bolAtivo"

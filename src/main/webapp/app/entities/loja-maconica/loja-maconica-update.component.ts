@@ -35,7 +35,7 @@ export class LojaMaconicaUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ lojaMaconica }) => {
             this.lojaMaconica = lojaMaconica;
-            this.lojaMaconica = new ContatoLojaMaconica();
+            this.contatoloja = new ContatoLojaMaconica();
             if (this.lojaMaconica.id !== undefined) {
                 this.contatoLojaMaconicaService.findByLoja(this.lojaMaconica.id).subscribe(
                     (res: HttpResponse<IContatoLojaMaconica[]>) => {
@@ -68,16 +68,16 @@ export class LojaMaconicaUpdateComponent implements OnInit {
                     this.contatolojas.forEach(element => {
                         element.lojaMaconicaId = dados.id;
                         if (element.id !== undefined) {
-                            this.contatoLojaMaconicaService.update(element);
+                            this.contatoLojaMaconicaService.update(element).subscribe();
                         } else {
-                            this.contatoLojaMaconicaService.create(element);
+                            this.contatoLojaMaconicaService.create(element).subscribe();
                         }
                     });
                 }
                 if (this.contatolojasDel != null && this.contatolojasDel.length > 0) {
                     this.contatolojasDel.forEach(element => {
                         if (element.id !== undefined) {
-                            this.contatoLojaMaconicaService.delete(element.id);
+                            this.contatoLojaMaconicaService.delete(element.id).subscribe();
                         }
                     });
                 }
@@ -97,7 +97,7 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     }
 
     saveItem() {
-        if (this.contatoloja == null) {
+        if (this.contatoloja === undefined) {
             this.contatolojas = [];
         }
 

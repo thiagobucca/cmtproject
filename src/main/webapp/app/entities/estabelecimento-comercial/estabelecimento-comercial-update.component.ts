@@ -163,16 +163,16 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
                     this.contatoEstabelecimentos.forEach(element => {
                         element.estabelecimentoComercialId = dados.id;
                         if (element.id !== undefined) {
-                            this.contatoEstabelecimentoService.update(element);
+                            this.contatoEstabelecimentoService.update(element).subscribe();
                         } else {
-                            this.contatoEstabelecimentoService.create(element);
+                            this.contatoEstabelecimentoService.create(element).subscribe();
                         }
                     });
                 }
                 if (this.contatoEstabelecimentosDel != null && this.contatoEstabelecimentosDel.length > 0) {
                     this.contatoEstabelecimentosDel.forEach(element => {
                         if (element.id !== undefined) {
-                            this.contatoEstabelecimentoService.delete(element.id);
+                            this.contatoEstabelecimentoService.delete(element.id).subscribe();
                         }
                     });
                 }

@@ -1,7 +1,7 @@
 <div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-loja-maconica-heading">{{lojaMaconica.id>0?"Editar":"Criar"}} Loja Maçonica</h2>
+            <h2 id="jhi-loja-maconica-heading">{{lojaMaconica.id>0?"Editar":"Criar"}} Loja Maçônica</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!lojaMaconica.id">
@@ -10,10 +10,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_codCnpj">CNPJ</label>
-                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" [(ngModel)]="lojaMaconica.codCnpj" />
+                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" 
+                    [(ngModel)]="lojaMaconica.codCnpj" 
+                    mask="00.000.000/0000-00" required/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.nome" for="field_nome">Nome</label>
+                    <label class="form-control-label"  for="field_nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="field_nome" [(ngModel)]="lojaMaconica.nome" />
                 </div>
                 <div class="form-group">
@@ -21,11 +23,12 @@
                     <input type="text" class="form-control" name="endereco" id="field_endereco" [(ngModel)]="lojaMaconica.endereco" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.telefone" for="field_telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="lojaMaconica.telefone" />
+                    <label class="form-control-label"  for="field_telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="lojaMaconica.telefone" 
+                    mask="(00) 0 0000-0000"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.lojaMaconica.numero" for="field_numero">Numero</label>
+                    <label class="form-control-label" for="field_numero">Número</label>
                     <input type="number" class="form-control" name="numero" id="field_numero" [(ngModel)]="lojaMaconica.numero" />
                 </div>
                 <div class="form-group form-check">
@@ -54,11 +57,12 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_telefone">Telefone</label>
                                     <input type="text" class="form-control" name="contatoloja_telefone" id="field_contatoloja_telefone"
-                                        [(ngModel)]="contatoloja.telefone" />
+                                        [(ngModel)]="contatoloja.telefone"
+                                        mask="(00) 0 0000-0000" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_email">Email</label>
-                                    <input type="text" class="form-control" name="contatoloja_email" id="field_contatoloja_email"
+                                    <input type="email" class="form-control" name="contatoloja_email" id="field_contatoloja_email"
                                         [(ngModel)]="contatoloja.email" />
                                 </div>
                                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancelar()"

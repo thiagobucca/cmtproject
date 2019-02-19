@@ -45,7 +45,7 @@ export const ROUTES: RouteInfo[] = [
         class: '',
         pathGlobal: 'global.menu.entities.contasPagarReceber'
     },
-    { path: 'loja-maconica', title: 'Loja Maçonica', icon: 'travel_istanbul', class: '', pathGlobal: 'global.menu.entities.lojaMaconica' },
+    { path: 'loja-maconica', title: 'Loja Maçônica', icon: 'travel_istanbul', class: '', pathGlobal: 'global.menu.entities.lojaMaconica' },
     // {
     //     path: 'contato-estabelecimento',
     //     title: 'Contato Estabelecimento',
