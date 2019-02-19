@@ -2,6 +2,7 @@ package com.cmt.myapp.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class EstabelecimentoComercial implements Serializable {
     private Boolean bolMatriz;
 
     @Column(name = "cod_cnpj")
+    @NotBlank(message="Informe o CPNJ.")
     private String codCnpj;
 
     @Column(name = "nome")

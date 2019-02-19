@@ -31,7 +31,7 @@ public class Cupom implements Serializable {
 
     @Lob
     @Column(name = "foto")
-    private byte[] foto;
+    private String foto;
 
     @Column(name = "foto_content_type")
     private String fotoContentType;
@@ -98,16 +98,16 @@ public class Cupom implements Serializable {
         this.numero = numero;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public Cupom foto(byte[] foto) {
+    public Cupom foto(String foto) {
         this.foto = foto;
         return this;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
