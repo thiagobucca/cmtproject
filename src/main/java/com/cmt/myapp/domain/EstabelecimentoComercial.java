@@ -82,7 +82,8 @@ public class EstabelecimentoComercial implements Serializable {
     //STEP 2 - Criar o get do atributo que deseja retornar no json o nome fica igual ao da assinatura removendo o prefixo 'get'
     //getNome da categoria pro swagger
     public String getCategoria() {
-        return categoria.getNome();
+        return  categoria == null ? null :
+         categoria.getNome();
     }
     
     //STEP 3 - criar o set do objeto q vem no select do banco
