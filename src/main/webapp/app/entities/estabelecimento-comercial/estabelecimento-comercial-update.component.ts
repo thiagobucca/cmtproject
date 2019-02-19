@@ -139,7 +139,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     }
 
     deletar(idx: number) {
-        if (this.contatoEstabelecimentosDel === null) {
+        if (this.contatoEstabelecimentosDel === undefined) {
             this.contatoEstabelecimentosDel = [];
         }
 

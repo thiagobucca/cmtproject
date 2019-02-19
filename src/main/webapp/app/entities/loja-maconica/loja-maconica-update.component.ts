@@ -118,14 +118,14 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     }
 
     deletar(idx: number) {
-        if (this.contatolojasDel === null) {
+        if (this.contatolojasDel === undefined) {
             this.contatolojasDel = [];
         }
 
-        if (this.contatoloja[idx].id === undefined) {
+        if (this.contatolojas[idx].id === undefined) {
             this.contatolojas.splice(idx, 1);
         } else {
-            this.contatolojasDel.push(this.contatoloja[idx]);
+            this.contatolojasDel.push(this.contatolojas[idx]);
             this.contatolojas.splice(idx, 1);
         }
     }

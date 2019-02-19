@@ -76,7 +76,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                     if (this.pushLoja != null && this.pushLoja.length > 0) {
                         this.pushLoja.forEach(element => {
                             if (element.id !== undefined) {
-                                this.comunicacaoPushService.delete(element.id).subscribe();
+                                this.deletarComunicacao(element.id);
                             }
                         });
                     }
@@ -84,7 +84,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                         const comunicacao = new ComunicacaoPushLoja();
                         comunicacao.comunicacaoPushId = dados.id;
                         comunicacao.lojaMaconicaId = element;
-                        this.comunicacaoPushService.create(comunicacao).subscribe();
+                        this.comunicacaoPushLojaService.create(comunicacao).subscribe();
                     });
                 }
                 this.onSaveSuccess();
@@ -92,7 +92,9 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onSaveError()
         );
     }
-
+    async deletarComunicacao(id: any) {
+        let result = await this.comunicacaoPushLojaService.delete(id).toPromise();
+    }
     private onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
