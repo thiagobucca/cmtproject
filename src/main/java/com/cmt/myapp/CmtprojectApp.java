@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
@@ -95,4 +96,6 @@ public class CmtprojectApp {
             contextPath,
             env.getActiveProfiles());
     }
+
+    
 }

@@ -24,7 +24,7 @@ public class EstabelecimentoComercial implements Serializable {
     private Boolean bolMatriz;
 
     @Column(name = "cod_cnpj")
-    @NotBlank(message = "Informe o CNPJ do estabelecimento")
+    @NotBlank(message="Informe o CPNJ.")
     private String codCnpj;
 
     @Column(name = "nome")
