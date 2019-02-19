@@ -1,7 +1,7 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,12 +22,14 @@ public class ComunicacaoPush implements Serializable {
     private Long id;
 
     @Column(name = "titulo")
+    @NotBlank(message = "Informe o titulo para o Push")
     private String titulo;
 
     @Column(name = "subtitulo")
     private String subTitulo;
 
     @Column(name = "conteudo_push")
+    @NotBlank(message = "Informe um conteudo para o Push")
     private String conteudoPush;
 
     @Enumerated(EnumType.STRING)

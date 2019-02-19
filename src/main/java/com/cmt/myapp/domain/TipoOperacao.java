@@ -1,7 +1,8 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class TipoOperacao implements Serializable {
     private Long id;
 
     @Column(name = "nome_operacao")
+    @NotBlank(message = "Informe o nome do tipo de operacao")
     private String nomeOperacao;
 
     @Enumerated(EnumType.STRING)

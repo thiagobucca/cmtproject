@@ -1,6 +1,8 @@
 package com.cmt.myapp.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,15 +22,19 @@ public class AgendaEventos implements Serializable {
 	private Long id;
 
 	@Column(name = "titulo")
+	@NotBlank(message = "Informe o titulo do evento")
 	private String titulo;
 
 	@Column(name = "data")
+	@NotNull(message="Informe a data para o evento")
 	private Instant data;
 
 	@Column(name = "jhi_local")
+	@NotBlank(message = "Informe o local do evento")
 	private String local;
 
 	@Column(name = "descricao")
+	@NotBlank(message = "Informe uma descricao para o evento")
 	private String descricao;
 
 	@Column(name = "bol_ativo")
