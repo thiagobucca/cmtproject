@@ -89,9 +89,16 @@ public class CategoriaEstabelecimentoResource {
      */
     @GetMapping("/categoria-estabelecimentos")
     @Timed
-    public ResponseEntity<List<CategoriaEstabelecimento>> getAllCategoriaEstabelecimentos(Pageable pageable) {
+    public ResponseEntity<List<CategoriaEstabelecimento>> getAllCategoriaEstabelecimentos(Pageable pageable,
+    @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
         log.debug("REST request to get a page of CategoriaEstabelecimentos");
-        Page<CategoriaEstabelecimento> page = categoriaEstabelecimentoRepository.findAll(pageable);
+        Page<CategoriaEstabelecimento> page = null;
+
+        if(bolAtivo != null)
+            page = categoriaEstabelecimentoRepository.findAllByBolAtivo(pageable, bolAtivo);
+        else
+            page = categoriaEstabelecimentoRepository.findAll(pageable);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categoria-estabelecimentos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

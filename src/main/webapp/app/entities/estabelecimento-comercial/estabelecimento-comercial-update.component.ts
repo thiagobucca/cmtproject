@@ -101,8 +101,9 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     }
 
     saveItem() {
-        debugger;
-        if (this.contatoEstabelecimentos == null) this.contatoEstabelecimentos = [];
+        if (this.contatoEstabelecimentos === null) {
+            this.contatoEstabelecimentos = [];
+        }
 
         if (this.indexEdit > -1) {
             this.contatoEstabelecimentos[this.indexEdit] = this.contatoEstabelecimento;
@@ -119,9 +120,11 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     }
 
     deletar(idx: number) {
-        if (this.contatoEstabelecimentosDel == null) this.contatoEstabelecimentosDel = [];
+        if (this.contatoEstabelecimentosDel === null) {
+            this.contatoEstabelecimentosDel = [];
+        }
 
-        if (this.contatoEstabelecimentos[idx].id == undefined) {
+        if (this.contatoEstabelecimentos[idx].id === undefined) {
             this.contatoEstabelecimentos.splice(idx, 1);
         } else {
             this.contatoEstabelecimentosDel.push(this.contatoEstabelecimentos[idx]);
@@ -136,8 +139,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     private subscribeToSaveResponse(result: Observable<HttpResponse<IEstabelecimentoComercial>>) {
         result.subscribe(
             (res: HttpResponse<IEstabelecimentoComercial>) => {
-                debugger;
-                let dados = res.body;
+                const dados = res.body;
                 if (this.contatoEstabelecimentos != null && this.contatoEstabelecimentos.length > 0) {
                     this.contatoEstabelecimentos.forEach(element => {
                         element.estabelecimentoComercialId = dados.id;

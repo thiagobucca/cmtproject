@@ -1,8 +1,8 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -24,16 +24,23 @@ public class EstabelecimentoComercial implements Serializable {
     private Boolean bolMatriz;
 
     @Column(name = "cod_cnpj")
+<<<<<<< HEAD
     @NotBlank(message="Informe o CPNJ.")
+=======
+    @NotBlank(message = "Informe o CNPJ do estabelecimento")
+>>>>>>> 879b23c0fc07b75208d3a05ec470e36d5ff15507
     private String codCnpj;
 
     @Column(name = "nome")
+    @NotBlank(message = "Informe o nome do estabelecimento comercial")
     private String nome;
 
     @Column(name = "endereco")
+    @NotBlank(message = "Informe o endereco do estabelecimento comercial")
     private String endereco;
 
     @Column(name = "telefone")
+    @NotBlank(message = "Informe o telefone do estabelecimento")
     private String telefone;
 
     @Lob
@@ -44,12 +51,14 @@ public class EstabelecimentoComercial implements Serializable {
     private String logoContentType;
 
     @Column(name = "taxa_convenio")
+    @NotNull(message="Informe a taxa em % do convênio")
     private Double taxaConvenio;
 
     @Column(name = "bol_ativo")
     private Boolean bolAtivo;
 
     @Column(name = "categoria_estabelecimento_id")
+    @NotNull(message="Informe a categoria do estabelecimento comercial")
     private Long categoriaEstabelecimentoId;
     
     //objeto categoria STEP 1 - CRIAR o relacionamento dos obejetos pelo coluna de FK
@@ -77,7 +86,8 @@ public class EstabelecimentoComercial implements Serializable {
     //STEP 2 - Criar o get do atributo que deseja retornar no json o nome fica igual ao da assinatura removendo o prefixo 'get'
     //getNome da categoria pro swagger
     public String getCategoria() {
-        return categoria.getNome();
+        return  categoria == null ? null :
+         categoria.getNome();
     }
     
     //STEP 3 - criar o set do objeto q vem no select do banco

@@ -16,7 +16,10 @@
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="statusLancamento">Status <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tipoOperacaoId"><span jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacaoId">Tipo Operacao Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipoOperacao"><span >Operação</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="usuario"><span >Usuário</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lojaMaconica"><span >Loja Maçonica</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estabelecimento"><span >Estabelecimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -27,6 +30,9 @@
                 <td>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</td>
                 <td jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
                 <td>{{contasPagarReceber.tipoOperacao}}</td>
+                <td>{{contasPagarReceber.usuario}}</td>
+                <td>{{contasPagarReceber.lojaMaconica}}</td>
+                <td>{{contasPagarReceber.estabelecimento}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

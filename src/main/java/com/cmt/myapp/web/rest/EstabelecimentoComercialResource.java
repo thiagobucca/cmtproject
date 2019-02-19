@@ -90,9 +90,25 @@ public class EstabelecimentoComercialResource {
      */
     @GetMapping("/estabelecimento-comercials")
     @Timed
-    public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoComercials(Pageable pageable) {
+    public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoComercials(Pageable pageable, @RequestParam(value="nome",required = false) String nome, @RequestParam(value="categoria_id",required = false) Long categoria_id) {
         log.debug("REST request to get a page of EstabelecimentoComercials");
-        Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAll(pageable);
+
+
+        Page<EstabelecimentoComercial> page = null;
+
+        if(nome==null && categoria_id==null)
+        {
+            page = estabelecimentoComercialRepository.findAll(pageable);
+        }
+        else if(nome==null && categoria_id != null) 
+        {
+            page = estabelecimentoComercialRepository.findAllByCategoriaId(pageable, categoria_id);
+        }
+        else
+        {
+            page = estabelecimentoComercialRepository.findByNomeContaining(pageable, nome);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -137,6 +153,20 @@ public class EstabelecimentoComercialResource {
     public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoByStatus(@PathVariable boolean bolAtivo, Pageable pageable) {
         final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAllByBolAtivo(pageable, bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials/status/");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+          /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/estabelecimento-comercials/nome/{nome}")
+    @Timed
+    public ResponseEntity<List<EstabelecimentoComercial>> getAllUsersByTipo(@PathVariable String nome, Pageable pageable) {
+        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findByNomeContaining(pageable, nome);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     

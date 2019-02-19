@@ -167,9 +167,8 @@ public class CupomResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
-
-           /**
+    
+    /**
      * GET /users : get all users.
      *
      * @param pageable the pagination information

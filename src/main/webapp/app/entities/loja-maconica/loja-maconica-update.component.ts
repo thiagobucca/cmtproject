@@ -63,8 +63,7 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     private subscribeToSaveResponse(result: Observable<HttpResponse<ILojaMaconica>>) {
         result.subscribe(
             (res: HttpResponse<ILojaMaconica>) => {
-                debugger;
-                let dados = res.body;
+                const dados = res.body;
                 if (this.contatolojas != null && this.contatolojas.length > 0) {
                     this.contatolojas.forEach(element => {
                         element.lojaMaconicaId = dados.id;
@@ -98,11 +97,14 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     }
 
     saveItem() {
-        debugger;
-        if (this.contatoloja == null) this.contatolojas = [];
+        if (this.contatoloja == null) {
+            this.contatolojas = [];
+        }
 
         if (this.indexEdit > -1) {
-            this.contatolojas[this.indexEdit] = this.contatoloja;
+            {
+                this.contatolojas[this.indexEdit] = this.contatoloja;
+            }
         } else {
             this.contatolojas.push(this.contatoloja);
         }
@@ -116,9 +118,11 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     }
 
     deletar(idx: number) {
-        if (this.contatolojasDel == null) this.contatolojasDel = [];
+        if (this.contatolojasDel === null) {
+            this.contatolojasDel = [];
+        }
 
-        if (this.contatoloja[idx].id == undefined) {
+        if (this.contatoloja[idx].id === undefined) {
             this.contatolojas.splice(idx, 1);
         } else {
             this.contatolojasDel.push(this.contatoloja[idx]);

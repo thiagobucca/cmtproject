@@ -127,7 +127,6 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        debugger;
         this.agendaEventos = data;
     }
 

@@ -1,7 +1,7 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,6 +20,7 @@ public class ComunicacaoPushLoja implements Serializable {
     private Long id;
 
     @Column(name = "comunicacao_push_id")
+    @NotNull(message="Informe o ID do Push")
     private Long comunicacaoPushId;
 
     @Column(name = "loja_maconica_id")
