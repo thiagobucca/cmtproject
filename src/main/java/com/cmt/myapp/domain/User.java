@@ -107,6 +107,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "tipo_pessoa")
     private TipoPessoa tipoPessoa;
 
+    @Column(name = "device_id")
+    private String deviceId;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -164,6 +167,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public String getImageUrl() {

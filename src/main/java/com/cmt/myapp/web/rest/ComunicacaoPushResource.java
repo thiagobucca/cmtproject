@@ -143,4 +143,27 @@ public class ComunicacaoPushResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comunicacao-pushes/tipoPessoa");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+
+    /**
+     * POST  /comunicacao-pushes : Create a new comunicacaoPush.
+     *
+     * @param comunicacaoPush the comunicacaoPush to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new comunicacaoPush, or with status 400 (Bad Request) if the comunicacaoPush has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/comunicacao-pushes/send")
+    @Timed
+    public ResponseEntity<ComunicacaoPush> sendComunicacaoPush(@RequestBody ComunicacaoPush comunicacaoPush) throws URISyntaxException {
+        log.debug("REST request to send ComunicacaoPush : {}", comunicacaoPush);
+        
+        ComunicacaoPush result = comunicacaoPushRepository.save(comunicacaoPush);
+
+
+
+        return ResponseEntity.created(new URI("/api/comunicacao-pushes/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+
 }
