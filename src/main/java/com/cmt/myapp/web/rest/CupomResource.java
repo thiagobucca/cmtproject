@@ -12,6 +12,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,6 +48,9 @@ public class CupomResource {
 
     private final CupomRepository cupomRepository;
 
+    @Value( "${spring.storageDir}" )
+    private String storageDir;
+
     @Autowired
     ServletContext context;
 
@@ -73,7 +77,8 @@ public class CupomResource {
         try{
 
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8)+System.currentTimeMillis(), "jpg");
-            Files.write(Paths.get("/home/cmt/storage/cupom/"+name), Base64.getDecoder().decode(cupom.getFoto()));
+            Files.createDirectories(Paths.get("/home/cmtdev/storage/cupom/"+name).getParent());
+            Files.write(Paths.get(storageDir+cupom.getUsuarioId()+"/"+name), Base64.getDecoder().decode(cupom.getFoto()));
 
             cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/"+name);
 
@@ -119,7 +124,7 @@ public class CupomResource {
     @GetMapping("/cupoms")
     @Timed
     public ResponseEntity<List<Cupom>> getAllCupoms(Pageable pageable) {
-        log.debug("REST request to get a page of Cupoms");
+        log.debug("REST request to get a page of Cupoms"+storageDir);
         Page<Cupom> page = cupomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -185,7 +190,6 @@ public class CupomResource {
         dataFinal.setSeconds(59);
         Page<Cupom> page=  null;
 
-        System.out.println("estabelecimento"+estabelecimentoId);
 
         if(estabelecimentoId != null)
             page = cupomRepository.findByDataBetweenAndEstabelecimentoComercialId(pageable, dataInicial.toInstant(),
