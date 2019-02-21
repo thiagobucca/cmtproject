@@ -20,8 +20,8 @@
                 <dt><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span></dt>
                 <dd>
                     <div *ngIf="cupom.foto">
-                        <a (click)="openFile(cupom.fotoContentType, cupom.foto)">
-                            <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-width: 100%;" alt="cupom image"/>
+                        <a [href]="cupom.fotoContentType" target="_black">
+                            <img [src]="cupom.fotoContentType" style="max-width: 100%;" alt="cupom image"/>
                         </a>
                         {{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}
                     </div>

@@ -50,14 +50,14 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
             this.data = this.contasPagarReceber.data != null ? this.contasPagarReceber.data.format(DATE_TIME_FORMAT) : null;
         });
 
-        this.lojaMaconicaService.query({ filter: 'lojaMaconica-is-null' }).subscribe(
+        this.lojaMaconicaService.findByStatus(true).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.estabelecimentoComercialService.query({ filter: 'estabelecimentoComercial-is-null' }).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
             },
@@ -86,6 +86,11 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.contasPagarReceber.data = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
+        this.contasPagarReceber.estabelecimento = null;
+        this.contasPagarReceber.lojaMaconica = null;
+        this.contasPagarReceber.tipoLancamento = null;
+        this.contasPagarReceber.tipoOperacao = null;
+        this.contasPagarReceber.usuario = null;
         if (this.contasPagarReceber.id !== undefined) {
             this.subscribeToSaveResponse(this.contasPagarReceberService.update(this.contasPagarReceber));
         } else {

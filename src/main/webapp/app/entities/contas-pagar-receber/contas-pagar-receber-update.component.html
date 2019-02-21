@@ -14,7 +14,8 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.data" for="field_data">Data</label>
                     <div class="d-flex ">
-                        <input id="field_data" type="date" class="form-control" name="data" [(ngModel)]="data" required />
+                        <input id="field_data" type="date" class="form-control" name="data" [(ngModel)]="data" required 
+                        max="9999-12-31" />
                     </div>
                 </div>
 

@@ -66,7 +66,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.categoriaEstabelecimentoService.query({ filter: 'categoriaEstabelecimento-is-null' }).subscribe(
+        this.categoriaEstabelecimentoService.query({ filter: { bolAtivo: true } }).subscribe(
             (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
                 this.categorias = res.body;
             },
@@ -97,6 +97,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.validar()) {
+            this.estabelecimentoComercial.categoria = null;
             if (this.estabelecimentoComercial.id !== undefined) {
                 this.subscribeToSaveResponse(this.estabelecimentoComercialService.update(this.estabelecimentoComercial));
             } else {
