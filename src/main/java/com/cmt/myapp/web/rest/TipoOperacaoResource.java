@@ -124,4 +124,18 @@ public class TipoOperacaoResource {
         tipoOperacaoRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * GET /users : get all lojas-maconicas.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/tipo-operacaos/status/{bolAtivo}")
+    @Timed
+    public ResponseEntity<List<TipoOperacao>> getAllUsersByStatus(@PathVariable boolean bolAtivo, Pageable pageable) {
+        final Page<TipoOperacao> page = tipoOperacaoRepository.findAllByBolAtivo(pageable, bolAtivo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tipo-operacaos/git/status/");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }
