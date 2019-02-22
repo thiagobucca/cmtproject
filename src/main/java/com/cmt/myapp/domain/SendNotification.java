@@ -92,8 +92,5 @@ public class SendNotification implements Serializable {
         this.included_segments = included_segments;
     }
 
-
-    
-    
 }
 

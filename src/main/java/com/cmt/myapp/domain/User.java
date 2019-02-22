@@ -87,7 +87,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String telefone;
 
     @Column(name = "placet")
-    private Long placet;
+    private String placet;
 
     @Column(name = "pessoa_dependente_id")
     private Long pessoaDependenteId;
@@ -333,14 +333,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
     /**
      * @return the placet
      */
-    public Long getPlacet() {
+    public String getPlacet() {
         return placet;
     }
 
     /**
      * @param placet the placet to set
      */
-    public void setPlacet(Long placet) {
+    public void setPlacet(String placet) {
         this.placet = placet;
     }
 

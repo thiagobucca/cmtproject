@@ -70,7 +70,7 @@ public class UserDTO {
     
     private String loja;
 
-    private Long placet;
+    private String placet;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -288,14 +288,14 @@ public class UserDTO {
     /**
      * @return the placet
      */
-    public Long getPlacet() {
+    public String getPlacet() {
         return placet;
     }
 
     /**
      * @param placet the placet to set
      */
-    public void setPlacet(Long placet) {
+    public void setPlacet(String placet) {
         this.placet = placet;
     }
 }
