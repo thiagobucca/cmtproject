@@ -135,7 +135,7 @@ public class TipoOperacaoResource {
     @Timed
     public ResponseEntity<List<TipoOperacao>> getAllUsersByStatus(@PathVariable boolean bolAtivo, Pageable pageable) {
         final Page<TipoOperacao> page = tipoOperacaoRepository.findAllByBolAtivo(pageable, bolAtivo);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tipo-operacaos//status/");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tipo-operacaos/git/status/");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }
