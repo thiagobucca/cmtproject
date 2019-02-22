@@ -34,7 +34,7 @@ public class ContasPagarReceber implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_lancamento")
-    @NotBlank(message = "Informe o status do lancamento do evento contas/pagar receber")
+    //@NotBlank(message = "Informe o status do lancamento do evento contas/pagar receber")
     private StatusLancamento statusLancamento;
 
     @Column(name = "usuario_id")
