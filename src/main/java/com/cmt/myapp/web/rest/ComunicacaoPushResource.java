@@ -2,24 +2,32 @@ package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.ComunicacaoPush;
+import com.cmt.myapp.domain.SendNotification;
 import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.ComunicacaoPushRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
 import com.cmt.myapp.web.rest.util.PaginationUtil;
+import com.cmt.myapp.web.rest.util.RequestUtil;
+
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -153,17 +161,37 @@ public class ComunicacaoPushResource {
      */
     @PostMapping("/comunicacao-pushes/send")
     @Timed
-    public ResponseEntity<ComunicacaoPush> sendComunicacaoPush(@RequestBody ComunicacaoPush comunicacaoPush) throws URISyntaxException {
-        log.debug("REST request to send ComunicacaoPush : {}", comunicacaoPush);
+    public ResponseEntity<String> sendComunicacaoPush() throws URISyntaxException {
+        log.debug("REST request to send ComunicacaoPush : {}");
         
-        ComunicacaoPush result = comunicacaoPushRepository.save(comunicacaoPush);
+        //ComunicacaoPush result = comunicacaoPushRepository.save(comunicacaoPush);
 
+        SendNotification notification = new SendNotification();
 
+        notification.setApp_id("1ee29f2c-4652-4629-ab1e-1d016cfad22e");
+        notification.setIncluded_segments(new ArrayList<String>());
 
-        return ResponseEntity.created(new URI("/api/comunicacao-pushes/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        notification.getIncluded_segments().add("Subscribed Users");
+        notification.getContents().setEn("push liso");
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("authorization", "Basic NjY1MGQ4MWQtN2EwMS00YTA4LWFhMTgtZjEzZDIwMTRhMjhk");
+
+        HttpEntity<SendNotification> entity = new HttpEntity<SendNotification>(notification, headers);
+
+        ResponseEntity<String> respEntity = restTemplate.exchange(new URI("https://onesignal.com/api/v1/notifications"), HttpMethod.POST, entity, String.class);
+
+        String resp = respEntity.getBody();
+
+        
+        log.debug(resp.toString());
+
+        return ResponseEntity.created(new URI("/api/comunicacao-pushes/"))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, ""))
+            .body("teste");
     }
-
-
 }
