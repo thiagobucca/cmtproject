@@ -21,7 +21,7 @@ import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-co
 export class CupomUpdateComponent implements OnInit {
     cupom: ICupom;
     isSaving: boolean;
-
+    isBase64: boolean;
     estabelecimentos: IEstabelecimentoComercial[];
     data: string;
     hora: string;
@@ -32,12 +32,15 @@ export class CupomUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
         private jhiAlertService: JhiAlertService
-    ) {}
+    ) {
+        this.isBase64 = true;
+    }
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cupom }) => {
             this.cupom = cupom;
+            this.isBase64 = false;
             this.data = this.cupom.data != null ? this.cupom.data.format(DATE_FORMAT) : null;
             this.hora = this.cupom.data != null ? this.cupom.data.format(TIME_FORMAT) : null;
         });
@@ -63,6 +66,7 @@ export class CupomUpdateComponent implements OnInit {
     }
 
     clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.isBase64 = true;
         this.dataUtils.clearInputImage(this.cupom, this.elementRef, field, fieldContentType, idInput);
     }
 

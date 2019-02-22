@@ -97,7 +97,7 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     }
 
     saveItem() {
-        if (this.contatoloja === undefined) {
+        if (this.contatolojas === undefined) {
             this.contatolojas = [];
         }
 

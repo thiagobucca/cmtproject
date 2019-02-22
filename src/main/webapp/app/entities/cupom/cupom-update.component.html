@@ -5,7 +5,7 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!cupom.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <label for="id" >ID</label>
                     <input type="text" class="form-control" id="id" name="id" [(ngModel)]="cupom.id" readonly />
                 </div>
                 <div class="form-group row">
@@ -33,7 +33,10 @@
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.foto" for="field_foto">Foto</label>
                     <div>
                         <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-height: 100px;"
-                            *ngIf="cupom.foto" alt="cupom image" />
+                            *ngIf="cupom.foto && isBase64" alt="cupom image" />
+                            <img [src]="cupom.fotoContentType" 
+                            *ngIf="fotoContentType.foto && !isBase64"
+                            style="max-width: 100%;" alt="cupom image"/>
                         <div *ngIf="cupom.foto" class="form-text text-danger clearfix">
                             <span class="pull-left">{{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}</span>
                             <button type="button" (click)="clearInputImage('foto', 'fotoContentType', 'fileImage')"

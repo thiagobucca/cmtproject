@@ -6,7 +6,7 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!contasPagarReceber.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <label for="id" >ID</label>
                     <input type="text" class="form-control" id="id" name="id" [(ngModel)]="contasPagarReceber.id"
                         readonly />
                 </div>
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_statusLancamento">Status Lançamento</label>
                     <select class="form-control" name="statusLancamento" [(ngModel)]="contasPagarReceber.statusLancamento"
-                        id="field_statusLancamento">
+                        id="field_statusLancamento" required>
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
                         <option value="Aberto">{{'cmtprojectApp.StatusLancamento.Aberto' | translate}}</option>
                         <option value="Baixado">{{'cmtprojectApp.StatusLancamento.Baixado' | translate}}</option>

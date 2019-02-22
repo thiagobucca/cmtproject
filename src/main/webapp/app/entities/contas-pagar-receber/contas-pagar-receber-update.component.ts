@@ -71,7 +71,7 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.tipoOperacaoService.query({ filter: 'tipoOperacao-is-null' }).subscribe(
+        this.tipoOperacaoService.query({ filter: { bolAtivo: true } }).subscribe(
             (res: HttpResponse<ITipoOperacao[]>) => {
                 this.tipoOperacoes = res.body;
             },
