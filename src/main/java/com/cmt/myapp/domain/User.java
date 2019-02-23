@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import javax.validation.constraints.Email;
-
+import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -87,6 +87,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String telefone;
 
     @Column(name = "placet")
+    @NotBlank(message = "O Placet nao foi informado")
     private String placet;
 
     @Column(name = "pessoa_dependente_id")

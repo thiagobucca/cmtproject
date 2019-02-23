@@ -99,7 +99,8 @@ public class UserResource {
             throw new LoginAlreadyUsedException();
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
-        } else {
+        } 
+        else {
             User newUser = userService.createUser(userDTO);
 
             if(userDTO.getTipoPessoa() == TipoPessoa.Dependente){
@@ -109,7 +110,18 @@ public class UserResource {
                     userDTO.setLojaMaconicaId(macom.get().getLojaMaconicaId());
                 }else
                     throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
+
+                if(!userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                    throw new BadRequestAlertException("Placet não encontrado, favor informar um valido", "userManagement", "idexists");
+                }        
             }
+            else
+            {
+                if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                    throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+                }
+            }
+
             
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
@@ -226,5 +238,4 @@ public class UserResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
- 
 }
