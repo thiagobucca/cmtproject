@@ -10,6 +10,8 @@ import { ComunicacaoPushLojaService } from 'app/entities/comunicacao-push-loja';
 import { JhiAlertService } from 'ng-jhipster';
 import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
 import { LojaMaconicaService } from 'app/entities/loja-maconica';
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'jhi-comunicacao-push-update',
@@ -26,13 +28,22 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private lojaMaconicaService: LojaMaconicaService,
         private comunicacaoPushLojaService: ComunicacaoPushLojaService,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.lojasSelecionadas = [];
+    }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.loading = true;
         this.activatedRoute.data.subscribe(({ comunicacaoPush }) => {
             this.comunicacaoPush = comunicacaoPush;
             if (this.comunicacaoPush.id !== undefined) {
@@ -42,8 +53,14 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                         this.pushLoja.forEach(element => {
                             this.lojasSelecionadas.push(element.lojaMaconicaId);
                         });
+                        this.loading = false;
+                        this.ref.detectChanges();
                     },
-                    (res: HttpErrorResponse) => this.onError(res.message)
+                    (res: HttpErrorResponse) => {
+                        this.onError(res.message);
+                        this.loading = false;
+                        this.ref.detectChanges();
+                    }
                 );
             }
         });
@@ -60,6 +77,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
     }
 
     save() {
+        this.loading = true;
         this.isSaving = true;
         if (this.comunicacaoPush.id !== undefined) {
             this.subscribeToSaveResponse(this.comunicacaoPushService.update(this.comunicacaoPush));
@@ -97,10 +115,12 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
     }
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
         this.previousState();
     }
 
     private onSaveError() {
+        this.loading = false;
         this.isSaving = false;
     }
     private onError(errorMessage: string) {

@@ -1,18 +1,16 @@
 <div class="row ">
-    <div class="col-8">
+    <div class="col-12">
         <div *ngIf="agendaEventos">
-            <h2><span jhiTranslate="cmtprojectApp.agendaEventos.detail.title">Agenda Evento</span> {{agendaEventos.titulo}}</h2>
+            <h2><span jhiTranslate="cmtprojectApp.agendaEventos.detail.title">Agenda Evento</span>
+                {{agendaEventos.titulo}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span >Título</span></dt>
+                <dt><span>Título</span></dt>
                 <dd>
                     <span>{{agendaEventos.titulo}}</span>
-                    <jhi-boolean
-                        [value]="agendaEventos.bolAtivo"
-                        [textTrue]="'Ativo'"
-                        [textFalse]="'Inativo'">
-                    </jhi-boolean>	
+                    <jhi-boolean [value]="agendaEventos.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                    </jhi-boolean>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.agendaEventos.data">Data</span></dt>
                 <dd>
@@ -22,25 +20,21 @@
                 <dd>
                     <span>{{agendaEventos.local}}</span>
                 </dd>
-                <dt><span >Descrição</span></dt>
+                <dt><span>Descrição</span></dt>
                 <dd>
                     <span>{{agendaEventos.descricao}}</span>
-                </dd>               
-                <dt><span >Loja Maçonica</span></dt>
+                </dd>
+                <dt><span>Loja Maçonica</span></dt>
                 <dd>
                     <span>{{agendaEventos.lojaMaconica}}</span>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/agenda-eventos', agendaEventos.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/agenda-eventos', agendaEventos.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

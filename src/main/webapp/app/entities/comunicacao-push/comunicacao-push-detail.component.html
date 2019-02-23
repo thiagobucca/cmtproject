@@ -1,23 +1,23 @@
 <div class="row ">
-    <div class="col-8">
+    <div class="col-12">
         <div *ngIf="comunicacaoPush">
-            <h2><span >Comunicação Push</span> {{comunicacaoPush.id}}</h2>
+            <h2><span>Comunicação Push</span> {{comunicacaoPush.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cmtprojectApp.comunicacaoPush.titulo">Titulo</span></dt>
+                <dt><span>Título</span></dt>
                 <dd>
                     <span>{{comunicacaoPush.titulo}}</span>
                 </dd>
-                <dt><span >Subtítulo</span></dt>
+                <dt><span>Subtítulo</span></dt>
                 <dd>
                     <span>{{comunicacaoPush.subTitulo}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.comunicacaoPush.conteudoPush">Conteudo Push</span></dt>
+                <dt><span>Conteúdo Push</span></dt>
                 <dd>
                     <span>{{comunicacaoPush.conteudoPush}}</span>
                 </dd>
-                <dt><span >Público</span></dt>
+                <dt><span>Público</span></dt>
                 <dd>
                     <span jhiTranslate="{{'cmtprojectApp.TipoPessoa.' + comunicacaoPush.tipoPessoa}}">{{comunicacaoPush.tipoPessoa}}</span>
                 </dd>
@@ -42,15 +42,11 @@
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/comunicacao-push', comunicacaoPush.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/comunicacao-push', comunicacaoPush.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

@@ -1,7 +1,7 @@
 <div class="row ">
-    <div class="col-8">
+    <div class="col-12">
         <div *ngIf="cupom">
-            <h2><span >Cupom</span> {{cupom.id}}</h2>
+            <h2><span>Cupom</span> {{cupom.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -13,7 +13,7 @@
                 <dd>
                     <span>{{cupom.valor | currency:'BRL':true:'1.2-2'}}</span>
                 </dd>
-                <dt><span >Número</span></dt>
+                <dt><span>Número</span></dt>
                 <dd>
                     <span>{{cupom.numero}}</span>
                 </dd>
@@ -21,31 +21,27 @@
                 <dd>
                     <div *ngIf="cupom.foto">
                         <a [href]="cupom.foto" target="_black">
-                            <img [src]="cupom.foto" style="max-width: 100%;" alt="cupom image"/>
+                            <img [src]="cupom.foto" style="max-width: 100%;" alt="cupom image" />
                         </a><br>
                         {{cupom.foto}}, {{byteSize(cupom.foto)}}
                     </div>
                 </dd>
-                <dt><span >Estabelecimento Comercial</span></dt>
+                <dt><span>Estabelecimento Comercial</span></dt>
                 <dd>
                     <span>{{cupom.estabelecimento}}</span>
                 </dd>
-                <dt><span >Usuário</span></dt>
+                <dt><span>Usuário</span></dt>
                 <dd>
                     <span>{{cupom.usuario}}</span>
                 </dd>
-                
+
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/cupom', cupom.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/cupom', cupom.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

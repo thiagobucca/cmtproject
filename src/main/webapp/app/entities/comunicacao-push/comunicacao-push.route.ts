@@ -39,7 +39,7 @@ export const comunicacaoPushRoute: Routes = [
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -51,7 +51,7 @@ export const comunicacaoPushRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -63,7 +63,7 @@ export const comunicacaoPushRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -75,7 +75,7 @@ export const comunicacaoPushRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -90,7 +90,7 @@ export const comunicacaoPushPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
