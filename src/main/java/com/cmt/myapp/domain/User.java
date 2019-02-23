@@ -270,7 +270,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	}
 
 	public TipoPessoa getTipoPessoa() {
-		return tipoPessoa;
+		return tipoPessoa == null ? null : tipoPessoa;
 	}
 
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
