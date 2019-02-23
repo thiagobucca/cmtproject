@@ -22,6 +22,6 @@ export class AgendaEventos implements IAgendaEventos {
         public lojaMaconicaId?: number,
         public lojaMaconica?: string
     ) {
-        this.bolAtivo = this.bolAtivo || false;
+        this.bolAtivo = this.bolAtivo || true;
     }
 }

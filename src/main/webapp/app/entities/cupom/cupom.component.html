@@ -15,7 +15,7 @@
             <th jhiSortBy="id">ID<fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.cupom.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.cupom.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="numero">Nº Cupom <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th jhiSortBy="numero">Nº Cupom <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th jhiSortBy="estabelecimentoComercialId"><span >Estabelecimento Comercial</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="usuarioId"><span >Usuário</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -26,15 +26,15 @@
                 <td><a [routerLink]="['/cupom', cupom.id, 'view' ]">{{cupom.id}}</a></td>
                 <td>{{cupom.data | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{cupom.valor | currency:'BRL':true:'1.2-2'}}</td>
-                <td>{{cupom.numero}}</td>                
+                <!-- <td>{{cupom.numero}}</td>                 -->
                 <td>{{cupom.estabelecimento}}</td>
                 <td>{{cupom.usuario}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/cupom', cupom.id, 'view' ]"
+                        <button type="submit"                                
                                 class="btn btn-info btn-sm"
-                                title="Visualizar">
+                                title="Visualizar"
+                                (click)="detalhar(['/cupom', cupom.id, 'view'])">
                             <fa-icon [icon]="'eye'"></fa-icon>                            
                         </button>
                         <button type="submit"

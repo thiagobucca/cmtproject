@@ -131,7 +131,10 @@ export class AgendaEventosComponent implements OnInit, OnDestroy, AfterViewInit 
     registerChangeInAgendaEventos() {
         this.eventSubscriber = this.eventManager.subscribe('agendaEventosListModification', response => this.loadAll());
     }
-
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
+    }
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
         if (this.predicate !== 'id') {

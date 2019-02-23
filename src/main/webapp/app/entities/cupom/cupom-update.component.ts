@@ -14,6 +14,9 @@ import { CupomService } from './cupom.service';
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-cupom-update',
     templateUrl: './cupom-update.component.html'
@@ -31,12 +34,15 @@ export class CupomUpdateComponent implements OnInit {
         private elementRef: ElementRef,
         private activatedRoute: ActivatedRoute,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.isBase64 = true;
     }
 
     ngOnInit() {
+        this.loading = true;
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cupom }) => {
             this.cupom = cupom;
@@ -48,11 +54,22 @@ export class CupomUpdateComponent implements OnInit {
         this.estabelecimentoComercialService.findByStatus(true).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
+                this.loading = false;
+                this.ref.detectChanges();
             },
-            (res: HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => {
+                this.onError(res.message);
+                this.loading = false;
+                this.ref.detectChanges();
+            }
         );
     }
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }
@@ -76,6 +93,7 @@ export class CupomUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.loading = true;
         this.cupom.data = this.data != null && this.hora != null ? moment(this.data + 'T' + this.hora, DATE_TIME_FORMAT) : null;
         this.cupom.estabelecimento = null;
         if (this.cupom.id !== undefined) {
@@ -91,10 +109,12 @@ export class CupomUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
         this.previousState();
     }
 
     private onSaveError() {
+        this.loading = false;
         this.isSaving = false;
     }
 

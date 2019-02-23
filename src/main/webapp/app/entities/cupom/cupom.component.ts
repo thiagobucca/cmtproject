@@ -10,6 +10,9 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { CupomService } from './cupom.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-cupom',
     templateUrl: './cupom.component.html'
@@ -38,7 +41,9 @@ export class CupomComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private dataUtils: JhiDataUtils,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -48,8 +53,14 @@ export class CupomComponent implements OnInit, OnDestroy {
             this.predicate = data.pagingParams.predicate;
         });
     }
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     loadAll() {
+        this.loading = true;
         this.cupomService
             .query({
                 page: this.page - 1,
@@ -57,8 +68,16 @@ export class CupomComponent implements OnInit, OnDestroy {
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<ICupom[]>) => this.paginateCupoms(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<ICupom[]>) => {
+                    this.paginateCupoms(res.body, res.headers);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                }
             );
     }
 
@@ -102,6 +121,10 @@ export class CupomComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
+    }
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
     }
 
     trackId(index: number, item: ICupom) {
