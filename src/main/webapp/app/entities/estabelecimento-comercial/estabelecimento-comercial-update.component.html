@@ -6,7 +6,7 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!estabelecimentoComercial.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <label for="id" >ID</label>
                     <input type="text" class="form-control" id="id" name="id" [(ngModel)]="estabelecimentoComercial.id"
                         readonly />
                 </div>
@@ -17,21 +17,25 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_codCnpj">CNPJ</label>
-                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" [(ngModel)]="estabelecimentoComercial.codCnpj" />
+                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" 
+                    [(ngModel)]="estabelecimentoComercial.codCnpj"
+                    mask="00.000.000/0000-00" required />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome" for="field_nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="field_nome" [(ngModel)]="estabelecimentoComercial.nome" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco"
-                        for="field_endereco">Endereco</label>
+                    <label class="form-control-label" 
+                        for="field_endereco">Endereço </label>
                     <input type="text" class="form-control" name="endereco" id="field_endereco" [(ngModel)]="estabelecimentoComercial.endereco" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone"
                         for="field_telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="estabelecimentoComercial.telefone" />
+                    <input type="text" class="form-control" name="telefone" id="field_telefone" 
+                    [(ngModel)]="estabelecimentoComercial.telefone"
+                    mask="(00) 0 0000-0000" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo" for="field_logo">Logo</label>
@@ -54,9 +58,19 @@
                         [(ngModel)]="estabelecimentoComercial.logoContentType" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio"
-                        for="field_taxaConvenio">Taxa Convenio</label>
-                    <input type="number" class="form-control" name="taxaConvenio" id="field_taxaConvenio" [(ngModel)]="estabelecimentoComercial.taxaConvenio" />
+                    <label class="form-control-label" 
+                        for="field_taxaConvenio">Taxa Convênio </label>
+                    <input type="text" class="form-control" required
+                    currencyMask [options]="{ align: 'right',
+                    allowNegative: true,
+                    allowZero: true,
+                    decimal: ',',
+                    precision: 2,
+                    prefix: '',
+                    suffix: '%',
+                    thousands: '.',
+                    nullable: false }"
+                     name="taxaConvenio" id="field_taxaConvenio" [(ngModel)]="estabelecimentoComercial.taxaConvenio" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_categoriaEstabelecimentoId">Categoria Estabelecimento</label>
@@ -88,6 +102,9 @@
                             </div>
                         </div>
                         <div class="card-body">
+                                <div class="alert alert-danger" role="alert"                            
+                                *ngIf="(contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0)">
+                                     Ao menos um contado deve ser fornecido</div>
                             <form name="editFormContato" role="form" novalidate (ngSubmit)="saveItem()" #editForm="ngForm">
                                 <div class="form-group" [hidden]="true">
                                     <label for="id">ID</label>
@@ -102,11 +119,12 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_telefone">Telefone</label>
                                     <input type="text" class="form-control" name="contatoEstabelecimento_telefone" id="field_contatoEstabelecimento_telefone"
-                                        [(ngModel)]="contatoEstabelecimento.telefone" />
+                                        [(ngModel)]="contatoEstabelecimento.telefone"
+                                        mask="(00) 0 0000-0000" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_email">Email</label>
-                                    <input type="text" class="form-control" name="contatoEstabelecimento_email" id="field_contatoEstabelecimento_email"
+                                    <input type="email" class="form-control" name="contatoEstabelecimento_email" id="field_contatoEstabelecimento_email"
                                         [(ngModel)]="contatoEstabelecimento.email" />
                                 </div>
                                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancelar()" title="Cancelar">
@@ -163,7 +181,7 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0)" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

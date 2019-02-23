@@ -12,3 +12,4 @@ export * from './shared-common.module';
 export * from './shared.module';
 export * from './util/datepicker-adapter';
 export * from './services/auxiliar.service';
+export * from './util/validacoes';

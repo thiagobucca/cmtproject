@@ -5,19 +5,21 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!parametrizacao.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <label for="id" >ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="parametrizacao.id" readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label"  for="field_diaCobrancaConvenio">Dia Cobrança Convênio</label>
                     <input type="number" class="form-control" name="diaCobrancaConvenio" id="field_diaCobrancaConvenio"
-                        [(ngModel)]="parametrizacao.diaCobrancaConvenio" />
+                        [(ngModel)]="parametrizacao.diaCobrancaConvenio" min="1" max="31"
+                        required />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.parametrizacao.diaPagamentoLoja" for="field_diaPagamentoLoja">Dia Pagamento Loja</label>
                     <input type="number" class="form-control" name="diaPagamentoLoja" id="field_diaPagamentoLoja"
-                        [(ngModel)]="parametrizacao.diaPagamentoLoja" />
+                        [(ngModel)]="parametrizacao.diaPagamentoLoja" min="1" max="31"
+                        required />
                 </div>
 
             </div>

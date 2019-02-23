@@ -28,7 +28,7 @@ export class ComunicacaoPushLojaService {
         return this.http.get<IComunicacaoPushLoja>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
     findByIdPush(id: number): Observable<EntityArrayResponseType> {
-        return this.http.get<IComunicacaoPush[]>(`${this.resourceUrl}/lojamaconica/${id}`, { observe: 'response' });
+        return this.http.get<IComunicacaoPush[]>(`${this.resourceUrl}/comunicacaopush/${id}`, { observe: 'response' });
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {

@@ -12,6 +12,6 @@ export interface ITipoOperacao {
 
 export class TipoOperacao implements ITipoOperacao {
     constructor(public id?: number, public nomeOperacao?: string, public tipoLancamento?: TipoLancamento, public bolAtivo?: boolean) {
-        this.bolAtivo = this.bolAtivo || false;
+        this.bolAtivo = this.bolAtivo || true;
     }
 }

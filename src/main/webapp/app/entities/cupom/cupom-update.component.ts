@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT, DATE_FORMAT, TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { JhiAlertService } from 'ng-jhipster';
@@ -21,8 +21,10 @@ import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-co
 export class CupomUpdateComponent implements OnInit {
     cupom: ICupom;
     isSaving: boolean;
-    data: string;
+    isBase64: boolean;
     estabelecimentos: IEstabelecimentoComercial[];
+    data: string;
+    hora: string;
     constructor(
         private dataUtils: JhiDataUtils,
         private cupomService: CupomService,
@@ -30,13 +32,17 @@ export class CupomUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
         private jhiAlertService: JhiAlertService
-    ) {}
+    ) {
+        this.isBase64 = true;
+    }
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cupom }) => {
             this.cupom = cupom;
-            this.data = this.cupom.data != null ? this.cupom.data.format(DATE_TIME_FORMAT) : null;
+            this.isBase64 = false;
+            this.data = this.cupom.data != null ? this.cupom.data.format(DATE_FORMAT) : null;
+            this.hora = this.cupom.data != null ? this.cupom.data.format(TIME_FORMAT) : null;
         });
 
         this.estabelecimentoComercialService.findByStatus(true).subscribe(
@@ -60,6 +66,7 @@ export class CupomUpdateComponent implements OnInit {
     }
 
     clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.isBase64 = true;
         this.dataUtils.clearInputImage(this.cupom, this.elementRef, field, fieldContentType, idInput);
     }
 
@@ -69,7 +76,8 @@ export class CupomUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.cupom.data = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
+        this.cupom.data = this.data != null && this.hora != null ? moment(this.data + 'T' + this.hora, DATE_TIME_FORMAT) : null;
+        this.cupom.estabelecimento = null;
         if (this.cupom.id !== undefined) {
             this.subscribeToSaveResponse(this.cupomService.update(this.cupom));
         } else {

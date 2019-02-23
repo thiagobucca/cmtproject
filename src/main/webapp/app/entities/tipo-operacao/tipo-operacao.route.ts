@@ -37,7 +37,7 @@ export const tipoOperacaoRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
         },
@@ -50,7 +50,7 @@ export const tipoOperacaoRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const tipoOperacaoRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const tipoOperacaoRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const tipoOperacaoPopupRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
         },
         canActivate: [UserRouteAccessService],

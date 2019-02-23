@@ -6,6 +6,6 @@ export interface ICategoriaEstabelecimento {
 
 export class CategoriaEstabelecimento implements ICategoriaEstabelecimento {
     constructor(public id?: number, public nome?: string, public bolAtivo?: boolean) {
-        this.bolAtivo = this.bolAtivo || false;
+        this.bolAtivo = this.bolAtivo || true;
     }
 }

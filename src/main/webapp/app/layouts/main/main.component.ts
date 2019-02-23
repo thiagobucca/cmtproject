@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
-//import PerfectScrollbar from 'perfect-scrollbar';
+// import PerfectScrollbar from 'perfect-scrollbar';
 import { JhiLanguageHelper, LoginModalService, LoginService } from 'app/core';
 import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 @Component({
@@ -49,8 +49,7 @@ export class JhiMainComponent implements OnInit {
         return bool;
     }
 
-    isAuthenticated() {
-        //return this.principal.isAuthenticated();
+    isAuthenticated(): boolean {
         return this.auxService.isAutenticado;
     }
 }

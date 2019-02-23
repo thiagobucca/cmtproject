@@ -2,6 +2,7 @@ package com.cmt.myapp.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public class LojaMaconica implements Serializable {
     private String telefone;
 
     @Column(name = "numero")
-    @NotBlank(message = "Informe o numero da loja maconica")
+    @NotNull(message = "Informe o numero da loja maconica")
     private Integer numero;
 
     @Column(name = "bol_ativo")
