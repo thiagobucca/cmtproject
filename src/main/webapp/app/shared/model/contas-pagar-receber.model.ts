@@ -18,6 +18,7 @@ export interface IContasPagarReceber {
     tipoOperacaoId?: number;
     tipoOperacao?: string;
     usuario?: string;
+    tipoLancamento?: string;
 }
 
 export class ContasPagarReceber implements IContasPagarReceber {
@@ -33,6 +34,7 @@ export class ContasPagarReceber implements IContasPagarReceber {
         public estabelecimento?: string,
         public tipoOperacao?: string,
         public lojaMaconica?: string,
-        public usuario?: string
+        public usuario?: string,
+        public tipoLancamento?: string
     ) {}
 }

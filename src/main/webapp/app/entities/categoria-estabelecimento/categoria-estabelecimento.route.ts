@@ -37,7 +37,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
         },
@@ -50,7 +50,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const categoriaEstabelecimentoPopupRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -37,7 +37,7 @@ export const contatoLojaMaconicaRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.contatoLojaMaconica.home.title'
         },
@@ -50,7 +50,7 @@ export const contatoLojaMaconicaRoute: Routes = [
             contatoLojaMaconica: ContatoLojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoLojaMaconica.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const contatoLojaMaconicaRoute: Routes = [
             contatoLojaMaconica: ContatoLojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoLojaMaconica.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const contatoLojaMaconicaRoute: Routes = [
             contatoLojaMaconica: ContatoLojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoLojaMaconica.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const contatoLojaMaconicaPopupRoute: Routes = [
             contatoLojaMaconica: ContatoLojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoLojaMaconica.home.title'
         },
         canActivate: [UserRouteAccessService],

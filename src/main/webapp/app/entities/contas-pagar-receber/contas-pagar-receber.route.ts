@@ -37,7 +37,7 @@ export const contasPagarReceberRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
         },
@@ -50,7 +50,7 @@ export const contasPagarReceberRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const contasPagarReceberRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const contasPagarReceberRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const contasPagarReceberPopupRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
         },
         canActivate: [UserRouteAccessService],

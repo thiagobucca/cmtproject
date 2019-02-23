@@ -44,5 +44,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByActivated(Pageable pageable, boolean bolAtivo);
 
     Optional<User> findOneByTipoPessoaAndPlacet(TipoPessoa tipoPessoa, String placet);
+    List<User> findAllByLojaMaconicaId(Long lojaMaconicaId);
+    Optional<User> findOneByIdAndPlacet(Long id, String placet);
     
 }

@@ -11,7 +11,7 @@
                 </dd>
                 <dt>CNPJ</dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.codCnpj}}</span>
+                    <span>{{estabelecimentoComercial.codCnpj | mask: '00.000.000/0000-00'}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span></dt>
                 <dd>
@@ -23,7 +23,7 @@
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone">Telefone</span></dt>
                 <dd>
-                    <span>{{estabelecimentoComercial.telefone}}</span>
+                    <span>{{estabelecimentoComercial.telefone | mask: '(00) 0 0000-0000'}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span></dt>
                 <dd>
@@ -51,7 +51,7 @@
                 <dd>
                     <span>{{estabelecimentoComercial.matriz}}</span>
                 </dd>
-                <dt><span>contato</span></dt>
+                <dt><span>Contato</span></dt>
                 <dd>
                     <div class="table-responsive" *ngIf="contatoEstabelecimentos">
                         <table class="table table-striped">
@@ -67,7 +67,7 @@
                                 <tr *ngFor="let item of contatoEstabelecimentos ;trackBy: trackById; let i = index">
 
                                     <td>{{item.nome}} </td>
-                                    <td>{{item.telefone}}</td>
+                                    <td>{{item.telefone | mask: '(00) 0 0000-0000'}}</td>
                                     <td>{{item.email}}</td>
                                 </tr>
                             </tbody>

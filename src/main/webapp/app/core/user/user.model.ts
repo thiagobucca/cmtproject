@@ -15,7 +15,7 @@ export interface IUser {
     lastModifiedBy?: string;
     lastModifiedDate?: Date;
     password?: string;
-    dataNascimento?: Date;
+    dataNascimento?: Moment;
     lojaMaconicaId?: number;
     pessoaDependenteId?: number;
     telefone?: string;
@@ -39,7 +39,7 @@ export class User implements IUser {
         public lastModifiedBy?: string,
         public lastModifiedDate?: Date,
         public password?: string,
-        public dataNascimento?: Date,
+        public dataNascimento?: Moment,
         public lojaMaconicaId?: number,
         public pessoaDependenteId?: number,
         public telefone?: string,

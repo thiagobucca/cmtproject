@@ -33,7 +33,7 @@ export const parametrizacaoRoute: Routes = [
         path: 'parametrizacao',
         component: ParametrizacaoComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.parametrizacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const parametrizacaoRoute: Routes = [
             parametrizacao: ParametrizacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.parametrizacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const parametrizacaoRoute: Routes = [
             parametrizacao: ParametrizacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.parametrizacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const parametrizacaoRoute: Routes = [
             parametrizacao: ParametrizacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.parametrizacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const parametrizacaoPopupRoute: Routes = [
             parametrizacao: ParametrizacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.parametrizacao.home.title'
         },
         canActivate: [UserRouteAccessService],

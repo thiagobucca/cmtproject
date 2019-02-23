@@ -1,6 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { NgxMaskModule } from 'ngx-mask';
+
 import { CmtprojectSharedModule } from 'app/shared';
 import {
     LojaMaconicaComponent,
@@ -15,7 +17,7 @@ import {
 const ENTITY_STATES = [...lojaMaconicaRoute, ...lojaMaconicaPopupRoute];
 
 @NgModule({
-    imports: [CmtprojectSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [CmtprojectSharedModule, RouterModule.forChild(ENTITY_STATES), NgxMaskModule.forRoot()],
     declarations: [
         LojaMaconicaComponent,
         LojaMaconicaDetailComponent,

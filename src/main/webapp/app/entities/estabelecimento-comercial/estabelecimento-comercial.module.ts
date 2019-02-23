@@ -1,5 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgxMaskModule } from 'ngx-mask';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { CmtprojectSharedModule } from 'app/shared';
 import {
@@ -15,7 +17,7 @@ import {
 const ENTITY_STATES = [...estabelecimentoComercialRoute, ...estabelecimentoComercialPopupRoute];
 
 @NgModule({
-    imports: [CmtprojectSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [CmtprojectSharedModule, RouterModule.forChild(ENTITY_STATES), NgxMaskModule.forRoot(), NgxCurrencyModule],
     declarations: [
         EstabelecimentoComercialComponent,
         EstabelecimentoComercialDetailComponent,

@@ -12,7 +12,7 @@ export class UserResolve implements CanActivate {
     constructor(private principal: Principal) {}
 
     canActivate() {
-        return this.principal.identity().then(account => this.principal.hasAnyAuthority(['ROLE_ADMIN']));
+        return this.principal.identity().then(account => this.principal.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_LOJA_MACONICA']));
     }
 }
 
@@ -37,7 +37,8 @@ export const userMgmtRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            pageTitle: 'userManagement.home.title',
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Usuários',
             defaultSort: 'id,asc'
         }
     },
@@ -48,7 +49,8 @@ export const userMgmtRoute: Routes = [
             user: UserMgmtResolve
         },
         data: {
-            pageTitle: 'userManagement.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Usuários'
         }
     },
     {
@@ -56,6 +58,10 @@ export const userMgmtRoute: Routes = [
         component: UserMgmtUpdateComponent,
         resolve: {
             user: UserMgmtResolve
+        },
+        data: {
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Novo Usuário'
         }
     },
     {
@@ -63,6 +69,10 @@ export const userMgmtRoute: Routes = [
         component: UserMgmtUpdateComponent,
         resolve: {
             user: UserMgmtResolve
+        },
+        data: {
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Edição Usuário'
         }
     }
 ];

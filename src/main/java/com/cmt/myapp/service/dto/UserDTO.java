@@ -72,6 +72,8 @@ public class UserDTO {
 
     private String placet;
 
+    private String deviceId;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -99,6 +101,7 @@ public class UserDTO {
         this.loja = user.getLojaMaconica();
         this.dependente = user.getDependente();
         this.placet = user.getPlacet();
+        this.deviceId = user.getDeviceId();
     }
 
     public Long getId() {
@@ -263,7 +266,33 @@ public class UserDTO {
 	public void setLoja(String loja) {
 		this.loja = loja;
     }
-    
+    /**
+     * @return the placet
+     */
+    public String getPlacet() {
+        return placet;
+    }
+
+    /**
+     * @param placet the placet to set
+     */
+    public void setPlacet(String placet) {
+        this.placet = placet;
+    }
+
+    /**
+     * @return the deviceId
+     */
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    /**
+     * @param deviceId the deviceId to set
+     */
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
 
     
 
@@ -285,17 +314,5 @@ public class UserDTO {
             "}";
     }
 
-    /**
-     * @return the placet
-     */
-    public String getPlacet() {
-        return placet;
-    }
-
-    /**
-     * @param placet the placet to set
-     */
-    public void setPlacet(String placet) {
-        this.placet = placet;
-    }
+    
 }
