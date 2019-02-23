@@ -152,4 +152,6 @@ public class ComunicacaoPushLojaResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comunicacao-push-lojas");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    
 }

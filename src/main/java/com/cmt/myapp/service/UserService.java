@@ -195,6 +195,12 @@ public class UserService {
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
+                user.setDeviceId(userDTO.getDeviceId());
+                user.setPlacet(userDTO.getPlacet());
+                user.setDataNascimento(userDTO.getDataNascimento());
+                user.setLojaMaconicaId(userDTO.getLojaMaconicaId());
+                user.setTelefone(userDTO.getTelefone());
+                
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
