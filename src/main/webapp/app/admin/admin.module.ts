@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
 import { CmtprojectSharedModule } from 'app/shared';
+
+import { NgxMaskModule } from 'ngx-mask';
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
 
 import {
@@ -24,7 +26,8 @@ import {
 @NgModule({
     imports: [
         CmtprojectSharedModule,
-        RouterModule.forChild(adminState)
+        RouterModule.forChild(adminState),
+        NgxMaskModule.forRoot()
         /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
     ],
     declarations: [

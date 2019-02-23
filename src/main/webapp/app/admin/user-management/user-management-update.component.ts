@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { JhiLanguageHelper, User, UserService, IUser } from 'app/core';
-
+import { DATE_TIME_FORMAT, DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
-
-import { IPessoa, TipoPessoa } from 'app/shared/model/pessoa.model';
-import { PessoaService } from 'app/entities/pessoa/pessoa.service';
+import * as moment from 'moment';
+import { TipoPessoa } from 'app/shared/model/pessoa.model';
 import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
 import { LojaMaconicaService } from 'app/entities/loja-maconica';
 
@@ -21,13 +20,11 @@ export class UserMgmtUpdateComponent implements OnInit {
     isSaving: boolean;
     lojas: ILojaMaconica[];
     macons: IUser[];
-
+    data: string;
     constructor(
         private languageHelper: JhiLanguageHelper,
         private userService: UserService,
         private route: ActivatedRoute,
-        private router: Router,
-        private pessoaService: PessoaService,
         private lojaMaconicaService: LojaMaconicaService,
         private jhiAlertService: JhiAlertService
     ) {}
@@ -36,6 +33,7 @@ export class UserMgmtUpdateComponent implements OnInit {
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
             this.user = user.body ? user.body : user;
+            this.data = this.user.dataNascimento != null ? this.user.dataNascimento.format(DATE_FORMAT) : null;
         });
         this.authorities = [];
         this.userService.authorities().subscribe(authorities => {
@@ -64,6 +62,7 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.user.dataNascimento = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         if (this.user.id !== null) {
             this.userService.update(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
         } else {

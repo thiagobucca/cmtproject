@@ -6,6 +6,7 @@ declare interface RouteInfo {
     icon: string;
     class: string;
     pathGlobal: string;
+    permissao: string[];
 }
 export const ROUTES: RouteInfo[] = [
     {
@@ -13,63 +14,76 @@ export const ROUTES: RouteInfo[] = [
         title: 'Agenda Eventos',
         icon: 'ui-1_calendar-60',
         class: '',
-        pathGlobal: 'global.menu.entities.agendaEventos'
+        pathGlobal: 'global.menu.entities.agendaEventos',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
     },
-    { path: 'cupom', title: 'Cupom', icon: 'shopping_tag-content', class: '', pathGlobal: 'global.menu.entities.cupom' },
+    {
+        path: 'cupom',
+        title: 'Cupom',
+        icon: 'shopping_tag-content',
+        class: '',
+        pathGlobal: 'global.menu.entities.cupom',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
+    },
 
     {
         path: 'comunicacao-push',
         title: 'Comunicação Push',
         icon: 'tech_mobile',
         class: '',
-        pathGlobal: 'global.menu.entities.comunicacaoPush'
+        pathGlobal: 'global.menu.entities.comunicacaoPush',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
     },
     {
         path: 'estabelecimento-comercial',
         title: 'Estabelecimento Comercial',
         icon: 'shopping_shop',
         class: '',
-        pathGlobal: 'global.menu.entities.estabelecimentoComercial'
+        pathGlobal: 'global.menu.entities.estabelecimentoComercial',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
     },
-    // {
-    //     path: 'comunicacao-push-loja',
-    //     title: 'Comunicação Push Loja',
-    //     icon: 'design_app',
-    //     class: '',
-    //     pathGlobal: 'global.menu.entities.comunicacaoPushLoja'
-    // },
+
     {
         path: 'contas-pagar-receber',
         title: 'Contas a Pagar/Receber',
         icon: 'business_money-coins',
         class: '',
-        pathGlobal: 'global.menu.entities.contasPagarReceber'
+        pathGlobal: 'global.menu.entities.contasPagarReceber',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
     },
-    { path: 'loja-maconica', title: 'Loja Maçônica', icon: 'travel_istanbul', class: '', pathGlobal: 'global.menu.entities.lojaMaconica' },
-    // {
-    //     path: 'contato-estabelecimento',
-    //     title: 'Contato Estabelecimento',
-    //     icon: 'design_app',
-    //     class: '',
-    //     pathGlobal: 'global.menu.entities.contatoEstabelecimento'
-    // },
-    // {
-    //     path: 'contato-loja-maconica',
-    //     title: 'Contato Loja Maçonica',
-    //     icon: 'design_app',
-    //     class: '',
-    //     pathGlobal: 'global.menu.entities.contatoLojaMaconica'
-    // },
+    {
+        path: 'loja-maconica',
+        title: 'Loja Maçônica',
+        icon: 'travel_istanbul',
+        class: '',
+        pathGlobal: 'global.menu.entities.lojaMaconica',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
+    },
 
-    { path: 'tipo-operacao', title: 'Tipo Operação', icon: 'design_vector', class: '', pathGlobal: 'global.menu.entities.tipoOperacao' },
+    {
+        path: 'tipo-operacao',
+        title: 'Tipo Operação',
+        icon: 'design_vector',
+        class: '',
+        pathGlobal: 'global.menu.entities.tipoOperacao',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
+    },
 
-    { path: 'parametrizacao', title: 'Parametrização', icon: 'loader_gear', class: '', pathGlobal: 'global.menu.entities.parametrizacao' },
+    {
+        path: 'parametrizacao',
+        title: 'Parametrização',
+        icon: 'loader_gear',
+        class: '',
+        pathGlobal: 'global.menu.entities.parametrizacao',
+        permissao: ['ROLE_ADMIN', 'ROLE_USER']
+    },
     {
         path: 'categoria-estabelecimento',
-        title: 'Categoria Estabelecimento',
+        title: 'Categoria Estabelecimento h',
         icon: 'design_app',
         class: '',
-        pathGlobal: 'global.menu.entities.categoriaEstabelecimento'
+        pathGlobal: 'global.menu.entities.categoriaEstabelecimento',
+        permissao: ['ROLE_USER']
     }
 ];
 

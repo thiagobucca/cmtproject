@@ -93,7 +93,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
         );
     }
     async deletarComunicacao(id: any) {
-        let result = await this.comunicacaoPushLojaService.delete(id).toPromise();
+        const result = await this.comunicacaoPushLojaService.delete(id).toPromise();
     }
     private onSaveSuccess() {
         this.isSaving = false;

@@ -112,7 +112,9 @@
             </div>
             <div class="form-group">
                     <label class="form-control-label" for="field_telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="user.telefone" />
+                    <input type="text" class="form-control" name="telefone" id="field_telefone" 
+                    [(ngModel)]="user.telefone" 
+                    mask='(00) 0 0000-0000' />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_tipoPessoa">Tipo Pessoa</label>
@@ -126,7 +128,7 @@
                     <label class="form-control-label" for="field_dataNascimento">Data Nascimento</label>
                     <div class="d-flex">
                         <input id="field_dataNascimento" type="date" class="form-control" name="dataNascimento"
-                            [(ngModel)]="user.dataNascimento" />
+                            [(ngModel)]="data" />
                     </div>
                 </div>
                 <div class="form-group">
