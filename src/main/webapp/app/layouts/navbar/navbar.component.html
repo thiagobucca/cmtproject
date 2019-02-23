@@ -89,8 +89,8 @@
                 </a>
             </li>
             
-            <li *jhiHasAnyAuthority="'ROLE_ADMIN'"  ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'"  ngbDropdown class="nav-item dropdown pointer" 
+               >
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
@@ -102,34 +102,34 @@
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
                         <a class="dropdown-item" routerLink="region" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.region">Region</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="country" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.country">Country</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="location" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.location">Location</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="department" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.department">Department</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="task" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        <a class="dropdown-item" routerLink="task" routerLinkActive="active" 
                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.task">Task</span>
@@ -137,13 +137,13 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="employee" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.employee">Employee</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="job" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        <a class="dropdown-item" routerLink="job" routerLinkActive="active" 
                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.job">Job</span>
@@ -151,14 +151,14 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="job-history" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.jobHistory">Job History</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="categoria-estabelecimento" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.categoriaEstabelecimento">Categoria
                                 Estabelecimento</span>
@@ -166,28 +166,28 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="perfil-usuario" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.perfilUsuario">Perfil Usuario</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="tipo-operacao" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.tipoOperacao">Tipo Operacao</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="loja-maconica" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.lojaMaconica">Loja Maconica</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="estabelecimento-comercial" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.estabelecimentoComercial">Estabelecimento
                                 Comercial</span>
@@ -195,62 +195,62 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="contato-loja-maconica" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.contatoLojaMaconica">Contato Loja Maconica</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="contato-estabelecimento" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.contatoEstabelecimento">Contato Estabelecimento</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="parametrizacao" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.parametrizacao">Parametrizacao</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="usuario" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.usuario">Usuario</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="pessoa" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.pessoa">Pessoa</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="comunicacao-push" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.comunicacaoPush">Comunicacao Push</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="agenda-eventos" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.agendaEventos">Agenda Eventos</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="contas-pagar-receber" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.contasPagarReceber">Contas Pagar Receber</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="cupom" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        <a class="dropdown-item" routerLink="cupom" routerLinkActive="active" 
                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.cupom">Cupom</span>
@@ -258,7 +258,7 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="comunicacao-push-loja" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                             (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.comunicacaoPushLoja">Comunicacao Push Loja</span>
                         </a>

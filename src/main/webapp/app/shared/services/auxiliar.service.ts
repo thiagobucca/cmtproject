@@ -5,8 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class AuxiliarService {
     private _storage: any = sessionStorage;
+    public isLoading: boolean;
 
-    constructor() {}
+    constructor() {
+        this._storage.isLoading = false;
+    }
 
     get isAutenticado(): boolean {
         return this._storage.getItem('isAutenticado') ? this._storage.getItem('isAutenticado') : false;

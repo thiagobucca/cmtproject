@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     JhiMainComponent,
     SidebarComponent,
+    LoadingComponent,
     NavbarComponent,
     FooterComponent,
     PageRibbonComponent,
@@ -55,6 +56,7 @@ import {
         JhiMainComponent,
         SidebarComponent,
         NavbarComponent,
+        LoadingComponent,
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,

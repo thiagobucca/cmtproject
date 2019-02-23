@@ -1,10 +1,11 @@
-import { Component, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, Renderer, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 
 @Component({
     selector: 'jhi-login-modal',
@@ -24,9 +25,16 @@ export class JhiLoginModalComponent implements AfterViewInit {
         private elementRef: ElementRef,
         private renderer: Renderer,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private auxService: AuxiliarService
     ) {
         this.credentials = {};
+    }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
     }
 
     ngAfterViewInit() {
@@ -44,6 +52,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     login() {
+        this.loading = true;
         this.loginService
             .login({
                 username: this.username,
@@ -52,6 +61,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
             })
             .then(() => {
                 this.authenticationError = false;
+                this.loading = false;
                 this.activeModal.dismiss('login success');
                 if (this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
                     this.router.navigate(['']);
@@ -72,6 +82,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
             })
             .catch(() => {
                 this.authenticationError = true;
+                this.loading = false;
             });
     }
 

@@ -11,6 +11,9 @@ import { AgendaEventosService } from './agenda-eventos.service';
 import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
 import { LojaMaconicaService } from 'app/entities/loja-maconica';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-agenda-eventos-update',
     templateUrl: './agenda-eventos-update.component.html'
@@ -25,11 +28,14 @@ export class AgendaEventosUpdateComponent implements OnInit {
         private agendaEventosService: AgendaEventosService,
         private activatedRoute: ActivatedRoute,
         private lojaMaconicaService: LojaMaconicaService,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
+        this.loading = true;
         this.activatedRoute.data.subscribe(({ agendaEventos }) => {
             this.agendaEventos = agendaEventos;
             this.data = this.agendaEventos.data != null ? this.agendaEventos.data.format(DATE_TIME_FORMAT) : null;
@@ -39,9 +45,21 @@ export class AgendaEventosUpdateComponent implements OnInit {
         this.lojaMaconicaService.findByStatus(true).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
+                this.loading = false;
+                this.ref.detectChanges();
             },
-            (res: HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => {
+                this.onError(res.message);
+                this.loading = false;
+                this.ref.detectChanges();
+            }
         );
+    }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
     }
 
     previousState() {
@@ -50,6 +68,7 @@ export class AgendaEventosUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.loading = true;
 
         this.agendaEventos.data = this.data != null && this.hora != null ? moment(this.data + 'T' + this.hora, DATE_TIME_FORMAT) : null;
         if (this.agendaEventos.id !== undefined) {
@@ -65,11 +84,13 @@ export class AgendaEventosUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
         this.previousState();
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.loading = false;
     }
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);

@@ -10,6 +10,9 @@ import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 export class JhiMainComponent implements OnInit {
     constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router, private auxService: AuxiliarService) {}
 
+    get isLoading(): boolean {
+        return this.auxService.isLoading === undefined ? false : this.auxService.isLoading;
+    }
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'cmtprojectApp';
         if (routeSnapshot.firstChild) {

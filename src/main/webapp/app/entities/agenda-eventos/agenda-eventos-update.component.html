@@ -1,58 +1,64 @@
 <div class="row ">
-    <div class="col-8">
+    <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-agenda-eventos-heading" >{{agendaEventos.id>0?"Editar":"Criar"}} Agenda Evento</h2>
+            <h2 id="jhi-agenda-eventos-heading">{{agendaEventos.id>0?"Editar":"Criar"}} Agenda Evento</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!agendaEventos.id">
-                    <label for="id" >ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="agendaEventos.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.titulo" for="field_titulo">Titulo</label>
-                    <input type="text" class="form-control" name="titulo" id="field_titulo" required
-                        [(ngModel)]="agendaEventos.titulo" />
-                </div>                
-                <div class="form-group row">
-                        <div class="col-md-4">
-                            <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.data" for="field_data">Data</label>
-    
-                            <input id="field_data" type="date" class="form-control" name="data" [(ngModel)]="data" required
-                                max="9999-12-31" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-control-label" for="field_data">Hora</label>
-    
-                            <input id="field_hora" type="time" class="form-control" name="hora" [(ngModel)]="hora" required />
-                        </div>
+                <div class="form-group row" [hidden]="!agendaEventos.id">
+                    <div class="col-sm-1">
+
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="agendaEventos.id"
+                            readonly />
                     </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.local" for="field_local">Local</label>
-                    <input type="text" class="form-control" name="local" id="field_local"
-                        [(ngModel)]="agendaEventos.local" required/>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.descricao" for="field_descricao">Descricao</label>
-                    <textarea class="form-control" name="descricao" id="field_descricao"
-                    [(ngModel)]="agendaEventos.descricao" rows="3"></textarea>
+                <div class="form-group row">
+                    <div class="col-md-10">
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.titulo" for="field_titulo">Titulo</label>
+                        <input type="text" class="form-control" name="titulo" id="field_titulo" required [(ngModel)]="agendaEventos.titulo" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.data" for="field_data">Data</label>
+
+                        <input id="field_data" type="date" class="form-control" name="data" [(ngModel)]="data" required
+                            max="9999-12-31" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-control-label" for="field_data">Hora</label>
+
+                        <input id="field_hora" type="time" class="form-control" name="hora" [(ngModel)]="hora" required />
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçonica</label>
+                        <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="agendaEventos.lojaMaconicaId">
+                            <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                            <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-10">
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.local" for="field_local">Local</label>
+                        <input type="text" class="form-control" name="local" id="field_local" [(ngModel)]="agendaEventos.local"
+                            required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-10">
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.agendaEventos.descricao" for="field_descricao">Descricao</label>
+                        <textarea class="form-control" name="descricao" id="field_descricao" [(ngModel)]="agendaEventos.descricao"
+                            rows="3"></textarea>
+                    </div>
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo"
-                    [(ngModel)]="agendaEventos.bolAtivo" />
-                    <label class="form-check-label"  for="field_bolAtivo">Ativo</label>
-                </div>                
-                <div class="form-group">
-                    <label class="form-control-label"  for="field_lojaMaconicaId">Loja Maçonica</label>
-                    <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="agendaEventos.lojaMaconicaId">
-                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
-                    </select>
+                    <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo" [(ngModel)]="agendaEventos.bolAtivo" />
+                    <label class="form-check-label" for="field_bolAtivo">Ativo</label>
                 </div>
-
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">

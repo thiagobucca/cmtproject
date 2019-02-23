@@ -1,22 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { IAgendaEventos } from 'app/shared/model/agenda-eventos.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { AgendaEventosService } from './agenda-eventos.service';
-import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
-import { LojaMaconicaService } from 'app/entities/loja-maconica';
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 
 @Component({
     selector: 'jhi-agenda-eventos',
     templateUrl: './agenda-eventos.component.html'
 })
-export class AgendaEventosComponent implements OnInit, OnDestroy {
+export class AgendaEventosComponent implements OnInit, OnDestroy, AfterViewInit {
     currentAccount: any;
     agendaEventos: IAgendaEventos[];
     error: any;
@@ -40,7 +40,8 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private lojaMaconicaService: LojaMaconicaService
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -50,17 +51,31 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
             this.predicate = data.pagingParams.predicate;
         });
     }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
 
-    loadAll() {
-        this.agendaEventosService
+    async loadAll() {
+        await this.agendaEventosService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<IAgendaEventos[]>) => this.paginateAgendaEventos(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<IAgendaEventos[]>) => {
+                    this.paginateAgendaEventos(res.body, res.headers);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.loading = false;
+                    this.ref.detectChanges();
+                    this.onError(res.message);
+                }
             );
     }
 
@@ -95,6 +110,7 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.loading = true;
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
@@ -102,6 +118,7 @@ export class AgendaEventosComponent implements OnInit, OnDestroy {
 
         this.registerChangeInAgendaEventos();
     }
+    ngAfterViewInit() {}
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
