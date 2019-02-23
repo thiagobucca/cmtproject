@@ -37,7 +37,7 @@ export const contatoEstabelecimentoRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.contatoEstabelecimento.home.title'
         },
@@ -50,7 +50,7 @@ export const contatoEstabelecimentoRoute: Routes = [
             contatoEstabelecimento: ContatoEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const contatoEstabelecimentoRoute: Routes = [
             contatoEstabelecimento: ContatoEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const contatoEstabelecimentoRoute: Routes = [
             contatoEstabelecimento: ContatoEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const contatoEstabelecimentoPopupRoute: Routes = [
             contatoEstabelecimento: ContatoEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.contatoEstabelecimento.home.title'
         },
         canActivate: [UserRouteAccessService],

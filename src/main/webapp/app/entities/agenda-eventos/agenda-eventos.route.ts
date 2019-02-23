@@ -37,7 +37,7 @@ export const agendaEventosRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.agendaEventos.home.title'
         },
@@ -50,7 +50,7 @@ export const agendaEventosRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.agendaEventos.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const agendaEventosRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.agendaEventos.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const agendaEventosRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.agendaEventos.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const agendaEventosPopupRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.agendaEventos.home.title'
         },
         canActivate: [UserRouteAccessService],

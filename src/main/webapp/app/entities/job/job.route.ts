@@ -37,7 +37,7 @@ export const jobRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.job.home.title'
         },
@@ -50,7 +50,7 @@ export const jobRoute: Routes = [
             job: JobResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.job.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const jobRoute: Routes = [
             job: JobResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.job.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const jobRoute: Routes = [
             job: JobResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.job.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const jobPopupRoute: Routes = [
             job: JobResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.job.home.title'
         },
         canActivate: [UserRouteAccessService],

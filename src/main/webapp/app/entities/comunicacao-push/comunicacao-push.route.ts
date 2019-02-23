@@ -37,7 +37,7 @@ export const comunicacaoPushRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
         },
@@ -50,7 +50,7 @@ export const comunicacaoPushRoute: Routes = [
             comunicacaoPush: ComunicacaoPushResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const comunicacaoPushRoute: Routes = [
             comunicacaoPush: ComunicacaoPushResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const comunicacaoPushRoute: Routes = [
             comunicacaoPush: ComunicacaoPushResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const comunicacaoPushPopupRoute: Routes = [
             comunicacaoPush: ComunicacaoPushResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
         },
         canActivate: [UserRouteAccessService],
