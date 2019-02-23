@@ -70,6 +70,8 @@ public class UserDTO {
     
     private String loja;
 
+    private String placet;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -96,6 +98,7 @@ public class UserDTO {
         this.tipoPessoa = user.getTipoPessoa();
         this.loja = user.getLojaMaconica();
         this.dependente = user.getDependente();
+        this.placet = user.getPlacet();
     }
 
     public Long getId() {
@@ -259,7 +262,10 @@ public class UserDTO {
 
 	public void setLoja(String loja) {
 		this.loja = loja;
-	}
+    }
+    
+
+    
 
 	@Override
     public String toString() {
@@ -277,5 +283,19 @@ public class UserDTO {
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
             "}";
+    }
+
+    /**
+     * @return the placet
+     */
+    public String getPlacet() {
+        return placet;
+    }
+
+    /**
+     * @param placet the placet to set
+     */
+    public void setPlacet(String placet) {
+        this.placet = placet;
     }
 }
