@@ -20,10 +20,10 @@
                 <dt><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span></dt>
                 <dd>
                     <div *ngIf="cupom.foto">
-                        <a [href]="cupom.fotoContentType" target="_black">
-                            <img [src]="cupom.fotoContentType" style="max-width: 100%;" alt="cupom image"/>
-                        </a>
-                        {{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}
+                        <a [href]="cupom.foto" target="_black">
+                            <img [src]="cupom.foto" style="max-width: 100%;" alt="cupom image"/>
+                        </a><br>
+                        {{cupom.foto}}, {{byteSize(cupom.foto)}}
                     </div>
                 </dd>
                 <dt><span >Estabelecimento Comercial</span></dt>

@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.valor" for="field_valor">Valor</label>
-                    <input type="number" class="form-control" name="valor" id="field_valor" [(ngModel)]="cupom.valor" />
+                    <input type="text" class="form-control" currencyMask name="valor" id="field_valor" [(ngModel)]="cupom.valor" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.numero" for="field_numero">Numero</label>
@@ -34,8 +34,9 @@
                     <div>
                         <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-height: 100px;"
                             *ngIf="cupom.foto && isBase64" alt="cupom image" />
+
                             <img [src]="cupom.foto" 
-                            *ngIf="fotoContentType.foto && !isBase64"
+                            *ngIf="cupom.foto && !isBase64"
                             style="max-width: 100%;" alt="cupom image"/>
                         <div *ngIf="cupom.foto" class="form-text text-danger clearfix">
                             <span class="pull-left">{{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}</span>
