@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.valor" for="field_valor">Valor</label>
-                    <input type="number" class="form-control" name="valor" id="field_valor" [(ngModel)]="contasPagarReceber.valor" />
+                    <input type="text" class="form-control" currencyMask   name="valor" id="field_valor" [(ngModel)]="contasPagarReceber.valor" required />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_statusLancamento">Status Lançamento</label>
@@ -34,22 +34,29 @@
                 </div>               
                 <div class="form-group">
                     <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçonica</label>
-                    <select class="form-control" id="field_lojaMaconicaId" name="lojaMaconicaId" [(ngModel)]="contasPagarReceber.lojaMaconicaId">
-                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                    <select class="form-control" id="field_lojaMaconicaId" name="lojaMaconicaId" 
+                    [required]="isLoja" [disabled]="contasPagarReceber.estabelecimentoComercialId !==undefined && contasPagarReceber.estabelecimentoComercialId !==null"
+                    (ngModelChange)="onChangeLojaMaconica($event)"
+                    [(ngModel)]="contasPagarReceber.lojaMaconicaId" >
+                        <option [ngValue]="undefined" selected>Selecione...</option>
                         <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_estabelecimentoComercialId">Estabelecimento Comercial</label>
                     <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
+                    [required]="isEstabelecimento" [disabled]="contasPagarReceber.lojaMaconicaId !== undefined &&contasPagarReceber.lojaMaconicaId !== null"
+                    (ngModelChange)="onChangeEstabelecimentoComercial($event)"
                         [(ngModel)]="contasPagarReceber.estabelecimentoComercialId">
-                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                        <option [ngValue]="undefined" selected>Selecione...</option>
                         <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_tipoOperacaoId">Tipo Operação</label>
-                    <select class="form-control" id="field_tipoOperacaoId" name="tipoOperacaoId" [(ngModel)]="contasPagarReceber.tipoOperacaoId">
+                    <select class="form-control" id="field_tipoOperacaoId" name="tipoOperacaoId" 
+                    required
+                    [(ngModel)]="contasPagarReceber.tipoOperacaoId">
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
                         <option [ngValue]="item.id" *ngFor="let item of tipoOperacoes; trackBy: trackById">{{item.nomeOperacao}}</option>
                     </select>

@@ -266,7 +266,7 @@
                     
                 </ul>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER','ROLE_LOJA_MACONICA']" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
@@ -275,7 +275,7 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER','ROLE_LOJA_MACONICA']">
                         <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="user" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.userManagement">User management</span>

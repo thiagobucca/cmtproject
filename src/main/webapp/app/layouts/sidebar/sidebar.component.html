@@ -9,14 +9,62 @@
     </a>
 </div>
 <div class="sidebar-wrapper">
-    <ul class="nav">            
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a [routerLink]="[menuItem.path]">
-                <i class="now-ui-icons {{menuItem.icon}}"></i>
-                <span >{{menuItem.title}}</span>
-                <p></p>
+    <ul class="nav">
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="agenda-eventos" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons ui-1_calendar-60"></i>
+                <span>Agenda Eventos</span>
+
             </a>
         </li>
-        
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="cupom" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons shopping_tag-content"></i>
+                <span>Cupom</span>
+            </a>
+        </li>
+
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="comunicacao-push" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons tech_mobile"></i>
+                <span>Comunicação Push</span>
+            </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="estabelecimento-comercial" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons shopping_shop"></i>
+                <span>Estabelecimento Comercial</span>
+            </a>
+        </li>        
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="contas-pagar-receber" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons business_money-coins"></i>
+                <span>Contas a Pagar/Receber</span>
+            </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="loja-maconica" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER','ROLE_LOJA_MACONICA']">
+                <i class="now-ui-icons travel_istanbul"></i>
+                <span>Loja Maçônica</span>
+            </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="tipo-operacao" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons design_vector"></i>
+                <span>Tipo Operação</span>
+            </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="parametrizacao" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons loader_gear"></i>
+                <span>Parametrização</span>
+            </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="categoria-estabelecimento" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons design_app"></i>
+                <span>Categoria Estabelecimento</span>
+            </a>
+        </li>
     </ul>
 </div>

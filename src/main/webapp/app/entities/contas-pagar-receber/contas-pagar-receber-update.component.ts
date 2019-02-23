@@ -32,7 +32,8 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
     estabelecimentos: IEstabelecimentoComercial[];
     tipoOperacoes: ITipoOperacao[];
     currentAccount: any;
-
+    isLoja: boolean;
+    isEstabelecimento: boolean;
     constructor(
         private contasPagarReceberService: ContasPagarReceberService,
         private activatedRoute: ActivatedRoute,
@@ -42,7 +43,10 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
         private tipoOperacaoService: TipoOperacaoService,
         private principal: Principal,
         private jhiAlertService: JhiAlertService
-    ) {}
+    ) {
+        this.isLoja = true;
+        this.isEstabelecimento = true;
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -53,6 +57,11 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ contasPagarReceber }) => {
             this.contasPagarReceber = contasPagarReceber;
             this.data = this.contasPagarReceber.data != null ? this.contasPagarReceber.data.format(DATE_FORMAT) : null;
+            this.isLoja =
+                this.contasPagarReceber.estabelecimentoComercialId === undefined ||
+                this.contasPagarReceber.estabelecimentoComercialId === null;
+            this.isEstabelecimento =
+                this.contasPagarReceber.lojaMaconicaId === undefined || this.contasPagarReceber.lojaMaconicaId === null;
         });
 
         this.lojaMaconicaService.findByStatus(true).subscribe(
@@ -99,6 +108,14 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IContasPagarReceber>>) {
         result.subscribe((res: HttpResponse<IContasPagarReceber>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    }
+    onChangeLojaMaconica(value) {
+        this.isEstabelecimento = value === undefined;
+        this.contasPagarReceber.estabelecimentoComercialId = undefined;
+    }
+    onChangeEstabelecimentoComercial(value) {
+        this.isLoja = value === undefined;
+        this.contasPagarReceber.lojaMaconicaId = undefined;
     }
 
     private onSaveSuccess() {

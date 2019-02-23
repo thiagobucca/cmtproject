@@ -34,7 +34,7 @@
                     <div>
                         <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-height: 100px;"
                             *ngIf="cupom.foto && isBase64" alt="cupom image" />
-                            <img [src]="cupom.fotoContentType" 
+                            <img [src]="cupom.foto" 
                             *ngIf="fotoContentType.foto && !isBase64"
                             style="max-width: 100%;" alt="cupom image"/>
                         <div *ngIf="cupom.foto" class="form-text text-danger clearfix">
