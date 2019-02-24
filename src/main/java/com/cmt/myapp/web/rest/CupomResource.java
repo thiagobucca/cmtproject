@@ -79,11 +79,11 @@ public class CupomResource {
 
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
-            Files.createDirectories(Paths.get("/home/cmtdev/storage/cupom/" + name).getParent());
-            Files.write(Paths.get(storageDir + cupom.getUsuarioId() + "/" + name),
+            Files.createDirectories(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name).getParent());
+            Files.write(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name),
                     Base64.getDecoder().decode(cupom.getFoto()));
 
-            cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + name);
+            cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/"+cupom.getUsuarioId() + "/" + name);
 
             Cupom result = cupomRepository.save(cupom);
             return ResponseEntity.created(new URI("/api/cupoms/" + result.getId()))
@@ -118,11 +118,11 @@ public class CupomResource {
 
                 String name = String.format("%s.%s",
                         RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(), "jpg");
-                Files.createDirectories(Paths.get("/home/cmtdev/storage/cupom/" + name).getParent());
-                Files.write(Paths.get(storageDir + cupom.getUsuarioId() + "/" + name),
+                Files.createDirectories(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name).getParent());
+                Files.write(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name),
                         Base64.getDecoder().decode(cupom.getFoto()));
 
-                cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + name);
+                cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" +name);
             }
 
             Cupom result = cupomRepository.save(cupom);
