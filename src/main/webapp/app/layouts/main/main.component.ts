@@ -14,9 +14,9 @@ export class JhiMainComponent implements OnInit {
         return this.auxService.isLoading === undefined ? false : this.auxService.isLoading;
     }
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
-        let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'cmtprojectApp';
+        let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'CMT';
         if (routeSnapshot.firstChild) {
-            title = this.getPageTitle(routeSnapshot.firstChild) || title;
+            title = this.getPageTitle(routeSnapshot.firstChild);
         }
         return title;
     }

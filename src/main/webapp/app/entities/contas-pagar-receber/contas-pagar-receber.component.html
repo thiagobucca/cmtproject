@@ -1,65 +1,74 @@
 <div>
     <h2 id="page-heading">
-        <span >Contas a Pagar/Receber</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-contas-pagar-receber" [routerLink]="['/contas-pagar-receber/new']">
+        <span>Contas a Pagar/Receber</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-contas-pagar-receber"
+            [routerLink]="['/contas-pagar-receber/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <br/>
+    <br />
     <div class="table-responsive" *ngIf="contasPagarRecebers">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="statusLancamento">Status <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tipoOperacao"><span >Operação</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="usuario"><span >Usuário</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lojaMaconica"><span >Loja Maçonica</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="estabelecimento"><span >Estabelecimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tipoLancamento"><span >Tipo Lançamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="statusLancamento">Status <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="tipoOperacao"><span>Operação</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="usuario"><span>Usuário</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="lojaMaconica"><span>Loja Maçonica</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="estabelecimento"><span>Estabelecimento</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="tipoLancamento"><span>Tipo Lançamento</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let contasPagarReceber of contasPagarRecebers ;trackBy: trackId">
-                <td><a [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'view' ]">{{contasPagarReceber.id}}</a></td>
-                <td>{{contasPagarReceber.data | date: 'dd/MM/yyyy'}}</td>
-                <td>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</td>
-                <td jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
-                <td>{{contasPagarReceber.tipoOperacao}}</td>
-                <td>{{contasPagarReceber.usuario}}</td>
-                <td>{{contasPagarReceber.lojaMaconica}}</td>
-                <td>{{contasPagarReceber.estabelecimento}}</td>
-                <td>{{contasPagarReceber.tipoLancamento}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'view' ]"
-                                class="btn btn-info btn-sm"
-                                title="Visualizar">
-                            <fa-icon [icon]="'eye'"></fa-icon>                            
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'edit']"
-                                class="btn btn-primary btn-sm"
-                                title="Editar">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'contas-pagar-receber/'+ contasPagarReceber.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm"
-                                title="Deletar">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                <tr *ngFor="let contasPagarReceber of contasPagarRecebers ;trackBy: trackId">
+                    <td><a [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'view' ]">{{contasPagarReceber.id}}</a></td>
+                    <td>{{contasPagarReceber.data | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</td>
+                    <td jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
+                    <td>{{contasPagarReceber.tipoOperacao}}</td>
+                    <td>{{contasPagarReceber.usuario}}</td>
+                    <td>{{contasPagarReceber.lojaMaconica}}</td>
+                    <td>{{contasPagarReceber.estabelecimento}}</td>
+                    <td>{{contasPagarReceber.tipoLancamento}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" (click)="detalhar(['/contas-pagar-receber', contasPagarReceber.id, 'view' ])"
+                                class="btn btn-info btn-sm" title="Visualizar">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                            </button>
+                            <button type="submit" [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'edit']"
+                                class="btn btn-primary btn-sm" title="Editar">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </button>
+                            <button type="submit" [routerLink]="['/', { outlets: { popup: 'contas-pagar-receber/'+ contasPagarReceber.id + '/delete'} }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -68,7 +77,8 @@
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

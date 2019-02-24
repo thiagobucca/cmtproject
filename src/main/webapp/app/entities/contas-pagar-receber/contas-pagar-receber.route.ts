@@ -39,7 +39,7 @@ export const contasPagarReceberRoute: Routes = [
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -51,7 +51,7 @@ export const contasPagarReceberRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -63,7 +63,7 @@ export const contasPagarReceberRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -75,7 +75,7 @@ export const contasPagarReceberRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -90,7 +90,7 @@ export const contasPagarReceberPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

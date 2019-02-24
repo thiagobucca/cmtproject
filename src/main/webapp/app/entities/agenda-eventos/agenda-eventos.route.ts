@@ -39,7 +39,7 @@ export const agendaEventosRoute: Routes = [
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -51,7 +51,7 @@ export const agendaEventosRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -63,7 +63,7 @@ export const agendaEventosRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -75,7 +75,7 @@ export const agendaEventosRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -90,7 +90,7 @@ export const agendaEventosPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

@@ -42,10 +42,11 @@ export class JhiLanguageHelper {
         if (!titleKey) {
             titleKey = this.getPageTitle(this.router.routerState.snapshot.root);
         }
+        this.titleService.setTitle(titleKey);
 
-        this.translateService.get(titleKey).subscribe(title => {
-            this.titleService.setTitle(title);
-        });
+        // this.translateService.get(titleKey).subscribe(title => {
+        //     this.titleService.setTitle(title);
+        // });
     }
 
     private init() {

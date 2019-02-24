@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-8">
+    <div class="col-12">
         <div *ngIf="contasPagarReceber">
             <h2><span >Contas a Pagar/Receber</span> {{contasPagarReceber.id}}</h2>
             <hr>
@@ -13,14 +13,11 @@
                 <dd>
                     <span>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento">Status Lancamento</span></dt>
+                <dt><span >Status Lançamento</span></dt>
                 <dd>
                     <span jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.contasPagarReceber.usuarioId">Usuario Id</span></dt>
-                <dd>
-                    <span>{{contasPagarReceber.usuarioId}}</span>
-                </dd>
+                
                 <dt><span >Loja Maçonica</span></dt>
                 <dd>
                     <span>{{contasPagarReceber.lojaMaconica}}</span>
@@ -41,7 +38,7 @@
                 <dd>
                     <span>{{contasPagarReceber.lojaMaconica}}</span>
                 </dd>
-                <dt><span >Estabelecimento</span></dt>
+                <dt><span >Estabelecimento Comercial</span></dt>
                 <dd>
                     <span>{{contasPagarReceber.estabelecimento}}</span>
                 </dd>

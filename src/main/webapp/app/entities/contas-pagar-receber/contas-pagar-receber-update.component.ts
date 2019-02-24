@@ -20,6 +20,9 @@ import { Principal, UserService, User } from 'app/core';
 import { ITipoOperacao } from 'app/shared/model/tipo-operacao.model';
 import { TipoOperacaoService } from 'app/entities/tipo-operacao';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-contas-pagar-receber-update',
     templateUrl: './contas-pagar-receber-update.component.html'
@@ -42,16 +45,27 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
         private userService: UserService,
         private tipoOperacaoService: TipoOperacaoService,
         private principal: Principal,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.isLoja = true;
         this.isEstabelecimento = true;
     }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
 
     ngOnInit() {
         this.isSaving = false;
+        this.loading = true;
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            this.loading = false;
+            this.ref.detectChanges();
         });
 
         this.activatedRoute.data.subscribe(({ contasPagarReceber }) => {
@@ -92,6 +106,7 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.loading = true;
         this.contasPagarReceber.data = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         this.contasPagarReceber.estabelecimento = null;
         this.contasPagarReceber.lojaMaconica = null;
@@ -120,11 +135,15 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
         this.previousState();
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
     }
 
     private onError(errorMessage: string) {
