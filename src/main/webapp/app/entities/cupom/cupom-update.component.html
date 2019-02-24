@@ -25,11 +25,13 @@
 
                     <div class="col-md-2">
                         <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.valor" for="field_valor">Valor</label>
-                        <input type="text" class="form-control" currencyMask name="valor" id="field_valor" [(ngModel)]="cupom.valor" />
+                        <input type="text" class="form-control" currencyMask name="valor" id="field_valor" [(ngModel)]="cupom.valor"
+                            required />
                     </div>
                     <div class="col-md-2">
-                        <label class="form-control-label"  for="field_numero">Número</label>
-                        <input type="text" class="form-control" name="numero" id="field_numero" [(ngModel)]="cupom.numero" />
+                        <label class="form-control-label" for="field_numero">Número</label>
+                        <input type="text" class="form-control" name="numero" id="field_numero" [(ngModel)]="cupom.numero"
+                            required />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -37,10 +39,11 @@
 
                         <label class="form-control-label" jhiTranslate="cmtprojectApp.cupom.foto" for="field_foto">Foto</label>
                         <div>
-                            <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-height: 100px;"
-                                *ngIf="cupom.foto && isBase64" alt="cupom image" />
+                            <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="    max-height: 200px; max-width: 200px;"
+                                *ngIf="cupom.foto && isBase64" alt="cupom image base64" />
 
-                            <img [src]="cupom.foto" *ngIf="cupom.foto && !isBase64" style="max-width: 100%;" alt="cupom image" />
+                            <img [src]="cupom.foto" *ngIf="cupom.foto && !isBase64" style="    max-height: 200px; max-width: 200px;"
+                                alt="cupom image url" />
                             <div *ngIf="cupom.foto" class="form-text text-danger clearfix">
                                 <span class="pull-left">{{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}</span>
                                 <button type="button" (click)="clearInputImage('foto', 'fotoContentType', 'fileImage')"
@@ -51,7 +54,8 @@
                             <input type="file" id="file_foto" (change)="setFileData($event, cupom, 'foto', true)"
                                 accept="image/*" jhiTranslate="entity.action.addimage" />
                         </div>
-                        <input type="hidden" class="form-control" name="foto" id="field_foto" [(ngModel)]="cupom.foto" />
+                        <input type="hidden" class="form-control" name="foto" id="field_foto" [(ngModel)]="cupom.foto"
+                            required />
                         <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
                             [(ngModel)]="cupom.fotoContentType" />
                     </div>
@@ -62,7 +66,7 @@
                         <label class="form-control-label" for="field_estabelecimentoComercialId">Estabelecimento
                             Comercial</label>
                         <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
-                            [(ngModel)]="cupom.estabelecimentoComercialId">
+                            [(ngModel)]="cupom.estabelecimentoComercialId" required>
                             <option [ngValue]="undefined" disabled selected>Selecione...</option>
                             <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
                         </select>

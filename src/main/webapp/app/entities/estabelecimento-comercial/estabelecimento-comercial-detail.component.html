@@ -30,7 +30,7 @@
                     <div *ngIf="estabelecimentoComercial.logo">
                         <a (click)="openFile(estabelecimentoComercial.logoContentType, estabelecimentoComercial.logo)">
                             <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
-                                style="max-width: 100%;" alt="estabelecimentoComercial image" />
+                            style="    max-height: 200px; max-width: 200px;" alt="estabelecimentoComercial image" />
                         </a>
                         {{estabelecimentoComercial.logoContentType}}, {{byteSize(estabelecimentoComercial.logo)}}
                     </div>

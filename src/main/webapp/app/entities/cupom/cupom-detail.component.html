@@ -21,7 +21,7 @@
                 <dd>
                     <div *ngIf="cupom.foto">
                         <a [href]="cupom.foto" target="_black">
-                            <img [src]="cupom.foto" style="max-width: 100%;" alt="cupom image" />
+                            <img [src]="cupom.foto" style="    max-height: 200px; max-width: 200px;" alt="cupom image" />
                         </a><br>
                         {{cupom.foto}}, {{byteSize(cupom.foto)}}
                     </div>
@@ -29,12 +29,7 @@
                 <dt><span>Estabelecimento Comercial</span></dt>
                 <dd>
                     <span>{{cupom.estabelecimento}}</span>
-                </dd>
-                <dt><span>Usuário</span></dt>
-                <dd>
-                    <span>{{cupom.usuario}}</span>
-                </dd>
-
+                </dd>               
             </dl>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">

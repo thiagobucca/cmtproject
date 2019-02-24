@@ -46,7 +46,9 @@ export class CupomUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cupom }) => {
             this.cupom = cupom;
-            this.isBase64 = false;
+            if (this.cupom.foto !== undefined) {
+                this.isBase64 = false;
+            }
             this.data = this.cupom.data != null ? this.cupom.data.format(DATE_FORMAT) : null;
             this.hora = this.cupom.data != null ? this.cupom.data.format(TIME_FORMAT) : null;
         });
