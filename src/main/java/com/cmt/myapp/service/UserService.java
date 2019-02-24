@@ -166,6 +166,8 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
+
+        log.debug("Information for UserDTO before: {}", userDTO);
         log.debug("Information for User before: {}", user);
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
