@@ -50,5 +50,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneByIdAndPlacet(Long id, String placet);
 
     Page<User> findAllByLojaMaconicaId(Pageable pageable, Long lojaMaconicaId);
+
+    List<User> findAllByLojaMaconicaId( Long lojaMaconicaId);
     
 }

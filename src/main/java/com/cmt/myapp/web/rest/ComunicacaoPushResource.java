@@ -183,12 +183,13 @@ public class ComunicacaoPushResource {
         ArrayList<User> usuarios = new ArrayList<>();
         for(ComunicacaoPushLoja item : lojas){
             usuarios.addAll(userRepository.findAllByLojaMaconicaId(item.getLojaMaconicaId()));
+            
         }
 
         if(comunicacaoPush.get().getTipoPessoa() != null){
             usuarios.addAll(userRepository.findAllByTipoPessoa(null, comunicacaoPush.get().getTipoPessoa()).getContent());
         }
-        
+
         SendNotification notification = new SendNotification();
 
         if(!usuarios.isEmpty()){
