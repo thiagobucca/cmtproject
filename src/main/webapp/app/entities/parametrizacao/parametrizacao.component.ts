@@ -3,9 +3,12 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
+import { ActivatedRoute, Router } from '@angular/router';
 import { IParametrizacao } from 'app/shared/model/parametrizacao.model';
 import { Principal } from 'app/core';
 import { ParametrizacaoService } from './parametrizacao.service';
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'jhi-parametrizacao',
@@ -20,18 +23,36 @@ export class ParametrizacaoComponent implements OnInit, OnDestroy {
         private parametrizacaoService: ParametrizacaoService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {}
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     loadAll() {
+        this.loading = true;
         this.parametrizacaoService.query().subscribe(
             (res: HttpResponse<IParametrizacao[]>) => {
                 this.parametrizacaos = res.body;
+                this.loading = false;
+                this.ref.detectChanges();
             },
-            (res: HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => {
+                this.onError(res.message);
+                this.loading = false;
+                this.ref.detectChanges();
+            }
         );
     }
-
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
+    }
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then(account => {

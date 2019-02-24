@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span>Parametrização</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parametrizacao"
-            [routerLink]="['/parametrizacao/new']">
+        (click)="detalhar(['/parametrizacao/new'])">
             <fa-icon [icon]="'plus'"></fa-icon>
             Novo
         </button>
@@ -26,11 +26,11 @@
                     <td class="text-cemter">{{parametrizacao.diaPagamentoLoja}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit" [routerLink]="['/parametrizacao', parametrizacao.id, 'view' ]" class="btn btn-info btn-sm"
-                                title="Visualizar">
+                            <button type="submit" (click)="detalhar(['/parametrizacao', parametrizacao.id, 'view' ])"
+                                class="btn btn-info btn-sm" title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
-                            <button type="submit" [routerLink]="['/parametrizacao', parametrizacao.id, 'edit']" class="btn btn-primary btn-sm"
+                            <button type="submit" (click)="detalhar(['/parametrizacao', parametrizacao.id, 'edit'])" class="btn btn-primary btn-sm"
                                 title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>

@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 import { IParametrizacao } from 'app/shared/model/parametrizacao.model';
 import { ParametrizacaoService } from './parametrizacao.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-parametrizacao-update',
     templateUrl: './parametrizacao-update.component.html'
@@ -13,13 +16,25 @@ import { ParametrizacaoService } from './parametrizacao.service';
 export class ParametrizacaoUpdateComponent implements OnInit {
     parametrizacao: IParametrizacao;
     isSaving: boolean;
-
-    constructor(private parametrizacaoService: ParametrizacaoService, private activatedRoute: ActivatedRoute) {}
-
+    constructor(
+        private parametrizacaoService: ParametrizacaoService,
+        private activatedRoute: ActivatedRoute,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
+    ) {}
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     ngOnInit() {
+        this.isSaving = true;
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ parametrizacao }) => {
             this.parametrizacao = parametrizacao;
+            this.loading = false;
+            this.ref.detectChanges();
         });
     }
 
@@ -28,6 +43,7 @@ export class ParametrizacaoUpdateComponent implements OnInit {
     }
 
     save() {
+        this.isSaving = true;
         this.isSaving = true;
         if (this.parametrizacao.id !== undefined) {
             this.subscribeToSaveResponse(this.parametrizacaoService.update(this.parametrizacao));
@@ -42,10 +58,14 @@ export class ParametrizacaoUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
         this.previousState();
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
     }
 }
