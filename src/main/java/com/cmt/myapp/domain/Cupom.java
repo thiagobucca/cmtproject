@@ -133,6 +133,10 @@ public class Cupom implements Serializable {
         return this;
     }
 
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
     public Long getEstabelecimentoComercialId() {
         return estabelecimentoComercialId;
     }
@@ -207,6 +211,7 @@ public class Cupom implements Serializable {
             ", foto='" + getFoto() + "'" +
             ", fotoContentType='" + getFotoContentType() + "'" +
             ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
+            ", usuarioId=" + getUsuarioId() +
             "}";
     }
 }
