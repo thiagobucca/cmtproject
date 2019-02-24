@@ -64,11 +64,13 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
                 this.contatoEstabelecimentoService.findByEstabelecimento(this.estabelecimentoComercial.id).subscribe(
                     (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                         this.contatoEstabelecimentos = res.body;
-                        this.loading = true;
+                        this.loading = false;
+                        this.ref.detectChanges();
                     },
                     (res: HttpErrorResponse) => {
                         this.onError(res.message);
-                        this.loading = true;
+                        this.loading = false;
+                        this.ref.detectChanges();
                     }
                 );
             }

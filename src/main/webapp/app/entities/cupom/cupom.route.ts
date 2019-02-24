@@ -39,7 +39,7 @@ export const cupomRoute: Routes = [
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -51,7 +51,7 @@ export const cupomRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -63,7 +63,7 @@ export const cupomRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -75,7 +75,7 @@ export const cupomRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -90,7 +90,7 @@ export const cupomPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
