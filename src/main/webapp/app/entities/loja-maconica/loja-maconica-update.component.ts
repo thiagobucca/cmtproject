@@ -11,6 +11,9 @@ import { JhiAlertService } from 'ng-jhipster';
 import { IContatoLojaMaconica, ContatoLojaMaconica } from 'app/shared/model/contato-loja-maconica.model';
 import { ContatoLojaMaconicaService } from 'app/entities/contato-loja-maconica/contato-loja-maconica.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-loja-maconica-update',
     templateUrl: './loja-maconica-update.component.html'
@@ -26,22 +29,41 @@ export class LojaMaconicaUpdateComponent implements OnInit {
         private lojaMaconicaService: LojaMaconicaService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
-        private contatoLojaMaconicaService: ContatoLojaMaconicaService
+        private contatoLojaMaconicaService: ContatoLojaMaconicaService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.indexEdit = -1;
     }
 
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
+
     ngOnInit() {
+        this.loading = true;
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ lojaMaconica }) => {
             this.lojaMaconica = lojaMaconica;
             this.contatoloja = new ContatoLojaMaconica();
+            this.loading = false;
+            this.ref.detectChanges();
             if (this.lojaMaconica.id !== undefined) {
+                this.loading = true;
                 this.contatoLojaMaconicaService.findByLoja(this.lojaMaconica.id).subscribe(
                     (res: HttpResponse<IContatoLojaMaconica[]>) => {
                         this.contatolojas = res.body;
+                        this.loading = false;
+                        this.ref.detectChanges();
                     },
-                    (res: HttpErrorResponse) => this.onError(res.message)
+                    (res: HttpErrorResponse) => {
+                        this.onError(res.message);
+                        this.loading = false;
+                        this.ref.detectChanges();
+                    }
                 );
             }
         });
@@ -52,6 +74,7 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     }
 
     save() {
+        this.loading = true;
         this.isSaving = true;
         if (this.lojaMaconica.id !== undefined) {
             this.subscribeToSaveResponse(this.lojaMaconicaService.update(this.lojaMaconica));
@@ -89,11 +112,15 @@ export class LojaMaconicaUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
         this.previousState();
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
     }
 
     saveItem() {

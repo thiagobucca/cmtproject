@@ -1,61 +1,68 @@
 <div>
     <h2 id="page-heading">
-        <span >Loja Maçônica</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-loja-maconica" [routerLink]="['/loja-maconica/new']">
+        <span>Loja Maçônica</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-loja-maconica"
+            [routerLink]="['/loja-maconica/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <br/>
+    <br />
     <div class="table-responsive" *ngIf="lojaMaconicas">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="codCnpj"><span >Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="endereco"><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="numero"><span jhiTranslate="cmtprojectApp.lojaMaconica.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="codCnpj"><span>CNPJ</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="endereco"><span>Endereço</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="numero"><span>Número</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let lojaMaconica of lojaMaconicas ;trackBy: trackId">
-                <td><a [routerLink]="['/loja-maconica', lojaMaconica.id, 'view' ]">{{lojaMaconica.id}}</a></td>
-                <td>{{lojaMaconica.codCnpj | mask: '00.000.000/0000-00'}}</td>
-                <td>{{lojaMaconica.nome}}</td>
-                <td>{{lojaMaconica.endereco}}</td>
-                <td>{{lojaMaconica.telefone | mask: '(00) 0 0000-0000'}}</td>
-                <td>{{lojaMaconica.numero}}</td>
-                <td><jhi-boolean
-                    [value]="lojaMaconica.bolAtivo"
-                    [textTrue]="'Ativo'"
-                    [textFalse]="'Inativo'"></td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/loja-maconica', lojaMaconica.id, 'view' ]"
+                <tr *ngFor="let lojaMaconica of lojaMaconicas ;trackBy: trackId">
+                    <td><a [routerLink]="['/loja-maconica', lojaMaconica.id, 'view' ]">{{lojaMaconica.id}}</a></td>
+                    <td>{{lojaMaconica.codCnpj | mask: '00.000.000/0000-00'}}</td>
+                    <td>{{lojaMaconica.nome}}</td>
+                    <td>{{lojaMaconica.endereco}}</td>
+                    <td>{{lojaMaconica.telefone | mask: '(00) 0 0000-0000'}}</td>
+                    <td>{{lojaMaconica.numero}}</td>
+                    <td>
+                        <jhi-boolean [value]="lojaMaconica.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" (click)="detalhar(['/loja-maconica', lojaMaconica.id, 'view' ])"
                                 class="btn btn-info btn-sm" title="Visualizar">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']"
-                                class="btn btn-primary btn-sm" title="Editar">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'loja-maconica/'+ lojaMaconica.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm" title="Deletar">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                            </button>
+                            <button type="submit" [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']" class="btn btn-primary btn-sm"
+                                title="Editar">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </button>
+                            <button type="submit" [routerLink]="['/', { outlets: { popup: 'loja-maconica/'+ lojaMaconica.id + '/delete'} }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -64,7 +71,8 @@
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

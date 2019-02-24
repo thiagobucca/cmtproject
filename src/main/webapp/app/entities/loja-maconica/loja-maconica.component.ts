@@ -10,6 +10,9 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { LojaMaconicaService } from './loja-maconica.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-loja-maconica',
     templateUrl: './loja-maconica.component.html'
@@ -37,7 +40,9 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -48,7 +53,15 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
         });
     }
 
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
+
     loadAll() {
+        this.loading = true;
         this.lojaMaconicaService
             .query({
                 page: this.page - 1,
@@ -56,9 +69,21 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<ILojaMaconica[]>) => this.paginateLojaMaconicas(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<ILojaMaconica[]>) => {
+                    this.paginateLojaMaconicas(res.body, res.headers);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                }
             );
+    }
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
     }
 
     loadPage(page: number) {

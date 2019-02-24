@@ -7,6 +7,9 @@ import { IContatoLojaMaconica, ContatoLojaMaconica } from 'app/shared/model/cont
 import { ContatoLojaMaconicaService } from 'app/entities/contato-loja-maconica/contato-loja-maconica.service';
 import { JhiAlertService } from 'ng-jhipster';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-loja-maconica-detail',
     templateUrl: './loja-maconica-detail.component.html'
@@ -17,18 +20,35 @@ export class LojaMaconicaDetailComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
-        private contatoLojaMaconicaService: ContatoLojaMaconicaService
+        private contatoLojaMaconicaService: ContatoLojaMaconicaService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {}
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     ngOnInit() {
+        this.loading = true;
         this.activatedRoute.data.subscribe(({ lojaMaconica }) => {
             this.lojaMaconica = lojaMaconica;
+            this.loading = false;
+            this.ref.detectChanges();
             if (this.lojaMaconica.id !== undefined) {
+                this.loading = true;
                 this.contatoLojaMaconicaService.findByLoja(this.lojaMaconica.id).subscribe(
                     (res: HttpResponse<IContatoLojaMaconica[]>) => {
                         this.contatolojas = res.body;
+                        this.loading = false;
+                        this.ref.detectChanges();
                     },
-                    (res: HttpErrorResponse) => this.onError(res.message)
+                    (res: HttpErrorResponse) => {
+                        this.onError(res.message);
+                        this.loading = false;
+                        this.ref.detectChanges();
+                    }
                 );
             }
         });

@@ -1,58 +1,65 @@
 <div class="row ">
-    <div class="col-8">
+    <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="jhi-loja-maconica-heading">{{lojaMaconica.id>0?"Editar":"Criar"}} Loja Maçônica</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!lojaMaconica.id">
-                    <label for="id" >ID</label>
-                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="lojaMaconica.id" readonly />
+                <div class="form-group row" [hidden]="!lojaMaconica.id">
+                    <div class="col-md-1">
+
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="lojaMaconica.id"
+                            readonly />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_codCnpj">CNPJ</label>
-                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" 
-                    [(ngModel)]="lojaMaconica.codCnpj" 
-                    mask="00.000.000/0000-00" required/>
+                <div class="form-group row">
+                    <div class="col-md-4">
+
+                        <label class="form-control-label" for="field_codCnpj">CNPJ</label>
+                        <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" [(ngModel)]="lojaMaconica.codCnpj"
+                            mask="00.000.000/0000-00" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-control-label" for="field_nome">Nome</label>
+                        <input type="text" class="form-control" name="nome" id="field_nome" [(ngModel)]="lojaMaconica.nome"
+                            required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label"  for="field_nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="field_nome" 
-                    [(ngModel)]="lojaMaconica.nome" 
-                    required/>
+                <div class="form-group row">
+                    <div class="col-md-10">
+
+                        <label class="form-control-label" for="field_endereco">Endereço</label>
+                        <input type="text" class="form-control" name="endereco" id="field_endereco" [(ngModel)]="lojaMaconica.endereco"
+                            required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_endereco">Endereço</label>
-                    <input type="text" class="form-control" name="endereco" id="field_endereco" 
-                    [(ngModel)]="lojaMaconica.endereco"
-                    required />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label"  for="field_telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="field_telefone" 
-                    [(ngModel)]="lojaMaconica.telefone" 
-                    mask="(00) 0 0000-0000"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_numero">Número</label>
-                    <input type="number" class="form-control" name="numero" id="field_numero" 
-                    [(ngModel)]="lojaMaconica.numero" 
-                    required/>
+                <div class="form-group row">
+                    <div class="col-md-5">
+
+                        <label class="form-control-label" for="field_telefone">Telefone</label>
+                        <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="lojaMaconica.telefone"
+                            mask="(00) 0 0000-0000" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-control-label" for="field_numero">Número</label>
+                        <input type="text" mask="00000" class="form-control" name="numero" id="field_numero"
+                            [(ngModel)]="lojaMaconica.numero" required />
+                    </div>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo" [(ngModel)]="lojaMaconica.bolAtivo" />
                     <label class="form-check-label" for="field_bolAtivo">Ativo</label>
                 </div>
                 <div class="row " style="    margin-left: 10px;">
-                    <div class="col-md-12 card">
+                    <div class="col-md-10 offset-md-1 card">
                         <div class="card-header">
                             <div class="card-title">
                                 Contato
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="alert alert-danger" role="alert"                            
-                            *ngIf="(contatolojas===undefined || contatolojas.length==0)">
-                                 Ao menos um contado deve ser fornecido</div>
+                            <div class="alert alert-danger" role="alert" *ngIf="(contatolojas===undefined || contatolojas.length==0)">
+                                Ao menos um contado deve ser fornecido</div>
                             <form name="editFormContato" role="form" novalidate (ngSubmit)="saveItem()" #editForm="ngForm">
                                 <div class="form-group" [hidden]="true">
                                     <label for="id">ID</label>
@@ -67,8 +74,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_telefone">Telefone</label>
                                     <input type="text" class="form-control" name="contatoloja_telefone" id="field_contatoloja_telefone"
-                                        [(ngModel)]="contatoloja.telefone"
-                                        mask="(00) 0 0000-0000" />
+                                        [(ngModel)]="contatoloja.telefone" mask="(00) 0 0000-0000" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_email">Email</label>
@@ -129,7 +135,8 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (contatolojas!==undefined && contatolojas.length>0)" class="btn btn-success">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (contatolojas===undefined || contatolojas.length==0)"
+                    class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
