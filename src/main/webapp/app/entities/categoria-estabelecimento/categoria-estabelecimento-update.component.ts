@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 
 import { ICategoriaEstabelecimento } from 'app/shared/model/categoria-estabelecimento.model';
 import { CategoriaEstabelecimentoService } from './categoria-estabelecimento.service';
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'jhi-categoria-estabelecimento-update',
@@ -14,12 +16,27 @@ export class CategoriaEstabelecimentoUpdateComponent implements OnInit {
     categoriaEstabelecimento: ICategoriaEstabelecimento;
     isSaving: boolean;
 
-    constructor(private categoriaEstabelecimentoService: CategoriaEstabelecimentoService, private activatedRoute: ActivatedRoute) {}
+    constructor(
+        private categoriaEstabelecimentoService: CategoriaEstabelecimentoService,
+        private activatedRoute: ActivatedRoute,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
+    ) {}
+
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
 
     ngOnInit() {
         this.isSaving = false;
+        this.loading = true;
         this.activatedRoute.data.subscribe(({ categoriaEstabelecimento }) => {
             this.categoriaEstabelecimento = categoriaEstabelecimento;
+            this.loading = false;
+            this.ref.detectChanges();
         });
     }
 
@@ -29,6 +46,7 @@ export class CategoriaEstabelecimentoUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.loading = true;
         if (this.categoriaEstabelecimento.id !== undefined) {
             this.subscribeToSaveResponse(this.categoriaEstabelecimentoService.update(this.categoriaEstabelecimento));
         } else {
@@ -45,10 +63,14 @@ export class CategoriaEstabelecimentoUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
         this.previousState();
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
     }
 }

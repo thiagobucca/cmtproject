@@ -39,7 +39,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -51,7 +51,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -63,7 +63,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -75,7 +75,7 @@ export const categoriaEstabelecimentoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -90,7 +90,7 @@ export const categoriaEstabelecimentoPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
