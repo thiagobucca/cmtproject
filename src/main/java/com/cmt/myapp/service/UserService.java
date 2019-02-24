@@ -126,6 +126,23 @@ public class UserService {
 
     public User createUser(UserDTO userDTO) {
         User user = new User();
+
+        user.setPlacet(userDTO.getPlacet());
+        user.setTelefone(userDTO.getTelefone());
+        
+
+        if (user.getLojaMaconicaId() != null && user.getLojaMaconicaId() > 0)
+        {
+            user.setLojaMaconicaId(userDTO.getLojaMaconicaId());
+        }
+
+        user.setTipoPessoa(userDTO.getTipoPessoa());
+
+        if (user.getPessoaDependenteId() != null && user.getPessoaDependenteId() > 0)
+        {
+            user.setPessoaDependenteId(user.getPessoaDependenteId());
+        }
+
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -195,6 +212,12 @@ public class UserService {
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
+                user.setDeviceId(userDTO.getDeviceId());
+                user.setPlacet(userDTO.getPlacet());
+                user.setDataNascimento(userDTO.getDataNascimento());
+                user.setLojaMaconicaId(userDTO.getLojaMaconicaId());
+                user.setTelefone(userDTO.getTelefone());
+                
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()

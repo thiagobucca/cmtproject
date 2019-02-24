@@ -2,9 +2,13 @@ package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.ComunicacaoPush;
+import com.cmt.myapp.domain.ComunicacaoPushLoja;
 import com.cmt.myapp.domain.SendNotification;
+import com.cmt.myapp.domain.User;
 import com.cmt.myapp.domain.enumeration.TipoPessoa;
+import com.cmt.myapp.repository.ComunicacaoPushLojaRepository;
 import com.cmt.myapp.repository.ComunicacaoPushRepository;
+import com.cmt.myapp.repository.UserRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
 import com.cmt.myapp.web.rest.util.PaginationUtil;
@@ -30,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing ComunicacaoPush.
@@ -44,8 +49,15 @@ public class ComunicacaoPushResource {
 
     private final ComunicacaoPushRepository comunicacaoPushRepository;
 
-    public ComunicacaoPushResource(ComunicacaoPushRepository comunicacaoPushRepository) {
+    private final ComunicacaoPushLojaRepository comunicacaoPushLojaRepository;
+
+    private final UserRepository userRepository;
+
+    public ComunicacaoPushResource(ComunicacaoPushRepository comunicacaoPushRepository, ComunicacaoPushLojaRepository comunicacaoPushLojaRepository, 
+    UserRepository userRepository) {
         this.comunicacaoPushRepository = comunicacaoPushRepository;
+        this.comunicacaoPushLojaRepository = comunicacaoPushLojaRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -161,21 +173,37 @@ public class ComunicacaoPushResource {
      */
     @PostMapping("/comunicacao-pushes/send")
     @Timed
-    public ResponseEntity<String> sendComunicacaoPush() throws URISyntaxException {
+    public ResponseEntity<String> sendComunicacaoPush(@PathVariable Long id)  throws URISyntaxException {
         log.debug("REST request to send ComunicacaoPush : {}");
         
         //ComunicacaoPush result = comunicacaoPushRepository.save(comunicacaoPush);
 
+        Optional<ComunicacaoPush> comunicacaoPush = comunicacaoPushRepository.findById(id);
+        Page<ComunicacaoPushLoja> lojas = comunicacaoPushLojaRepository.findAllByComunicacaoPushId(null, comunicacaoPush.get().getId());
+        ArrayList<User> usuarios = new ArrayList<>();
+        for(ComunicacaoPushLoja item : lojas){
+            usuarios.addAll(userRepository.findAllByLojaMaconicaId(item.getLojaMaconicaId()));
+            
+        }
+
+        if(comunicacaoPush.get().getTipoPessoa() != null){
+            usuarios.addAll(userRepository.findAllByTipoPessoa(null, comunicacaoPush.get().getTipoPessoa()).getContent());
+        }
+
         SendNotification notification = new SendNotification();
 
-        notification.setApp_id("1ee29f2c-4652-4629-ab1e-1d016cfad22e");
-        notification.setIncluded_segments(new ArrayList<String>());
+        if(!usuarios.isEmpty()){
+            notification.setInclude_player_ids(new ArrayList<>());
+            notification.getInclude_player_ids().addAll(usuarios.stream().map(User::getDeviceId).collect(Collectors.toList()));
+        }else{
+            notification.setIncluded_segments(new ArrayList<String>());
+            notification.getIncluded_segments().add("Subscribed Users");
+        }
 
-        notification.getIncluded_segments().add("Subscribed Users");
-        notification.getContents().setEn("push liso");
+        notification.setApp_id("1ee29f2c-4652-4629-ab1e-1d016cfad22e");
+        notification.getContents().setEn(comunicacaoPush.get().getConteudoPush());
 
         RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -187,11 +215,8 @@ public class ComunicacaoPushResource {
 
         String resp = respEntity.getBody();
 
-        
-        log.debug(resp.toString());
-
         return ResponseEntity.created(new URI("/api/comunicacao-pushes/"))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, ""))
-            .body("teste");
+            .body(resp);
     }
 }

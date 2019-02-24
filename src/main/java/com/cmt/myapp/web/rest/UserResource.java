@@ -99,17 +99,32 @@ public class UserResource {
             throw new LoginAlreadyUsedException();
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
-        } else {
-            User newUser = userService.createUser(userDTO);
-
+        } 
+        else {
             if(userDTO.getTipoPessoa() == TipoPessoa.Dependente){
-                Optional<User> macom = userRepository.findById(userDTO.getPessoaDependenteId());
 
-                if(macom.get() != null){
-                    userDTO.setLojaMaconicaId(macom.get().getLojaMaconicaId());
-                }else
-                    throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
+                if (userDTO.getPessoaDependenteId() != null && userDTO.getPessoaDependenteId() > 0)
+                {
+                    Optional<User> macom = userRepository.findById(userDTO.getPessoaDependenteId());
+
+                    if(macom.get() != null){
+                        userDTO.setLojaMaconicaId(macom.get().getLojaMaconicaId());
+                    }else
+                        throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
+                }
+
+                if(!userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                    throw new BadRequestAlertException("Placet não encontrado, favor informar um valido", "userManagement", "idexists");
+                }
             }
+            else
+            {
+                if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                    throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+                }
+            }
+
+            User newUser = userService.createUser(userDTO);
             
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
@@ -139,10 +154,38 @@ public class UserResource {
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new LoginAlreadyUsedException();
         }
+
+        //Consulta o cadastro do usuario antes da edicao
+        existingUser = userRepository.findById(userDTO.getId());
+
+        //Verifica se o usuario macom editou o campo PLACET
+        if (userDTO.getTipoPessoa() == TipoPessoa.Macom && (userDTO.getPlacet() != existingUser.get().getPlacet()))
+        {
+            //Verifica se o numero do placet esta vinculado a outro macom
+            if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+            }
+            
+        }
+
+        //Verifica se o usuario trocou de tipo Pessoa (Macom )
+        if (userDTO.getTipoPessoa() != existingUser.get().getTipoPessoa())
+        {
+            //Se trocou o tipo de pessoa para Dependente
+            if(userDTO.getTipoPessoa() == TipoPessoa.Dependente && !userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet não encontrado, favor informar um valido", "userManagement", "idexists");
+            }
+            //Verifica se o numero do placet esta vinculado a outro macom
+            else if(userDTO.getTipoPessoa() == TipoPessoa.Macom && userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+            }
+            
+        }
+
         Optional<UserDTO> updatedUser = userService.updateUser(userDTO);
 
         return ResponseUtil.wrapOrNotFound(updatedUser,
-            HeaderUtil.createAlert("userManagement.updated", userDTO.getLogin()));
+        HeaderUtil.createAlert("userManagement.updated", userDTO.getLogin()));
     }
 
     /**
@@ -226,5 +269,18 @@ public class UserResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
- 
+
+    /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/users/lojaMaconica/{lojaMaconicaId}")
+    @Timed
+    public ResponseEntity<List<User>> getAllUsersByLojaMaconicaId(@PathVariable Long lojaMaconicaId, Pageable pageable) {
+        final Page<User> page = userRepository.findAllByLojaMaconicaId(pageable, lojaMaconicaId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }

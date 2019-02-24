@@ -56,7 +56,7 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
-    storageDir: /home/cmt/storage/cupom/
+    storageDir: /home/cmt/storage/
     
 
 server:
