@@ -1,93 +1,113 @@
 <div class="row ">
-    <div class="col-8">
+    <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="jhi-estabelecimento-comercial-heading">{{estabelecimentoComercial.id>0?"Editar":"Criar"}}
                 Estabelecimento Comercial</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!estabelecimentoComercial.id">
-                    <label for="id" >ID</label>
-                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="estabelecimentoComercial.id"
-                        readonly />
+                <div class="form-group row" [hidden]="!estabelecimentoComercial.id">
+                    <div class="col-md-1">
+
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="estabelecimentoComercial.id"
+                            readonly />
+                    </div>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" name="bolMatriz" id="field_bolMatriz" [(ngModel)]="estabelecimentoComercial.bolMatriz" />
                     <label class="form-check-label" for="field_bolMatriz">Matriz</label>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" for="field_codCnpj">CNPJ</label>
-                    <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" 
-                    [(ngModel)]="estabelecimentoComercial.codCnpj"
-                    mask="00.000.000/0000-00" required />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome" for="field_nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="field_nome" [(ngModel)]="estabelecimentoComercial.nome" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" 
-                        for="field_endereco">Endereço </label>
-                    <input type="text" class="form-control" name="endereco" id="field_endereco" [(ngModel)]="estabelecimentoComercial.endereco" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone"
-                        for="field_telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="field_telefone" 
-                    [(ngModel)]="estabelecimentoComercial.telefone"
-                    mask="(00) 0 0000-0000" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo" for="field_logo">Logo</label>
-                    <div>
-                        <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
-                            style="max-height: 100px;" *ngIf="estabelecimentoComercial.logo" alt="estabelecimentoComercial image" />
-                        <div *ngIf="estabelecimentoComercial.logo" class="form-text text-danger clearfix">
-                            <span class="pull-left">{{estabelecimentoComercial.logoContentType}},
-                                {{byteSize(estabelecimentoComercial.logo)}}</span>
-                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')"
-                                class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_logo" (change)="setFileData($event, estabelecimentoComercial, 'logo', true)"
-                            accept="image/*" jhiTranslate="entity.action.addimage" />
+                <div class="form-group row">
+                    <div class="col-md-4">
+
+                        <label class="form-control-label" for="field_codCnpj">CNPJ</label>
+                        <input type="text" class="form-control" name="codCnpj" id="field_codCnpj" [(ngModel)]="estabelecimentoComercial.codCnpj"
+                            mask="00.000.000/0000-00" required />
                     </div>
-                    <input type="hidden" class="form-control" name="logo" id="field_logo" [(ngModel)]="estabelecimentoComercial.logo" />
-                    <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
-                        [(ngModel)]="estabelecimentoComercial.logoContentType" />
+                    <div class="col-md-6">
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome"
+                            for="field_nome">Nome</label>
+                        <input type="text" class="form-control" name="nome" id="field_nome" [(ngModel)]="estabelecimentoComercial.nome"
+                            required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" 
-                        for="field_taxaConvenio">Taxa Convênio </label>
-                    <input type="text" class="form-control" required
-                    currencyMask [options]="{ align: 'right',
-                    allowNegative: true,
-                    allowZero: true,
-                    decimal: ',',
-                    precision: 2,
-                    prefix: '',
-                    suffix: '%',
-                    thousands: '.',
-                    nullable: false }"
-                     name="taxaConvenio" id="field_taxaConvenio" [(ngModel)]="estabelecimentoComercial.taxaConvenio" />
+                <div class="form-group row">
+                    <div class="col-md-10">
+
+                        <label class="form-control-label" for="field_endereco">Endereço </label>
+                        <input type="text" class="form-control" name="endereco" id="field_endereco" [(ngModel)]="estabelecimentoComercial.endereco"
+                            required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_categoriaEstabelecimentoId">Categoria Estabelecimento</label>
-                    <select class="form-control" id="field_categoriaEstabelecimentoId" name="categoriaEstabelecimentoId"
-                        [(ngModel)]="estabelecimentoComercial.categoriaEstabelecimentoId">
-                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="item.id" *ngFor="let item of categorias; trackBy: trackById">{{item.nome}}</option>
-                    </select>
+                <div class="form-group row">
+                    <div class="col-md-3">
+
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone"
+                            for="field_telefone">Telefone</label>
+                        <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="estabelecimentoComercial.telefone"
+                            mask="(00) 0 0000-0000" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-control-label" for="field_taxaConvenio">Taxa Convênio </label>
+                        <input type="text" class="form-control" required currencyMask [options]="{ align: 'right',
+                            allowNegative: true,
+                            allowZero: true,
+                            decimal: ',',
+                            precision: 2,
+                            prefix: '',
+                            suffix: '%',
+                            thousands: '.',
+                            nullable: false }"
+                            name="taxaConvenio" id="field_taxaConvenio" [(ngModel)]="estabelecimentoComercial.taxaConvenio" />
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-control-label" for="field_categoriaEstabelecimentoId">Categoria
+                            Estabelecimento</label>
+                        <select class="form-control" id="field_categoriaEstabelecimentoId" name="categoriaEstabelecimentoId"
+                            required [(ngModel)]="estabelecimentoComercial.categoriaEstabelecimentoId">
+                            <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                            <option [ngValue]="item.id" *ngFor="let item of categorias; trackBy: trackById">{{item.nome}}</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_estabelecimentoMatrizId">Matriz</label>
-                    <select class="form-control" id="field_estabelecimentoMatrizId" name="estabelecimentoMatrizId"
-                        [(ngModel)]="estabelecimentoComercial.estabelecimentoMatrizId" [disabled]="estabelecimentoComercial.bolMatriz"
-                        [required]="!estabelecimentoComercial.bolMatriz">
-                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
-                        <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
-                    </select>
+                <div class="form-group row">
+                    <div class="col-md-10">
+
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo"
+                            for="field_logo">Logo</label>
+                        <div>
+                            <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
+                                style="max-height: 100px;" *ngIf="estabelecimentoComercial.logo" alt="estabelecimentoComercial image" />
+                            <div *ngIf="estabelecimentoComercial.logo" class="form-text text-danger clearfix">
+                                <span class="pull-left">{{estabelecimentoComercial.logoContentType}},
+                                    {{byteSize(estabelecimentoComercial.logo)}}</span>
+                                <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                </button>
+                            </div>
+                            <input type="file" id="file_logo" (change)="setFileData($event, estabelecimentoComercial, 'logo', true)"
+                                accept="image/*" jhiTranslate="entity.action.addimage" />
+                        </div>
+                        <input type="hidden" class="form-control" name="logo" id="field_logo" [(ngModel)]="estabelecimentoComercial.logo" />
+                        <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                            [(ngModel)]="estabelecimentoComercial.logoContentType" />
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-md-10">
+
+                        <label class="form-control-label" for="field_estabelecimentoMatrizId">Matriz</label>
+                        <select class="form-control" id="field_estabelecimentoMatrizId" name="estabelecimentoMatrizId"
+                            [(ngModel)]="estabelecimentoComercial.estabelecimentoMatrizId" [disabled]="estabelecimentoComercial.bolMatriz"
+                            [required]="!estabelecimentoComercial.bolMatriz">
+                            <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                            <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo" [(ngModel)]="estabelecimentoComercial.bolAtivo" />
@@ -95,16 +115,15 @@
                 </div>
 
                 <div class="row " style="    margin-left: 10px;">
-                    <div class="col-md-12 card">
+                    <div class="col-md-10 offset-md-1 card">
                         <div class="card-header">
                             <div class="card-title">
                                 Contato
                             </div>
                         </div>
                         <div class="card-body">
-                                <div class="alert alert-danger" role="alert"                            
-                                *ngIf="(contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0)">
-                                     Ao menos um contado deve ser fornecido</div>
+                            <div class="alert alert-danger" role="alert" *ngIf="(contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0)">
+                                Ao menos um contado deve ser fornecido</div>
                             <form name="editFormContato" role="form" novalidate (ngSubmit)="saveItem()" #editForm="ngForm">
                                 <div class="form-group" [hidden]="true">
                                     <label for="id">ID</label>
@@ -119,15 +138,15 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_telefone">Telefone</label>
                                     <input type="text" class="form-control" name="contatoEstabelecimento_telefone" id="field_contatoEstabelecimento_telefone"
-                                        [(ngModel)]="contatoEstabelecimento.telefone"
-                                        mask="(00) 0 0000-0000" />
+                                        [(ngModel)]="contatoEstabelecimento.telefone" mask="(00) 0 0000-0000" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="field_email">Email</label>
                                     <input type="email" class="form-control" name="contatoEstabelecimento_email" id="field_contatoEstabelecimento_email"
                                         [(ngModel)]="contatoEstabelecimento.email" />
                                 </div>
-                                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancelar()" title="Cancelar">
+                                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancelar()"
+                                    title="Cancelar">
                                     <fa-icon [icon]="'ban'"></fa-icon>
                                 </button>
                                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
@@ -157,13 +176,12 @@
                                             <td class="text-right">
                                                 <div class="btn-group flex-btn-group-container">
 
-                                                    <button type="button" (click)="editarItem(i)"
-                                                        class="btn btn-primary btn-sm" title="Editar">
+                                                    <button type="button" (click)="editarItem(i)" class="btn btn-primary btn-sm"
+                                                        title="Editar">
                                                         <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                                     </button>
-                                                    <button type="button" (click)="deletar(i)"
-                                                        replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm"
-                                                        title="Deletar">
+                                                    <button type="button" (click)="deletar(i)" replaceUrl="true"
+                                                        queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
                                                         <fa-icon [icon]="'times'"></fa-icon>
                                                     </button>
                                                 </div>
@@ -181,12 +199,11 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0)" class="btn btn-success">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0)"
+                    class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>
     </div>
 </div>
-
-    
