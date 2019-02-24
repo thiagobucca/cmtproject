@@ -17,6 +17,9 @@ import { CategoriaEstabelecimentoService } from 'app/entities/categoria-estabele
 
 import { GenericValidator } from 'app/shared/util/validacoes';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-estabelecimento-comercial-update',
     templateUrl: './estabelecimento-comercial-update.component.html'
@@ -38,13 +41,21 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private categoriaEstabelecimentoService: CategoriaEstabelecimentoService,
-        private contatoEstabelecimentoService: ContatoEstabelecimentoService
+        private contatoEstabelecimentoService: ContatoEstabelecimentoService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.indexEdit = -1;
         this.validacoes = new GenericValidator();
     }
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     ngOnInit() {
+        this.loading = true;
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ estabelecimentoComercial }) => {
             this.estabelecimentoComercial = estabelecimentoComercial;
@@ -53,8 +64,12 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
                 this.contatoEstabelecimentoService.findByEstabelecimento(this.estabelecimentoComercial.id).subscribe(
                     (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                         this.contatoEstabelecimentos = res.body;
+                        this.loading = true;
                     },
-                    (res: HttpErrorResponse) => this.onError(res.message)
+                    (res: HttpErrorResponse) => {
+                        this.onError(res.message);
+                        this.loading = true;
+                    }
                 );
             }
         });
@@ -66,7 +81,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.categoriaEstabelecimentoService.query({ filter: { bolAtivo: true } }).subscribe(
+        this.categoriaEstabelecimentoService.query({ bolAtivo: true }).subscribe(
             (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
                 this.categorias = res.body;
             },
@@ -96,6 +111,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.loading = true;
         if (this.validar()) {
             this.estabelecimentoComercial.categoria = null;
             if (this.estabelecimentoComercial.id !== undefined) {
@@ -185,10 +201,12 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.loading = false;
         this.previousState();
     }
 
     private onSaveError() {
+        this.loading = false;
         this.isSaving = false;
     }
     private onError(errorMessage: string) {
