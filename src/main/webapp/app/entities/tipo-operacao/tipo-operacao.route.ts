@@ -39,7 +39,7 @@ export const tipoOperacaoRoute: Routes = [
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -51,7 +51,7 @@ export const tipoOperacaoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -63,7 +63,7 @@ export const tipoOperacaoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -75,7 +75,7 @@ export const tipoOperacaoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -90,7 +90,7 @@ export const tipoOperacaoPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

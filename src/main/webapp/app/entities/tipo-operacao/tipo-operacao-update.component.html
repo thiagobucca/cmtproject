@@ -1,35 +1,40 @@
 <div class="row ">
-    <div class="col-8">
+    <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-tipo-operacao-heading" >{{tipoOperacao.id>0?"Editar":"Criar"}} Tipo Operação</h2>
+            <h2 id="jhi-tipo-operacao-heading">{{tipoOperacao.id>0?"Editar":"Criar"}} Tipo Operação</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!tipoOperacao.id">
-                    <label for="id" >ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="tipoOperacao.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label"  for="field_nomeOperacao">Nome Operação</label>
-                    <input type="text" class="form-control" name="nomeOperacao" id="field_nomeOperacao"
-                        [(ngModel)]="tipoOperacao.nomeOperacao" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_tipoLancamento">Tipo Lançamento</label>
-                    <select class="form-control" name="tipoLancamento" [(ngModel)]="tipoOperacao.tipoLancamento" id="field_tipoLancamento" >
-                        <option value="Credito">{{'cmtprojectApp.TipoLancamento.Credito' | translate}}</option>
-                        <option value="Debito">{{'cmtprojectApp.TipoLancamento.Debito' | translate}}</option>
-                    </select>
-                </div>                
-                <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo"
-                        [(ngModel)]="tipoOperacao.bolAtivo" />
-                        <label class="form-check-label"  for="field_bolAtivo">Ativo</label>
+                <div class="form-group row" [hidden]="!tipoOperacao.id">
+                    <div class="col-md-1">
+
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="tipoOperacao.id" readonly />
                     </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+
+                        <label class="form-control-label" for="field_nomeOperacao">Nome Operação</label>
+                        <input type="text" class="form-control" name="nomeOperacao" id="field_nomeOperacao" [(ngModel)]="tipoOperacao.nomeOperacao"
+                            required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-control-label" for="field_tipoLancamento">Tipo Lançamento</label>
+                        <select class="form-control" name="tipoLancamento" [(ngModel)]="tipoOperacao.tipoLancamento" id="field_tipoLancamento"
+                            required>
+                            <option value="Credito">Crédito</option>
+                            <option value="Debito">Débito</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo" [(ngModel)]="tipoOperacao.bolAtivo" />
+                    <label class="form-check-label" for="field_bolAtivo">Ativo</label>
+                </div>
 
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
