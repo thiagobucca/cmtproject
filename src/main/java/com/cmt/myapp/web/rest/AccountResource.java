@@ -3,6 +3,7 @@ package com.cmt.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import com.cmt.myapp.domain.User;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.UserRepository;
 import com.cmt.myapp.security.SecurityUtils;
 import com.cmt.myapp.service.MailService;
@@ -61,7 +62,29 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
+        if(managedUserVM.getTipoPessoa() == TipoPessoa.Dependente){
 
+            if (managedUserVM.getPessoaDependenteId() != null && managedUserVM.getPessoaDependenteId() > 0)
+            {
+                Optional<User> macom = userRepository.findById(managedUserVM.getPessoaDependenteId());
+
+                if(macom.get() != null){
+                    managedUserVM.setLojaMaconicaId(macom.get().getLojaMaconicaId());
+                }else
+                    throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
+            }
+
+            if(!userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet não encontrado, favor informar um valido", "userManagement", "idexists");
+            }
+        }
+        else
+        {
+            if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+            }
+        }
+        
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
     }
