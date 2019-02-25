@@ -3,6 +3,7 @@ package com.cmt.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import com.cmt.myapp.domain.User;
+import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.UserRepository;
 import com.cmt.myapp.security.SecurityUtils;
 import com.cmt.myapp.service.MailService;
@@ -61,6 +62,26 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
+        if(managedUserVM.getTipoPessoa() == TipoPessoa.Dependente){
+
+            
+                Optional<User> macom = userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom, managedUserVM.getPlacet());
+
+                if(macom.isPresent()){
+                    managedUserVM.setLojaMaconicaId(macom.get().getLojaMaconicaId());
+                    managedUserVM.setPessoaDependenteId(macom.get().getId());
+                    log.debug("id macom"+ macom.get().getId());
+                }else
+                    throw new BadRequestAlertException("Não foi encontrado Maçom para o Placet informado", "userManagement", "idexists");
+            
+        }
+        else
+        {
+            if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+            }
+        }
+        
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
     }
@@ -127,7 +148,7 @@ public class AccountResource {
             throw new InternalServerErrorException("User could not be found");
         }
         userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
-            userDTO.getLangKey(), userDTO.getImageUrl());
+            userDTO.getLangKey(), userDTO.getImageUrl(), userDTO.getDeviceId());
     }
 
     /**

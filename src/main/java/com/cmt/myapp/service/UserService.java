@@ -94,8 +94,24 @@ public class UserService {
                 throw new EmailAlreadyUsedException();
             }
         });
+
+
+
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
+        newUser.setPlacet(userDTO.getPlacet());
+        newUser.setTelefone(userDTO.getTelefone());
+        newUser.setDeviceId(userDTO.getDeviceId());
+
+        if (userDTO.getLojaMaconicaId() != null && userDTO.getLojaMaconicaId() > 0)
+        {
+            newUser.setLojaMaconicaId(userDTO.getLojaMaconicaId());
+        }
+
+        newUser.setTipoPessoa(userDTO.getTipoPessoa());
+        log.debug("id macom2"+ userDTO.getPessoaDependenteId());
+        newUser.setPessoaDependenteId(userDTO.getPessoaDependenteId());
+        newUser.setDataNascimento(userDTO.getDataNascimento());
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
@@ -104,8 +120,10 @@ public class UserService {
         newUser.setEmail(userDTO.getEmail().toLowerCase());
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
+        
+
         // new user is not active
-        newUser.setActivated(true);
+        newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -157,7 +175,7 @@ public class UserService {
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
-        user.setActivated(true);
+        user.setActivated(false);
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO.getAuthorities().stream()
                 .map(authorityRepository::findById)
@@ -183,7 +201,7 @@ public class UserService {
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String deviceId) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
@@ -192,6 +210,7 @@ public class UserService {
                 user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
+                user.setDeviceId(deviceId);
                 log.debug("Changed Information for User: {}", user);
             });
     }
