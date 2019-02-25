@@ -100,18 +100,18 @@ public class UserService {
         newUser.setTelefone(userDTO.getTelefone());
         newUser.setDeviceId(userDTO.getDeviceId());
 
-        if (newUser.getLojaMaconicaId() != null && newUser.getLojaMaconicaId() > 0)
+        if (userDTO.getLojaMaconicaId() != null && userDTO.getLojaMaconicaId() > 0)
         {
             newUser.setLojaMaconicaId(userDTO.getLojaMaconicaId());
         }
 
         newUser.setTipoPessoa(userDTO.getTipoPessoa());
 
-        if (newUser.getPessoaDependenteId() != null && newUser.getPessoaDependenteId() > 0)
+        if (userDTO.getPessoaDependenteId() != null && userDTO.getPessoaDependenteId() > 0)
         {
-            newUser.setPessoaDependenteId(newUser.getPessoaDependenteId());
+            newUser.setPessoaDependenteId(userDTO.getPessoaDependenteId());
         }
-
+        newUser.setDataNascimento(userDTO.getDataNascimento());
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
@@ -123,7 +123,7 @@ public class UserService {
         
 
         // new user is not active
-        newUser.setActivated(true);
+        newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
