@@ -12,7 +12,10 @@ const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, loadingRoute, ...errorRoute];
                 ...LAYOUT_ROUTES,
                 {
                     path: 'admin',
-                    loadChildren: './admin/admin.module#CmtprojectAdminModule'
+                    loadChildren: './admin/admin.module#CmtprojectAdminModule',
+                    data: {
+                        authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA']
+                    }
                 }
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }

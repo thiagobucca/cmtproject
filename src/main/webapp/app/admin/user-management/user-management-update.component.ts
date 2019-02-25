@@ -32,7 +32,7 @@ export class UserMgmtUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
-            this.user = user.body ? user.body : user;
+            this.user = user;
             this.data = this.user.dataNascimento != null ? this.user.dataNascimento.format(DATE_FORMAT) : null;
         });
         this.authorities = [];
@@ -62,6 +62,7 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.user.langKey = 'pt-br';
         this.user.dataNascimento = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         if (this.user.id !== null) {
             this.userService.update(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
@@ -83,5 +84,22 @@ export class UserMgmtUpdateComponent implements OnInit {
     }
     trackById(index: number, item: any) {
         return item.id;
+    }
+
+    onChangeTipoPessoa(event) {
+        this.user.lojaMaconicaId = undefined;
+        this.user.pessoaDependenteId = undefined;
+    }
+
+    onChangeMacom(event) {
+        debugger;
+        const dependencia = this.macons.find(x => x.id == event);
+        if (dependencia != null) {
+            this.user.lojaMaconicaId = dependencia.lojaMaconicaId;
+            this.user.placet = dependencia.placet;
+        } else {
+            this.user.lojaMaconicaId = undefined;
+            this.user.placet = undefined;
+        }
     }
 }
