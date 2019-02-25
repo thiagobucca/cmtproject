@@ -105,16 +105,13 @@ public class UserResource {
 
                     Optional<User> macom = userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom, userDTO.getPlacet());
 
-                    if(macom.get() != null){
+                    if(macom.isPresent()){
                         userDTO.setLojaMaconicaId(macom.get().getLojaMaconicaId());
                         userDTO.setPessoaDependenteId(macom.get().getId());
                     }else
-                        throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
+                        throw new BadRequestAlertException("Não foi encontrado Maçom para o Placet informado", "userManagement", "idexists");
                 
 
-                if(!userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
-                    throw new BadRequestAlertException("Placet não encontrado, favor informar um valido", "userManagement", "idexists");
-                }
             }
             else
             {
