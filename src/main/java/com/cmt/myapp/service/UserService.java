@@ -96,6 +96,22 @@ public class UserService {
         });
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
+        newUser.setPlacet(userDTO.getPlacet());
+        newUser.setTelefone(userDTO.getTelefone());
+        
+
+        if (newUser.getLojaMaconicaId() != null && newUser.getLojaMaconicaId() > 0)
+        {
+            newUser.setLojaMaconicaId(userDTO.getLojaMaconicaId());
+        }
+
+        newUser.setTipoPessoa(userDTO.getTipoPessoa());
+
+        if (newUser.getPessoaDependenteId() != null && newUser.getPessoaDependenteId() > 0)
+        {
+            newUser.setPessoaDependenteId(newUser.getPessoaDependenteId());
+        }
+
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
@@ -104,6 +120,8 @@ public class UserService {
         newUser.setEmail(userDTO.getEmail().toLowerCase());
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
+        
+
         // new user is not active
         newUser.setActivated(true);
         // new user gets registration key
@@ -183,7 +201,7 @@ public class UserService {
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String placet) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
@@ -192,6 +210,7 @@ public class UserService {
                 user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
+                user.setPlacet(placet);
                 log.debug("Changed Information for User: {}", user);
             });
     }
