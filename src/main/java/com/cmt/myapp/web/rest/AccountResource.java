@@ -64,16 +64,16 @@ public class AccountResource {
         }
         if(managedUserVM.getTipoPessoa() == TipoPessoa.Dependente){
 
-            if (managedUserVM.getPessoaDependenteId() != null && managedUserVM.getPessoaDependenteId() > 0)
-            {
-                Optional<User> macom = userRepository.findById(managedUserVM.getPessoaDependenteId());
+            
+                Optional<User> macom = userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom, managedUserVM.getPlacet());
 
                 if(macom.get() != null){
                     managedUserVM.setLojaMaconicaId(macom.get().getLojaMaconicaId());
                     managedUserVM.setPessoaDependenteId(macom.get().getId());
+                    log.debug("id macom"+ macom.get().getId());
                 }else
                     throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
-            }
+            
 
             if(!userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
                 throw new BadRequestAlertException("Placet não encontrado, favor informar um valido", "userManagement", "idexists");

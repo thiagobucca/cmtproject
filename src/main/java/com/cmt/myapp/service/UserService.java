@@ -96,7 +96,7 @@ public class UserService {
         });
 
 
-        
+
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setPlacet(userDTO.getPlacet());
@@ -109,11 +109,8 @@ public class UserService {
         }
 
         newUser.setTipoPessoa(userDTO.getTipoPessoa());
-
-        if (userDTO.getPessoaDependenteId() != null && userDTO.getPessoaDependenteId() > 0)
-        {
-            newUser.setPessoaDependenteId(userDTO.getPessoaDependenteId());
-        }
+        log.debug("id macom2"+ userDTO.getPessoaDependenteId());
+        newUser.setPessoaDependenteId(userDTO.getPessoaDependenteId());
         newUser.setDataNascimento(userDTO.getDataNascimento());
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
