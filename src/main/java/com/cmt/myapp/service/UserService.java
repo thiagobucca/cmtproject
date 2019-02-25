@@ -94,6 +94,9 @@ public class UserService {
                 throw new EmailAlreadyUsedException();
             }
         });
+
+
+        
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setPlacet(userDTO.getPlacet());

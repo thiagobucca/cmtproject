@@ -70,6 +70,7 @@ public class AccountResource {
 
                 if(macom.get() != null){
                     managedUserVM.setLojaMaconicaId(macom.get().getLojaMaconicaId());
+                    managedUserVM.setPessoaDependenteId(macom.get().getId());
                 }else
                     throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
             }

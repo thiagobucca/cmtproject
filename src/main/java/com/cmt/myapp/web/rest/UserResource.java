@@ -109,6 +109,7 @@ public class UserResource {
 
                     if(macom.get() != null){
                         userDTO.setLojaMaconicaId(macom.get().getLojaMaconicaId());
+                        userDTO.setPessoaDependenteId(macom.get().getId());
                     }else
                         throw new BadRequestAlertException("Maçom não encontrado", "userManagement", "idexists");
                 }
