@@ -1,0 +1,20 @@
+{
+    "cmtprojectApp": {
+        "relatoriocontapagarreceber": {
+            "home": {
+                "title": "Relatoriocontapagarrecebers",
+                "createLabel": "Criar novo Relatoriocontapagarreceber",
+                "createOrEditLabel": "Criar ou editar Relatoriocontapagarreceber"
+            },
+            "created": "Um novo Relatoriocontapagarreceber foi criado com o identificador {{ param }}",
+            "updated": "Um Relatoriocontapagarreceber foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Relatoriocontapagarreceber foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Relatoriocontapagarreceber {{ id }}?"
+            },
+            "detail": {
+                "title": "Relatoriocontapagarreceber"
+            }
+        }
+    }
+}

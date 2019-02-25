@@ -1,0 +1,20 @@
+{
+    "cmtprojectApp": {
+        "relatoriocupomxcmt": {
+            "home": {
+                "title": "Relatoriocupomxcmts",
+                "createLabel": "Criar novo Relatoriocupomxcmt",
+                "createOrEditLabel": "Criar ou editar Relatoriocupomxcmt"
+            },
+            "created": "Um novo Relatoriocupomxcmt foi criado com o identificador {{ param }}",
+            "updated": "Um Relatoriocupomxcmt foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Relatoriocupomxcmt foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Relatoriocupomxcmt {{ id }}?"
+            },
+            "detail": {
+                "title": "Relatoriocupomxcmt"
+            }
+        }
+    }
+}

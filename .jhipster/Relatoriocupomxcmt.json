@@ -1,0 +1,13 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [],
+    "changelogDate": "20190225231644",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "relatoriocupomxcmt",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}
