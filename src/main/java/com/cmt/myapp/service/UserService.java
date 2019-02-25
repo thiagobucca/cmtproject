@@ -98,7 +98,7 @@ public class UserService {
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setPlacet(userDTO.getPlacet());
         newUser.setTelefone(userDTO.getTelefone());
-        
+        newUser.setDeviceId(userDTO.getDeviceId());
 
         if (newUser.getLojaMaconicaId() != null && newUser.getLojaMaconicaId() > 0)
         {
