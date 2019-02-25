@@ -110,8 +110,6 @@ public class UserResource {
                         userDTO.setPessoaDependenteId(macom.get().getId());
                     }else
                         throw new BadRequestAlertException("Não foi encontrado Maçom para o Placet informado", "userManagement", "idexists");
-                
-
             }
             else
             {

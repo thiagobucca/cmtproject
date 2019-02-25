@@ -41,7 +41,7 @@ public class EstabelecimentoComercial implements Serializable {
 
     @Lob
     @Column(name = "logo")
-    private byte[] logo;
+    private String logo;
 
     @Column(name = "logo_content_type")
     private String logoContentType;
@@ -171,16 +171,16 @@ public class EstabelecimentoComercial implements Serializable {
         this.telefone = telefone;
     }
 
-    public byte[] getLogo() {
+    public String getLogo() {
         return logo;
     }
 
-    public EstabelecimentoComercial logo(byte[] logo) {
+    public EstabelecimentoComercial logo(String logo) {
         this.logo = logo;
         return this;
     }
 
-    public void setLogo(byte[] logo) {
+    public void setLogo(String logo) {
         this.logo = logo;
     }
 
