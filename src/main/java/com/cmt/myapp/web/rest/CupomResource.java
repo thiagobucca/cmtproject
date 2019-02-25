@@ -77,6 +77,8 @@ public class CupomResource {
 
         try {
 
+
+            log.debug("usuario:"+cupom.getUsuarioId());
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
             Files.createDirectories(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name).getParent());
