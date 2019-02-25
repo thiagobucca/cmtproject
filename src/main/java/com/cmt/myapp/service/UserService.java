@@ -201,7 +201,7 @@ public class UserService {
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String placet) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String deviceId) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
@@ -210,7 +210,7 @@ public class UserService {
                 user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
-                user.setPlacet(placet);
+                user.setDeviceId(deviceId);
                 log.debug("Changed Information for User: {}", user);
             });
     }

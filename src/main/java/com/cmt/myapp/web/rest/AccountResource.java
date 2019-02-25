@@ -128,7 +128,7 @@ public class AccountResource {
             throw new InternalServerErrorException("User could not be found");
         }
         userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
-            userDTO.getLangKey(), userDTO.getImageUrl(), userDTO.getPlacet());
+            userDTO.getLangKey(), userDTO.getImageUrl(), userDTO.getDeviceId());
     }
 
     /**
