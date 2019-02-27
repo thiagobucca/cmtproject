@@ -25,6 +25,7 @@ import { ChangeDetectorRef } from '@angular/core';
     templateUrl: './estabelecimento-comercial-update.component.html'
 })
 export class EstabelecimentoComercialUpdateComponent implements OnInit {
+    isBase64: boolean;
     contatoEstabelecimento: IContatoEstabelecimento;
     estabelecimentoComercial: IEstabelecimentoComercial;
     estabelecimentos: IEstabelecimentoComercial[];
@@ -45,6 +46,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         private auxService: AuxiliarService,
         private ref: ChangeDetectorRef
     ) {
+        this.isBase64 = true;
         this.indexEdit = -1;
         this.validacoes = new GenericValidator();
     }
@@ -62,6 +64,9 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             this.contatoEstabelecimento = new ContatoEstabelecimento();
             this.loading = false;
             this.ref.detectChanges();
+            if (this.estabelecimentoComercial.logo !== undefined) {
+                this.isBase64 = false;
+            }
             if (this.estabelecimentoComercial.id !== undefined) {
                 this.loading = true;
                 this.contatoEstabelecimentoService.findByEstabelecimento(this.estabelecimentoComercial.id).subscribe(

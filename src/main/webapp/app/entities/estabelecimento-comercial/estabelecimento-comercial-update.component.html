@@ -78,7 +78,9 @@
                             for="field_logo">Logo</label>
                         <div>
                             <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
-                            style="    max-height: 200px; max-width: 200px;" *ngIf="estabelecimentoComercial.logo" alt="estabelecimentoComercial image" />
+                            style="    max-height: 200px; max-width: 200px;" *ngIf="estabelecimentoComercial.logo && isBase64" alt="estabelecimentoComercial image" />
+                            <img [src]="estabelecimentoComercial.logo" *ngIf="estabelecimentoComercial.logo && !isBase64" style="    max-height: 200px; max-width: 200px;"
+                                alt="Logo image url" /><br>
                             <div *ngIf="estabelecimentoComercial.logo" class="form-text text-danger clearfix">
                                 <span class="pull-left">{{estabelecimentoComercial.logoContentType}},
                                     {{byteSize(estabelecimentoComercial.logo)}}</span>
