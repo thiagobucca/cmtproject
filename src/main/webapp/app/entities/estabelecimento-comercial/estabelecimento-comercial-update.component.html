@@ -46,7 +46,7 @@
                         <label class="form-control-label" jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone"
                             for="field_telefone">Telefone</label>
                         <input type="text" class="form-control" name="telefone" id="field_telefone" [(ngModel)]="estabelecimentoComercial.telefone"
-                            mask="(00) 0 0000-0000" />
+                            mask="(00) 0 0000-0000" required />
                     </div>
                     <div class="col-md-2">
                         <label class="form-control-label" for="field_taxaConvenio">Taxa Convênio </label>
@@ -93,6 +93,7 @@
                         <input type="hidden" class="form-control" name="logo" id="field_logo" [(ngModel)]="estabelecimentoComercial.logo" />
                         <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
                             [(ngModel)]="estabelecimentoComercial.logoContentType" />
+                            <span *ngIf="!estabelecimentoComercial.logo" class="text-danger"> Uma imagem deve ser fornecida.</span>
                     </div>
                 </div>
 
@@ -199,7 +200,7 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0)"
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (contatoEstabelecimentos===undefined || contatoEstabelecimentos.length==0) ||!estabelecimentoComercial.logo"
                     class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>

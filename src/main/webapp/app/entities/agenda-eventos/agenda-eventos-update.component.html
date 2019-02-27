@@ -31,7 +31,7 @@
                         <input id="field_hora" type="time" class="form-control" name="hora" [(ngModel)]="hora" required />
                     </div>
                     <div class="col-md-5">
-                        <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçonica</label>
+                        <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçônica</label>
                         <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="agendaEventos.lojaMaconicaId">
                             <option [ngValue]="undefined" disabled selected>Selecione...</option>
                             <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
@@ -49,7 +49,7 @@
                     <div class="col-md-10">
                         <label class="form-control-label" >Descrição</label>
                         <textarea class="form-control" name="descricao" id="field_descricao" [(ngModel)]="agendaEventos.descricao"
-                            rows="3"></textarea>
+                            rows="3" required></textarea>
                     </div>
                 </div>
                 <div class="form-group form-check">
