@@ -171,7 +171,7 @@ public class ComunicacaoPushResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new comunicacaoPush, or with status 400 (Bad Request) if the comunicacaoPush has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/comunicacao-pushes/send")
+    @PostMapping("/comunicacao-pushes/send/{id}")
     @Timed
     public ResponseEntity<String> sendComunicacaoPush(@PathVariable Long id)  throws URISyntaxException {
         log.debug("REST request to send ComunicacaoPush : {}");
@@ -183,10 +183,8 @@ public class ComunicacaoPushResource {
         ArrayList<User> usuarios = new ArrayList<>();
         for(ComunicacaoPushLoja item : lojas){
             usuarios.addAll(userRepository.findAllByLojaMaconicaId(item.getLojaMaconicaId()));
-            
-        }
-
-        if(comunicacaoPush.get().getTipoPessoa() != null){
+        } 
+        if(comunicacaoPush.get().getTipoPessoa() != null && !lojas.hasContent()){
             usuarios.addAll(userRepository.findAllByTipoPessoa(null, comunicacaoPush.get().getTipoPessoa()).getContent());
         }
 
