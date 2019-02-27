@@ -79,24 +79,22 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        if (false && this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
-            this.userService.find(this.currentAccount.login).subscribe(usuario => {
-                if (usuario !== undefined) {
-                    this.userService
-                        .queryIdLoja(
-                            {
-                                page: this.page - 1,
-                                size: this.itemsPerPage,
-                                sort: this.sort()
-                            },
-                            usuario.body.lojaMaconicaId
-                        )
-                        .subscribe(
-                            (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
-                            (res: HttpResponse<any>) => this.onError(res.body)
-                        );
-                }
-            });
+        if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
+            if (this.currentAccount.lojaMaconicaId !== undefined) {
+                this.userService
+                    .queryIdLoja(
+                        {
+                            page: this.page - 1,
+                            size: this.itemsPerPage,
+                            sort: this.sort()
+                        },
+                        this.currentAccount.lojaMaconicaId
+                    )
+                    .subscribe(
+                        (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
+                        (res: HttpResponse<any>) => this.onError(res.body)
+                    );
+            }
         } else {
             this.userService
                 .query({

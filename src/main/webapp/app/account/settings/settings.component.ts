@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
+import { DATE_TIME_FORMAT, DATE_FORMAT } from 'app/shared/constants/input.constants';
 
 import { Principal, AccountService, JhiLanguageHelper } from 'app/core';
+
+import * as moment from 'moment';
 
 @Component({
     selector: 'jhi-settings',
@@ -12,7 +15,7 @@ export class SettingsComponent implements OnInit {
     success: string;
     settingsAccount: any;
     languages: any[];
-
+    data: string;
     constructor(
         private account: AccountService,
         private principal: Principal,
@@ -23,6 +26,7 @@ export class SettingsComponent implements OnInit {
     ngOnInit() {
         this.principal.identity().then(account => {
             this.settingsAccount = this.copyAccount(account);
+            this.data = account.dataNascimento != null ? account.dataNascimento.substr(0, 10) : null;
         });
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
@@ -30,6 +34,7 @@ export class SettingsComponent implements OnInit {
     }
 
     save() {
+        this.settingsAccount.dataNascimento = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         this.account.save(this.settingsAccount).subscribe(
             () => {
                 this.error = null;
@@ -58,7 +63,9 @@ export class SettingsComponent implements OnInit {
             langKey: account.langKey,
             lastName: account.lastName,
             login: account.login,
-            imageUrl: account.imageUrl
+            imageUrl: account.imageUrl,
+            dataNascimento: account.dataNascimento,
+            telefone: account.telefone
         };
     }
 }

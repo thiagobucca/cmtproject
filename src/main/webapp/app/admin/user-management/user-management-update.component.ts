@@ -33,7 +33,7 @@ export class UserMgmtUpdateComponent implements OnInit {
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
             this.user = user;
-            this.data = this.user.dataNascimento != null ? this.user.dataNascimento.format(DATE_FORMAT) : null;
+            this.data = user.dataNascimento != null ? user.dataNascimento.substr(0, 10) : null;
         });
         this.authorities = [];
         this.userService.authorities().subscribe(authorities => {

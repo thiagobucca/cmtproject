@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import { CmtprojectSharedModule } from 'app/shared';
 
+import { NgxMaskModule } from 'ngx-mask';
+
 import {
     PasswordStrengthBarComponent,
     RegisterComponent,
@@ -15,7 +17,7 @@ import {
 } from './';
 
 @NgModule({
-    imports: [CmtprojectSharedModule, RouterModule.forChild(accountState)],
+    imports: [CmtprojectSharedModule, RouterModule.forChild(accountState), NgxMaskModule.forRoot()],
     declarations: [
         ActivateComponent,
         RegisterComponent,

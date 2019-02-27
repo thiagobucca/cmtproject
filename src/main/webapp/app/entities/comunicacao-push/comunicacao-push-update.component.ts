@@ -62,6 +62,9 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                         this.ref.detectChanges();
                     }
                 );
+            } else {
+                this.loading = false;
+                this.ref.detectChanges();
             }
         });
         this.lojaMaconicaService.findByStatus(true).subscribe(
