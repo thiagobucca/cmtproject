@@ -1,0 +1,153 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-usuarioportal-heading" jhiTranslate="cmtprojectApp.usuarioportal.home.createOrEditLabel">Create or edit a Usuarioportal</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!usuarioportal.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="usuarioportal.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.login" for="field_login">Login</label>
+                    <input type="text" class="form-control" name="login" id="field_login"
+                        [(ngModel)]="usuarioportal.login" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.firstName" for="field_firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                        [(ngModel)]="usuarioportal.firstName" required/>
+                    <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="usuarioportal.email" required/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.activated" for="field_activated">Activated</label>
+                    <input type="checkbox" class="form-control" name="activated" id="field_activated"
+                        [(ngModel)]="usuarioportal.activated" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.langKey" for="field_langKey">Lang Key</label>
+                    <input type="text" class="form-control" name="langKey" id="field_langKey"
+                        [(ngModel)]="usuarioportal.langKey" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.authorities" for="field_authorities">Authorities</label>
+                    <input type="text" class="form-control" name="authorities" id="field_authorities"
+                        [(ngModel)]="usuarioportal.authorities" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                        [(ngModel)]="usuarioportal.createdBy" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="input-group">
+                        <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker  #createdDateDp="ngbDatepicker" [(ngModel)]="usuarioportal.createdDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                    <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                        [(ngModel)]="usuarioportal.lastModifiedBy" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                    <div class="input-group">
+                        <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" ngbDatepicker  #lastModifiedDateDp="ngbDatepicker" [(ngModel)]="usuarioportal.lastModifiedDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="lastModifiedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.password" for="field_password">Password</label>
+                    <input type="text" class="form-control" name="password" id="field_password"
+                        [(ngModel)]="usuarioportal.password" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.dataNascimento" for="field_dataNascimento">Data Nascimento</label>
+                    <div class="input-group">
+                        <input id="field_dataNascimento" type="text" class="form-control" name="dataNascimento" ngbDatepicker  #dataNascimentoDp="ngbDatepicker" [(ngModel)]="usuarioportal.dataNascimento"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataNascimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.lojaMaconicaId" for="field_lojaMaconicaId">Loja Maconica Id</label>
+                    <input type="number" class="form-control" name="lojaMaconicaId" id="field_lojaMaconicaId"
+                        [(ngModel)]="usuarioportal.lojaMaconicaId" required/>
+                    <div [hidden]="!(editForm.controls.lojaMaconicaId?.dirty && editForm.controls.lojaMaconicaId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lojaMaconicaId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.lojaMaconicaId?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.telefone" for="field_telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="field_telefone"
+                        [(ngModel)]="usuarioportal.telefone" required/>
+                    <div [hidden]="!(editForm.controls.telefone?.dirty && editForm.controls.telefone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.telefone?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.tipoPessoa" for="field_tipoPessoa">Tipo Pessoa</label>
+                    <input type="text" class="form-control" name="tipoPessoa" id="field_tipoPessoa"
+                        [(ngModel)]="usuarioportal.tipoPessoa" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cmtprojectApp.usuarioportal.placet" for="field_placet">Placet</label>
+                    <input type="text" class="form-control" name="placet" id="field_placet"
+                        [(ngModel)]="usuarioportal.placet" required/>
+                    <div [hidden]="!(editForm.controls.placet?.dirty && editForm.controls.placet?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.placet?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

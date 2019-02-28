@@ -30,6 +30,7 @@
                 "contasPagarReceber": "Contas Pagar Receber",
                 "cupom": "Cupom",
                 "comunicacaoPushLoja": "Comunicacao Push Loja",
+                "usuarioportal": "Usuarioportal",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

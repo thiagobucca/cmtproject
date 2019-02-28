@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="usuarioportal">
+            <h2><span jhiTranslate="cmtprojectApp.usuarioportal.detail.title">Usuarioportal</span> {{usuarioportal.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.login">Login</span></dt>
+                <dd>
+                    <span>{{usuarioportal.login}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{usuarioportal.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.email">Email</span></dt>
+                <dd>
+                    <span>{{usuarioportal.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.activated">Activated</span></dt>
+                <dd>
+                    <span>{{usuarioportal.activated}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.langKey">Lang Key</span></dt>
+                <dd>
+                    <span>{{usuarioportal.langKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.authorities">Authorities</span></dt>
+                <dd>
+                    <span>{{usuarioportal.authorities}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{usuarioportal.createdBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{usuarioportal.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{usuarioportal.lastModifiedBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{usuarioportal.lastModifiedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.password">Password</span></dt>
+                <dd>
+                    <span>{{usuarioportal.password}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.dataNascimento">Data Nascimento</span></dt>
+                <dd>
+                    <span>{{usuarioportal.dataNascimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.lojaMaconicaId">Loja Maconica Id</span></dt>
+                <dd>
+                    <span>{{usuarioportal.lojaMaconicaId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.telefone">Telefone</span></dt>
+                <dd>
+                    <span>{{usuarioportal.telefone}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.tipoPessoa">Tipo Pessoa</span></dt>
+                <dd>
+                    <span>{{usuarioportal.tipoPessoa}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.placet">Placet</span></dt>
+                <dd>
+                    <span>{{usuarioportal.placet}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/usuarioportal', usuarioportal.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
