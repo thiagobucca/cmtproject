@@ -9,6 +9,7 @@ import com.cmt.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+
 
 /**
  * REST controller for managing TipoOperacao.
@@ -40,52 +42,70 @@ public class TipoOperacaoResource {
     }
 
     /**
-     * POST  /tipo-operacaos : Create a new tipoOperacao.
+     * POST /tipo-operacaos : Create a new tipoOperacao.
      *
      * @param tipoOperacao the tipoOperacao to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new tipoOperacao, or with status 400 (Bad Request) if the tipoOperacao has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the new
+     *         tipoOperacao, or with status 400 (Bad Request) if the tipoOperacao
+     *         has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/tipo-operacaos")
     @Timed
-    public ResponseEntity<TipoOperacao> createTipoOperacao(@RequestBody TipoOperacao tipoOperacao) throws URISyntaxException {
+    public ResponseEntity<TipoOperacao> createTipoOperacao(@RequestBody TipoOperacao tipoOperacao)
+            throws URISyntaxException {
         log.debug("REST request to save TipoOperacao : {}", tipoOperacao);
         if (tipoOperacao.getId() != null) {
             throw new BadRequestAlertException("A new tipoOperacao cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        TipoOperacao result = tipoOperacaoRepository.save(tipoOperacao);
-        return ResponseEntity.created(new URI("/api/tipo-operacaos/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+
+        try {
+            TipoOperacao result = tipoOperacaoRepository.save(tipoOperacao);
+            return ResponseEntity.created(new URI("/api/tipo-operacaos/" + result.getId()))
+                    .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
+
+        } catch (DataIntegrityViolationException ex) {
+            throw new BadRequestAlertException("Já existe uma operação com estas configurações", ENTITY_NAME,
+                    "duplicate");
+        }
     }
 
     /**
-     * PUT  /tipo-operacaos : Updates an existing tipoOperacao.
+     * PUT /tipo-operacaos : Updates an existing tipoOperacao.
      *
      * @param tipoOperacao the tipoOperacao to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated tipoOperacao,
-     * or with status 400 (Bad Request) if the tipoOperacao is not valid,
-     * or with status 500 (Internal Server Error) if the tipoOperacao couldn't be updated
+     * @return the ResponseEntity with status 200 (OK) and with body the updated
+     *         tipoOperacao, or with status 400 (Bad Request) if the tipoOperacao is
+     *         not valid, or with status 500 (Internal Server Error) if the
+     *         tipoOperacao couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/tipo-operacaos")
     @Timed
-    public ResponseEntity<TipoOperacao> updateTipoOperacao(@RequestBody TipoOperacao tipoOperacao) throws URISyntaxException {
+    public ResponseEntity<TipoOperacao> updateTipoOperacao(@RequestBody TipoOperacao tipoOperacao)
+            throws URISyntaxException {
         log.debug("REST request to update TipoOperacao : {}", tipoOperacao);
         if (tipoOperacao.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        TipoOperacao result = tipoOperacaoRepository.save(tipoOperacao);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, tipoOperacao.getId().toString()))
-            .body(result);
+        try {
+            TipoOperacao result = tipoOperacaoRepository.save(tipoOperacao);
+            return ResponseEntity.ok()
+                    .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, tipoOperacao.getId().toString()))
+                    .body(result);
+
+        } catch (Exception ex) {
+            throw new BadRequestAlertException("Já existe uma operação com estas configurações", ENTITY_NAME,
+                    "duplicate");
+        }
     }
 
     /**
-     * GET  /tipo-operacaos : get all the tipoOperacaos.
+     * GET /tipo-operacaos : get all the tipoOperacaos.
      *
      * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of tipoOperacaos in body
+     * @return the ResponseEntity with status 200 (OK) and the list of tipoOperacaos
+     *         in body
      */
     @GetMapping("/tipo-operacaos")
     @Timed
@@ -97,10 +117,11 @@ public class TipoOperacaoResource {
     }
 
     /**
-     * GET  /tipo-operacaos/:id : get the "id" tipoOperacao.
+     * GET /tipo-operacaos/:id : get the "id" tipoOperacao.
      *
      * @param id the id of the tipoOperacao to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the tipoOperacao, or with status 404 (Not Found)
+     * @return the ResponseEntity with status 200 (OK) and with body the
+     *         tipoOperacao, or with status 404 (Not Found)
      */
     @GetMapping("/tipo-operacaos/{id}")
     @Timed
@@ -111,7 +132,7 @@ public class TipoOperacaoResource {
     }
 
     /**
-     * DELETE  /tipo-operacaos/:id : delete the "id" tipoOperacao.
+     * DELETE /tipo-operacaos/:id : delete the "id" tipoOperacao.
      *
      * @param id the id of the tipoOperacao to delete
      * @return the ResponseEntity with status 200 (OK)
