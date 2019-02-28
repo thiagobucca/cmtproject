@@ -205,7 +205,10 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
                 }
                 this.onSaveSuccess();
             },
-            (res: HttpErrorResponse) => this.onSaveError()
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                this.onError(res.message);
+            }
         );
     }
 

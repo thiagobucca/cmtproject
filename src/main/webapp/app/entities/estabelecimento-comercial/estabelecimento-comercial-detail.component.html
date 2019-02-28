@@ -16,6 +16,8 @@
                 <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.nome}}</span>
+                    <jhi-boolean [value]="estabelecimentoComercial.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                    </jhi-boolean>
                 </dd>
                 <dt><span>Endereço</span></dt>
                 <dd>
@@ -38,11 +40,7 @@
                 <dt><span>Taxa Convênio</span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.taxaConvenio}}%</span>
-                </dd>
-                <dt><span>Ativo</span></dt>
-                <dd>
-                    <span>{{estabelecimentoComercial.bolAtivo?"Ativo":"Inativo"}}</span>
-                </dd>
+                </dd>                
                 <dt><span>Categoria Estabelecimento </span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.categoria}}</span>
