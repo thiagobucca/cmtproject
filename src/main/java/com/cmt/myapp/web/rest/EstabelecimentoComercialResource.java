@@ -44,7 +44,6 @@ public class EstabelecimentoComercialResource {
     @Value("${spring.storageDir}")
     private String storageDir;
 
-    
     public EstabelecimentoComercialResource(EstabelecimentoComercialRepository estabelecimentoComercialRepository) {
         this.estabelecimentoComercialRepository = estabelecimentoComercialRepository;
     }
@@ -68,17 +67,24 @@ public class EstabelecimentoComercialResource {
                     "idexists");
         }
 
+        Optional<EstabelecimentoComercial> existingCnpj = estabelecimentoComercialRepository
+                .findOneByCodCnpj(estabelecimentoComercial.getCodCnpj());
+
+        if (existingCnpj.isPresent()) {
+            throw new BadRequestAlertException("CNPJ ja cadastrado, favor informar um diferente", ENTITY_NAME,
+                    "cnpjexists");
+        }
+
         try {
             if (!estabelecimentoComercial.getLogo().contains("http://")) {
 
                 String name = String.format("%s.%s",
                         RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(), "jpg");
-                Files.createDirectories(
-                        Paths.get(storageDir + "estabelecimento/" + name).getParent());
+                Files.createDirectories(Paths.get(storageDir + "estabelecimento/" + name).getParent());
                 Files.write(Paths.get(storageDir + "estabelecimento/" + name),
                         Base64.getDecoder().decode(estabelecimentoComercial.getLogo()));
 
-                        estabelecimentoComercial.setLogo("http://cmtweb.ddns.net/resources/estabelecimento/" + name);
+                estabelecimentoComercial.setLogo("http://cmtweb.ddns.net/resources/estabelecimento/" + name);
             }
         } catch (Exception e) {
             throw new BadRequestAlertException("Erro ao salvar imagem", ENTITY_NAME, "idexists");
@@ -109,22 +115,32 @@ public class EstabelecimentoComercialResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
 
+        // Consulta o cadastro do estabelcimento comercial antes da edicao
+        Optional<EstabelecimentoComercial> existingCnpj = estabelecimentoComercialRepository.findById(estabelecimentoComercial.getId());
+
+        if (!existingCnpj.get().getCodCnpj().equals(estabelecimentoComercial.getCodCnpj())) {
+            existingCnpj = estabelecimentoComercialRepository.findOneByCodCnpj(estabelecimentoComercial.getCodCnpj());
+
+            if (existingCnpj.isPresent()) {
+                throw new BadRequestAlertException("CNPJ ja cadastrado, favor informar um diferente", ENTITY_NAME,"cnpjexists");
+            }
+        }
+
         try {
             if (!estabelecimentoComercial.getLogo().contains("http://")) {
 
                 String name = String.format("%s.%s",
                         RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(), "jpg");
-                Files.createDirectories(
-                        Paths.get(storageDir + "estabelecimento/" + name).getParent());
+                Files.createDirectories(Paths.get(storageDir + "estabelecimento/" + name).getParent());
                 Files.write(Paths.get(storageDir + "estabelecimento/" + name),
                         Base64.getDecoder().decode(estabelecimentoComercial.getLogo()));
 
-                        estabelecimentoComercial.setLogo("http://cmtweb.ddns.net/resources/estabelecimento/" + name);
+                estabelecimentoComercial.setLogo("http://cmtweb.ddns.net/resources/estabelecimento/" + name);
             }
         } catch (Exception e) {
             throw new BadRequestAlertException("Erro ao salvar imagem", ENTITY_NAME, "idexists");
         }
-        
+
         EstabelecimentoComercial result = estabelecimentoComercialRepository.save(estabelecimentoComercial);
         return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, estabelecimentoComercial.getId().toString()))

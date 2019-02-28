@@ -52,8 +52,16 @@ public class LojaMaconicaResource {
     public ResponseEntity<LojaMaconica> createLojaMaconica(@RequestBody LojaMaconica lojaMaconica) throws URISyntaxException {
         log.debug("REST request to save LojaMaconica : {}", lojaMaconica);
         if (lojaMaconica.getId() != null) {
-            throw new BadRequestAlertException("A new lojaMaconica cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new lojaMaconica cannot already have an ID", ENTITY_NAME, "cnpjexists");
         }
+
+        Optional<LojaMaconica> existingCnpj = lojaMaconicaRepository.findOneByCodCnpj(lojaMaconica.getCodCnpj());
+
+        if (existingCnpj.isPresent()) {
+            throw new BadRequestAlertException("CNPJ ja cadastrado, favor informar um diferente", ENTITY_NAME,
+                    "cnpjexists");
+        }
+
         LojaMaconica result = lojaMaconicaRepository.save(lojaMaconica);
         return ResponseEntity.created(new URI("/api/loja-maconicas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -76,6 +84,22 @@ public class LojaMaconicaResource {
         if (lojaMaconica.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+         // Consulta o cadastro do estabelcimento comercial antes da edicao
+         Optional<LojaMaconica> existingCnpj = lojaMaconicaRepository.findById(lojaMaconica.getId());
+
+         log.debug("existingCnpj - 1 {} ",existingCnpj.get().getCodCnpj());
+         log.debug("lojaMaconica {}",lojaMaconica.getCodCnpj());
+
+         if (!existingCnpj.get().getCodCnpj().equals(lojaMaconica.getCodCnpj())) {
+
+             existingCnpj = lojaMaconicaRepository.findOneByCodCnpj(lojaMaconica.getCodCnpj());
+ 
+             if (existingCnpj.isPresent()) {
+                 throw new BadRequestAlertException("CNPJ ja cadastrado, favor informar um diferente", ENTITY_NAME,"cnpjexists");
+             }
+         }
+
         LojaMaconica result = lojaMaconicaRepository.save(lojaMaconica);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, lojaMaconica.getId().toString()))

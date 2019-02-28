@@ -114,7 +114,7 @@ public class UserResource {
             else
             {
                 if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
-                    throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+                    throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
                 }
             }
 
@@ -157,7 +157,7 @@ public class UserResource {
         {
             //Verifica se o numero do placet esta vinculado a outro macom
             if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
-                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
             }
             
         }
@@ -171,7 +171,7 @@ public class UserResource {
             }
             //Verifica se o numero do placet esta vinculado a outro macom
             else if(userDTO.getTipoPessoa() == TipoPessoa.Macom && userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
-                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
             }
             
         }

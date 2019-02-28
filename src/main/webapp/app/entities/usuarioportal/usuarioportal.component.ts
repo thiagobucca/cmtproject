@@ -9,13 +9,16 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 import { Principal, UserService, User } from 'app/core';
 import { UserMgmtDeleteDialogComponent } from 'app/admin';
 
+import { UsuarioportalService } from './index';
+import { IUsuarioPortal, UsuarioPortal } from 'app/shared/model/usuarioportal.model';
+
 @Component({
-    selector: 'jhi-user-mgmt',
-    templateUrl: './user-management.component.html'
+    selector: 'jhi-usuarioportal',
+    templateUrl: './usuarioportal.component.html'
 })
-export class UserMgmtComponent implements OnInit, OnDestroy {
+export class UsuarioportalComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    users: User[];
+    users: UsuarioPortal[];
     error: any;
     success: any;
     routeData: any;
@@ -29,7 +32,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     reverse: any;
 
     constructor(
-        private userService: UserService,
+        private userService: UsuarioportalService,
         private alertService: JhiAlertService,
         private principal: Principal,
         private parseLinks: JhiParseLinks,
@@ -160,5 +163,17 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
     private onError(error) {
         this.alertService.error(error.error, error.message, null);
+    }
+
+    clear() {
+        this.page = 0;
+        this.router.navigate([
+            '/usuarioportal',
+            {
+                page: this.page,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        ]);
+        this.loadAll();
     }
 }

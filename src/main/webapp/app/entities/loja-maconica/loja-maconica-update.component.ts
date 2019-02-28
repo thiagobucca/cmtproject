@@ -106,7 +106,14 @@ export class LojaMaconicaUpdateComponent implements OnInit {
                 }
                 this.onSaveSuccess();
             },
-            (res: HttpErrorResponse) => this.onSaveError()
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                if (res.error !== undefined) {
+                    this.onError(res.error.title);
+                } else {
+                    this.onError(res.message);
+                }
+            }
         );
     }
 

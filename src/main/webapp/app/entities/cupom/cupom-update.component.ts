@@ -106,7 +106,17 @@ export class CupomUpdateComponent implements OnInit {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<ICupom>>) {
-        result.subscribe((res: HttpResponse<ICupom>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe(
+            (res: HttpResponse<ICupom>) => this.onSaveSuccess(),
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                if (res.error !== undefined) {
+                    this.onError(res.error.title);
+                } else {
+                    this.onError(res.message);
+                }
+            }
+        );
     }
 
     private onSaveSuccess() {

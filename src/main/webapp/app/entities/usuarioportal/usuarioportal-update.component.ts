@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { JhiLanguageHelper, User, UserService, IUser } from 'app/core';
+import { UsuarioportalService } from './index';
+import { IUsuarioPortal, UsuarioPortal } from 'app/shared/model/usuarioportal.model';
 import { DATE_TIME_FORMAT, DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import * as moment from 'moment';
@@ -10,11 +12,11 @@ import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
 import { LojaMaconicaService } from 'app/entities/loja-maconica';
 
 @Component({
-    selector: 'jhi-user-mgmt-update',
-    templateUrl: './user-management-update.component.html'
+    selector: 'jhi-usuarioportal-update',
+    templateUrl: './usuarioportal-update.component.html'
 })
-export class UserMgmtUpdateComponent implements OnInit {
-    user: User;
+export class UsuarioportalUpdateComponent implements OnInit {
+    user: UsuarioPortal;
     languages: any[];
     authorities: any[];
     isSaving: boolean;
@@ -23,7 +25,7 @@ export class UserMgmtUpdateComponent implements OnInit {
     data: string;
     constructor(
         private languageHelper: JhiLanguageHelper,
-        private userService: UserService,
+        private userService: UsuarioportalService,
         private route: ActivatedRoute,
         private lojaMaconicaService: LojaMaconicaService,
         private jhiAlertService: JhiAlertService
@@ -33,7 +35,7 @@ export class UserMgmtUpdateComponent implements OnInit {
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
             this.user = user;
-            this.data = user.dataNascimento != null ? user.dataNascimento.substr(0, 10) : null;
+            this.data = this.user.dataNascimento != null ? this.user.dataNascimento.format(DATE_FORMAT) : null;
         });
         this.authorities = [];
         this.userService.authorities().subscribe(authorities => {
@@ -63,11 +65,32 @@ export class UserMgmtUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.user.langKey = 'pt-br';
+
         this.user.dataNascimento = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         if (this.user.id !== null) {
-            this.userService.update(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+            this.userService.update(this.user).subscribe(
+                response => this.onSaveSuccess(response),
+                (res: HttpErrorResponse) => {
+                    this.onSaveError();
+                    if (res.error !== undefined) {
+                        this.onError(res.error.title);
+                    } else {
+                        this.onError(res.message);
+                    }
+                }
+            );
         } else {
-            this.userService.create(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+            this.userService.create(this.user).subscribe(
+                response => this.onSaveSuccess(response),
+                (res: HttpErrorResponse) => {
+                    this.onSaveError();
+                    if (res.error !== undefined) {
+                        this.onError(res.error.title);
+                    } else {
+                        this.onError(res.message);
+                    }
+                }
+            );
         }
     }
 
@@ -84,22 +107,5 @@ export class UserMgmtUpdateComponent implements OnInit {
     }
     trackById(index: number, item: any) {
         return item.id;
-    }
-
-    onChangeTipoPessoa(event) {
-        this.user.lojaMaconicaId = undefined;
-        this.user.pessoaDependenteId = undefined;
-    }
-
-    onChangeMacom(event) {
-        debugger;
-        const dependencia = this.macons.find(x => x.id == event);
-        if (dependencia != null) {
-            this.user.lojaMaconicaId = dependencia.lojaMaconicaId;
-            this.user.placet = dependencia.placet;
-        } else {
-            this.user.lojaMaconicaId = undefined;
-            this.user.placet = undefined;
-        }
     }
 }

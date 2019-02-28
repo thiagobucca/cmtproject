@@ -16,6 +16,8 @@
                 <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.nome}}</span>
+                    <jhi-boolean [value]="estabelecimentoComercial.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                    </jhi-boolean>
                 </dd>
                 <dt><span>Endereço</span></dt>
                 <dd>
@@ -28,21 +30,17 @@
                 <dt><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span></dt>
                 <dd>
                     <div *ngIf="estabelecimentoComercial.logo">
-                        <a (click)="openFile(estabelecimentoComercial.logoContentType, estabelecimentoComercial.logo)">
-                            <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo"
-                            style="    max-height: 200px; max-width: 200px;" alt="estabelecimentoComercial image" />
-                        </a>
+                        <a [href]="estabelecimentoComercial.logo" target="_black" >
+                            <img [src]="estabelecimentoComercial.logo" style="    max-height: 200px; max-width: 200px;"
+                            alt="Logo image url" />
+                        </a><br>
                         {{estabelecimentoComercial.logoContentType}}, {{byteSize(estabelecimentoComercial.logo)}}
                     </div>
                 </dd>
                 <dt><span>Taxa Convênio</span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.taxaConvenio}}%</span>
-                </dd>
-                <dt><span>Ativo</span></dt>
-                <dd>
-                    <span>{{estabelecimentoComercial.bolAtivo?"Ativo":"Inativo"}}</span>
-                </dd>
+                </dd>                
                 <dt><span>Categoria Estabelecimento </span></dt>
                 <dd>
                     <span>{{estabelecimentoComercial.categoria}}</span>

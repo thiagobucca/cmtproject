@@ -30,6 +30,7 @@
                 "contasPagarReceber": "Contas Pagar Receber",
                 "cupom": "Cupom",
                 "comunicacaoPushLoja": "Comunicacao Push Loja",
+                "usuarioportal": "Usuarioportal",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -154,6 +155,8 @@
         "emailexists": "Este email já está cadastrado!",
         "idexists": "Novo(a) {{entityName}} não pode ter uma ID",
         "duplicate": "Novo(a) {{entityName}} já existe",
+        "placetexists": "Placet ja cadastrado, favor informar um diferente",
+        "cnpjexists": "CNPJ do(a) {{entityName}} ja cadastrado, favor informar um diferente",
         "idnull": "Invalid ID"
     },
     "footer": "Este é o seu rodapé"

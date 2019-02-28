@@ -9,6 +9,8 @@ import { ParametrizacaoService } from './parametrizacao.service';
 import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 import { ChangeDetectorRef } from '@angular/core';
 
+import { JhiAlertService } from 'ng-jhipster';
+
 @Component({
     selector: 'jhi-parametrizacao-update',
     templateUrl: './parametrizacao-update.component.html'
@@ -20,6 +22,7 @@ export class ParametrizacaoUpdateComponent implements OnInit {
         private parametrizacaoService: ParametrizacaoService,
         private activatedRoute: ActivatedRoute,
         private auxService: AuxiliarService,
+        private jhiAlertService: JhiAlertService,
         private ref: ChangeDetectorRef
     ) {}
     get loading(): boolean {
@@ -53,9 +56,21 @@ export class ParametrizacaoUpdateComponent implements OnInit {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IParametrizacao>>) {
-        result.subscribe((res: HttpResponse<IParametrizacao>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe(
+            (res: HttpResponse<IParametrizacao>) => this.onSaveSuccess(),
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                if (res.error !== undefined) {
+                    this.onError(res.error.title);
+                } else {
+                    this.onError(res.message);
+                }
+            }
+        );
     }
-
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
     private onSaveSuccess() {
         this.isSaving = false;
         this.loading = false;
