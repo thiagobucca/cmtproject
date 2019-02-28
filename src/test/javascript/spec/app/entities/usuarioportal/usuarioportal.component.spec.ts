@@ -7,10 +7,10 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { CmtprojectTestModule } from '../../../test.module';
 import { UsuarioportalComponent } from 'app/entities/usuarioportal/usuarioportal.component';
 import { UsuarioportalService } from 'app/entities/usuarioportal/usuarioportal.service';
-import { Usuarioportal } from 'app/shared/model/usuarioportal.model';
+import { UsuarioPortal } from 'app/shared/model/usuarioportal.model';
 
 describe('Component Tests', () => {
-    describe('Usuarioportal Management Component', () => {
+    describe('Usuario Portal Management Component', () => {
         let comp: UsuarioportalComponent;
         let fixture: ComponentFixture<UsuarioportalComponent>;
         let service: UsuarioportalService;
@@ -51,7 +51,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new Usuarioportal(123)],
+                        body: [new UsuarioPortal(123)],
                         headers
                     })
                 )
@@ -62,7 +62,7 @@ describe('Component Tests', () => {
 
             // THEN
             expect(service.query).toHaveBeenCalled();
-            expect(comp.usuarioportals[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+            expect(comp.users[0]).toEqual(jasmine.objectContaining({ id: 123 }));
         });
 
         it('should load a page', () => {
@@ -71,7 +71,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new Usuarioportal(123)],
+                        body: [new UsuarioPortal(123)],
                         headers
                     })
                 )
@@ -82,7 +82,7 @@ describe('Component Tests', () => {
 
             // THEN
             expect(service.query).toHaveBeenCalled();
-            expect(comp.usuarioportals[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+            expect(comp.users[0]).toEqual(jasmine.objectContaining({ id: 123 }));
         });
 
         it('should not load a page is the page is the same as the previous page', () => {
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new Usuarioportal(123)],
+                        body: [new UsuarioPortal(123)],
                         headers
                     })
                 )
@@ -114,7 +114,7 @@ describe('Component Tests', () => {
             // THEN
             expect(comp.page).toEqual(0);
             expect(service.query).toHaveBeenCalledTimes(2);
-            expect(comp.usuarioportals[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+            expect(comp.users[0]).toEqual(jasmine.objectContaining({ id: 123 }));
         });
         it('should calculate the sort attribute for an id', () => {
             // WHEN

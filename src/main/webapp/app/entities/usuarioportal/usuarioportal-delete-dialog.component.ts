@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { IUsuarioportal } from 'app/shared/model/usuarioportal.model';
+import { User, UserService } from 'app/core';
 import { UsuarioportalService } from './usuarioportal.service';
 
 @Component({
@@ -12,23 +11,19 @@ import { UsuarioportalService } from './usuarioportal.service';
     templateUrl: './usuarioportal-delete-dialog.component.html'
 })
 export class UsuarioportalDeleteDialogComponent {
-    usuarioportal: IUsuarioportal;
+    user: User;
 
-    constructor(
-        private usuarioportalService: UsuarioportalService,
-        public activeModal: NgbActiveModal,
-        private eventManager: JhiEventManager
-    ) {}
+    constructor(private userService: UsuarioportalService, public activeModal: NgbActiveModal, private eventManager: JhiEventManager) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
-    confirmDelete(id: number) {
-        this.usuarioportalService.delete(id).subscribe(response => {
+    confirmDelete(login) {
+        this.userService.delete(login).subscribe(response => {
             this.eventManager.broadcast({
-                name: 'usuarioportalListModification',
-                content: 'Deleted an usuarioportal'
+                name: 'userListModification',
+                content: 'Deleted a user'
             });
             this.activeModal.dismiss(true);
         });
@@ -36,7 +31,7 @@ export class UsuarioportalDeleteDialogComponent {
 }
 
 @Component({
-    selector: 'jhi-usuarioportal-delete-popup',
+    selector: 'jhi-tipo-operacao-delete-popup',
     template: ''
 })
 export class UsuarioportalDeletePopupComponent implements OnInit, OnDestroy {
@@ -45,13 +40,13 @@ export class UsuarioportalDeletePopupComponent implements OnInit, OnDestroy {
     constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ usuarioportal }) => {
+        this.activatedRoute.data.subscribe(({ tipoOperacao }) => {
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(UsuarioportalDeleteDialogComponent as Component, {
                     size: 'lg',
                     backdrop: 'static'
                 });
-                this.ngbModalRef.componentInstance.usuarioportal = usuarioportal;
+                this.ngbModalRef.componentInstance.tipoOperacao = tipoOperacao;
                 this.ngbModalRef.result.then(
                     result => {
                         this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });

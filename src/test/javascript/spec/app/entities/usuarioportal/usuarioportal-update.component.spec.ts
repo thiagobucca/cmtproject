@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 import { CmtprojectTestModule } from '../../../test.module';
 import { UsuarioportalUpdateComponent } from 'app/entities/usuarioportal/usuarioportal-update.component';
 import { UsuarioportalService } from 'app/entities/usuarioportal/usuarioportal.service';
-import { Usuarioportal } from 'app/shared/model/usuarioportal.model';
+import { UsuarioPortal } from 'app/shared/model/usuarioportal.model';
 
 describe('Component Tests', () => {
     describe('Usuarioportal Management Update Component', () => {
@@ -30,9 +30,9 @@ describe('Component Tests', () => {
         describe('save', () => {
             it('Should call update service on save for existing entity', fakeAsync(() => {
                 // GIVEN
-                const entity = new Usuarioportal(123);
+                const entity = new UsuarioPortal(123);
                 spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
-                comp.usuarioportal = entity;
+                comp.user = entity;
                 // WHEN
                 comp.save();
                 tick(); // simulate async
@@ -44,9 +44,9 @@ describe('Component Tests', () => {
 
             it('Should call create service on save for new entity', fakeAsync(() => {
                 // GIVEN
-                const entity = new Usuarioportal();
+                const entity = new UsuarioPortal();
                 spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
-                comp.usuarioportal = entity;
+                comp.user = entity;
                 // WHEN
                 comp.save();
                 tick(); // simulate async

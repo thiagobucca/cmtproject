@@ -5,13 +5,13 @@ import { of } from 'rxjs';
 
 import { CmtprojectTestModule } from '../../../test.module';
 import { UsuarioportalDetailComponent } from 'app/entities/usuarioportal/usuarioportal-detail.component';
-import { Usuarioportal } from 'app/shared/model/usuarioportal.model';
+import { UsuarioPortal } from 'app/shared/model/usuarioportal.model';
 
 describe('Component Tests', () => {
     describe('Usuarioportal Management Detail Component', () => {
         let comp: UsuarioportalDetailComponent;
         let fixture: ComponentFixture<UsuarioportalDetailComponent>;
-        const route = ({ data: of({ usuarioportal: new Usuarioportal(123) }) } as any) as ActivatedRoute;
+        const route = ({ data: of({ usuarioportal: new UsuarioPortal(123) }) } as any) as ActivatedRoute;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
                 comp.ngOnInit();
 
                 // THEN
-                expect(comp.usuarioportal).toEqual(jasmine.objectContaining({ id: 123 }));
+                expect(comp.user).toEqual(jasmine.objectContaining({ id: 123 }));
             });
         });
     });

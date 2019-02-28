@@ -5,84 +5,61 @@ import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
+import { TipoPessoa } from 'app/shared/model/pessoa.model';
+
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IUsuarioportal } from 'app/shared/model/usuarioportal.model';
+import { IUsuarioPortal } from 'app/shared/model/usuarioportal.model';
 
-type EntityResponseType = HttpResponse<IUsuarioportal>;
-type EntityArrayResponseType = HttpResponse<IUsuarioportal[]>;
+type EntityArrayResponseType = HttpResponse<IUsuarioPortal[]>;
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioportalService {
-    public resourceUrl = SERVER_API_URL + 'api/usuarioportals';
+    public resourceUrl = SERVER_API_URL + 'api/users';
 
     constructor(private http: HttpClient) {}
 
-    create(usuarioportal: IUsuarioportal): Observable<EntityResponseType> {
-        const copy = this.convertDateFromClient(usuarioportal);
-        return this.http
-            .post<IUsuarioportal>(this.resourceUrl, copy, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    create(user: IUsuarioPortal): Observable<HttpResponse<IUsuarioPortal>> {
+        return this.http.post<IUsuarioPortal>(this.resourceUrl, user, { observe: 'response' });
     }
 
-    update(usuarioportal: IUsuarioportal): Observable<EntityResponseType> {
-        const copy = this.convertDateFromClient(usuarioportal);
-        return this.http
-            .put<IUsuarioportal>(this.resourceUrl, copy, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    update(user: IUsuarioPortal): Observable<HttpResponse<IUsuarioPortal>> {
+        return this.http.put<IUsuarioPortal>(this.resourceUrl, user, { observe: 'response' });
     }
 
-    find(id: number): Observable<EntityResponseType> {
+    find(login: string): Observable<HttpResponse<IUsuarioPortal>> {
         return this.http
-            .get<IUsuarioportal>(`${this.resourceUrl}/${id}`, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+            .get<IUsuarioPortal>(`${this.resourceUrl}/${login}`, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IUsuarioPortal>) => this.convertDateFromServer(res)));
     }
 
-    query(req?: any): Observable<EntityArrayResponseType> {
+    findByTipo(tipo: TipoPessoa): Observable<EntityArrayResponseType> {
+        return this.http.get<IUsuarioPortal[]>(`${this.resourceUrl}/tipo/${tipo}`, { observe: 'response' });
+    }
+    findByStatus(status: boolean): Observable<EntityArrayResponseType> {
+        return this.http.get<IUsuarioPortal[]>(`${this.resourceUrl}/status/${status}`, { observe: 'response' });
+    }
+
+    query(req?: any): Observable<HttpResponse<IUsuarioPortal[]>> {
         const options = createRequestOption(req);
-        return this.http
-            .get<IUsuarioportal[]>(this.resourceUrl, { params: options, observe: 'response' })
-            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+        return this.http.get<IUsuarioPortal[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
+    queryIdLoja(req?: any, id?: number): Observable<HttpResponse<IUsuarioPortal[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<IUsuarioPortal[]>(`${this.resourceUrl}/lojaMaconica/${id}`, { params: options, observe: 'response' });
     }
 
-    delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    delete(login: string): Observable<HttpResponse<any>> {
+        return this.http.delete(`${this.resourceUrl}/${login}`, { observe: 'response' });
     }
 
-    protected convertDateFromClient(usuarioportal: IUsuarioportal): IUsuarioportal {
-        const copy: IUsuarioportal = Object.assign({}, usuarioportal, {
-            createdDate:
-                usuarioportal.createdDate != null && usuarioportal.createdDate.isValid()
-                    ? usuarioportal.createdDate.format(DATE_FORMAT)
-                    : null,
-            lastModifiedDate:
-                usuarioportal.lastModifiedDate != null && usuarioportal.lastModifiedDate.isValid()
-                    ? usuarioportal.lastModifiedDate.format(DATE_FORMAT)
-                    : null,
-            dataNascimento:
-                usuarioportal.dataNascimento != null && usuarioportal.dataNascimento.isValid()
-                    ? usuarioportal.dataNascimento.format(DATE_FORMAT)
-                    : null
-        });
-        return copy;
+    authorities(): Observable<string[]> {
+        return this.http.get<string[]>(SERVER_API_URL + 'api/users/authorities');
     }
 
-    protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+    protected convertDateFromServer(res: HttpResponse<IUsuarioPortal>): HttpResponse<IUsuarioPortal> {
         if (res.body) {
-            res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
-            res.body.lastModifiedDate = res.body.lastModifiedDate != null ? moment(res.body.lastModifiedDate) : null;
             res.body.dataNascimento = res.body.dataNascimento != null ? moment(res.body.dataNascimento) : null;
-        }
-        return res;
-    }
-
-    protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
-        if (res.body) {
-            res.body.forEach((usuarioportal: IUsuarioportal) => {
-                usuarioportal.createdDate = usuarioportal.createdDate != null ? moment(usuarioportal.createdDate) : null;
-                usuarioportal.lastModifiedDate = usuarioportal.lastModifiedDate != null ? moment(usuarioportal.lastModifiedDate) : null;
-                usuarioportal.dataNascimento = usuarioportal.dataNascimento != null ? moment(usuarioportal.dataNascimento) : null;
-            });
         }
         return res;
     }

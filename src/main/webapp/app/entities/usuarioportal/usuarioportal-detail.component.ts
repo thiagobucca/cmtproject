@@ -1,24 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IUsuarioportal } from 'app/shared/model/usuarioportal.model';
+import { User } from 'app/core';
 
 @Component({
     selector: 'jhi-usuarioportal-detail',
     templateUrl: './usuarioportal-detail.component.html'
 })
 export class UsuarioportalDetailComponent implements OnInit {
-    usuarioportal: IUsuarioportal;
+    user: User;
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ usuarioportal }) => {
-            this.usuarioportal = usuarioportal;
+        this.route.data.subscribe(({ user }) => {
+            this.user = user.body ? user.body : user;
         });
-    }
-
-    previousState() {
-        window.history.back();
     }
 }

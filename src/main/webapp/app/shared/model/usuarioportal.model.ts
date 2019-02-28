@@ -1,45 +1,73 @@
+import { TipoPessoa } from 'app/shared/model/comunicacao-push.model';
 import { Moment } from 'moment';
 
-export interface IUsuarioportal {
-    id?: number;
+export interface IUsuarioPortal {
+    id?: any;
     login?: string;
     firstName?: string;
+    lastName?: string;
     email?: string;
     activated?: boolean;
     langKey?: string;
-    authorities?: string;
+    authorities?: any[];
     createdBy?: string;
-    createdDate?: Moment;
+    createdDate?: Date;
     lastModifiedBy?: string;
-    lastModifiedDate?: Moment;
+    lastModifiedDate?: Date;
     password?: string;
     dataNascimento?: Moment;
     lojaMaconicaId?: number;
+    pessoaDependenteId?: number;
     telefone?: string;
-    tipoPessoa?: string;
+    tipoPessoa?: TipoPessoa;
+    dependente?: string;
+    loja?: string;
     placet?: string;
 }
 
-export class Usuarioportal implements IUsuarioportal {
+export class UsuarioPortal implements IUsuarioPortal {
     constructor(
-        public id?: number,
+        public id?: any,
         public login?: string,
         public firstName?: string,
+        public lastName?: string,
         public email?: string,
         public activated?: boolean,
         public langKey?: string,
-        public authorities?: string,
+        public authorities?: any[],
         public createdBy?: string,
-        public createdDate?: Moment,
+        public createdDate?: Date,
         public lastModifiedBy?: string,
-        public lastModifiedDate?: Moment,
+        public lastModifiedDate?: Date,
         public password?: string,
         public dataNascimento?: Moment,
         public lojaMaconicaId?: number,
+        public pessoaDependenteId?: number,
         public telefone?: string,
-        public tipoPessoa?: string,
+        public tipoPessoa?: TipoPessoa,
+        public dependente?: string,
+        public loja?: string,
         public placet?: string
     ) {
-        this.activated = this.activated || false;
+        this.id = id ? id : null;
+        this.login = login ? login : null;
+        this.firstName = firstName ? firstName : null;
+        this.lastName = lastName ? lastName : null;
+        this.email = email ? email : null;
+        this.activated = activated ? activated : false;
+        this.langKey = langKey ? langKey : null;
+        this.authorities = authorities ? authorities : null;
+        this.createdBy = createdBy ? createdBy : null;
+        this.createdDate = createdDate ? createdDate : null;
+        this.lastModifiedBy = lastModifiedBy ? lastModifiedBy : null;
+        this.lastModifiedDate = lastModifiedDate ? lastModifiedDate : null;
+        this.password = password ? password : null;
+
+        this.dataNascimento = dataNascimento ? dataNascimento : null;
+        this.lojaMaconicaId = lojaMaconicaId ? lojaMaconicaId : null;
+        this.pessoaDependenteId = pessoaDependenteId ? pessoaDependenteId : null;
+        this.telefone = telefone ? telefone : null;
+        this.tipoPessoa = tipoPessoa ? tipoPessoa : null;
+        this.placet = placet ? placet : null;
     }
 }

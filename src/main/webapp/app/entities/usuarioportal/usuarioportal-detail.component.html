@@ -1,86 +1,73 @@
-<div class="row justify-content-center">
+<div class="row">
     <div class="col-8">
-        <div *ngIf="usuarioportal">
-            <h2><span jhiTranslate="cmtprojectApp.usuarioportal.detail.title">Usuarioportal</span> {{usuarioportal.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
+        <div *ngIf="user">
+            <h2>
+                <span >Usuário</span> [<b>{{user.login}}</b>]
+            </h2>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.login">Login</span></dt>
+                <dt><span jhiTranslate="userManagement.login">Login</span></dt>
                 <dd>
-                    <span>{{usuarioportal.login}}</span>
+                    <span>{{user.login}}</span>
+                    <jhi-boolean
+                        [value]="user.activated"
+                        [textTrue]="'userManagement.activated' | translate"
+                        [textFalse]="'userManagement.deactivated' | translate">
+                    </jhi-boolean>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.firstName">First Name</span></dt>
+                <dt><span jhiTranslate="userManagement.firstName">First Name</span></dt>
+                <dd>{{user.firstName}}</dd>
+                <dt><span jhiTranslate="userManagement.lastName">Last Name</span></dt>
+                <dd>{{user.lastName}}</dd>
+                <dt><span jhiTranslate="userManagement.email">Email</span></dt>
+                <dd>{{user.email}}</dd>
+                <dt><span jhiTranslate="userManagement.langKey">Lang Key</span></dt>
+                <dd>{{user.langKey}}</dd>
+                <dt><span jhiTranslate="userManagement.createdBy">Created By</span></dt>
+                <dd>{{user.createdBy}}</dd>
+                <dt><span jhiTranslate="userManagement.createdDate">Created Date</span></dt>
+                <dd>{{user.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
+                <dt><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span></dt>
+                <dd>{{user.lastModifiedBy}}</dd>
+                <dt><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</dd>
+                <dt><span jhiTranslate="userManagement.profiles">Profiles</span></dt>
                 <dd>
-                    <span>{{usuarioportal.firstName}}</span>
+                    <ul class="list-unstyled">
+                        <li *ngFor="let authority of user.authorities">
+                            <span class="badge badge-info">{{authority}}</span>
+                        </li>
+                    </ul>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.email">Email</span></dt>
+                <dt><span >Telefone</span></dt>
                 <dd>
-                    <span>{{usuarioportal.email}}</span>
+                    <span>{{user.telefone | mask: '(00) 0 0000-0000'}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.activated">Activated</span></dt>
+                <dt><span >Email</span></dt>
                 <dd>
-                    <span>{{usuarioportal.activated}}</span>
+                    <span>{{user.email}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.langKey">Lang Key</span></dt>
+                <dt><span >Tipo Pessoa</span></dt>
                 <dd>
-                    <span>{{usuarioportal.langKey}}</span>
+                    <span jhiTranslate="{{'cmtprojectApp.TipoPessoa.' + user.tipoPessoa}}">{{user.tipoPessoa}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.authorities">Authorities</span></dt>
+                
+                <dt><span>Data Nascimento</span></dt>
                 <dd>
-                    <span>{{usuarioportal.authorities}}</span>
+                    <span>{{user.dataNascimento| date: 'dd/MM/yyyy'}}</span>
+                </dd>                
+                <dt>Dependente</dt>
+                <dd>
+                    <span>{{user.dependente}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.createdBy">Created By</span></dt>
+                <dt>Loja Maçonica</dt>
                 <dd>
-                    <span>{{usuarioportal.createdBy}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{usuarioportal.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.lastModifiedBy">Last Modified By</span></dt>
-                <dd>
-                    <span>{{usuarioportal.lastModifiedBy}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.lastModifiedDate">Last Modified Date</span></dt>
-                <dd>
-                    <span>{{usuarioportal.lastModifiedDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.password">Password</span></dt>
-                <dd>
-                    <span>{{usuarioportal.password}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.dataNascimento">Data Nascimento</span></dt>
-                <dd>
-                    <span>{{usuarioportal.dataNascimento}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.lojaMaconicaId">Loja Maconica Id</span></dt>
-                <dd>
-                    <span>{{usuarioportal.lojaMaconicaId}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.telefone">Telefone</span></dt>
-                <dd>
-                    <span>{{usuarioportal.telefone}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.tipoPessoa">Tipo Pessoa</span></dt>
-                <dd>
-                    <span>{{usuarioportal.tipoPessoa}}</span>
-                </dd>
-                <dt><span jhiTranslate="cmtprojectApp.usuarioportal.placet">Placet</span></dt>
-                <dd>
-                    <span>{{usuarioportal.placet}}</span>
+                    <span>{{user.loja}}</span>
                 </dd>
             </dl>
-
             <button type="submit"
-                    (click)="previousState()"
+                    routerLink="../../"
                     class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/usuarioportal', usuarioportal.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
     </div>

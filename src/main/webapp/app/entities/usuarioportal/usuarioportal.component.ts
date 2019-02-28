@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { IUsuarioportal } from 'app/shared/model/usuarioportal.model';
-import { Principal } from 'app/core';
-
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { UsuarioportalService } from './usuarioportal.service';
+import { Principal, UserService, User } from 'app/core';
+import { UserMgmtDeleteDialogComponent } from 'app/admin';
+
+import { UsuarioportalService } from './index';
+import { IUsuarioPortal, UsuarioPortal } from 'app/shared/model/usuarioportal.model';
 
 @Component({
     selector: 'jhi-usuarioportal',
@@ -16,10 +18,9 @@ import { UsuarioportalService } from './usuarioportal.service';
 })
 export class UsuarioportalComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    usuarioportals: IUsuarioportal[];
+    users: UsuarioPortal[];
     error: any;
     success: any;
-    eventSubscriber: Subscription;
     routeData: any;
     links: any;
     totalItems: any;
@@ -31,34 +32,96 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
     reverse: any;
 
     constructor(
-        private usuarioportalService: UsuarioportalService,
-        private parseLinks: JhiParseLinks,
-        private jhiAlertService: JhiAlertService,
+        private userService: UsuarioportalService,
+        private alertService: JhiAlertService,
         private principal: Principal,
+        private parseLinks: JhiParseLinks,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private modalService: NgbModal
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
-            this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
-            this.predicate = data.pagingParams.predicate;
+            this.page = data['pagingParams'].page;
+            this.previousPage = data['pagingParams'].page;
+            this.reverse = data['pagingParams'].ascending;
+            this.predicate = data['pagingParams'].predicate;
+        });
+    }
+
+    ngOnInit() {
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+            this.loadAll();
+            this.registerChangeInUsers();
+        });
+    }
+
+    ngOnDestroy() {
+        this.routeData.unsubscribe();
+    }
+
+    registerChangeInUsers() {
+        this.eventManager.subscribe('userListModification', response => this.loadAll());
+    }
+
+    setActive(user, isActivated) {
+        user.activated = isActivated;
+
+        this.userService.update(user).subscribe(response => {
+            if (response.status === 200) {
+                this.error = null;
+                this.success = 'OK';
+                this.loadAll();
+            } else {
+                this.success = null;
+                this.error = 'ERROR';
+            }
         });
     }
 
     loadAll() {
-        this.usuarioportalService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IUsuarioportal[]>) => this.paginateUsuarioportals(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
+            if (this.currentAccount.lojaMaconicaId !== undefined) {
+                this.userService
+                    .queryIdLoja(
+                        {
+                            page: this.page - 1,
+                            size: this.itemsPerPage,
+                            sort: this.sort()
+                        },
+                        this.currentAccount.lojaMaconicaId
+                    )
+                    .subscribe(
+                        (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
+                        (res: HttpResponse<any>) => this.onError(res.body)
+                    );
+            }
+        } else {
+            this.userService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
+                    (res: HttpResponse<any>) => this.onError(res.body)
+                );
+        }
+    }
+
+    trackIdentity(index, item: User) {
+        return item.id;
+    }
+
+    sort() {
+        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        if (this.predicate !== 'id') {
+            result.push('id');
+        }
+        return result;
     }
 
     loadPage(page: number) {
@@ -69,14 +132,37 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/usuarioportal'], {
+        this.router.navigate(['/admin/user-management'], {
             queryParams: {
                 page: this.page,
-                size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
         this.loadAll();
+    }
+
+    deleteUser(user: User) {
+        const modalRef = this.modalService.open(UserMgmtDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.user = user;
+        modalRef.result.then(
+            result => {
+                // Left blank intentionally, nothing to do here
+            },
+            reason => {
+                // Left blank intentionally, nothing to do here
+            }
+        );
+    }
+
+    private onSuccess(data, headers) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.totalItems = headers.get('X-Total-Count');
+        this.queryCount = this.totalItems;
+        this.users = data;
+    }
+
+    private onError(error) {
+        this.alertService.error(error.error, error.message, null);
     }
 
     clear() {
@@ -89,44 +175,5 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
             }
         ]);
         this.loadAll();
-    }
-
-    ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInUsuarioportals();
-    }
-
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
-    trackId(index: number, item: IUsuarioportal) {
-        return item.id;
-    }
-
-    registerChangeInUsuarioportals() {
-        this.eventSubscriber = this.eventManager.subscribe('usuarioportalListModification', response => this.loadAll());
-    }
-
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
-        }
-        return result;
-    }
-
-    private paginateUsuarioportals(data: IUsuarioportal[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-        this.queryCount = this.totalItems;
-        this.usuarioportals = data;
-    }
-
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
     }
 }
