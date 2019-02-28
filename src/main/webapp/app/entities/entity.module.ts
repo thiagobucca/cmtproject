@@ -24,6 +24,9 @@ import { CmtprojectContasPagarReceberModule } from './contas-pagar-receber/conta
 import { CmtprojectCupomModule } from './cupom/cupom.module';
 import { CmtprojectComunicacaoPushLojaModule } from './comunicacao-push-loja/comunicacao-push-loja.module';
 import { CmtprojectUsuarioportalModule } from './usuarioportal/usuarioportal.module';
+import { CmtprojectMembroModule } from './membro/membro.module';
+import { CmtprojectRelatorioCupomCmtModule } from './relatorio-cupom-cmt/relatorio-cupom-cmt.module';
+import { CmtprojectRelatorioContasPagarReceberModule } from './relatorio-contas-pagar-receber/relatorio-contas-pagar-receber.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -53,6 +56,9 @@ import { CmtprojectUsuarioportalModule } from './usuarioportal/usuarioportal.mod
         CmtprojectCupomModule,
         CmtprojectComunicacaoPushLojaModule,
         CmtprojectUsuarioportalModule,
+        CmtprojectMembroModule,
+        CmtprojectRelatorioCupomCmtModule,
+        CmtprojectRelatorioContasPagarReceberModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

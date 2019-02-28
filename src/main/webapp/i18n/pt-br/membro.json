@@ -1,0 +1,21 @@
+{
+    "cmtprojectApp": {
+        "membro": {
+            "home": {
+                "title": "Membros",
+                "createLabel": "Criar novo Membro",
+                "createOrEditLabel": "Criar ou editar Membro"
+            },
+            "created": "Um novo Membro foi criado com o identificador {{ param }}",
+            "updated": "Um Membro foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Membro foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Membro {{ id }}?"
+            },
+            "detail": {
+                "title": "Membro"
+            },
+            "nome": "Nome"
+        }
+    }
+}

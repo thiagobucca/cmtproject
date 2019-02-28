@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="relatorioCupomCmt">
+            <h2><span jhiTranslate="cmtprojectApp.relatorioCupomCmt.detail.title">Relatorio Cupom Cmt</span> {{relatorioCupomCmt.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cmtprojectApp.relatorioCupomCmt.cupom">Cupom</span></dt>
+                <dd>
+                    <span>{{relatorioCupomCmt.cupom}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.relatorioCupomCmt.data">Data</span></dt>
+                <dd>
+                    <span>{{relatorioCupomCmt.data}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/relatorio-cupom-cmt', relatorioCupomCmt.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -31,6 +31,9 @@
                 "cupom": "Cupom",
                 "comunicacaoPushLoja": "Comunicacao Push Loja",
                 "usuarioportal": "Usuarioportal",
+                "membro": "Membro",
+                "relatorioCupomCmt": "Relatorio Cupom Cmt",
+                "relatorioContasPagarReceber": "Relatorio Contas Pagar Receber",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

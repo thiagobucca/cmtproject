@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "cupom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20190228125344",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "relatorio_cupom_cmt",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
+}
