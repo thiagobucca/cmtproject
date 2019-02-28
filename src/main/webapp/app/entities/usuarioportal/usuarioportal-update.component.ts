@@ -68,9 +68,29 @@ export class UsuarioportalUpdateComponent implements OnInit {
 
         this.user.dataNascimento = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         if (this.user.id !== null) {
-            this.userService.update(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+            this.userService.update(this.user).subscribe(
+                response => this.onSaveSuccess(response),
+                (res: HttpErrorResponse) => {
+                    this.onSaveError();
+                    if (res.error !== undefined) {
+                        this.onError(res.error.title);
+                    } else {
+                        this.onError(res.message);
+                    }
+                }
+            );
         } else {
-            this.userService.create(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+            this.userService.create(this.user).subscribe(
+                response => this.onSaveSuccess(response),
+                (res: HttpErrorResponse) => {
+                    this.onSaveError();
+                    if (res.error !== undefined) {
+                        this.onError(res.error.title);
+                    } else {
+                        this.onError(res.message);
+                    }
+                }
+            );
         }
     }
 

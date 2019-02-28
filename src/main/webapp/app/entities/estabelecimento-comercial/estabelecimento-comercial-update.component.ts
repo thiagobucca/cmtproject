@@ -207,7 +207,11 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => {
                 this.onSaveError();
-                this.onError(res.message);
+                if (res.error !== undefined) {
+                    this.onError(res.error.title);
+                } else {
+                    this.onError(res.message);
+                }
             }
         );
     }

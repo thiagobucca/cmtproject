@@ -7,6 +7,7 @@ import { ICategoriaEstabelecimento } from 'app/shared/model/categoria-estabeleci
 import { CategoriaEstabelecimentoService } from './categoria-estabelecimento.service';
 import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-categoria-estabelecimento-update',
@@ -20,6 +21,7 @@ export class CategoriaEstabelecimentoUpdateComponent implements OnInit {
         private categoriaEstabelecimentoService: CategoriaEstabelecimentoService,
         private activatedRoute: ActivatedRoute,
         private auxService: AuxiliarService,
+        private jhiAlertService: JhiAlertService,
         private ref: ChangeDetectorRef
     ) {}
 
@@ -57,10 +59,19 @@ export class CategoriaEstabelecimentoUpdateComponent implements OnInit {
     private subscribeToSaveResponse(result: Observable<HttpResponse<ICategoriaEstabelecimento>>) {
         result.subscribe(
             (res: HttpResponse<ICategoriaEstabelecimento>) => this.onSaveSuccess(),
-            (res: HttpErrorResponse) => this.onSaveError()
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                if (res.error !== undefined) {
+                    this.onError(res.error.title);
+                } else {
+                    this.onError(res.message);
+                }
+            }
         );
     }
-
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
     private onSaveSuccess() {
         this.isSaving = false;
         this.loading = false;

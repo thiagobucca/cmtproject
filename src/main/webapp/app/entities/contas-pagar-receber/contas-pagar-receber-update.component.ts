@@ -122,7 +122,17 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IContasPagarReceber>>) {
-        result.subscribe((res: HttpResponse<IContasPagarReceber>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe(
+            (res: HttpResponse<IContasPagarReceber>) => this.onSaveSuccess(),
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                if (res.error !== undefined) {
+                    this.onError(res.error.title);
+                } else {
+                    this.onError(res.message);
+                }
+            }
+        );
     }
     onChangeLojaMaconica(value) {
         this.isEstabelecimento = value === undefined;

@@ -173,7 +173,7 @@
                                         <tr *ngFor="let item of contatoEstabelecimentos ;trackBy: trackById; let i = index">
 
                                             <td>{{item.nome}} </td>
-                                            <td>{{item.telefone}}</td>
+                                            <td>{{item.telefone| mask: '(00) 0 0000-0000'}}</td>
                                             <td>{{item.email}}</td>
 
                                             <td class="text-right">
