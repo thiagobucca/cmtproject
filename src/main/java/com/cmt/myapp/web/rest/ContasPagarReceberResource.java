@@ -55,6 +55,36 @@ public class ContasPagarReceberResource {
         if (contasPagarReceber.getId() != null) {
             throw new BadRequestAlertException("A new contasPagarReceber cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if(contasPagarReceber.getLojaMaconicaId() != null && contasPagarReceber.getLojaMaconicaId() > 0){
+            List<ContasPagarReceber> contas = contasPagarReceberRepository.findByDataAndValorAndStatusLancamentoAndTipoOperacaoIdAndLojaMaconicaId(
+                contasPagarReceber.getData(), 
+                contasPagarReceber.getValor(),
+                contasPagarReceber.getStatusLancamento(),
+                contasPagarReceber.getTipoOperacaoId(),
+                contasPagarReceber.getLojaMaconicaId()
+            );
+
+
+            if(!contas.isEmpty()){
+                throw new BadRequestAlertException("Conta em duplicadade", ENTITY_NAME, "duplicate");
+            }
+            
+        }else if(contasPagarReceber.getEstabelecimentoComercialId() != null && contasPagarReceber.getEstabelecimentoComercialId() > 0){
+            List<ContasPagarReceber> contas = contasPagarReceberRepository.findByDataAndValorAndStatusLancamentoAndTipoOperacaoIdAndEstabelecimentoComercialId(
+                contasPagarReceber.getData(), 
+                contasPagarReceber.getValor(),
+                contasPagarReceber.getStatusLancamento(),
+                contasPagarReceber.getTipoOperacaoId(),
+                contasPagarReceber.getEstabelecimentoComercialId()
+            );
+
+            if(!contas.isEmpty()){
+                throw new BadRequestAlertException("Conta em duplicadade", ENTITY_NAME, "duplicate");
+            }
+        }
+
+
         ContasPagarReceber result = contasPagarReceberRepository.save(contasPagarReceber);
         return ResponseEntity.created(new URI("/api/contas-pagar-recebers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -77,6 +107,36 @@ public class ContasPagarReceberResource {
         if (contasPagarReceber.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        if(contasPagarReceber.getLojaMaconicaId() != null && contasPagarReceber.getLojaMaconicaId() > 0){
+            List<ContasPagarReceber> contas = contasPagarReceberRepository.findByDataAndValorAndStatusLancamentoAndTipoOperacaoIdAndLojaMaconicaId(
+                contasPagarReceber.getData(), 
+                contasPagarReceber.getValor(),
+                contasPagarReceber.getStatusLancamento(),
+                contasPagarReceber.getTipoOperacaoId(),
+                contasPagarReceber.getLojaMaconicaId()
+            );
+
+
+            if(!contas.isEmpty() && contas.get(0).getId() != contasPagarReceber.getId()){
+                throw new BadRequestAlertException("Conta em duplicadade", ENTITY_NAME, "duplicate");
+            }
+            
+        }else if(contasPagarReceber.getEstabelecimentoComercialId() != null && contasPagarReceber.getEstabelecimentoComercialId() > 0){
+            List<ContasPagarReceber> contas = contasPagarReceberRepository.findByDataAndValorAndStatusLancamentoAndTipoOperacaoIdAndEstabelecimentoComercialId(
+                contasPagarReceber.getData(), 
+                contasPagarReceber.getValor(),
+                contasPagarReceber.getStatusLancamento(),
+                contasPagarReceber.getTipoOperacaoId(),
+                contasPagarReceber.getEstabelecimentoComercialId()
+            );
+
+            if(!contas.isEmpty() && contas.get(0).getId() != contasPagarReceber.getId()){
+                throw new BadRequestAlertException("Conta em duplicadade", ENTITY_NAME, "duplicate");
+            }
+        }
+
+
         ContasPagarReceber result = contasPagarReceberRepository.save(contasPagarReceber);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, contasPagarReceber.getId().toString()))

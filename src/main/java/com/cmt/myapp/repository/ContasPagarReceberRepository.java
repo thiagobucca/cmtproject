@@ -1,8 +1,10 @@
 package com.cmt.myapp.repository;
 
 import java.time.Instant;
+import java.util.List;
 
 import com.cmt.myapp.domain.ContasPagarReceber;
+import com.cmt.myapp.domain.enumeration.StatusLancamento;
 import com.cmt.myapp.domain.enumeration.TipoLancamento;
 
 import org.springframework.data.domain.Page;
@@ -23,4 +25,12 @@ public interface ContasPagarReceberRepository extends JpaRepository<ContasPagarR
     public Page<ContasPagarReceber> findByDataBetweenAndTipoOperacaoTipoLancamento(Pageable pageable, Instant dataInicial, Instant dataFinal, TipoLancamento tipoLancamento);
 
     public Page<ContasPagarReceber> findByDataBetweenAndTipoOperacaoId(Pageable pageable, Instant dataInicial, Instant dataFinal, Long tipoOperacao);
+
+    public List<ContasPagarReceber> findByDataAndValorAndStatusLancamentoAndTipoOperacaoIdAndLojaMaconicaId(
+        Instant data, Double valor, StatusLancamento status, Long tipo, Long loja
+    );
+
+    public List<ContasPagarReceber> findByDataAndValorAndStatusLancamentoAndTipoOperacaoIdAndEstabelecimentoComercialId(
+        Instant data, Double valor, StatusLancamento status, Long tipo, Long estabelecimento
+    );
 }
