@@ -137,7 +137,6 @@ public class UserResource {
      */
     @PutMapping("/users")
     @Timed
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.USER + "\")")
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("REST request to update User : {}", userDTO);
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
@@ -190,7 +189,8 @@ public class UserResource {
      */
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
+    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable, @RequestParam( value = "isPortal", required = false) Boolean isPortal) {
+
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -201,7 +201,7 @@ public class UserResource {
      */
     @GetMapping("/users/authorities")
     @Timed
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\") or hasRole(\"" + AuthoritiesConstants.USER + "\")")
     public List<String> getAuthorities() {
         return userService.getAuthorities();
     }
