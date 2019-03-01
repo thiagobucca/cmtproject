@@ -85,13 +85,13 @@
 
 
             <div class="form-group row">
-                <div class="col-md-2">
+                <div class="col-md-2" style="display: none;">
 
                     <label class="form-control-label" for="field_tipoPessoa">Tipo Pessoa</label>
                     <select class="form-control" name="tipoPessoa" [(ngModel)]="user.tipoPessoa" id="field_tipoPessoa"
                     (ngModelChange)="onChangeTipoPessoa($event)"
-                        required>
-                        <option value="Macom">{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
+                        disabled>
+                        <option value="Macom" selected>{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
                         <option value="Dependente">{{'cmtprojectApp.TipoPessoa.Dependente' | translate}}</option>
                     </select>
                 </div>

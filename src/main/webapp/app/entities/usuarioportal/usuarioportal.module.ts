@@ -24,7 +24,12 @@ const ENTITY_STATES = [...usuarioportalRoute, ...usuarioportalPopupRoute];
         UsuarioportalDeletePopupComponent,
         UsuarioportalDeleteDialogComponent
     ],
-    entryComponents: [UsuarioportalComponent, UsuarioportalUpdateComponent, UsuarioportalDeletePopupComponent],
+    entryComponents: [
+        UsuarioportalComponent,
+        UsuarioportalUpdateComponent,
+        UsuarioportalDeletePopupComponent,
+        UsuarioportalDeleteDialogComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CmtprojectUsuarioportalModule {}

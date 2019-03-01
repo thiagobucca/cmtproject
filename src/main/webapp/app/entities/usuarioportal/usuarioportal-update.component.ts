@@ -10,6 +10,8 @@ import * as moment from 'moment';
 import { TipoPessoa } from 'app/shared/model/pessoa.model';
 import { ILojaMaconica } from 'app/shared/model/loja-maconica.model';
 import { LojaMaconicaService } from 'app/entities/loja-maconica';
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'jhi-usuarioportal-update',
@@ -21,21 +23,32 @@ export class UsuarioportalUpdateComponent implements OnInit {
     authorities: any[];
     isSaving: boolean;
     lojas: ILojaMaconica[];
-    macons: IUser[];
+    macons: IUsuarioPortal[];
     data: string;
     constructor(
         private languageHelper: JhiLanguageHelper,
         private userService: UsuarioportalService,
         private route: ActivatedRoute,
         private lojaMaconicaService: LojaMaconicaService,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {}
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     ngOnInit() {
+        this.loading = true;
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
             this.user = user;
+            this.user.tipoPessoa = <TipoPessoa>'Macom';
             this.data = this.user.dataNascimento != null ? this.user.dataNascimento.format(DATE_FORMAT) : null;
+            this.loading = false;
+            this.ref.detectChanges();
         });
         this.authorities = [];
         this.userService.authorities().subscribe(authorities => {
@@ -51,7 +64,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
         this.userService.findByTipo(TipoPessoa.Macom).subscribe(
-            (res: HttpResponse<IUser[]>) => {
+            (res: HttpResponse<IUsuarioPortal[]>) => {
                 this.macons = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -65,6 +78,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.user.langKey = 'pt-br';
+        this.loading = true;
 
         this.user.dataNascimento = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         if (this.user.id !== null) {
@@ -97,10 +111,14 @@ export class UsuarioportalUpdateComponent implements OnInit {
     private onSaveSuccess(result) {
         this.isSaving = false;
         this.previousState();
+        this.loading = false;
+        this.ref.detectChanges();
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.loading = false;
+        this.ref.detectChanges();
     }
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);

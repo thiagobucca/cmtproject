@@ -44,7 +44,7 @@
                                 title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
-                            <button type="submit" [routerLink]="['./', user.login, 'edit']" queryParamsHandling="merge"
+                            <button type="submit" (click)="detalhar(['./', user.login, 'edit'])" queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm" title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
