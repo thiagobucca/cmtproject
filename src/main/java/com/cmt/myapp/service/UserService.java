@@ -149,14 +149,14 @@ public class UserService {
         user.setTelefone(userDTO.getTelefone());
         
 
-        if (user.getLojaMaconicaId() != null && user.getLojaMaconicaId() > 0)
+        if (userDTO.getLojaMaconicaId() != null && userDTO.getLojaMaconicaId() > 0)
         {
             user.setLojaMaconicaId(userDTO.getLojaMaconicaId());
         }
 
         user.setTipoPessoa(userDTO.getTipoPessoa());
 
-        if (user.getPessoaDependenteId() != null && user.getPessoaDependenteId() > 0)
+        if (userDTO.getPessoaDependenteId() != null && userDTO.getPessoaDependenteId() > 0)
         {
             user.setPessoaDependenteId(user.getPessoaDependenteId());
         }
