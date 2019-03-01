@@ -92,7 +92,6 @@ export class UserMgmtUpdateComponent implements OnInit {
     }
 
     onChangeMacom(event) {
-        debugger;
         const dependencia = this.macons.find(x => x.id == event);
         if (dependencia != null) {
             this.user.lojaMaconicaId = dependencia.lojaMaconicaId;

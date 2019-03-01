@@ -27,7 +27,7 @@ export class LoginService {
                                     this.logout();
                                     this.router.navigate(['accessdenied']);
                                 } else {
-                                    this.router.navigate(['home']);
+                                    this.router.navigate(['']);
                                 }
                             });
                         }
