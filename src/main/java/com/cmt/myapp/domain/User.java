@@ -87,7 +87,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String telefone;
 
     @Column(name = "placet")
-    @NotBlank(message = "O Placet nao foi informado")
     private String placet;
 
     @Column(name = "pessoa_dependente_id")
