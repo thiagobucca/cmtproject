@@ -4,6 +4,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { RelatorioCupomCmtService } from 'app/entities/relatorio-cupom-cmt/relatorio-cupom-cmt.service';
 import { IRelatorioCupomCmt, RelatorioCupomCmt } from 'app/shared/model/relatorio-cupom-cmt.model';
 
@@ -13,6 +15,7 @@ describe('Service Tests', () => {
         let service: RelatorioCupomCmtService;
         let httpMock: HttpTestingController;
         let elemDefault: IRelatorioCupomCmt;
+        let currentDate: moment.Moment;
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [HttpClientTestingModule]
@@ -21,7 +24,7 @@ describe('Service Tests', () => {
             service = injector.get(RelatorioCupomCmtService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new RelatorioCupomCmt(0, 'AAAAAAA', 0);
+            elemDefault = new RelatorioCupomCmt(0, 'AAAAAAA', currentDate);
         });
 
         describe('Service methods', async () => {
@@ -33,40 +36,6 @@ describe('Service Tests', () => {
                     .subscribe(resp => expect(resp).toMatchObject({ body: elemDefault }));
 
                 const req = httpMock.expectOne({ method: 'GET' });
-                req.flush(JSON.stringify(returnedFromService));
-            });
-
-            it('should create a RelatorioCupomCmt', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        id: 0
-                    },
-                    elemDefault
-                );
-                const expected = Object.assign({}, returnedFromService);
-                service
-                    .create(new RelatorioCupomCmt(null))
-                    .pipe(take(1))
-                    .subscribe(resp => expect(resp).toMatchObject({ body: expected }));
-                const req = httpMock.expectOne({ method: 'POST' });
-                req.flush(JSON.stringify(returnedFromService));
-            });
-
-            it('should update a RelatorioCupomCmt', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        cupom: 'BBBBBB',
-                        data: 1
-                    },
-                    elemDefault
-                );
-
-                const expected = Object.assign({}, returnedFromService);
-                service
-                    .update(expected)
-                    .pipe(take(1))
-                    .subscribe(resp => expect(resp).toMatchObject({ body: expected }));
-                const req = httpMock.expectOne({ method: 'PUT' });
                 req.flush(JSON.stringify(returnedFromService));
             });
 
@@ -89,13 +58,6 @@ describe('Service Tests', () => {
                 const req = httpMock.expectOne({ method: 'GET' });
                 req.flush(JSON.stringify([returnedFromService]));
                 httpMock.verify();
-            });
-
-            it('should delete a RelatorioCupomCmt', async () => {
-                const rxPromise = service.delete(123).subscribe(resp => expect(resp.ok));
-
-                const req = httpMock.expectOne({ method: 'DELETE' });
-                req.flush({ status: 200 });
             });
         });
 

@@ -8,8 +8,6 @@ import { RelatorioCupomCmt } from 'app/shared/model/relatorio-cupom-cmt.model';
 import { RelatorioCupomCmtService } from './relatorio-cupom-cmt.service';
 import { RelatorioCupomCmtComponent } from './relatorio-cupom-cmt.component';
 import { RelatorioCupomCmtDetailComponent } from './relatorio-cupom-cmt-detail.component';
-import { RelatorioCupomCmtUpdateComponent } from './relatorio-cupom-cmt-update.component';
-import { RelatorioCupomCmtDeletePopupComponent } from './relatorio-cupom-cmt-delete-dialog.component';
 import { IRelatorioCupomCmt } from 'app/shared/model/relatorio-cupom-cmt.model';
 
 @Injectable({ providedIn: 'root' })
@@ -34,7 +32,7 @@ export const relatorioCupomCmtRoute: Routes = [
         component: RelatorioCupomCmtComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioCupomCmt.home.title'
+            pageTitle: 'Relatório Cupom X CMT'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,48 +44,8 @@ export const relatorioCupomCmtRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioCupomCmt.home.title'
+            pageTitle: 'Relatório Cupom X CMT'
         },
         canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'relatorio-cupom-cmt/new',
-        component: RelatorioCupomCmtUpdateComponent,
-        resolve: {
-            relatorioCupomCmt: RelatorioCupomCmtResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioCupomCmt.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'relatorio-cupom-cmt/:id/edit',
-        component: RelatorioCupomCmtUpdateComponent,
-        resolve: {
-            relatorioCupomCmt: RelatorioCupomCmtResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioCupomCmt.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    }
-];
-
-export const relatorioCupomCmtPopupRoute: Routes = [
-    {
-        path: 'relatorio-cupom-cmt/:id/delete',
-        component: RelatorioCupomCmtDeletePopupComponent,
-        resolve: {
-            relatorioCupomCmt: RelatorioCupomCmtResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioCupomCmt.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];
