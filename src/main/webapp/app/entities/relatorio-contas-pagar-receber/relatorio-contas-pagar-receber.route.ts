@@ -8,8 +8,6 @@ import { RelatorioContasPagarReceber } from 'app/shared/model/relatorio-contas-p
 import { RelatorioContasPagarReceberService } from './relatorio-contas-pagar-receber.service';
 import { RelatorioContasPagarReceberComponent } from './relatorio-contas-pagar-receber.component';
 import { RelatorioContasPagarReceberDetailComponent } from './relatorio-contas-pagar-receber-detail.component';
-import { RelatorioContasPagarReceberUpdateComponent } from './relatorio-contas-pagar-receber-update.component';
-import { RelatorioContasPagarReceberDeletePopupComponent } from './relatorio-contas-pagar-receber-delete-dialog.component';
 import { IRelatorioContasPagarReceber } from 'app/shared/model/relatorio-contas-pagar-receber.model';
 
 @Injectable({ providedIn: 'root' })
@@ -49,45 +47,5 @@ export const relatorioContasPagarReceberRoute: Routes = [
             pageTitle: 'cmtprojectApp.relatorioContasPagarReceber.home.title'
         },
         canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'relatorio-contas-pagar-receber/new',
-        component: RelatorioContasPagarReceberUpdateComponent,
-        resolve: {
-            relatorioContasPagarReceber: RelatorioContasPagarReceberResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioContasPagarReceber.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'relatorio-contas-pagar-receber/:id/edit',
-        component: RelatorioContasPagarReceberUpdateComponent,
-        resolve: {
-            relatorioContasPagarReceber: RelatorioContasPagarReceberResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioContasPagarReceber.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    }
-];
-
-export const relatorioContasPagarReceberPopupRoute: Routes = [
-    {
-        path: 'relatorio-contas-pagar-receber/:id/delete',
-        component: RelatorioContasPagarReceberDeletePopupComponent,
-        resolve: {
-            relatorioContasPagarReceber: RelatorioContasPagarReceberResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.relatorioContasPagarReceber.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

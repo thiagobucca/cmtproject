@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { Principal, UserService, User } from 'app/core';
+import { Principal } from 'app/core';
 import { UsuarioportalDeleteDialogComponent } from './usuarioportal-delete-dialog.component';
 
 import { UsuarioportalService } from './index';
@@ -100,14 +100,13 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
                     )
                     .subscribe(
                         (res: HttpResponse<UsuarioPortal[]>) => {
-                            this.onSuccess(res.body, res.headers);
                             this.loading = false;
-                            this.ref.detectChanges();
+                            this.onSuccess(res.body, res.headers);
                         },
                         (res: HttpResponse<any>) => {
-                            this.onError(res.body);
                             this.loading = false;
                             this.ref.detectChanges();
+                            this.onError(res.body);
                         }
                     );
             }
@@ -120,14 +119,14 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
                 })
                 .subscribe(
                     (res: HttpResponse<UsuarioPortal[]>) => {
-                        this.onSuccess(res.body, res.headers);
                         this.loading = false;
+                        this.onSuccess(res.body, res.headers);
                         this.ref.detectChanges();
                     },
                     (res: HttpResponse<any>) => {
-                        this.onError(res.body);
                         this.loading = false;
                         this.ref.detectChanges();
+                        this.onError(res.body);
                     }
                 );
         }
@@ -136,7 +135,7 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.router.navigate(parametros);
     }
-    trackIdentity(index, item: User) {
+    trackIdentity(index, item: UsuarioPortal) {
         return item.id;
     }
     get loading(): boolean {
@@ -171,7 +170,7 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
 
-    deleteUser(user: User) {
+    deleteUser(user: UsuarioPortal) {
         const modalRef = this.modalService.open(UsuarioportalDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.user = user;
         modalRef.result.then(

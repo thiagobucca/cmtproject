@@ -66,5 +66,11 @@
                 <span>Categoria Estabelecimento</span>
             </a>
         </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="membro" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER','ROLE_LOJA_MACONICA']">
+                <i class="now-ui-icons users_single-02"></i>
+                <span>Membros</span>
+            </a>
+        </li>
     </ul>
 </div>

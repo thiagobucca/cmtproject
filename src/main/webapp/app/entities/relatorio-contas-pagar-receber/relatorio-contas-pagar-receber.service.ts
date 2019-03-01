@@ -11,17 +11,9 @@ type EntityArrayResponseType = HttpResponse<IRelatorioContasPagarReceber[]>;
 
 @Injectable({ providedIn: 'root' })
 export class RelatorioContasPagarReceberService {
-    public resourceUrl = SERVER_API_URL + 'api/relatorio-contas-pagar-recebers';
+    public resourceUrl = SERVER_API_URL + 'api/contas-pagar-recebers';
 
     constructor(private http: HttpClient) {}
-
-    create(relatorioContasPagarReceber: IRelatorioContasPagarReceber): Observable<EntityResponseType> {
-        return this.http.post<IRelatorioContasPagarReceber>(this.resourceUrl, relatorioContasPagarReceber, { observe: 'response' });
-    }
-
-    update(relatorioContasPagarReceber: IRelatorioContasPagarReceber): Observable<EntityResponseType> {
-        return this.http.put<IRelatorioContasPagarReceber>(this.resourceUrl, relatorioContasPagarReceber, { observe: 'response' });
-    }
 
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IRelatorioContasPagarReceber>(`${this.resourceUrl}/${id}`, { observe: 'response' });
@@ -29,10 +21,6 @@ export class RelatorioContasPagarReceberService {
 
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
-        return this.http.get<IRelatorioContasPagarReceber[]>(this.resourceUrl, { params: options, observe: 'response' });
-    }
-
-    delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+        return this.http.get<IRelatorioContasPagarReceber[]>(`${this.resourceUrl}/filter/?`, { params: options, observe: 'response' });
     }
 }

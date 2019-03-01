@@ -39,7 +39,7 @@ export const usuarioportalRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.usuarioportal.home.title'
+            pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -51,7 +51,7 @@ export const usuarioportalRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.usuarioportal.home.title'
+            pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -63,7 +63,7 @@ export const usuarioportalRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.usuarioportal.home.title'
+            pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -75,7 +75,7 @@ export const usuarioportalRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.usuarioportal.home.title'
+            pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -90,7 +90,7 @@ export const usuarioportalPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.usuarioportal.home.title'
+            pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

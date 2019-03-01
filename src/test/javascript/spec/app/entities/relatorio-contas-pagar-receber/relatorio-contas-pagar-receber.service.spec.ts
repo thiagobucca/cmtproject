@@ -36,39 +36,6 @@ describe('Service Tests', () => {
                 req.flush(JSON.stringify(returnedFromService));
             });
 
-            it('should create a RelatorioContasPagarReceber', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        id: 0
-                    },
-                    elemDefault
-                );
-                const expected = Object.assign({}, returnedFromService);
-                service
-                    .create(new RelatorioContasPagarReceber(null))
-                    .pipe(take(1))
-                    .subscribe(resp => expect(resp).toMatchObject({ body: expected }));
-                const req = httpMock.expectOne({ method: 'POST' });
-                req.flush(JSON.stringify(returnedFromService));
-            });
-
-            it('should update a RelatorioContasPagarReceber', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        nome: 'BBBBBB'
-                    },
-                    elemDefault
-                );
-
-                const expected = Object.assign({}, returnedFromService);
-                service
-                    .update(expected)
-                    .pipe(take(1))
-                    .subscribe(resp => expect(resp).toMatchObject({ body: expected }));
-                const req = httpMock.expectOne({ method: 'PUT' });
-                req.flush(JSON.stringify(returnedFromService));
-            });
-
             it('should return a list of RelatorioContasPagarReceber', async () => {
                 const returnedFromService = Object.assign(
                     {
@@ -87,13 +54,6 @@ describe('Service Tests', () => {
                 const req = httpMock.expectOne({ method: 'GET' });
                 req.flush(JSON.stringify([returnedFromService]));
                 httpMock.verify();
-            });
-
-            it('should delete a RelatorioContasPagarReceber', async () => {
-                const rxPromise = service.delete(123).subscribe(resp => expect(resp.ok));
-
-                const req = httpMock.expectOne({ method: 'DELETE' });
-                req.flush({ status: 200 });
             });
         });
 

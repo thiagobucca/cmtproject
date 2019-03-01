@@ -18,10 +18,6 @@ import { LojaMaconicaService } from 'app/entities/loja-maconica';
 
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
-import { filter } from 'rxjs/operators';
-import { stringify } from 'querystring';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { load } from '@angular/core/src/render3';
 
 @Component({
     selector: 'jhi-relatorio-cupom-cmt',
@@ -75,8 +71,6 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     loadAll() {
         this.loading = true;
         this.ref.detectChanges();
-        let query = {};
-
         this.relatorioCupomCmtService
             .query({
                 page: this.page,

@@ -1,6 +1,6 @@
 <div>
     <h2>
-        <span id="user-management-page-heading" jhiTranslate="userManagement.home.title">Users</span>
+        <span id="user-management-page-heading" >Usuário Portal</span>
         <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['./new']">
             <fa-icon [icon]="'plus'"></fa-icon> Novo</button>
     </h2>
@@ -44,7 +44,7 @@
                                 title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
-                            <button type="submit" (click)="detalhar(['./', user.login, 'edit'])" queryParamsHandling="merge"
+                            <button type="submit" (click)="detalhar(['usuarioportal/', user.login, 'edit'])" queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm" title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
