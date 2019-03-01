@@ -75,17 +75,24 @@ public class CupomResource {
             throw new BadRequestAlertException("A new cupom cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
+        Optional<Cupom> existingCupom = cupomRepository.findOneByDataAndValorAndNumeroAndEstabelecimentoComercialId(
+                cupom.getData(), cupom.getValor(), cupom.getNumero(), cupom.getEstabelecimentoComercialId());
+
+        if (existingCupom.isPresent()) {
+            throw new BadRequestAlertException("Cupom ja cadastrado, favor informar um diferente", ENTITY_NAME,
+                    "duplicate");
+        }
+
         try {
 
-
-            log.debug("usuario:"+cupom.getUsuarioId());
+            log.debug("usuario:" + cupom.getUsuarioId());
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
-            Files.createDirectories(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name).getParent());
-            Files.write(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name),
+            Files.createDirectories(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
+            Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
                     Base64.getDecoder().decode(cupom.getFoto()));
 
-            cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/"+cupom.getUsuarioId() + "/" + name);
+            cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" + name);
 
             Cupom result = cupomRepository.save(cupom);
             return ResponseEntity.created(new URI("/api/cupoms/" + result.getId()))
@@ -114,17 +121,37 @@ public class CupomResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
 
+        Optional<Cupom> existingCupom = cupomRepository.findById(cupom.getId());
+
+        if (!existingCupom.get().getData().equals(cupom.getData())
+                || !existingCupom.get().getValor().equals(cupom.getValor())
+                || !existingCupom.get().getNumero().equals(cupom.getNumero())
+                || !existingCupom.get().getEstabelecimentoComercialId().equals(cupom.getEstabelecimentoComercialId())) 
+        {
+            
+            existingCupom = cupomRepository.findOneByDataAndValorAndNumeroAndEstabelecimentoComercialId(cupom.getData(),
+                    cupom.getValor(), cupom.getNumero(), cupom.getEstabelecimentoComercialId());
+
+            if (existingCupom.isPresent()) {
+                throw new BadRequestAlertException("Cupom ja cadastrado, favor informar um diferente", ENTITY_NAME,
+                        "duplicate");
+            }
+        }
+        
+        
+
         try {
 
             if (!cupom.getFoto().contains("http://")) {
 
                 String name = String.format("%s.%s",
                         RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(), "jpg");
-                Files.createDirectories(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name).getParent());
-                Files.write(Paths.get(storageDir + "cupom/"+cupom.getUsuarioId() + "/" + name),
+                Files.createDirectories(
+                        Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
+                Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
                         Base64.getDecoder().decode(cupom.getFoto()));
 
-                cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" +name);
+                cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" + name);
             }
 
             Cupom result = cupomRepository.save(cupom);

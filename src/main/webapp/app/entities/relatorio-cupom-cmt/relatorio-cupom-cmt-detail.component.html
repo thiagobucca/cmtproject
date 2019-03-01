@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-12">
+        <div *ngIf="relatorioCupomCmt">
+            <h2><span > Cupom X CMT</span> {{relatorioCupomCmt.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                    <dt><span >Estabelecimento</span></dt>
+                    <dd>
+                        <span>{{relatorioCupomCmt.estabelecimento}}</span>
+                    </dd>
+                    
+                    <dt><span >Data e Hora</span></dt>
+                    <dd>
+                        <span>{{relatorioCupomCmt.data| date: 'dd/MM/yyyy HH:mm'}}</span>
+                    </dd>
+                    <dt><span >Cupom</span></dt>
+                    <dd>
+                        <span>{{relatorioCupomCmt.numero}}</span>
+                    </dd>
+                <dt><span >Foto</span></dt>
+                <dd>
+                    <div *ngIf="relatorioCupomCmt.foto">
+                        <a [href]="relatorioCupomCmt.foto" target="_black">
+                            <img [src]="relatorioCupomCmt.foto" style="    max-height: 200px; max-width: 200px;" alt="cupom image" />
+                        </a><br>
+                        {{relatorioCupomCmt.foto}}
+                    </div>
+                </dd>
+                <dt><span >Cupom</span></dt>
+                <dd>
+                    <span>{{relatorioCupomCmt.valor | currency:'BRL':true:'1.2-2'}}</span>
+                </dd>
+                <dt><span >Valor CMT</span></dt>
+                <dd>
+                    <span>{{relatorioCupomCmt.valorCMT | currency:'BRL':true:'1.2-2'}}</span>
+                </dd>
+                <dt><span >Valor Loja Maçônica</span></dt>
+                <dd>
+                    <span>{{relatorioCupomCmt.valorLoja | currency:'BRL':true:'1.2-2'}}</span>
+                </dd>
+                <dt><span >Taxa Convênio</span></dt>
+                <dd>
+                    <span>{{relatorioCupomCmt.taxaConvenio}}%</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>            
+        </div>
+    </div>
+</div>

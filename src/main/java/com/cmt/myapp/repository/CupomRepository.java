@@ -3,6 +3,7 @@ package com.cmt.myapp.repository;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.cmt.myapp.domain.Cupom;
 
@@ -28,6 +29,8 @@ public interface CupomRepository extends JpaRepository<Cupom, Long> {
     public Page<Cupom> findByDataBetweenAndEstabelecimentoComercialId(Pageable pageable, Instant dataInicial, Instant dataFinal, Long estabelecimentoId);
     
     public Page<Cupom> findByDataBetweenAndUsuarioLojaMaconicaId(Pageable pageable, Instant dataInicial, Instant dataFinal, Long lojaMaconicaId);
+
+    public Optional<Cupom> findOneByDataAndValorAndNumeroAndEstabelecimentoComercialId(Instant data, Number valor, String numero, Long estabelecimentoId);
     
 }
 

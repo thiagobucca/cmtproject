@@ -1,0 +1,22 @@
+{
+    "cmtprojectApp": {
+        "relatorioCupomCmt": {
+            "home": {
+                "title": "Relatorio Cupom Cmts",
+                "createLabel": "Criar novo Relatorio Cupom Cmt",
+                "createOrEditLabel": "Criar ou editar Relatorio Cupom Cmt"
+            },
+            "created": "Um novo Relatorio Cupom Cmt foi criado com o identificador {{ param }}",
+            "updated": "Um Relatorio Cupom Cmt foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Relatorio Cupom Cmt foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Relatorio Cupom Cmt {{ id }}?"
+            },
+            "detail": {
+                "title": "Relatorio Cupom Cmt"
+            },
+            "cupom": "Cupom",
+            "data": "Data"
+        }
+    }
+}
