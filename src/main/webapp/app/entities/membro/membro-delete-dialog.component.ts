@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { IMembro } from 'app/shared/model/membro.model';
+import { IMembro, Membro } from 'app/shared/model/membro.model';
 import { MembroService } from './membro.service';
 
 @Component({
@@ -12,19 +11,19 @@ import { MembroService } from './membro.service';
     templateUrl: './membro-delete-dialog.component.html'
 })
 export class MembroDeleteDialogComponent {
-    membro: IMembro;
+    user: Membro;
 
-    constructor(private membroService: MembroService, public activeModal: NgbActiveModal, private eventManager: JhiEventManager) {}
+    constructor(private userService: MembroService, public activeModal: NgbActiveModal, private eventManager: JhiEventManager) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
-    confirmDelete(id: number) {
-        this.membroService.delete(id).subscribe(response => {
+    confirmDelete(login) {
+        this.userService.delete(login).subscribe(response => {
             this.eventManager.broadcast({
-                name: 'membroListModification',
-                content: 'Deleted an membro'
+                name: 'userListModification',
+                content: 'Deleted a user'
             });
             this.activeModal.dismiss(true);
         });
@@ -32,7 +31,7 @@ export class MembroDeleteDialogComponent {
 }
 
 @Component({
-    selector: 'jhi-membro-delete-popup',
+    selector: 'jhi-tipo-operacao-delete-popup',
     template: ''
 })
 export class MembroDeletePopupComponent implements OnInit, OnDestroy {
@@ -41,10 +40,13 @@ export class MembroDeletePopupComponent implements OnInit, OnDestroy {
     constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ membro }) => {
+        this.activatedRoute.data.subscribe(({ tipoOperacao }) => {
             setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(MembroDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
-                this.ngbModalRef.componentInstance.membro = membro;
+                this.ngbModalRef = this.modalService.open(MembroDeleteDialogComponent as Component, {
+                    size: 'lg',
+                    backdrop: 'static'
+                });
+                this.ngbModalRef.componentInstance.tipoOperacao = tipoOperacao;
                 this.ngbModalRef.result.then(
                     result => {
                         this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });

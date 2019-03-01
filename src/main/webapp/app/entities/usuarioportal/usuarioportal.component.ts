@@ -6,11 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { Principal, UserService, User } from 'app/core';
-import { UserMgmtDeleteDialogComponent } from 'app/admin';
+import { Principal } from 'app/core';
+import { UsuarioportalDeleteDialogComponent } from './usuarioportal-delete-dialog.component';
 
 import { UsuarioportalService } from './index';
 import { IUsuarioPortal, UsuarioPortal } from 'app/shared/model/usuarioportal.model';
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'jhi-usuarioportal',
@@ -39,7 +41,9 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -82,6 +86,7 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
+        this.loading = true;
         if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
             if (this.currentAccount.lojaMaconicaId !== undefined) {
                 this.userService
@@ -94,8 +99,15 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
                         this.currentAccount.lojaMaconicaId
                     )
                     .subscribe(
-                        (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
-                        (res: HttpResponse<any>) => this.onError(res.body)
+                        (res: HttpResponse<UsuarioPortal[]>) => {
+                            this.loading = false;
+                            this.onSuccess(res.body, res.headers);
+                        },
+                        (res: HttpResponse<any>) => {
+                            this.loading = false;
+                            this.ref.detectChanges();
+                            this.onError(res.body);
+                        }
                     );
             }
         } else {
@@ -106,14 +118,31 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
                     sort: this.sort()
                 })
                 .subscribe(
-                    (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
-                    (res: HttpResponse<any>) => this.onError(res.body)
+                    (res: HttpResponse<UsuarioPortal[]>) => {
+                        this.loading = false;
+                        this.onSuccess(res.body, res.headers);
+                        this.ref.detectChanges();
+                    },
+                    (res: HttpResponse<any>) => {
+                        this.loading = false;
+                        this.ref.detectChanges();
+                        this.onError(res.body);
+                    }
                 );
         }
     }
-
-    trackIdentity(index, item: User) {
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
+    }
+    trackIdentity(index, item: UsuarioPortal) {
         return item.id;
+    }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
     }
 
     sort() {
@@ -132,7 +161,7 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/admin/user-management'], {
+        this.router.navigate(['/usuarioportal'], {
             queryParams: {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -141,8 +170,8 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
 
-    deleteUser(user: User) {
-        const modalRef = this.modalService.open(UserMgmtDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    deleteUser(user: UsuarioPortal) {
+        const modalRef = this.modalService.open(UsuarioportalDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.user = user;
         modalRef.result.then(
             result => {
@@ -159,6 +188,7 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         this.users = data;
+        this.ref.detectChanges();
     }
 
     private onError(error) {

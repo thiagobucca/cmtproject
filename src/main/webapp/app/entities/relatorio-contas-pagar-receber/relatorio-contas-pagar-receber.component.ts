@@ -9,6 +9,13 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { RelatorioContasPagarReceberService } from './relatorio-contas-pagar-receber.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+import { ITipoOperacao } from 'app/shared/model/tipo-operacao.model';
+import { TipoOperacaoService } from 'app/entities/tipo-operacao';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
     selector: 'jhi-relatorio-contas-pagar-receber',
     templateUrl: './relatorio-contas-pagar-receber.component.html'
@@ -24,13 +31,19 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     queryCount: any;
     reverse: any;
     totalItems: number;
+    consulta: any;
 
+    tipoOperacoes: ITipoOperacao[];
     constructor(
         private relatorioContasPagarReceberService: RelatorioContasPagarReceberService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private parseLinks: JhiParseLinks,
-        private principal: Principal
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef,
+        private principal: Principal,
+        private router: Router,
+        private tipoOperacaoService: TipoOperacaoService
     ) {
         this.relatorioContasPagarRecebers = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -40,23 +53,51 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
         };
         this.predicate = 'id';
         this.reverse = true;
+        this.consulta = {
+            dataIni: '',
+            dataFim: '',
+            tipoOperacaoId: undefined,
+            tipoLancamento: undefined
+        };
     }
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     loadAll() {
+        this.loading = true;
         this.relatorioContasPagarReceberService
             .query({
                 page: this.page,
                 size: this.itemsPerPage,
-                sort: this.sort()
+                sort: this.sort(),
+                data_inicial: this.consulta.dataIni,
+                data_final: this.consulta.dataFim,
+                tipoOperacaoId: this.consulta.tipoOperacaoId === undefined ? '' : this.consulta.tipoOperacaoId,
+                tipoLancamento: this.consulta.tipoLancamento === undefined ? '' : this.consulta.tipoLancamento
             })
             .subscribe(
-                (res: HttpResponse<IRelatorioContasPagarReceber[]>) => this.paginateRelatorioContasPagarRecebers(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<IRelatorioContasPagarReceber[]>) => {
+                    this.paginateRelatorioContasPagarRecebers(res.body, res.headers);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                }
             );
     }
 
     reset() {
         this.page = 0;
+        this.relatorioContasPagarRecebers = [];
+        this.loadAll();
+    }
+    consultar() {
         this.relatorioContasPagarRecebers = [];
         this.loadAll();
     }
@@ -67,10 +108,20 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.loadAll();
+        if (sessionStorage.getItem('dadosConsultaConta') !== '' && sessionStorage.getItem('dadosConsultaConta') !== 'null') {
+            this.consulta = JSON.parse(sessionStorage.getItem('dadosConsultaConta'));
+            sessionStorage.setItem('dadosConsultaConta', '');
+            this.loadAll();
+        }
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
+        this.tipoOperacaoService.query({}).subscribe(
+            (res: HttpResponse<ITipoOperacao[]>) => {
+                this.tipoOperacoes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.registerChangeInRelatorioContasPagarRecebers();
     }
 
@@ -104,5 +155,10 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    detalhar(parametros: []) {
+        sessionStorage.setItem('dadosConsultaConta', JSON.stringify(this.consulta));
+        this.loading = true;
+        this.router.navigate(parametros);
     }
 }

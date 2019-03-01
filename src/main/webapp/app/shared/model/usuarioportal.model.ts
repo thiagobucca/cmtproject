@@ -1,4 +1,4 @@
-import { TipoPessoa } from 'app/shared/model/comunicacao-push.model';
+import { TipoPessoa } from 'app/shared/model/pessoa.model';
 import { Moment } from 'moment';
 
 export interface IUsuarioPortal {

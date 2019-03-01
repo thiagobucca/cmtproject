@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span>Parametrização</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parametrizacao"
-        (click)="detalhar(['/parametrizacao/new'])">
+            (click)="detalhar(['/parametrizacao/new'])" *jhiHasAnyAuthority="['ROLE_ADMIN']">
             <fa-icon [icon]="'plus'"></fa-icon>
             Novo
         </button>
@@ -30,12 +30,13 @@
                                 class="btn btn-info btn-sm" title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
-                            <button type="submit" (click)="detalhar(['/parametrizacao', parametrizacao.id, 'edit'])" class="btn btn-primary btn-sm"
-                                title="Editar">
+                            <button type="submit" (click)="detalhar(['/parametrizacao', parametrizacao.id, 'edit'])"
+                                class="btn btn-primary btn-sm" title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
                             <button type="submit" [routerLink]="['/', { outlets: { popup: 'parametrizacao/'+ parametrizacao.id + '/delete'} }]"
-                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN']">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>
                         </div>

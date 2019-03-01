@@ -1,54 +1,95 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="cmtprojectApp.relatorioContasPagarReceber.home.title">Relatorio Contas Pagar Recebers</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-relatorio-contas-pagar-receber" [routerLink]="['/relatorio-contas-pagar-receber/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cmtprojectApp.relatorioContasPagarReceber.home.createLabel">
-            Create new Relatorio Contas Pagar Receber
-            </span>
-        </button>
+        <span >Relatório Contas Pagar Receber</span>
+       
     </h2>
     <jhi-alert></jhi-alert>
-    <br/>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <form name="editForm" role="form" novalidate (ngSubmit)="consultar()" #editForm="ngForm">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label class="form-control-label" for="field_data">Data Inicial</label>
+
+                        <input id="field_dataIni" type="date" class="form-control" name="dataIni" [(ngModel)]="consulta.dataIni"
+                            required max="9999-12-31" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-control-label" for="field_data">Data Fim</label>
+
+                        <input id="field_dataFim" type="date" class="form-control" name="dataFim" [(ngModel)]="consulta.dataFim"
+                            required max="9999-12-31" />
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-5"><label class="form-control-label" for="field_tipoOperacaoId">Tipo Operação</label>
+                        <select class="form-control" id="field_tipoOperacaoId" name="tipoOperacaoId" [(ngModel)]="consulta.tipoOperacaoId">
+                            <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                            <option [ngValue]="item.id" *ngFor="let item of tipoOperacoes; trackBy: trackById">{{item.nomeOperacao}}</option>
+                        </select></div>
+                    <div class="col-md-2">
+                        <label class="form-control-label" for="field_tipoLancamento">Tipo Lançamento</label>
+                        <select class="form-control" name="tipoLancamento" [(ngModel)]="consulta.tipoLancamento" id="field_tipoLancamento">
+                            <option [ngValue]="undefined" selected>Selecione...</option>
+                            <option value="Credito">Crédito</option>
+                            <option value="Debito">Débito</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="submit" id="save-entity" [disabled]="editForm.form.invalid" class="btn btn-success"
+                            style="margin-top: 24px;">
+                            <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span>Buscar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="table-responsive" *ngIf="relatorioContasPagarRecebers">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.relatorioContasPagarReceber.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+
+                    <th jhiSortBy="data"><span>Data</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="estabelecimentoComercialId"><span>Loja Maçônica</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="estabelecimentoComercialId"><span>Estabelecimento</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th><span>Valor</span></th>
+                    <th><span>Tipo Operação</span></th>
+                    <th><span>Tipo do Lançamento</span></th>
+                    <th></th>
+                </tr>
             </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-            <tr *ngFor="let relatorioContasPagarReceber of relatorioContasPagarRecebers ;trackBy: trackId">
-                <td><a [routerLink]="['/relatorio-contas-pagar-receber', relatorioContasPagarReceber.id, 'view' ]">{{relatorioContasPagarReceber.id}}</a></td>
-                <td>{{relatorioContasPagarReceber.nome}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/relatorio-contas-pagar-receber', relatorioContasPagarReceber.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/relatorio-contas-pagar-receber', relatorioContasPagarReceber.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'relatorio-contas-pagar-receber/'+ relatorioContasPagarReceber.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                [infiniteScrollDistance]="0">
+                <tr *ngFor="let relatorioContasPagarRecebers of relatorioContasPagarRecebers ;trackBy: trackId">
+                    <td>{{relatorioContasPagarRecebers.data | date: 'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{relatorioContasPagarRecebers.lojaMaconica}}</td>
+                    <td>{{relatorioContasPagarRecebers.estabelecimento}}</td>
+                    <td >{{relatorioContasPagarRecebers.valor | currency:'BRL':true:'1.2-2'}}</td>
+                    <td >{{relatorioContasPagarRecebers.tipoOperacao}}</td>
+                    <td >{{relatorioContasPagarRecebers.tipoLancamento}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" (click)="detalhar(['/relatorio-contas-pagar-receber', relatorioContasPagarRecebers.id, 'view' ])"
+                                class="btn btn-info btn-sm" title="Vizualizar">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
+
 </div>

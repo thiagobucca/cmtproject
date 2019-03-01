@@ -18,7 +18,7 @@ export class MembroResolve implements Resolve<IMembro> {
     constructor(private service: MembroService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Membro> {
-        const id = route.params['id'] ? route.params['id'] : null;
+        const id = route.params['login'] ? route.params['login'] : null;
         if (id) {
             return this.service.find(id).pipe(
                 filter((response: HttpResponse<Membro>) => response.ok),
@@ -39,19 +39,19 @@ export const membroRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.membro.home.title'
+            pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'membro/:id/view',
+        path: 'membro/:login/view',
         component: MembroDetailComponent,
         resolve: {
-            membro: MembroResolve
+            user: MembroResolve
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.membro.home.title'
+            pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -59,23 +59,23 @@ export const membroRoute: Routes = [
         path: 'membro/new',
         component: MembroUpdateComponent,
         resolve: {
-            membro: MembroResolve
+            user: MembroResolve
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.membro.home.title'
+            pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'membro/:id/edit',
+        path: 'membro/:login/edit',
         component: MembroUpdateComponent,
         resolve: {
-            membro: MembroResolve
+            user: MembroResolve
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.membro.home.title'
+            pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -83,14 +83,14 @@ export const membroRoute: Routes = [
 
 export const membroPopupRoute: Routes = [
     {
-        path: 'membro/:id/delete',
+        path: 'membro/:login/delete',
         component: MembroDeletePopupComponent,
         resolve: {
-            membro: MembroResolve
+            user: MembroResolve
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.membro.home.title'
+            pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
