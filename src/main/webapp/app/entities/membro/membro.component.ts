@@ -38,7 +38,7 @@ export class MembroComponent implements OnInit, OnDestroy {
     lojas: ILojaMaconica[];
     consulta: any;
     lojaMaconicaId: any;
-    isLojaMacanica: boolean;
+    isLojaMaconica: boolean;
     constructor(
         private userService: MembroService,
         private alertService: JhiAlertService,
@@ -59,10 +59,10 @@ export class MembroComponent implements OnInit, OnDestroy {
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
-        this.isLojaMacanica = false;
+        this.isLojaMaconica = false;
         this.consulta = {
             lojaMaconicaId: '',
-            isLojaMacanica: false
+            isLojaMaconica: false
         };
     }
 
@@ -72,7 +72,7 @@ export class MembroComponent implements OnInit, OnDestroy {
             if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
                 if (this.currentAccount.lojaMaconicaId !== undefined) {
                     this.consulta.lojaMaconicaId = this.currentAccount.lojaMaconicaId;
-                    this.consulta.isLojaMacanica = true;
+                    this.consulta.isLojaMaconica = true;
                 }
             }
             this.loadAll();
@@ -116,12 +116,12 @@ export class MembroComponent implements OnInit, OnDestroy {
     }
 
     setarLoja(codLoja?: any) {
-        if (sessionStorage.getItem('consultaMembro') !== '' && sessionStorage.getItem('consultaMembro') !== 'null') {
+        if (sessionStorage.getItem('consultaMembro') !== '' && sessionStorage.getItem('consultaMembro') !== null) {
             this.consulta = JSON.parse(sessionStorage.getItem('consultaMembro'));
             sessionStorage.setItem('consultaMembro', '');
         } else {
             this.consulta.lojaMaconicaId = codLoja;
-            this.consulta.isLojaMacanica = false;
+            this.consulta.isLojaMaconica = false;
         }
         this.loadAll();
     }

@@ -113,7 +113,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (sessionStorage.getItem('dadosConsulta') !== '' && sessionStorage.getItem('dadosConsulta') !== 'null') {
+        if (sessionStorage.getItem('dadosConsulta') !== '' && sessionStorage.getItem('dadosConsulta') !== null) {
             this.consulta = JSON.parse(sessionStorage.getItem('dadosConsulta'));
             sessionStorage.setItem('dadosConsulta', '');
             this.loadAll();

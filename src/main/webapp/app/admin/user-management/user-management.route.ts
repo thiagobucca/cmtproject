@@ -13,7 +13,7 @@ export class UserResolve implements CanActivate {
     constructor(private principal: Principal) {}
 
     canActivate() {
-        return this.principal.identity().then(account => this.principal.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_LOJA_MACONICA']));
+        return this.principal.identity().then(account => this.principal.hasAnyAuthority(['ROLE_ADMIN']));
     }
 }
 

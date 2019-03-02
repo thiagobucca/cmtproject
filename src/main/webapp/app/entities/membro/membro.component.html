@@ -5,7 +5,7 @@
                 <fa-icon [icon]="'plus'"></fa-icon> Novo</button> -->
         </h2>
         <jhi-alert></jhi-alert>
-        <div class="form-group row">               
+        <div class="form-group row" [hidden]="consulta.isLojaMaconica">               
                 <div class="col-md-5">
                     <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçônica</label>
                     <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="consulta.lojaMaconicaId"
@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody *ngIf="users">
-                    <tr *ngFor="let user of users; trackBy: trackIdentity">
+                    <tr *ngFor="let user of users; trackBy: trackIdentity" >
                         <td><a [routerLink]="['./', user.login, 'view']">{{user.id}}</a></td>
                         <td>{{user.login}}</td>
                         <td>{{user.email}}</td>

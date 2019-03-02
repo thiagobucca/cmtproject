@@ -108,7 +108,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (sessionStorage.getItem('dadosConsultaConta') !== '' && sessionStorage.getItem('dadosConsultaConta') !== 'null') {
+        if (sessionStorage.getItem('dadosConsultaConta') !== '' && sessionStorage.getItem('dadosConsultaConta') !== null) {
             this.consulta = JSON.parse(sessionStorage.getItem('dadosConsultaConta'));
             sessionStorage.setItem('dadosConsultaConta', '');
             this.loadAll();

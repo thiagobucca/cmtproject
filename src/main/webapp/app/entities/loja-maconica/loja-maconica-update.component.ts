@@ -14,6 +14,8 @@ import { ContatoLojaMaconicaService } from 'app/entities/contato-loja-maconica/c
 import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 import { ChangeDetectorRef } from '@angular/core';
 
+import { Principal } from 'app/core';
+
 @Component({
     selector: 'jhi-loja-maconica-update',
     templateUrl: './loja-maconica-update.component.html'
@@ -25,15 +27,22 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     contatolojas: IContatoLojaMaconica[];
     contatolojasDel: IContatoLojaMaconica[];
     indexEdit: number;
+    roleLoja: any;
+    currentAccount: any;
     constructor(
         private lojaMaconicaService: LojaMaconicaService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private contatoLojaMaconicaService: ContatoLojaMaconicaService,
         private auxService: AuxiliarService,
+        private principal: Principal,
         private ref: ChangeDetectorRef
     ) {
         this.indexEdit = -1;
+        this.roleLoja = {
+            isLojaMaconica: false,
+            codLoja: undefined
+        };
     }
 
     get loading(): boolean {
@@ -46,6 +55,15 @@ export class LojaMaconicaUpdateComponent implements OnInit {
     ngOnInit() {
         this.loading = true;
         this.isSaving = false;
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+            if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
+                if (this.currentAccount.lojaMaconicaId !== undefined) {
+                    this.roleLoja.codLoja = this.currentAccount.lojaMaconicaId;
+                }
+                this.roleLoja.isLojaMaconica = true;
+            }
+        });
         this.activatedRoute.data.subscribe(({ lojaMaconica }) => {
             this.lojaMaconica = lojaMaconica;
             this.contatoloja = new ContatoLojaMaconica();

@@ -32,7 +32,7 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-
+    roleLoja: any;
     constructor(
         private lojaMaconicaService: LojaMaconicaService,
         private parseLinks: JhiParseLinks,
@@ -51,6 +51,10 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.roleLoja = {
+            isLojaMaconica: false,
+            codLoja: undefined
+        };
     }
 
     get loading(): boolean {
@@ -120,6 +124,12 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
+                if (this.currentAccount.lojaMaconicaId !== undefined) {
+                    this.roleLoja.codLoja = this.currentAccount.lojaMaconicaId;
+                }
+                this.roleLoja.isLojaMaconica = true;
+            }
         });
         this.registerChangeInLojaMaconicas();
     }

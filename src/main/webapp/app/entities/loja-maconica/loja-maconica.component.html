@@ -2,7 +2,8 @@
     <h2 id="page-heading">
         <span>Loja Maçônica</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-loja-maconica"
-            [routerLink]="['/loja-maconica/new']">
+            [routerLink]="['/loja-maconica/new']"
+            *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
             <fa-icon [icon]="'plus'"></fa-icon>
             Novo
         </button>
@@ -53,10 +54,12 @@
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
                             <button type="submit" [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']" class="btn btn-primary btn-sm"
-                                title="Editar">
+                                title="Editar" *ngIf="!roleLoja.isLojaMaconica || roleLoja.codLoja ==lojaMaconica.id">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
-                            <button type="submit" [routerLink]="['/', { outlets: { popup: 'loja-maconica/'+ lojaMaconica.id + '/delete'} }]"
+                            <button type="submit"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']"
+                             [routerLink]="['/', { outlets: { popup: 'loja-maconica/'+ lojaMaconica.id + '/delete'} }]"
                                 replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>

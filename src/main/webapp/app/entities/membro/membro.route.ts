@@ -37,7 +37,7 @@ export const membroRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
             defaultSort: 'id,asc',
             pageTitle: 'Membros'
         },
@@ -50,7 +50,7 @@ export const membroRoute: Routes = [
             user: MembroResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
             pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const membroRoute: Routes = [
             user: MembroResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
             pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const membroRoute: Routes = [
             user: MembroResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
             pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const membroPopupRoute: Routes = [
             user: MembroResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
             pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService],

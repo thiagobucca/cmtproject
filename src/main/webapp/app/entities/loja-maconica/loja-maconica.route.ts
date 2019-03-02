@@ -89,7 +89,7 @@ export const lojaMaconicaPopupRoute: Routes = [
             lojaMaconica: LojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'Loja Maçônica'
         },
         canActivate: [UserRouteAccessService],

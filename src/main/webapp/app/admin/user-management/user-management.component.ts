@@ -9,6 +9,9 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 import { Principal, UserService, User } from 'app/core';
 import { UserMgmtDeleteDialogComponent } from 'app/admin';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-user-mgmt',
     templateUrl: './user-management.component.html'
@@ -36,7 +39,9 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -91,8 +96,14 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
                         this.currentAccount.lojaMaconicaId
                     )
                     .subscribe(
-                        (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
-                        (res: HttpResponse<any>) => this.onError(res.body)
+                        (res: HttpResponse<User[]>) => {
+                            this.onSuccess(res.body, res.headers);
+                            this.ref.detectChanges();
+                        },
+                        (res: HttpResponse<any>) => {
+                            this.onError(res.body);
+                            this.ref.detectChanges();
+                        }
                     );
             }
         } else {
