@@ -57,7 +57,8 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button" [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']" 
+            class="btn btn-primary" *ngIf="!roleLoja.isLojaMaconica || roleLoja.codLoja ==lojaMaconica.id">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
