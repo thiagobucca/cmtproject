@@ -1,6 +1,7 @@
 package com.cmt.myapp.web.rest;
 
 import com.cmt.myapp.config.Constants;
+import com.cmt.myapp.domain.Authority;
 import com.cmt.myapp.domain.User;
 import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.UserRepository;
@@ -25,6 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.spring5.ISpringTemplateEngine;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -189,8 +191,10 @@ public class UserResource {
     @GetMapping("/users")
     @Timed
     public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable, @RequestParam( value = "isPortal", required = false) Boolean isPortal) {
+        if(isPortal == null)
+            isPortal = false;
 
-        final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
+        final Page<UserDTO> page = userService.getAllManagedUsers(pageable, isPortal);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

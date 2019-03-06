@@ -269,8 +269,18 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
-        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
+    public Page<UserDTO> getAllManagedUsers(Pageable pageable, Boolean isPortal) {
+        if(isPortal){
+            Authority a = new Authority();
+            a.setName("ROLE_LOJA_MACONICA");
+            Set<Authority> lista = new HashSet<>();
+            lista.add(a);
+            a = new Authority();
+            a.setName("ROLE_USER");
+            lista.add(a);
+            return userRepository.findOneWithAuthoritiesByAuthoritiesIn(pageable,lista).map(UserDTO::new);
+        }else
+            return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
 
     @Transactional(readOnly = true)
