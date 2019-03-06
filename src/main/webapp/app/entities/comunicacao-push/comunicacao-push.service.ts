@@ -18,6 +18,9 @@ export class ComunicacaoPushService {
     create(comunicacaoPush: IComunicacaoPush): Observable<EntityResponseType> {
         return this.http.post<IComunicacaoPush>(this.resourceUrl, comunicacaoPush, { observe: 'response' });
     }
+    send(id: number): Observable<EntityResponseType> {
+        return this.http.post<IComunicacaoPush>(`${this.resourceUrl}/send/${id}`, null, { observe: 'response' });
+    }
 
     update(comunicacaoPush: IComunicacaoPush): Observable<EntityResponseType> {
         return this.http.put<IComunicacaoPush>(this.resourceUrl, comunicacaoPush, { observe: 'response' });

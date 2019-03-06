@@ -45,18 +45,21 @@
                     </div>
                     <div class="col-md-5">
                         <label>Loja</label>
-                        <select class="form-control" multiple name="loja" [(ngModel)]="lojasSelecionadas">
-                            <option [ngValue]="item.id" *ngFor="let item of lojas; trackBy: trackById">{{item.nome}}</option>
+                        <select class="form-control" multiple name="loja" [(ngModel)]="itemSelecionado" >
+                            <option value="0" (click)="selecionarLoja(0)">Todas</option>
+                            <option [ngValue]="item.id" *ngFor="let item of lojas; trackBy: trackById" (click)="selecionarLoja(item.id)">{{item.nome}}</option>
                         </select>
+                        <span *ngIf='lojasSelecionadas===undefined || lojasSelecionadas.length===0' class="text-danger">Ao menos uma loja deve ser selecionada.</span>
                     </div>
                 </div>
+
 
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving ||lojasSelecionadas===undefined || lojasSelecionadas.length===0" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

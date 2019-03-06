@@ -21,6 +21,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
     user: UsuarioPortal;
     languages: any[];
     authorities: any[];
+    authoritiesSelecionado: any[];
     isSaving: boolean;
     lojas: ILojaMaconica[];
     macons: IUsuarioPortal[];
@@ -33,7 +34,9 @@ export class UsuarioportalUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private auxService: AuxiliarService,
         private ref: ChangeDetectorRef
-    ) {}
+    ) {
+        this.authoritiesSelecionado = [];
+    }
     get loading(): boolean {
         return this.auxService.isLoading;
     }
@@ -48,6 +51,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
             this.user.tipoPessoa = <TipoPessoa>'Macom';
             this.data = this.user.dataNascimento != null ? this.user.dataNascimento.format(DATE_FORMAT) : null;
             this.loading = false;
+            this.authoritiesSelecionado = user.authorities;
             this.ref.detectChanges();
         });
         this.authorities = [];
@@ -107,7 +111,28 @@ export class UsuarioportalUpdateComponent implements OnInit {
             );
         }
     }
+    selecionarAuth(id: any) {
+        if (id === 0) {
+            if (this.authoritiesSelecionado.length !== this.lojas.length) {
+                this.lojas.forEach(value => {
+                    this.authoritiesSelecionado.push(value.id);
+                });
+            } else {
+                this.authoritiesSelecionado = [];
+            }
+        } else {
+            if (this.authoritiesSelecionado === undefined || this.authoritiesSelecionado === null) {
+                this.authoritiesSelecionado = [];
+                this.authoritiesSelecionado.push(id);
+            } else if (this.authoritiesSelecionado.indexOf(id) > -1) {
+                this.authoritiesSelecionado.splice(this.authoritiesSelecionado.indexOf(id), 1);
+            } else {
+                this.authoritiesSelecionado.push(id);
+            }
+        }
 
+        this.user.authorities = this.authoritiesSelecionado.length > 0 ? this.authoritiesSelecionado : null;
+    }
     private onSaveSuccess(result) {
         this.isSaving = false;
         this.previousState();

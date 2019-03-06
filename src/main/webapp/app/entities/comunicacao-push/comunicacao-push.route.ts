@@ -66,24 +66,24 @@ export const comunicacaoPushRoute: Routes = [
             pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'comunicacao-push/:id/edit',
-        component: ComunicacaoPushUpdateComponent,
-        resolve: {
-            comunicacaoPush: ComunicacaoPushResolve
-        },
-        data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            pageTitle: 'Comunicação Push'
-        },
-        canActivate: [UserRouteAccessService]
     }
+    // {
+    //     path: 'comunicacao-push/:id/edit',
+    //     component: ComunicacaoPushUpdateComponent,
+    //     resolve: {
+    //         comunicacaoPush: ComunicacaoPushResolve
+    //     },
+    //     data: {
+    //         authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+    //         pageTitle: 'Comunicação Push'
+    //     },
+    //     canActivate: [UserRouteAccessService]
+    // }
 ];
 
 export const comunicacaoPushPopupRoute: Routes = [
     {
-        path: 'comunicacao-push/:id/delete',
+        //path: 'comunicacao-push/:id/delete',
         component: ComunicacaoPushDeletePopupComponent,
         resolve: {
             comunicacaoPush: ComunicacaoPushResolve
