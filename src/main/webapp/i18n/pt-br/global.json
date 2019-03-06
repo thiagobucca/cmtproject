@@ -160,7 +160,8 @@
         "duplicate": "Novo(a) {{entityName}} já existe",
         "placetexists": "Placet ja cadastrado, favor informar um diferente",
         "cnpjexists": "CNPJ do(a) {{entityName}} ja cadastrado, favor informar um diferente",
-        "idnull": "Invalid ID"
+        "idnull": "Invalid ID",
+        "filialexists": "Estabelecimento comercial possui filial(ais), sera necessario excluir elas primeiro"
     },
     "footer": "Este é o seu rodapé"
 }

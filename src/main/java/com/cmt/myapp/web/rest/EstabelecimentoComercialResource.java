@@ -118,7 +118,7 @@ public class EstabelecimentoComercialResource {
         // Consulta o cadastro do estabelcimento comercial antes da edicao
         Optional<EstabelecimentoComercial> existingCnpj = estabelecimentoComercialRepository.findById(estabelecimentoComercial.getId());
 
-        if (!existingCnpj.get().getCodCnpj().equals(estabelecimentoComercial.getCodCnpj())) {
+        if (!existingCnpj.get().getCodCnpj().trim().equals(estabelecimentoComercial.getCodCnpj().trim())) {
             existingCnpj = estabelecimentoComercialRepository.findOneByCodCnpj(estabelecimentoComercial.getCodCnpj());
 
             if (existingCnpj.isPresent()) {
@@ -158,17 +158,23 @@ public class EstabelecimentoComercialResource {
     @Timed
     public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoComercials(Pageable pageable,
             @RequestParam(value = "nome", required = false) String nome,
-            @RequestParam(value = "categoria_id", required = false) Long categoria_id) {
+            @RequestParam(value = "categoria_id", required = false) Long categoria_id,
+            @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
         log.debug("REST request to get a page of EstabelecimentoComercials");
+
+        if(bolAtivo == null)
+        {
+            bolAtivo = true;
+        }        
 
         Page<EstabelecimentoComercial> page = null;
 
         if (nome == null && categoria_id == null) {
-            page = estabelecimentoComercialRepository.findAll(pageable);
+            page = estabelecimentoComercialRepository.findAllByBolAtivo(pageable,bolAtivo);
         } else if (nome == null && categoria_id != null) {
-            page = estabelecimentoComercialRepository.findAllByCategoriaId(pageable, categoria_id);
+            page = estabelecimentoComercialRepository.findAllByCategoriaIdAndBolAtivo(pageable, categoria_id, bolAtivo);
         } else {
-            page = estabelecimentoComercialRepository.findByNomeContaining(pageable, nome);
+            page = estabelecimentoComercialRepository.findByNomeContainingAndBolAtivo(pageable, nome, bolAtivo);
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
@@ -202,6 +208,16 @@ public class EstabelecimentoComercialResource {
     public ResponseEntity<Void> deleteEstabelecimentoComercial(@PathVariable Long id) {
         log.debug("REST request to delete EstabelecimentoComercial : {}", id);
 
+        
+        //Testa se o estabelecimento matriz, possui filiais. Somente permite a exclusao depois de excluir as filiais.
+        List<EstabelecimentoComercial> dadosEstabelecimento = estabelecimentoComercialRepository.findByEstabelecimentoMatrizId(id);
+
+        if (!dadosEstabelecimento.isEmpty())
+        {
+            throw new BadRequestAlertException("Estabelecimento comercial possui filial(ais), sera necessario excluir elas primeiro", ENTITY_NAME,
+            "filialexists");
+        }
+    
         estabelecimentoComercialRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }

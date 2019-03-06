@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,8 +20,10 @@ import java.util.Optional;
 public interface EstabelecimentoComercialRepository extends JpaRepository<EstabelecimentoComercial, Long> {
 
     Page<EstabelecimentoComercial> findAllByBolAtivo(Pageable pageable, boolean bolAtivo);
-    Page<EstabelecimentoComercial> findByNomeContaining(Pageable pageable, String nome);
-    Page<EstabelecimentoComercial> findAllByCategoriaId(Pageable pageable, Long categoria_id);
+    Page<EstabelecimentoComercial> findByNomeContainingAndBolAtivo(Pageable pageable, String nome, Boolean bolAtivo);
+    Page<EstabelecimentoComercial> findAllByCategoriaIdAndBolAtivo(Pageable pageable, Long categoria_id, Boolean bolAtivo);
     Optional<EstabelecimentoComercial> findOneByCodCnpj(String codCnpj);
+    List<EstabelecimentoComercial> findByEstabelecimentoMatrizId(Long id);
+    
     
 }

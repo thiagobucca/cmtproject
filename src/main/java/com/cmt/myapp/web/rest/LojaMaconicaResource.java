@@ -114,9 +114,18 @@ public class LojaMaconicaResource {
      */
     @GetMapping("/loja-maconicas")
     @Timed
-    public ResponseEntity<List<LojaMaconica>> getAllLojaMaconicas(Pageable pageable) {
+    public ResponseEntity<List<LojaMaconica>> getAllLojaMaconicas(Pageable pageable,
+            @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
         log.debug("REST request to get a page of LojaMaconicas");
-        Page<LojaMaconica> page = lojaMaconicaRepository.findAll(pageable);
+
+        if(bolAtivo == null)
+        {
+            bolAtivo = true;
+        }     
+
+
+        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable,bolAtivo);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
