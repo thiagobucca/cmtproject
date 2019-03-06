@@ -83,7 +83,7 @@ export const comunicacaoPushRoute: Routes = [
 
 export const comunicacaoPushPopupRoute: Routes = [
     {
-        //path: 'comunicacao-push/:id/delete',
+        path: 'comunicacao-push/:id/delete',
         component: ComunicacaoPushDeletePopupComponent,
         resolve: {
             comunicacaoPush: ComunicacaoPushResolve
