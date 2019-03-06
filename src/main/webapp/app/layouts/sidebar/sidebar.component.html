@@ -74,6 +74,28 @@
                 <span>Parametrização</span>
             </a>
         </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="relatorio-cupom-cmt" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons files_paper"></i>
+                <span>Relatório Cupom X CMT</span>
+            </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+            <a routerLink="relatorio-contas-pagar-receber" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <i class="now-ui-icons files_paper"></i>
+                <span>Relatório Contas Pagar/Receber</span>
+            </a>
+
+        </li>
+        <li routerLinkActive="active" class="nav-item" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+
+            <a class="dropdown-item" routerLink="usuarioportal">
+
+                <i class="now-ui-icons users_circle-08"></i>
+                <span>Usuário Portal</span>
+            </a>
+
+        </li>
 
     </ul>
 </div>

@@ -248,33 +248,8 @@
                         </li>
 
                     </ul>
-                </li>
-                <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" ngbDropdown class="nav-item dropdown pointer"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="relatorio-menu">
-                        <span>
-                            <fa-icon icon="book"></fa-icon>
-                            <span>Relatórios</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu>
-                        <li>
-                            <a class="dropdown-item" routerLink="relatorio-cupom-cmt" routerLinkActive="active" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span>Relatório Cupom X CMT</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="relatorio-contas-pagar-receber" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span>Relatório Contas Pagar/Receber</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" ngbDropdown class="nav-item dropdown pointer"
+                </li>                
+                <li *jhiHasAnyAuthority="['ROLE_ADMIN']" ngbDropdown class="nav-item dropdown pointer"
                     routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                         <span>
@@ -283,7 +258,7 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu" ngbDropdownMenu>
-                        <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
                             <a class="dropdown-item" routerLink="usuarioportal" routerLinkActive="active"
                                 (click)="collapseNavbar()">
                                 <fa-icon icon="user" fixedWidth="true"></fa-icon>
