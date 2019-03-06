@@ -151,13 +151,13 @@ export class MembroComponent implements OnInit, OnDestroy {
                         this.ref.detectChanges();
                     }
                 );
-        } else {
+        } /* else {
             this.userService
-                .query({
+                .queryIdLoja({
                     page: this.page - 1,
                     size: this.itemsPerPage,
                     sort: this.sort()
-                })
+                },0)
                 .subscribe(
                     (res: HttpResponse<Membro[]>) => {
                         this.loading = false;
@@ -170,7 +170,7 @@ export class MembroComponent implements OnInit, OnDestroy {
                         this.ref.detectChanges();
                     }
                 );
-        }
+        } */
     }
     detalhar(parametros: []) {
         this.loading = true;
