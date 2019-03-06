@@ -248,9 +248,12 @@ public class EstabelecimentoComercialResource {
     @GetMapping("/estabelecimento-comercials/nome/{nome}")
     @Timed
     public ResponseEntity<List<EstabelecimentoComercial>> getAllUsersByTipo(@PathVariable String nome,
-            Pageable pageable) {
-        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findByNomeContaining(pageable,
-                nome);
+            Pageable pageable,
+            @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
+            if(bolAtivo == null)
+                bolAtivo = true;
+        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findByNomeContainingAndBolAtivo(pageable,
+                nome, bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
