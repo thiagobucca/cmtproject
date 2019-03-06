@@ -107,6 +107,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
     selecionarLoja(id: any) {
         if (id === 0) {
             if (this.lojasSelecionadas.length !== this.lojas.length) {
+                this.lojasSelecionadas = [];
                 this.lojas.forEach(value => {
                     this.lojasSelecionadas.push(value.id);
                 });
