@@ -125,6 +125,8 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         if (this.validar()) {
             this.estabelecimentoComercial.categoria = null;
             if (this.estabelecimentoComercial.id !== undefined) {
+                this.estabelecimentoComercial.matriz = null;
+
                 this.subscribeToSaveResponse(this.estabelecimentoComercialService.update(this.estabelecimentoComercial));
             } else {
                 this.subscribeToSaveResponse(this.estabelecimentoComercialService.create(this.estabelecimentoComercial));
