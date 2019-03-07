@@ -104,14 +104,26 @@ public class CupomResource {
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
             Files.createDirectories(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
-            Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
-                    cupom.getFoto().getBytes(StandardCharsets.UTF_8));
 
+
+            byte[] imageByte= Base64.getDecoder().decode((cupom.getFoto()));
+
+            FileOutputStream fs = new FileOutputStream(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name);
+            fs.write(imageByte);
+            fs.close();
+        
+
+
+            
+            /*
+            Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
+                    Base64.getDecoder().decode(cupom.getFoto().getBytes(StandardCharsets.UTF_8)));
+*/
             cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" + name);
 
 
 
-
+            
 
 
 /*
