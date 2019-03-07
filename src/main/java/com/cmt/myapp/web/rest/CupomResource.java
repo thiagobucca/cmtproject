@@ -84,10 +84,12 @@ public class CupomResource {
         }
 
         try {
+
             if(cupom.getFoto().startsWith("/9j")){
                 cupom.setFoto(cupom.getFoto().replace("/9j/",""));
             }else if(cupom.getFoto().startsWith("/9/")){
                 cupom.setFoto(cupom.getFoto().replace("/9/",""));
+            }
 
             log.debug("usuario:" + cupom.getUsuarioId());
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
