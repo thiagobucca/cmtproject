@@ -98,8 +98,6 @@ public class CupomResource {
                 log.debug("base64 -2:" + cupom.getFoto());
             }
 */
-            storageDir = "/home/cmtdev/storage/";
-            
             
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
