@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -94,12 +95,13 @@ public class CupomResource {
             }
 */
 
+
             
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
             Files.createDirectories(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
             Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
-                    Base64.getDecoder().decode(cupom.getFoto()));
+                    Base64.getDecoder().decode(cupom.getFoto().getBytes(StandardCharsets.UTF_8)));
 
             cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" + name);
 
