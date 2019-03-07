@@ -107,6 +107,8 @@ public class CupomResource {
             return ResponseEntity.created(new URI("/api/cupoms/" + result.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
         } catch (Exception ex) {
+            ex.printStackTrace();
+            log.debug("ex: "+ex);
             throw new BadRequestAlertException("Erro ao salvar imagem2", ENTITY_NAME, "idexists");
         }
 
