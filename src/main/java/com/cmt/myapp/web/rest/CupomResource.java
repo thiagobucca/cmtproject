@@ -98,7 +98,7 @@ public class CupomResource {
                 log.debug("base64 -2:" + cupom.getFoto());
             }
 */
-
+            storageDir = "/home/cmtdev/storage/";
             
             
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
@@ -106,12 +106,13 @@ public class CupomResource {
             Files.createDirectories(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
 
 
-            byte[] imageByte= Base64.getDecoder().decode((cupom.getFoto()));
+            byte[] imageByte= Base64.getDecoder().decode((cupom.getFoto().replaceAll("\\r|\\n", "").getBytes(StandardCharsets.UTF_8)));
 
             FileOutputStream fs = new FileOutputStream(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name);
             fs.write(imageByte);
             fs.close();
         
+
 
 
             
