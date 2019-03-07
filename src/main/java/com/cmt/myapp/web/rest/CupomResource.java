@@ -21,6 +21,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
@@ -34,6 +37,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
 /**
@@ -95,15 +99,27 @@ public class CupomResource {
             }
 */
 
-
+            
             
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
             Files.createDirectories(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
             Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
-                    Base64.getDecoder().decode(cupom.getFoto().getBytes(StandardCharsets.UTF_8)));
+                    cupom.getFoto().getBytes(StandardCharsets.UTF_8));
 
             cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" + name);
+
+
+
+
+
+
+/*
+            BufferedImage originalImage = ImageIO.read(new File(cupom.getFoto()));
+            int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+            
+            BufferedImage resizeImageJpg = resizeImage(originalImage, type);
+		    ImageIO.write(resizeImageJpg, "jpg", new File(cupom.getFoto())); */
 
             Cupom result = cupomRepository.save(cupom);
             return ResponseEntity.created(new URI("/api/cupoms/" + result.getId()))
@@ -116,6 +132,17 @@ public class CupomResource {
 
     }
 
+
+    private static BufferedImage resizeImage(BufferedImage originalImage, int type){
+        BufferedImage resizedImage = new BufferedImage(300, 300, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, 300, 300, null);
+        g.dispose();
+
+        return resizedImage;
+    }
+
+        
     /**
      * PUT /cupoms : Updates an existing cupom.
      *
