@@ -85,14 +85,14 @@ public class CupomResource {
 
         try {
 
-            if(cupom.getFoto().startsWith("/9j")){
+          /*  if(cupom.getFoto().startsWith("/9j")){
                 cupom.setFoto(cupom.getFoto().substring(4));
                 log.debug("base64 -1:" + cupom.getFoto());
             }else if(cupom.getFoto().startsWith("/9/")){
                 cupom.setFoto(cupom.getFoto().substring(3));
                 log.debug("base64 -2:" + cupom.getFoto());
             }
-
+*/
 
             
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
