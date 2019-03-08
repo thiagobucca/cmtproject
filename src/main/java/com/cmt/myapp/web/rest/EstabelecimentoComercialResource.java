@@ -245,7 +245,7 @@ public class EstabelecimentoComercialResource {
                 }
 
                 
-        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAllByBolAtivo(pageable,
+        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAllByBolAtivoOrderByNome(pageable,
                 bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
                 "/api/estabelecimento-comercials/status/");
