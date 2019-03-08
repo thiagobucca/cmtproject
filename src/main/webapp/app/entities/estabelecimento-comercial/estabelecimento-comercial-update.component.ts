@@ -91,7 +91,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.categoriaEstabelecimentoService.query({ bolAtivo: true }).subscribe(
+        this.categoriaEstabelecimentoService.query({ bolAtivo: true, size: 1000 }).subscribe(
             (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
                 this.categorias = res.body;
             },

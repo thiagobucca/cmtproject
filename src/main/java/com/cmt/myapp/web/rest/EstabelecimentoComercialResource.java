@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -162,6 +163,12 @@ public class EstabelecimentoComercialResource {
             @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
         log.debug("REST request to get a page of EstabelecimentoComercials");
 
+
+        if(pageable == null || pageable.getPageSize() ==20){
+            pageable = PageRequest.of(0, Integer.MAX_VALUE);
+        }
+
+        
         if(bolAtivo == null)
         {
             bolAtivo = true;
@@ -232,6 +239,12 @@ public class EstabelecimentoComercialResource {
     @Timed
     public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoByStatus(@PathVariable boolean bolAtivo,
             Pageable pageable) {
+
+                if(pageable == null || pageable.getPageSize() ==20){
+                    pageable = PageRequest.of(0, Integer.MAX_VALUE);
+                }
+
+                
         final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAllByBolAtivo(pageable,
                 bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
