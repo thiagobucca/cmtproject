@@ -19,7 +19,7 @@ import java.util.Optional;
 @Repository
 public interface EstabelecimentoComercialRepository extends JpaRepository<EstabelecimentoComercial, Long> {
 
-    Page<EstabelecimentoComercial> findAllByBolAtivo(Pageable pageable, boolean bolAtivo);
+    Page<EstabelecimentoComercial> findAllByBolAtivoOrderByNome(Pageable pageable, boolean bolAtivo);
     Page<EstabelecimentoComercial> findByNomeContainingAndBolAtivo(Pageable pageable, String nome, Boolean bolAtivo);
     Page<EstabelecimentoComercial> findAllByCategoriaIdAndBolAtivo(Pageable pageable, Long categoria_id, Boolean bolAtivo);
     Optional<EstabelecimentoComercial> findOneByCodCnpj(String codCnpj);

@@ -177,7 +177,7 @@ public class EstabelecimentoComercialResource {
         Page<EstabelecimentoComercial> page = null;
 
         if (nome == null && categoria_id == null) {
-            page = estabelecimentoComercialRepository.findAllByBolAtivo(pageable,bolAtivo);
+            page = estabelecimentoComercialRepository.findAllByBolAtivoOrderByNome(pageable,bolAtivo);
         } else if (nome == null && categoria_id != null) {
             page = estabelecimentoComercialRepository.findAllByCategoriaIdAndBolAtivo(pageable, categoria_id, bolAtivo);
         } else {

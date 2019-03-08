@@ -131,7 +131,7 @@ public class LojaMaconicaResource {
         }     
 
 
-        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable,bolAtivo);
+        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivoOrderByNome(pageable,bolAtivo);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -182,7 +182,7 @@ public class LojaMaconicaResource {
         }
 
 
-        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable, bolAtivo);
+        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivoOrderByNome(pageable, bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas/status/");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
