@@ -44,10 +44,10 @@ export class MembroUpdateComponent implements OnInit {
         this.loading = true;
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
+            this.loading = false;
             this.user = user;
             this.user.tipoPessoa = <TipoPessoa>'Macom';
-            this.data = this.user.dataNascimento != null ? this.user.dataNascimento.format(DATE_FORMAT) : null;
-            this.loading = false;
+            this.data = user.dataNascimento != null ? user.dataNascimento.format(DATE_FORMAT) : null;
             this.ref.detectChanges();
         });
         this.authorities = [];

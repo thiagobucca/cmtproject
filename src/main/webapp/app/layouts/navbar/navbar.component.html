@@ -8,10 +8,10 @@
                 (click)="toggleNavbar()">
                     <fa-icon icon="bars"></fa-icon>
                 </a>
-                <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
+                <!-- <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
                     <span class="logo-img"></span>
                     <span class="navbar-title">MyApp</span> <span class="navbar-version">{{version}}</span>
-                </a>
+                </a> -->
             </div>
         <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
             <ul class="navbar-nav ml-auto">

@@ -62,7 +62,7 @@ export const membroRoute: Routes = [
             user: MembroResolve
         },
         data: {
-            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const membroRoute: Routes = [
             user: MembroResolve
         },
         data: {
-            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const membroPopupRoute: Routes = [
             user: MembroResolve
         },
         data: {
-            authorities: ['ROLE_USER', 'ROLE_LOJA_MACONICA'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'Membros'
         },
         canActivate: [UserRouteAccessService],
