@@ -11,6 +11,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -118,13 +119,19 @@ public class LojaMaconicaResource {
             @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
         log.debug("REST request to get a page of LojaMaconicas");
 
+
+        if(pageable == null || pageable.getPageSize() ==20){
+            pageable = PageRequest.of(0, Integer.MAX_VALUE);
+        }
+
+        
         if(bolAtivo == null)
         {
             bolAtivo = true;
         }     
 
 
-        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable,bolAtivo);
+        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivoOrderByNome(pageable,bolAtivo);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -168,7 +175,14 @@ public class LojaMaconicaResource {
     @GetMapping("/loja-maconicas/status/{bolAtivo}")
     @Timed
     public ResponseEntity<List<LojaMaconica>> getAllUsersByStatus(@PathVariable boolean bolAtivo, Pageable pageable) {
-        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable, bolAtivo);
+
+        
+        if(pageable == null || pageable.getPageSize() ==20){
+            pageable = PageRequest.of(0, Integer.MAX_VALUE);
+        }
+
+
+        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivoOrderByNome(pageable, bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas/status/");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

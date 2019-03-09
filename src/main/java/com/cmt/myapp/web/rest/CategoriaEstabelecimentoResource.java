@@ -10,6 +10,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -94,9 +95,14 @@ public class CategoriaEstabelecimentoResource {
         log.debug("REST request to get a page of CategoriaEstabelecimentos");
         Page<CategoriaEstabelecimento> page = null;
 
+        if(pageable == null || pageable.getPageSize() ==20){
+            pageable = PageRequest.of(0, Integer.MAX_VALUE);
+        }
+
         if(bolAtivo != null)
             page = categoriaEstabelecimentoRepository.findAllByBolAtivo(pageable, bolAtivo);
         else
+
             page = categoriaEstabelecimentoRepository.findAll(pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categoria-estabelecimentos");
@@ -105,7 +111,7 @@ public class CategoriaEstabelecimentoResource {
 
     /**
      * GET  /categoria-estabelecimentos/:id : get the "id" categoriaEstabelecimento.
-     *
+     *a
      * @param id the id of the categoriaEstabelecimento to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the categoriaEstabelecimento, or with status 404 (Not Found)
      */

@@ -21,10 +21,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,6 +37,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
 /**
@@ -85,24 +90,70 @@ public class CupomResource {
 
         try {
 
-            log.debug("usuario:" + cupom.getUsuarioId());
+          /*  if(cupom.getFoto().startsWith("/9j")){
+                cupom.setFoto(cupom.getFoto().substring(4));
+                log.debug("base64 -1:" + cupom.getFoto());
+            }else if(cupom.getFoto().startsWith("/9/")){
+                cupom.setFoto(cupom.getFoto().substring(3));
+                log.debug("base64 -2:" + cupom.getFoto());
+            }
+*/
+            
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
             Files.createDirectories(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
-            Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
-                    Base64.getDecoder().decode(cupom.getFoto()));
 
+
+            byte[] imageByte= Base64.getDecoder().decode((cupom.getFoto().replaceAll("\\r|\\n", "").getBytes(StandardCharsets.UTF_8)));
+
+            FileOutputStream fs = new FileOutputStream(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name);
+            fs.write(imageByte);
+            fs.close();
+        
+
+
+
+            
+            /*
+            Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
+                    Base64.getDecoder().decode(cupom.getFoto().getBytes(StandardCharsets.UTF_8)));
+*/
             cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" + name);
+
+
+
+            
+
+
+/*
+            BufferedImage originalImage = ImageIO.read(new File(cupom.getFoto()));
+            int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+            
+            BufferedImage resizeImageJpg = resizeImage(originalImage, type);
+		    ImageIO.write(resizeImageJpg, "jpg", new File(cupom.getFoto())); */
 
             Cupom result = cupomRepository.save(cupom);
             return ResponseEntity.created(new URI("/api/cupoms/" + result.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
         } catch (Exception ex) {
+            ex.printStackTrace();
+            log.debug("ex: "+ex);
             throw new BadRequestAlertException("Erro ao salvar imagem2", ENTITY_NAME, "idexists");
         }
 
     }
 
+
+    private static BufferedImage resizeImage(BufferedImage originalImage, int type){
+        BufferedImage resizedImage = new BufferedImage(300, 300, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, 300, 300, null);
+        g.dispose();
+
+        return resizedImage;
+    }
+
+        
     /**
      * PUT /cupoms : Updates an existing cupom.
      *
