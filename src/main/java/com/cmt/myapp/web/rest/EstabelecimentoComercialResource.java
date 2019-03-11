@@ -165,7 +165,7 @@ public class EstabelecimentoComercialResource {
 
 
         if(pageable == null || pageable.getPageSize() ==20){
-            pageable = PageRequest.of(0, Integer.MAX_VALUE);
+            pageable = PageRequest.of(0, Integer.MAX_VALUE, pageable.getSort());
         }
 
         
@@ -177,7 +177,7 @@ public class EstabelecimentoComercialResource {
         Page<EstabelecimentoComercial> page = null;
 
         if (nome == null && categoria_id == null) {
-            page = estabelecimentoComercialRepository.findAllByBolAtivoOrderByNome(pageable,bolAtivo);
+            page = estabelecimentoComercialRepository.findAllByBolAtivo(pageable,bolAtivo);
         } else if (nome == null && categoria_id != null) {
             page = estabelecimentoComercialRepository.findAllByCategoriaIdAndBolAtivo(pageable, categoria_id, bolAtivo);
         } else {
@@ -241,11 +241,12 @@ public class EstabelecimentoComercialResource {
             Pageable pageable) {
 
                 if(pageable == null || pageable.getPageSize() ==20){
-                    pageable = PageRequest.of(0, Integer.MAX_VALUE);
+                    pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
                 }
+        
 
                 
-        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAllByBolAtivoOrderByNome(pageable,
+        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAllByBolAtivo(pageable,
                 bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
                 "/api/estabelecimento-comercials/status/");
@@ -265,6 +266,13 @@ public class EstabelecimentoComercialResource {
             @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
             if(bolAtivo == null)
                 bolAtivo = true;
+
+
+                if(pageable == null || pageable.getPageSize() ==20){
+                    pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
+                }
+
+                
         final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findByNomeContainingAndBolAtivo(pageable,
                 nome, bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");

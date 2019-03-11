@@ -275,8 +275,9 @@ public class UserResource {
      */
     @GetMapping("/users/lojaMaconica/{lojaMaconicaId}")
     @Timed
-    public ResponseEntity<List<User>> getAllUsersByLojaMaconicaId(@PathVariable Long lojaMaconicaId, Pageable pageable) {
-        final Page<User> page = userRepository.findAllByLojaMaconicaId(pageable, lojaMaconicaId);
+    public ResponseEntity<List<UserDTO>> getAllUsersByLojaMaconicaId(@PathVariable Long lojaMaconicaId, Pageable pageable) {
+
+        final Page<UserDTO> page = userRepository.findAllWithAuthoritiesByLojaMaconicaId(pageable, lojaMaconicaId).map(UserDTO::new);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

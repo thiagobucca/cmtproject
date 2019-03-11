@@ -50,8 +50,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //List<User> findAllByLojaMaconicaId(Long lojaMaconicaId);
     
     Optional<User> findOneByIdAndPlacet(Long id, String placet);
-
-    Page<User> findAllByLojaMaconicaId(Pageable pageable, Long lojaMaconicaId);
+    
+    @EntityGraph(attributePaths = "authorities")
+    Page<User> findAllWithAuthoritiesByLojaMaconicaId(Pageable pageable, Long lojaMaconicaId);
 
     List<User> findAllByLojaMaconicaId( Long lojaMaconicaId);
 
