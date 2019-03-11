@@ -78,7 +78,7 @@ public class AccountResource {
         else
         {
             if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
-                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "idexists");
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
             }
         }
         
