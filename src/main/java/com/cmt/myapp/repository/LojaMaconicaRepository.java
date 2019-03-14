@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface LojaMaconicaRepository extends JpaRepository<LojaMaconica, Long> {
 	
 
-    Page<LojaMaconica> findAllByBolAtivoOrderByNome(Pageable pageable, boolean bolAtivo);
+    Page<LojaMaconica> findAllByBolAtivo(Pageable pageable, boolean bolAtivo);
     Optional<LojaMaconica> findOneByCodCnpj(String codCnpj);
 
 }

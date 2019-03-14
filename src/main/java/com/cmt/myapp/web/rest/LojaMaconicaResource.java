@@ -119,9 +119,8 @@ public class LojaMaconicaResource {
             @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
         log.debug("REST request to get a page of LojaMaconicas");
 
-
         if(pageable == null || pageable.getPageSize() ==20){
-            pageable = PageRequest.of(0, Integer.MAX_VALUE);
+            pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
         }
 
         
@@ -130,8 +129,7 @@ public class LojaMaconicaResource {
             bolAtivo = true;
         }     
 
-
-        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivoOrderByNome(pageable,bolAtivo);
+        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable,bolAtivo);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -178,11 +176,11 @@ public class LojaMaconicaResource {
 
         
         if(pageable == null || pageable.getPageSize() ==20){
-            pageable = PageRequest.of(0, Integer.MAX_VALUE);
+            pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
         }
 
 
-        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivoOrderByNome(pageable, bolAtivo);
+        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable, bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas/status/");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
