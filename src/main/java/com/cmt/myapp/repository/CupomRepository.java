@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cmt.myapp.domain.Cupom;
+import com.cmt.myapp.domain.enumeration.StatusCupom;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Repository;
 public interface CupomRepository extends JpaRepository<Cupom, Long> {
 
     public Page<Cupom> findAllByUsuarioId(Pageable pageable,Long usuario_id);
+
+    public Page<Cupom> findAllByUsuarioIdAndStatus(Pageable pageable,Long usuario_id,StatusCupom status);
 
     //@Query("SELECT e FROM Cupom e WHERE e.data BETWEEN :dataInicial AND :dataFinal")
     public Page<Cupom> findByDataBetween(Pageable pageable, Instant dataInicial, Instant dataFinal);

@@ -3,6 +3,8 @@ package com.cmt.myapp.domain;
 
 import javax.persistence.*;
 
+import com.cmt.myapp.domain.enumeration.StatusCupom;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -49,6 +51,11 @@ public class Cupom implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "usuario_id", insertable = false, updatable = false, nullable = true)
     private User usuario;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    //@NotBlank(message = "Informe o status do cupom")
+    private StatusCupom statusCupom;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -137,6 +144,19 @@ public class Cupom implements Serializable {
         this.usuarioId = usuarioId;
     }
 
+    public StatusCupom getStatus() {
+        return statusCupom = statusCupom == null ? StatusCupom.Ativo : statusCupom;
+    }
+
+    public Cupom status(StatusCupom statusCupom) {
+        this.statusCupom = statusCupom;
+        return this;
+    }
+
+    public void setStatus(StatusCupom statusCupom) {
+        this.statusCupom = statusCupom;
+    }
+
     public Long getEstabelecimentoComercialId() {
         return estabelecimentoComercialId;
     }
@@ -212,6 +232,7 @@ public class Cupom implements Serializable {
             ", fotoContentType='" + getFotoContentType() + "'" +
             ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
             ", usuarioId=" + getUsuarioId() +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }
