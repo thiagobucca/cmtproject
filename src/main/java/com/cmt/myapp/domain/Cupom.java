@@ -145,7 +145,8 @@ public class Cupom implements Serializable {
     }
 
     public StatusCupom getStatus() {
-        return statusCupom = statusCupom == null ? StatusCupom.Ativo : statusCupom;
+        statusCupom = statusCupom == null ? StatusCupom.Ativo : statusCupom;
+        return statusCupom;
     }
 
     public Cupom status(StatusCupom statusCupom) {

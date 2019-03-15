@@ -89,6 +89,7 @@ public class CupomResource {
                     "duplicate");
         }
 
+        
         try {
 
           /*  if(cupom.getFoto().startsWith("/9j")){
