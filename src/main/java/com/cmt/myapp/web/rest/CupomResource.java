@@ -2,6 +2,7 @@ package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.Cupom;
+import com.cmt.myapp.domain.enumeration.StatusCupom;
 import com.cmt.myapp.repository.CupomRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
@@ -88,6 +89,7 @@ public class CupomResource {
                     "duplicate");
         }
 
+        
         try {
 
           /*  if(cupom.getFoto().startsWith("/9j")){
@@ -268,8 +270,18 @@ public class CupomResource {
      */
     @GetMapping("/cupoms/usuario/{usuario_id}")
     @Timed
-    public ResponseEntity<List<Cupom>> getAllUsersByTipo(@PathVariable Long usuario_id, Pageable pageable) {
-        final Page<Cupom> page = cupomRepository.findAllByUsuarioId(pageable, usuario_id);
+    public ResponseEntity<List<Cupom>> getAllUsersByTipo(@PathVariable Long usuario_id, Pageable pageable,
+    @RequestParam( value = "status", required = false) StatusCupom status) {
+
+        if (status == null)
+        {
+            status  = StatusCupom.Ativo;
+        }
+        
+        log.debug("REST request Cupom Ativos : {}", usuario_id);
+
+        final Page<Cupom> page = cupomRepository.findAllByUsuarioIdAndStatus(pageable, usuario_id,status);
+                
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
