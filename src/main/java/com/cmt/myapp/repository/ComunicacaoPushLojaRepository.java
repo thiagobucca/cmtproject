@@ -1,5 +1,7 @@
 package com.cmt.myapp.repository;
 
+import java.util.List;
+
 import com.cmt.myapp.domain.ComunicacaoPushLoja;
 
 import org.springframework.data.domain.Page;
@@ -17,4 +19,5 @@ public interface ComunicacaoPushLojaRepository extends JpaRepository<Comunicacao
 
     public Page<ComunicacaoPushLoja> findAllByLojaMaconicaId(Pageable pageable,Long usualoja_maconica_idrio_id);
     public Page<ComunicacaoPushLoja> findAllByComunicacaoPushId(Pageable pageable, long comunicacao_push_id);
+    public List<ComunicacaoPushLoja> findAllByComunicacaoPushId(long comunicacao_push_id);
 }

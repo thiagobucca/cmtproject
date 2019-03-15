@@ -2,6 +2,7 @@ package com.cmt.myapp.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -36,11 +37,14 @@ public class Cupom implements Serializable {
     @Column(name = "foto_content_type")
     private String fotoContentType;
 
+    @NotNull(message = "Informe o estabelecimento")
     @Column(name = "estabelecimento_comercial_id")
     private Long estabelecimentoComercialId;
 
+    @NotNull(message = "Informe o usuário")
     @Column(name = "usuario_id")
     private Long usuarioId;
+    
     
     @OneToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
