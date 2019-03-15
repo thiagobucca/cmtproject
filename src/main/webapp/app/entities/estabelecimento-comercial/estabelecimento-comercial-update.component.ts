@@ -84,7 +84,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             }
         });
 
-        this.estabelecimentoComercialService.findByStatus(true).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true, { size: 1000 }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
             },

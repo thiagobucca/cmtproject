@@ -21,7 +21,8 @@ import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-co
 
 @Component({
     selector: 'jhi-relatorio-cupom-cmt',
-    templateUrl: './relatorio-cupom-cmt.component.html'
+    templateUrl: './relatorio-cupom-cmt.component.html',
+    styleUrls: ['./relatorio-cupom-cmt.component.scss']
 })
 export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     relatorioCupomCmts: IRelatorioCupomCmt[];
@@ -34,6 +35,9 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     queryCount: any;
     reverse: any;
     totalItems: number;
+    totalValor: any;
+    totalValorLoja: any;
+    totalValorCMT: any;
     estabelecimentos: IEstabelecimentoComercial[];
     lojas: ILojaMaconica[];
     consulta: any;
@@ -49,6 +53,9 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         private lojaMaconicaService: LojaMaconicaService,
         private principal: Principal
     ) {
+        this.totalValor = 0;
+        this.totalValorLoja = 0;
+        this.totalValorCMT = 0;
         this.relatorioCupomCmts = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.page = 0;
@@ -66,6 +73,10 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     }
     consultar() {
         this.relatorioCupomCmts = [];
+        this.totalValor = 0;
+        this.totalValorLoja = 0;
+        this.totalValorCMT = 0;
+        this.page = 0;
         this.loadAll();
     }
     loadAll() {
@@ -102,6 +113,9 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         this.auxService.isLoading = status;
     }
     reset() {
+        this.totalValor = 0;
+        this.totalValorLoja = 0;
+        this.totalValorCMT = 0;
         this.page = 0;
         this.relatorioCupomCmts = [];
         this.loadAll();
@@ -176,6 +190,9 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         for (let i = 0; i < data.length; i++) {
+            this.totalValor += data[i].valor;
+            this.totalValorLoja += data[i].valorLoja;
+            this.totalValorCMT += data[i].valorCMT;
             this.relatorioCupomCmts.push(data[i]);
         }
     }

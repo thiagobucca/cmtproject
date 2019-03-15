@@ -30,7 +30,7 @@ export class ContatoLojaMaconicaUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ contatoLojaMaconica }) => {
             this.contatoLojaMaconica = contatoLojaMaconica;
         });
-        this.lojaMaconicaService.findByStatus(true).subscribe(
+        this.lojaMaconicaService.findByStatus(true, { size: 1000 }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
             },

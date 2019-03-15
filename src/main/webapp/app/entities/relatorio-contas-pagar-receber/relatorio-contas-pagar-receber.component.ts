@@ -18,7 +18,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-relatorio-contas-pagar-receber',
-    templateUrl: './relatorio-contas-pagar-receber.component.html'
+    templateUrl: './relatorio-contas-pagar-receber.component.html',
+    styleUrls: ['./relatorio-contas-pagar-receber.component.scss']
 })
 export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     relatorioContasPagarRecebers: IRelatorioContasPagarReceber[];
@@ -31,6 +32,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     queryCount: any;
     reverse: any;
     totalItems: number;
+    totalValor: any;
     consulta: any;
 
     tipoOperacoes: ITipoOperacao[];
@@ -51,6 +53,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
         this.links = {
             last: 0
         };
+        this.totalValor = 0;
         this.predicate = 'id';
         this.reverse = true;
         this.consulta = {
@@ -93,12 +96,15 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     }
 
     reset() {
+        this.totalValor = 0;
         this.page = 0;
         this.relatorioContasPagarRecebers = [];
         this.loadAll();
     }
     consultar() {
         this.relatorioContasPagarRecebers = [];
+        this.totalValor = 0;
+        this.page = 0;
         this.loadAll();
     }
 
@@ -149,6 +155,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         for (let i = 0; i < data.length; i++) {
+            this.totalValor += data[i].valor;
             this.relatorioContasPagarRecebers.push(data[i]);
         }
     }

@@ -36,8 +36,9 @@ export class UsuarioportalService {
     findByTipo(tipo: TipoPessoa): Observable<EntityArrayResponseType> {
         return this.http.get<IUsuarioPortal[]>(`${this.resourceUrl}/tipo/${tipo}`, { observe: 'response' });
     }
-    findByStatus(status: boolean): Observable<EntityArrayResponseType> {
-        return this.http.get<IUsuarioPortal[]>(`${this.resourceUrl}/status/${status}`, { observe: 'response' });
+    findByStatus(status: boolean, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IUsuarioPortal[]>(`${this.resourceUrl}/status/${status}`, { params: options, observe: 'response' });
     }
 
     query(req?: any): Observable<HttpResponse<IUsuarioPortal[]>> {

@@ -53,7 +53,7 @@ export class CupomUpdateComponent implements OnInit {
             this.hora = this.cupom.data != null ? this.cupom.data.format(TIME_FORMAT) : null;
         });
 
-        this.estabelecimentoComercialService.findByStatus(true).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true, { size: 1000 }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
                 this.loading = false;
@@ -98,6 +98,7 @@ export class CupomUpdateComponent implements OnInit {
         this.loading = true;
         this.cupom.data = this.data != null && this.hora != null ? moment(this.data + 'T' + this.hora, DATE_TIME_FORMAT) : null;
         this.cupom.estabelecimento = null;
+        this.cupom.usuario = null;
         if (this.cupom.id !== undefined) {
             this.subscribeToSaveResponse(this.cupomService.update(this.cupom));
         } else {

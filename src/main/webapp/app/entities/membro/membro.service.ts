@@ -36,8 +36,9 @@ export class MembroService {
         return this.http.get<IMembro[]>(`${this.resourceUrl}/tipo/${tipo}`, { observe: 'response' });
     }
 
-    findByStatus(status: boolean): Observable<EntityArrayResponseType> {
-        return this.http.get<IMembro[]>(`${this.resourceUrl}/status/${status}`, { observe: 'response' });
+    findByStatus(status: boolean, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IMembro[]>(`${this.resourceUrl}/status/${status}`, { params: options, observe: 'response' });
     }
 
     query(req?: any): Observable<HttpResponse<IMembro[]>> {

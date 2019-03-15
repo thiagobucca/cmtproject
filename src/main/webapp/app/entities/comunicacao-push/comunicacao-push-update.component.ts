@@ -71,7 +71,7 @@ export class ComunicacaoPushUpdateComponent implements OnInit {
                 this.ref.detectChanges();
             }
         });
-        this.lojaMaconicaService.findByStatus(true).subscribe(
+        this.lojaMaconicaService.findByStatus(true, { size: 1000 }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
             },

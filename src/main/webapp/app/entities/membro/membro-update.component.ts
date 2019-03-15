@@ -57,7 +57,7 @@ export class MembroUpdateComponent implements OnInit {
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
-        this.lojaMaconicaService.findByStatus(true).subscribe(
+        this.lojaMaconicaService.findByStatus(true, { size: 1000 }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
             },
