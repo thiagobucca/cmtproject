@@ -110,12 +110,32 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
                         }
                     );
             }
-        } else {
+        } else if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_ADMIN')) {
             this.userService
                 .query({
                     page: this.page - 1,
                     size: this.itemsPerPage,
                     sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<UsuarioPortal[]>) => {
+                        this.loading = false;
+                        this.onSuccess(res.body, res.headers);
+                        this.ref.detectChanges();
+                    },
+                    (res: HttpResponse<any>) => {
+                        this.loading = false;
+                        this.ref.detectChanges();
+                        this.onError(res.body);
+                    }
+                );
+        } else {
+            this.userService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    sort: this.sort(),
+                    isPortal: true
                 })
                 .subscribe(
                     (res: HttpResponse<UsuarioPortal[]>) => {
