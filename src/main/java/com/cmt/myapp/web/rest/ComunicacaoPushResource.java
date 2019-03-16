@@ -3,11 +3,13 @@ package com.cmt.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.ComunicacaoPush;
 import com.cmt.myapp.domain.ComunicacaoPushLoja;
+import com.cmt.myapp.domain.PushUsuario;
 import com.cmt.myapp.domain.SendNotification;
 import com.cmt.myapp.domain.User;
 import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.ComunicacaoPushLojaRepository;
 import com.cmt.myapp.repository.ComunicacaoPushRepository;
+import com.cmt.myapp.repository.PushUsuarioRepository;
 import com.cmt.myapp.repository.UserRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
@@ -18,6 +20,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -51,13 +54,16 @@ public class ComunicacaoPushResource {
 
     private final ComunicacaoPushLojaRepository comunicacaoPushLojaRepository;
 
+    private final PushUsuarioRepository pushUsuarioRepository;
+
     private final UserRepository userRepository;
 
     public ComunicacaoPushResource(ComunicacaoPushRepository comunicacaoPushRepository, ComunicacaoPushLojaRepository comunicacaoPushLojaRepository, 
-    UserRepository userRepository) {
+    UserRepository userRepository, PushUsuarioRepository pushUsuarioRepository) {
         this.comunicacaoPushRepository = comunicacaoPushRepository;
         this.comunicacaoPushLojaRepository = comunicacaoPushLojaRepository;
         this.userRepository = userRepository;
+        this.pushUsuarioRepository = pushUsuarioRepository;
     }
 
     /**
@@ -113,9 +119,19 @@ public class ComunicacaoPushResource {
      */
     @GetMapping("/comunicacao-pushes")
     @Timed
-    public ResponseEntity<List<ComunicacaoPush>> getAllComunicacaoPushes(Pageable pageable) {
+    public ResponseEntity<List<ComunicacaoPush>> getAllComunicacaoPushes(Pageable pageable,
+        @RequestParam( value = "usuarioId", required = false) Long usuarioId) {
         log.debug("REST request to get a page of ComunicacaoPushes");
-        Page<ComunicacaoPush> page = comunicacaoPushRepository.findAll(pageable);
+        Page<ComunicacaoPush> page = null;
+
+        Page<PushUsuario> pushs = null;
+        if(usuarioId != null){
+            pushs = pushUsuarioRepository.findAllByUsuarioId(pageable, usuarioId);
+            List<ComunicacaoPush> l = pushs.stream().map(PushUsuario::getComunicacaoPush).collect(Collectors.toList());
+            page = new PageImpl<ComunicacaoPush>(l);
+        }else{
+            page = comunicacaoPushRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comunicacao-pushes");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -179,13 +195,13 @@ public class ComunicacaoPushResource {
         //ComunicacaoPush result = comunicacaoPushRepository.save(comunicacaoPush);
 
         Optional<ComunicacaoPush> comunicacaoPush = comunicacaoPushRepository.findById(id);
-        Page<ComunicacaoPushLoja> lojas = comunicacaoPushLojaRepository.findAllByComunicacaoPushId(null, comunicacaoPush.get().getId());
+        List<ComunicacaoPushLoja> lojas = comunicacaoPushLojaRepository.findAllByComunicacaoPushId(comunicacaoPush.get().getId());
         ArrayList<User> usuarios = new ArrayList<>();
         for(ComunicacaoPushLoja item : lojas){
             usuarios.addAll(userRepository.findAllByLojaMaconicaId(item.getLojaMaconicaId()));
         } 
-        if(comunicacaoPush.get().getTipoPessoa() != null && !lojas.hasContent()){
-            usuarios.addAll(userRepository.findAllByTipoPessoa(null, comunicacaoPush.get().getTipoPessoa()).getContent());
+        if(comunicacaoPush.get().getTipoPessoa() != null && lojas.isEmpty()){
+            usuarios.addAll(userRepository.findAllByTipoPessoa(comunicacaoPush.get().getTipoPessoa()));
         }
 
         SendNotification notification = new SendNotification();
@@ -197,6 +213,19 @@ public class ComunicacaoPushResource {
             notification.setIncluded_segments(new ArrayList<String>());
             notification.getIncluded_segments().add("Subscribed Users");
         }
+
+        List<PushUsuario> listapush = new ArrayList<>();
+
+        for (User item : usuarios) {
+            PushUsuario p = new PushUsuario();
+            p.setPushId(id);
+            p.setUsuarioId(item.getId());
+            listapush.add(p);
+        }
+
+        if(!listapush.isEmpty()) pushUsuarioRepository.saveAll(listapush);
+
+
 
         notification.setApp_id("1ee29f2c-4652-4629-ab1e-1d016cfad22e");
         notification.getContents().setEn(comunicacaoPush.get().getConteudoPush());
