@@ -21,8 +21,7 @@ import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-co
 
 @Component({
     selector: 'jhi-relatorio-cupom-cmt',
-    templateUrl: './relatorio-cupom-cmt.component.html',
-    styleUrls: ['./relatorio-cupom-cmt.component.scss']
+    templateUrl: './relatorio-cupom-cmt.component.html'
 })
 export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     relatorioCupomCmts: IRelatorioCupomCmt[];
@@ -63,7 +62,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             last: 0
         };
         this.predicate = 'data';
-        this.reverse = true;
+        this.reverse = false;
         this.consulta = {
             dataIni: '',
             dataFim: '',
@@ -135,7 +134,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.estabelecimentoComercialService.query().subscribe(
+        this.estabelecimentoComercialService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
                 this.loading = false;
@@ -147,7 +146,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
                 this.ref.detectChanges();
             }
         );
-        this.lojaMaconicaService.query().subscribe(
+        this.lojaMaconicaService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
                 this.loading = false;
@@ -167,7 +166,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         this.router.navigate(parametros);
     }
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
+        if (this.eventSubscriber !== undefined) this.eventManager.destroy(this.eventSubscriber);
     }
 
     trackId(index: number, item: IRelatorioCupomCmt) {

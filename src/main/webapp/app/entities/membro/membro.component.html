@@ -29,7 +29,7 @@
                         <th jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span>
                             <fa-icon [icon]="'sort'"></fa-icon>
                         </th>
-                        <th>Status</th>
+                        <th class="text-center">Status</th>
                         <th><span jhiTranslate="userManagement.profiles">Profiles</span></th>
                         <th></th>
                     </tr>
@@ -39,7 +39,7 @@
                         <td><a [routerLink]="['./', user.login, 'view']">{{user.id}}</a></td>
                         <td>{{user.login}}</td>
                         <td>{{user.email}}</td>
-                        <td>
+                        <td class="text-center">
                                 <jhi-boolean [value]="user.activated" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
                                     </jhi-boolean>
                           
@@ -51,16 +51,16 @@
                         </td>
                         <td class="text-right">
                             <div class="btn-group flex-btn-group-container">
-                                <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-info btn-sm"
+                                <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-link btn-sm"
                                     title="Visualizar">
                                     <fa-icon [icon]="'eye'"></fa-icon>
                                 </button>
                                 <button type="submit" [routerLink]="['./', user.login, 'edit']" queryParamsHandling="merge"
-                                    class="btn btn-primary btn-sm" title="Editar"
+                                    class="btn btn-link btn-sm" title="Editar"
                                     *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
                                     <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                 </button>
-                                <button type="button" (click)="deleteUser(user)" class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login"
+                                <button type="button" (click)="deleteUser(user)" class="btn btn-link btn-sm" [disabled]="currentAccount.login === user.login"
                                     title="Deletar"
                                     *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
                                     <fa-icon [icon]="'times'"></fa-icon>

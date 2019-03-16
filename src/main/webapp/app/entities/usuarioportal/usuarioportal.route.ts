@@ -37,7 +37,7 @@ export const usuarioportalRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'Usuários Portal'
         },
@@ -50,7 +50,7 @@ export const usuarioportalRoute: Routes = [
             user: UsuarioportalResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const usuarioportalRoute: Routes = [
             user: UsuarioportalResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const usuarioportalRoute: Routes = [
             user: UsuarioportalResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const usuarioportalPopupRoute: Routes = [
             user: UsuarioportalResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'Usuários Portal'
         },
         canActivate: [UserRouteAccessService],

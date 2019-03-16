@@ -18,8 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-relatorio-contas-pagar-receber',
-    templateUrl: './relatorio-contas-pagar-receber.component.html',
-    styleUrls: ['./relatorio-contas-pagar-receber.component.scss']
+    templateUrl: './relatorio-contas-pagar-receber.component.html'
 })
 export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     relatorioContasPagarRecebers: IRelatorioContasPagarReceber[];
@@ -54,8 +53,8 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
             last: 0
         };
         this.totalValor = 0;
-        this.predicate = 'id';
-        this.reverse = true;
+        this.predicate = 'data';
+        this.reverse = false;
         this.consulta = {
             dataIni: '',
             dataFim: '',
@@ -122,7 +121,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.tipoOperacaoService.query({}).subscribe(
+        this.tipoOperacaoService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ITipoOperacao[]>) => {
                 this.tipoOperacoes = res.body;
             },
@@ -132,7 +131,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
+        if (this.eventSubscriber !== undefined) this.eventManager.destroy(this.eventSubscriber);
     }
 
     trackId(index: number, item: IRelatorioContasPagarReceber) {
@@ -145,8 +144,8 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
 
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
+        if (this.predicate !== 'data') {
+            result.push('data');
         }
         return result;
     }

@@ -78,7 +78,7 @@ export class MembroComponent implements OnInit, OnDestroy {
             this.loadAll();
             this.registerChangeInUsers();
         });
-        this.lojaMaconicaService.query().subscribe(
+        this.lojaMaconicaService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
                 this.loading = false;

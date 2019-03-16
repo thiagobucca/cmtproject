@@ -53,7 +53,7 @@ export class CupomUpdateComponent implements OnInit {
             this.hora = this.cupom.data != null ? this.cupom.data.format(TIME_FORMAT) : null;
         });
 
-        this.estabelecimentoComercialService.findByStatus(true, { size: 1000 }).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true, { size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
                 this.loading = false;

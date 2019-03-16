@@ -78,14 +78,14 @@ export class ContasPagarReceberUpdateComponent implements OnInit {
                 this.contasPagarReceber.lojaMaconicaId === undefined || this.contasPagarReceber.lojaMaconicaId === null;
         });
 
-        this.lojaMaconicaService.findByStatus(true, { size: 1000 }).subscribe(
+        this.lojaMaconicaService.findByStatus(true, { size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.estabelecimentoComercialService.findByStatus(true).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true, { size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
             },

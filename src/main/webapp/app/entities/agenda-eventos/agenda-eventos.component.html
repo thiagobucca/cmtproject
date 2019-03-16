@@ -17,7 +17,7 @@
             <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.agendaEventos.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="local"><span jhiTranslate="cmtprojectApp.agendaEventos.local">Local</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="descricao"><span >Descrição</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th class="text-center" jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon></th>
             
             <th></th>
             </tr>
@@ -29,7 +29,7 @@
                 <td>{{agendaEventos.data | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{agendaEventos.local}}</td>
                 <td>{{agendaEventos.descricao}}</td>
-                <td><jhi-boolean
+                <td class="text-center"> <jhi-boolean
                     [value]="agendaEventos.bolAtivo"
                     [textTrue]="'Ativo'"
                     [textFalse]="'Inativo'">
@@ -38,19 +38,19 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                         (click)="detalhar(['/agenda-eventos', agendaEventos.id, 'view' ])"
-                                class="btn btn-info btn-sm" title="Visualizar">
+                                class="btn btn-link btn-sm" title="Visualizar">
                             <fa-icon [icon]="'eye'"></fa-icon>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/agenda-eventos', agendaEventos.id, 'edit']"
-                                class="btn btn-primary btn-sm" title="Editar">
+                                class="btn btn-link btn-sm" title="Editar">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'agenda-eventos/'+ agendaEventos.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm" title="Deletar">
+                                class="btn btn-link btn-sm" title="Deletar">
                             <fa-icon [icon]="'times'"></fa-icon></button>
                     </div>
                 </td>
