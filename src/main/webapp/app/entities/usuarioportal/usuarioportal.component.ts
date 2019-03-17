@@ -101,6 +101,14 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
                     .subscribe(
                         (res: HttpResponse<UsuarioPortal[]>) => {
                             this.loading = false;
+                            const lstFiltrada = res.body.filter(
+                                p => p.authorities.indexOf('ROLE_ADMIN') > -1 || p.authorities.indexOf('ROLE_USER') > -1
+                            );
+                            if (lstFiltrada !== undefined && lstFiltrada !== null) {
+                                lstFiltrada.forEach(item => {
+                                    res.body.splice(res.body.indexOf(item), 1);
+                                });
+                            }
                             this.onSuccess(res.body, res.headers);
                         },
                         (res: HttpResponse<any>) => {
@@ -140,6 +148,12 @@ export class UsuarioportalComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (res: HttpResponse<UsuarioPortal[]>) => {
                         this.loading = false;
+                        const lstFiltrada = res.body.filter(p => p.authorities.indexOf('ROLE_ADMIN') > -1);
+                        if (lstFiltrada !== undefined && lstFiltrada !== null) {
+                            lstFiltrada.forEach(item => {
+                                res.body.splice(res.body.indexOf(item), 1);
+                            });
+                        }
                         this.onSuccess(res.body, res.headers);
                         this.ref.detectChanges();
                     },
