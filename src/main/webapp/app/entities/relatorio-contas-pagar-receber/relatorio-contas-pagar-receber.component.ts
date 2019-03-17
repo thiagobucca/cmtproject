@@ -121,7 +121,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.tipoOperacaoService.query({ sort: ['nome,asc'] }).subscribe(
+        this.tipoOperacaoService.query({ sort: ['nomeOperacao,asc'] }).subscribe(
             (res: HttpResponse<ITipoOperacao[]>) => {
                 this.tipoOperacoes = res.body;
             },
