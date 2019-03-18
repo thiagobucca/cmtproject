@@ -269,18 +269,28 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Page<UserDTO> getAllManagedUsers(Pageable pageable, Boolean isPortal) {
-        if(isPortal){
-            Authority a = new Authority();
-            a.setName("ROLE_LOJA_MACONICA");
+    public Page<UserDTO> getAllManagedUsers(Pageable pageable, String roles, Long lojaMaconicaId) {
+
+        if(roles.length() > 0){
+            Authority a;
             Set<Authority> lista = new HashSet<>();
-            lista.add(a);
-            a = new Authority();
-            a.setName("ROLE_USER");
-            lista.add(a);
-            return userRepository.findOneWithAuthoritiesByAuthoritiesIn(pageable,lista).map(UserDTO::new);
-        }else
-            return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
+            String[] roles_array =  roles.split("\\|");
+
+            for (String role : roles_array) {
+                a = new Authority();
+                a.setName(role);
+            
+                lista.add(a);
+            }
+            if(lojaMaconicaId == null)
+                return userRepository.findOneWithAuthoritiesByAuthoritiesIn(pageable,lista).map(UserDTO::new);
+
+            return userRepository.findOneWithAuthoritiesByLojaMaconicaIdAndAuthoritiesIn(pageable,lojaMaconicaId, lista).map(UserDTO::new);    
+        }else if(lojaMaconicaId !=null){
+            return userRepository.findAllWithAuthoritiesByLojaMaconicaId(pageable, lojaMaconicaId).map(UserDTO::new);
+        }
+
+        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
 
     @Transactional(readOnly = true)

@@ -61,5 +61,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @EntityGraph(attributePaths = "authorities")
     Page<User> findOneWithAuthoritiesByAuthoritiesIn(Pageable pageable, Set<Authority> auth);
+
+    @EntityGraph(attributePaths = "authorities")
+    Page<User> findOneWithAuthoritiesByLojaMaconicaIdAndAuthoritiesIn(Pageable pageable, Long lojaMaconicaId, Set<Authority> auth);
     
 }

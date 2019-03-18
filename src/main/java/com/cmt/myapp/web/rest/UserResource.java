@@ -190,11 +190,14 @@ public class UserResource {
      */
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable, @RequestParam( value = "isPortal", required = false) Boolean isPortal) {
-        if(isPortal == null)
-            isPortal = false;
-
-        final Page<UserDTO> page = userService.getAllManagedUsers(pageable, isPortal);
+    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable, @RequestParam( value = "roles", required = false)
+    String roles,
+    @RequestParam( value = "lojaMaconicaId", required = false)
+    Long lojaMaconicaId) {
+        if(roles == null)
+            roles = "";
+        
+        final Page<UserDTO> page = userService.getAllManagedUsers(pageable, roles, lojaMaconicaId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
