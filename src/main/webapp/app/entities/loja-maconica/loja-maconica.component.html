@@ -28,10 +28,10 @@
                     <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="numero"><span>Número</span>
+                    <th class="text-center" jhiSortBy="numero"><span>Número</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
+                    <th class="text-center" jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th></th>
                 </tr>
@@ -43,24 +43,24 @@
                     <td>{{lojaMaconica.nome}}</td>
                     <td>{{lojaMaconica.endereco}}</td>
                     <td>{{lojaMaconica.telefone | mask: '(00) 0 0000-0000'}}</td>
-                    <td>{{lojaMaconica.numero}}</td>
-                    <td>
+                    <td class="text-center">{{lojaMaconica.numero}}</td>
+                    <td class="text-center">
                         <jhi-boolean [value]="lojaMaconica.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit" (click)="detalhar(['/loja-maconica', lojaMaconica.id, 'view' ])"
-                                class="btn btn-info btn-sm" title="Visualizar">
+                                class="btn btn-link btn-sm" title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
-                            <button type="submit" [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']" class="btn btn-primary btn-sm"
+                            <button type="submit" [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']" class="btn btn-link btn-sm"
                                 title="Editar" *ngIf="!roleLoja.isLojaMaconica || roleLoja.codLoja ==lojaMaconica.id">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
                             <button type="submit"
                             *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']"
                              [routerLink]="['/', { outlets: { popup: 'loja-maconica/'+ lojaMaconica.id + '/delete'} }]"
-                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-link btn-sm" title="Deletar">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>
                         </div>

@@ -100,6 +100,7 @@
                                             <th><span>Nome</span> </th>
                                             <th><span>Telefone</span> </th>
                                             <th><span>Email</span> </th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -108,16 +109,16 @@
                                             <td>{{item.nome}} </td>
                                             <td>{{item.telefone|mask:'(00) 0 0000-0000'}}</td>
                                             <td>{{item.email}}</td>
-
+                                            
                                             <td class="text-right">
                                                 <div class="btn-group flex-btn-group-container">
 
-                                                    <button type="button" (click)="editarItem(i)" class="btn btn-primary btn-sm"
+                                                    <button type="button" (click)="editarItem(i)" class="btn btn-link btn-sm"
                                                         title="Editar">
                                                         <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                                     </button>
                                                     <button type="button" (click)="deletar(i)" replaceUrl="true"
-                                                        queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                                        queryParamsHandling="merge" class="btn btn-link btn-sm" title="Deletar">
                                                         <fa-icon [icon]="'times'"></fa-icon>
                                                     </button>
                                                 </div>

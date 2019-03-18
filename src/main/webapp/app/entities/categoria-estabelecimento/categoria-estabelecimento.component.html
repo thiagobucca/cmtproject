@@ -20,7 +20,7 @@
                     <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.categoriaEstabelecimento.nome">Nome</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
+                    <th class="text-center" jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th></th>
                 </tr>
@@ -29,22 +29,22 @@
                 <tr *ngFor="let categoriaEstabelecimento of categoriaEstabelecimentos ;trackBy: trackId">
                     <td><a [routerLink]="['/categoria-estabelecimento', categoriaEstabelecimento.id, 'view' ]">{{categoriaEstabelecimento.id}}</a></td>
                     <td>{{categoriaEstabelecimento.nome}}</td>
-                    <td>
+                    <td class="text-center"> 
                         <jhi-boolean [value]="categoriaEstabelecimento.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
                         </jhi-boolean>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit" (click)="detalhar(['/categoria-estabelecimento', categoriaEstabelecimento.id, 'view' ])"
-                                class="btn btn-info btn-sm" title="Visualizar">
+                                class="btn btn-link btn-sm" title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
                             <button type="submit" (click)="detalhar(['/categoria-estabelecimento', categoriaEstabelecimento.id, 'edit'])"
-                                class="btn btn-primary btn-sm" title="Editar">
+                                class="btn btn-link btn-sm" title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
                             <button type="submit" [routerLink]="['/', { outlets: { popup: 'categoria-estabelecimento/'+ categoriaEstabelecimento.id + '/delete'} }]"
-                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-link btn-sm" title="Deletar">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>
                         </div>

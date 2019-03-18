@@ -78,7 +78,7 @@ export class MembroComponent implements OnInit, OnDestroy {
             this.loadAll();
             this.registerChangeInUsers();
         });
-        this.lojaMaconicaService.query().subscribe(
+        this.lojaMaconicaService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
                 this.loading = false;
@@ -142,6 +142,21 @@ export class MembroComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (res: HttpResponse<Membro[]>) => {
                         this.loading = false;
+
+                        let lstFiltrada = [];
+
+                        if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
+                            lstFiltrada = res.body.filter(
+                                p => p.authorities.indexOf('ROLE_ADMIN') > -1 || p.authorities.indexOf('ROLE_USER') > -1
+                            );
+                        } else if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_USER')) {
+                            lstFiltrada = res.body.filter(p => p.authorities.indexOf('ROLE_ADMIN') > -1);
+                        }
+                        if (lstFiltrada !== undefined && lstFiltrada !== null) {
+                            lstFiltrada.forEach(item => {
+                                res.body.splice(res.body.indexOf(item), 1);
+                            });
+                        }
                         this.onSuccess(res.body, res.headers);
                         this.ref.detectChanges();
                     },

@@ -265,3 +265,36 @@ ui bootstrap tweaks
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #055028;
 }
+
+thead {
+    tr {
+        th {
+            padding: 6px 7px !important;
+        }
+        font-size: 10px;
+    }
+    background-color: #4d7a62;
+    color: #fff;
+}
+tbody {
+    tr {
+        td {
+            padding: 0px 7px !important;
+        }
+
+        font-size: 10px;
+    }
+}
+tfoot {
+    tr {
+        td {
+            padding: 0px 7px !important;
+        }
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+.table-responsive {
+    overflow: hidden;
+    overflow-x: scroll;
+}

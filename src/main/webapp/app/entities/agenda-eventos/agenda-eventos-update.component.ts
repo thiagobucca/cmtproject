@@ -42,7 +42,7 @@ export class AgendaEventosUpdateComponent implements OnInit {
             this.data = this.agendaEventos.data != null ? this.agendaEventos.data.format(DATE_FORMAT) : null;
             this.hora = this.agendaEventos.data != null ? this.agendaEventos.data.format(TIME_FORMAT) : null;
         });
-        this.lojaMaconicaService.findByStatus(true, { size: 1000 }).subscribe(
+        this.lojaMaconicaService.findByStatus(true, { size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
                 this.loading = false;

@@ -18,15 +18,15 @@
                     <th jhiSortBy="data"><span jhiTranslate="cmtprojectApp.contasPagarReceber.data">Data</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span>
+                    <th class="text-right" jhiSortBy="valor"><span jhiTranslate="cmtprojectApp.contasPagarReceber.valor">Valor</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="statusLancamento">Status <fa-icon [icon]="'sort'"></fa-icon>
+                    <th class="text-center" jhiSortBy="statusLancamento">Status <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th jhiSortBy="tipoOperacao"><span>Operação</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="usuario"><span>Usuário</span>
+                    <th class="text-center" jhiSortBy="usuario"><span>Usuário</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th jhiSortBy="lojaMaconica"><span>Loja Maçônica</span>
@@ -35,7 +35,7 @@
                     <th jhiSortBy="estabelecimento"><span>Estabelecimento</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th jhiSortBy="tipoLancamento"><span>Tipo Lançamento</span>
+                    <th class="text-center" jhiSortBy="tipoLancamento"><span>Tipo Lançamento</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th></th>
@@ -45,25 +45,25 @@
                 <tr *ngFor="let contasPagarReceber of contasPagarRecebers ;trackBy: trackId">
                     <td><a [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'view' ]">{{contasPagarReceber.id}}</a></td>
                     <td>{{contasPagarReceber.data | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</td>
-                    <td jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
+                    <td class="text-right">{{contasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</td>
+                    <td class="text-center" jhiTranslate="{{'cmtprojectApp.StatusLancamento.' + contasPagarReceber.statusLancamento}}">{{contasPagarReceber.statusLancamento}}</td>
                     <td>{{contasPagarReceber.tipoOperacao}}</td>
-                    <td>{{contasPagarReceber.usuario}}</td>
+                    <td class="text-center">{{contasPagarReceber.usuario}}</td>
                     <td>{{contasPagarReceber.lojaMaconica}}</td>
                     <td>{{contasPagarReceber.estabelecimento}}</td>
-                    <td>{{contasPagarReceber.tipoLancamento}}</td>
+                    <td class="text-center">{{contasPagarReceber.tipoLancamento}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit" (click)="detalhar(['/contas-pagar-receber', contasPagarReceber.id, 'view' ])"
-                                class="btn btn-info btn-sm" title="Visualizar">
+                                class="btn btn-link btn-sm" title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
                             <button type="submit" [routerLink]="['/contas-pagar-receber', contasPagarReceber.id, 'edit']"
-                                class="btn btn-primary btn-sm" title="Editar">
+                                class="btn btn-link btn-sm" title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
                             <button type="submit" [routerLink]="['/', { outlets: { popup: 'contas-pagar-receber/'+ contasPagarReceber.id + '/delete'} }]"
-                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-link btn-sm" title="Deletar">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>
                         </div>

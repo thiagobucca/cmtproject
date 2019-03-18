@@ -47,7 +47,7 @@ export class AgendaEventosComponent implements OnInit, OnDestroy, AfterViewInit 
         this.routeData = this.activatedRoute.data.subscribe(data => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
+            this.reverse = false;
             this.predicate = data.pagingParams.predicate;
         });
     }
@@ -137,8 +137,8 @@ export class AgendaEventosComponent implements OnInit, OnDestroy, AfterViewInit 
     }
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
+        if (this.predicate !== 'data') {
+            result.push('data');
         }
         return result;
     }

@@ -14,28 +14,28 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Dia Cobrança Convênio</th>
-                    <th>Dia Pagamento Loja</th>
+                    <th class="text-center">Dia Cobrança Convênio</th>
+                    <th class="text-center">Dia Pagamento Loja</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let parametrizacao of parametrizacaos ;trackBy: trackId">
                     <td><a [routerLink]="['/parametrizacao', parametrizacao.id, 'view' ]">{{parametrizacao.id}}</a></td>
-                    <td class="text-cemter">{{parametrizacao.diaCobrancaConvenio}}</td>
-                    <td class="text-cemter">{{parametrizacao.diaPagamentoLoja}}</td>
+                    <td class="text-center">{{parametrizacao.diaCobrancaConvenio}}</td>
+                    <td class="text-center">{{parametrizacao.diaPagamentoLoja}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit" (click)="detalhar(['/parametrizacao', parametrizacao.id, 'view' ])"
-                                class="btn btn-info btn-sm" title="Visualizar">
+                                class="btn btn-link btn-sm" title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
                             <button type="submit" (click)="detalhar(['/parametrizacao', parametrizacao.id, 'edit'])"
-                                class="btn btn-primary btn-sm" title="Editar">
+                                class="btn btn-link btn-sm" title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
                             <button type="submit" [routerLink]="['/', { outlets: { popup: 'parametrizacao/'+ parametrizacao.id + '/delete'} }]"
-                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-link btn-sm" title="Deletar"
                                 *jhiHasAnyAuthority="['ROLE_ADMIN']">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>

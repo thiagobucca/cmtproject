@@ -40,15 +40,15 @@
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-info btn-sm"
+                            <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-link btn-sm"
                                 title="Visualizar">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                             </button>
                             <button type="submit" [routerLink]="['./', user.login, 'edit']" queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm" title="Editar">
+                                class="btn btn-linkbtn-sm" title="Editar">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
-                            <button type="button" (click)="deleteUser(user)" class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login"
+                            <button type="button" (click)="deleteUser(user)" class="btn btn-link btn-sm" [disabled]="currentAccount.login === user.login"
                                 title="Deletar">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>

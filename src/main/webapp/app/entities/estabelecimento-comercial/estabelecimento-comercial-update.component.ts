@@ -84,14 +84,14 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             }
         });
 
-        this.estabelecimentoComercialService.findByStatus(true, { size: 1000 }).subscribe(
+        this.estabelecimentoComercialService.findByStatus(true, { size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.categoriaEstabelecimentoService.query({ bolAtivo: true, size: 1000 }).subscribe(
+        this.categoriaEstabelecimentoService.query({ bolAtivo: true, size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
                 this.categorias = res.body;
             },

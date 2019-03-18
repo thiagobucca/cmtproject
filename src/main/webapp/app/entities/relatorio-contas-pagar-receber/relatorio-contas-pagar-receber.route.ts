@@ -31,7 +31,7 @@ export const relatorioContasPagarReceberRoute: Routes = [
         path: 'relatorio-contas-pagar-receber',
         component: RelatorioContasPagarReceberComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.relatorioContasPagarReceber.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -43,7 +43,7 @@ export const relatorioContasPagarReceberRoute: Routes = [
             relatorioContasPagarReceber: RelatorioContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.relatorioContasPagarReceber.home.title'
         },
         canActivate: [UserRouteAccessService]
