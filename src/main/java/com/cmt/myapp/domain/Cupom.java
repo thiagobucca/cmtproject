@@ -237,7 +237,7 @@ public class Cupom implements Serializable {
             ", fotoContentType='" + getFotoContentType() + "'" +
             ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
             ", usuarioId=" + getUsuarioId() +
-            ", status='" + getStatus() + "'" +
+            ", status='" + getStatusCupom() + "'" +
             "}";
     }
 }
