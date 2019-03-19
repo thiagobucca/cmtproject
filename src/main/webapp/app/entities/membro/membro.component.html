@@ -12,7 +12,7 @@
                     <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="consulta.lojaMaconicaId"
                     (ngModelChange)="onChangeLoja($event)"
                     >
-                        <option [ngValue]="undefined"  selected>Selecione...</option>
+                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
                         <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
                     </select>
                 </div>               
