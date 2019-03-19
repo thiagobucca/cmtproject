@@ -24,7 +24,7 @@ public interface CupomRepository extends JpaRepository<Cupom, Long> {
 
     public Page<Cupom> findAllByUsuarioId(Pageable pageable,Long usuario_id);
 
-    public Page<Cupom> findAllByUsuarioIdAndStatus(Pageable pageable,Long usuario_id,StatusCupom status);
+    public Page<Cupom> findAllByUsuarioIdAndStatusCupom(Pageable pageable,Long usuario_id,StatusCupom status);
 
     //@Query("SELECT e FROM Cupom e WHERE e.data BETWEEN :dataInicial AND :dataFinal")
     public Page<Cupom> findByDataBetween(Pageable pageable, Instant dataInicial, Instant dataFinal);
