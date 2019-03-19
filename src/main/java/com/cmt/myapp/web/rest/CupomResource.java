@@ -280,7 +280,7 @@ public class CupomResource {
         
         log.debug("REST request Cupom Ativos : {}", usuario_id);
 
-        final Page<Cupom> page = cupomRepository.findAllByUsuarioIdAndStatus(pageable, usuario_id,status);
+        final Page<Cupom> page = cupomRepository.findAllByUsuarioIdAndStatusCupom(pageable, usuario_id,status);
                 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
