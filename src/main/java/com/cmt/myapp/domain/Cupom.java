@@ -148,17 +148,17 @@ public class Cupom implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public StatusCupom getStatus() {
+    public StatusCupom getStatusCupom() {
         statusCupom = statusCupom == null ? StatusCupom.Ativo : statusCupom;
         return statusCupom;
     }
 
-    public Cupom status(StatusCupom statusCupom) {
+    public Cupom statusCupom(StatusCupom statusCupom) {
         this.statusCupom = statusCupom;
         return this;
     }
 
-    public void setStatus(StatusCupom statusCupom) {
+    public void setStatusCupom(StatusCupom statusCupom) {
         this.statusCupom = statusCupom;
     }
 
