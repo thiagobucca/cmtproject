@@ -38,7 +38,7 @@ export const cupomRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            defaultSort: 'id,asc',
+            defaultSort: 'data,desc',
             pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
