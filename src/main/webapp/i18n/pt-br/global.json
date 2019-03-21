@@ -161,6 +161,7 @@
         "placetexists": "Placet ja cadastrado, favor informar um diferente",
         "cnpjexists": "CNPJ do(a) {{entityName}} ja cadastrado, favor informar um diferente",
         "idnull": "Invalid ID",
+        "usuarioidnull": "ID do usuário não informado.",
         "filialexists": "Estabelecimento comercial possui filial(ais), sera necessario excluir elas primeiro"
     },
     "footer": "Este é o seu rodapé"

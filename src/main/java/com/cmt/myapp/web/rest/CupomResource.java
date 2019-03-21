@@ -176,6 +176,9 @@ public class CupomResource {
         if (cupom.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        if (cupom.getUsuarioId() == null) {
+            throw new BadRequestAlertException("ID do usuário não informado", ENTITY_NAME, "usuarioidnull");
+        }
 
         Optional<Cupom> existingCupom = cupomRepository.findById(cupom.getId());
 
@@ -213,6 +216,7 @@ public class CupomResource {
         } catch (Exception e) {
             throw new BadRequestAlertException("Erro ao salvar imagem", ENTITY_NAME, "idexists");
         }
+
 
         Cupom result = cupomRepository.save(cupom);
         return ResponseEntity.ok()
