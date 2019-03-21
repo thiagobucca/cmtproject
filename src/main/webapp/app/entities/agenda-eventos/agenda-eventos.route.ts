@@ -38,7 +38,7 @@ export const agendaEventosRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            defaultSort: 'id,asc',
+            defaultSort: 'data,asc',
             pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]

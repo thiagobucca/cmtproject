@@ -6,9 +6,10 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT, DATE_FORMAT, TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils } from 'ng-jhipster';
 
+import { Principal } from 'app/core';
 import { JhiAlertService } from 'ng-jhipster';
 
-import { ICupom } from 'app/shared/model/cupom.model';
+import { ICupom, StatusCupom } from 'app/shared/model/cupom.model';
 import { CupomService } from './cupom.service';
 
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
@@ -28,10 +29,12 @@ export class CupomUpdateComponent implements OnInit {
     estabelecimentos: IEstabelecimentoComercial[];
     data: string;
     hora: string;
+    currentAccount: any;
     constructor(
         private dataUtils: JhiDataUtils,
         private cupomService: CupomService,
         private elementRef: ElementRef,
+        private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
         private jhiAlertService: JhiAlertService,
@@ -65,6 +68,9 @@ export class CupomUpdateComponent implements OnInit {
                 this.ref.detectChanges();
             }
         );
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+        });
     }
     get loading(): boolean {
         return this.auxService.isLoading;
@@ -102,6 +108,7 @@ export class CupomUpdateComponent implements OnInit {
         if (this.cupom.id !== undefined) {
             this.subscribeToSaveResponse(this.cupomService.update(this.cupom));
         } else {
+            this.cupom.usuarioId = this.currentAccount.id;
             this.subscribeToSaveResponse(this.cupomService.create(this.cupom));
         }
     }

@@ -38,7 +38,7 @@ export const contasPagarReceberRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER', 'ROLE_ADMIN'],
-            defaultSort: 'id,asc',
+            defaultSort: 'data,asc',
             pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
