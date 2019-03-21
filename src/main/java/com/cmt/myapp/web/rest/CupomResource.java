@@ -207,13 +207,13 @@ public class CupomResource {
                 cupom.setFoto("http://cmtweb.ddns.net/resources/cupom/" + cupom.getUsuarioId() + "/" + name);
             }
 
-            Cupom result = cupomRepository.save(cupom);
-            return ResponseEntity.ok()
-                    .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cupom.getId().toString())).body(result);
-
         } catch (Exception e) {
             throw new BadRequestAlertException("Erro ao salvar imagem", ENTITY_NAME, "idexists");
         }
+
+        Cupom result = cupomRepository.save(cupom);
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cupom.getId().toString())).body(result);
     }
 
     /**
