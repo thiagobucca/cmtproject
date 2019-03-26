@@ -67,7 +67,8 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             dataIni: '',
             dataFim: '',
             estabelecimentoId: undefined,
-            lojaMaconicaId: undefined
+            lojaMaconicaId: undefined,
+            isLojaMaconica: false
         };
     }
     consultar() {
@@ -133,6 +134,12 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         }
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
+                if (this.currentAccount.lojaMaconicaId !== undefined) {
+                    this.consulta.lojaMaconicaId = this.currentAccount.lojaMaconicaId;
+                    this.consulta.isLojaMaconica = true;
+                }
+            }
         });
         this.estabelecimentoComercialService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
