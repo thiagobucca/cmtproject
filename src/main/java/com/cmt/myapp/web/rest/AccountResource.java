@@ -71,17 +71,18 @@ public class AccountResource {
                     managedUserVM.setLojaMaconicaId(macom.get().getLojaMaconicaId());
                     managedUserVM.setPessoaDependenteId(macom.get().getId());
                     log.debug("id macom"+ macom.get().getId());
-                }else
-                    throw new BadRequestAlertException("Não foi encontrado Maçom para o Placet informado", "userManagement", "idexists");
+                } //else
+                    //throw new BadRequestAlertException("Não foi encontrado Maçom para o Placet informado", "userManagement", "idexists");
             
         }
         else
         {
             if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
-                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
+                //throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
             }
         }
-        
+        if(managedUserVM.getPlacet().equalsIgnoreCase("")) managedUserVM.setPlacet("12");
+
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
     }
