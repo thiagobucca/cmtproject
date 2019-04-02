@@ -81,8 +81,7 @@ public class AccountResource {
                 //throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
             }
         }
-        if(managedUserVM.getPlacet().equalsIgnoreCase("")) managedUserVM.setPlacet("12");
-
+        
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
     }
