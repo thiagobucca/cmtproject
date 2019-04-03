@@ -1,8 +1,8 @@
 import { StatusLancamento } from './contas-pagar-receber.model';
-import moment = require('moment');
+import { Moment } from 'moment';
 export interface IRelatorioContasPagarReceber {
     id?: number;
-    data?: moment.Moment;
+    data?: Moment;
     valor?: number;
     statusLancamento?: StatusLancamento;
     usuarioId?: number;

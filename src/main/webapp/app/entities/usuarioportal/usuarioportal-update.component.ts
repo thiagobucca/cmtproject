@@ -13,6 +13,9 @@ import { LojaMaconicaService } from 'app/entities/loja-maconica';
 import { AuxiliarService } from 'app/shared/services/auxiliar.service';
 import { ChangeDetectorRef } from '@angular/core';
 
+import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
+import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
+
 @Component({
     selector: 'jhi-usuarioportal-update',
     templateUrl: './usuarioportal-update.component.html'
@@ -25,6 +28,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
     isSaving: boolean;
     lojas: ILojaMaconica[];
     macons: IUsuarioPortal[];
+    estabelecimentos: IEstabelecimentoComercial[];
     data: string;
     constructor(
         private languageHelper: JhiLanguageHelper,
@@ -33,6 +37,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
         private lojaMaconicaService: LojaMaconicaService,
         private jhiAlertService: JhiAlertService,
         private auxService: AuxiliarService,
+        private estabelecimentoComercialService: EstabelecimentoComercialService,
         private ref: ChangeDetectorRef
     ) {
         this.authoritiesSelecionado = [];
@@ -61,6 +66,19 @@ export class UsuarioportalUpdateComponent implements OnInit {
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
+
+        this.estabelecimentoComercialService.query({ sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                this.estabelecimentos = res.body;
+                this.loading = false;
+                this.ref.detectChanges();
+            },
+            (res: HttpErrorResponse) => {
+                this.onError(res.message);
+                this.loading = false;
+                this.ref.detectChanges();
+            }
+        );
         this.lojaMaconicaService.findByStatus(true, { size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;

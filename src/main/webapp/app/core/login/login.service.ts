@@ -22,14 +22,16 @@ export class LoginService {
                         resolve(data);
                         this.auxService.isAutenticado = true;
                         if (account) {
-                            return this.principal.hasAnyAuthority(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA']).then(response => {
-                                if (!response) {
-                                    this.logout();
-                                    this.router.navigate(['accessdenied']);
-                                } else {
-                                    this.router.navigate(['']);
-                                }
-                            });
+                            return this.principal
+                                .hasAnyAuthority(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA', 'ROLE_ESTABELECIMENTO_COMERCIAL'])
+                                .then(response => {
+                                    if (!response) {
+                                        this.logout();
+                                        this.router.navigate(['accessdenied']);
+                                    } else {
+                                        this.router.navigate(['']);
+                                    }
+                                });
                         }
                     });
                     return cb();

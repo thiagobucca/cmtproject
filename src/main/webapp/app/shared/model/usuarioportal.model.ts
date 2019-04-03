@@ -23,6 +23,7 @@ export interface IUsuarioPortal {
     dependente?: string;
     loja?: string;
     placet?: string;
+    estabelecimentoComercialId?: number;
 }
 
 export class UsuarioPortal implements IUsuarioPortal {

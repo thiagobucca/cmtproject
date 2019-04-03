@@ -31,7 +31,7 @@ export const relatorioCupomCmtRoute: Routes = [
         path: 'relatorio-cupom-cmt',
         component: RelatorioCupomCmtComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA', 'ROLE_ESTABELECIMENTO_COMERCIAL'],
             pageTitle: 'Relatório Cupom X CMT'
         },
         canActivate: [UserRouteAccessService]
@@ -43,7 +43,7 @@ export const relatorioCupomCmtRoute: Routes = [
             relatorioCupomCmt: RelatorioCupomCmtResolve
         },
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA', 'ROLE_ESTABELECIMENTO_COMERCIAL'],
             pageTitle: 'Relatório Cupom X CMT'
         },
         canActivate: [UserRouteAccessService]

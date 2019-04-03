@@ -68,7 +68,8 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             dataFim: '',
             estabelecimentoId: undefined,
             lojaMaconicaId: undefined,
-            isLojaMaconica: false
+            isLojaMaconica: false,
+            isEstabelecimento: false
         };
     }
     consultar() {
@@ -80,30 +81,36 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
     loadAll() {
-        this.loading = true;
-        this.ref.detectChanges();
-        this.relatorioCupomCmtService
-            .query({
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.sort(),
-                data_inicial: this.consulta.dataIni,
-                data_final: this.consulta.dataFim,
-                estabelecimentoId: this.consulta.estabelecimentoId === undefined ? '' : this.consulta.estabelecimentoId,
-                lojaMaconicaId: this.consulta.lojaMaconicaId === undefined ? '' : this.consulta.lojaMaconicaId
-            })
-            .subscribe(
-                (res: HttpResponse<IRelatorioCupomCmt[]>) => {
-                    this.paginateRelatorioCupomCmts(res.body, res.headers);
-                    this.loading = false;
-                    this.ref.detectChanges();
-                },
-                (res: HttpErrorResponse) => {
-                    this.onError(res.message);
-                    this.loading = false;
-                    this.ref.detectChanges();
-                }
-            );
+        if (
+            (this.consulta.isEstabelecimento && this.consulta.estabelecimentoId !== undefined) ||
+            (this.consulta.isLojaMaconica && this.consulta.lojaMaconicaId !== undefined) ||
+            (!this.consulta.isEstabelecimento && !this.consulta.isLojaMaconica)
+        ) {
+            this.loading = true;
+            this.ref.detectChanges();
+            this.relatorioCupomCmtService
+                .query({
+                    page: this.page,
+                    size: this.itemsPerPage,
+                    sort: this.sort(),
+                    data_inicial: this.consulta.dataIni,
+                    data_final: this.consulta.dataFim,
+                    estabelecimentoId: this.consulta.estabelecimentoId === undefined ? '' : this.consulta.estabelecimentoId,
+                    lojaMaconicaId: this.consulta.lojaMaconicaId === undefined ? '' : this.consulta.lojaMaconicaId
+                })
+                .subscribe(
+                    (res: HttpResponse<IRelatorioCupomCmt[]>) => {
+                        this.paginateRelatorioCupomCmts(res.body, res.headers);
+                        this.loading = false;
+                        this.ref.detectChanges();
+                    },
+                    (res: HttpErrorResponse) => {
+                        this.onError(res.message);
+                        this.loading = false;
+                        this.ref.detectChanges();
+                    }
+                );
+        }
     }
 
     get loading(): boolean {
@@ -134,10 +141,18 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         }
         this.principal.identity().then(account => {
             this.currentAccount = account;
-            if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
-                if (this.currentAccount.lojaMaconicaId !== undefined) {
-                    this.consulta.lojaMaconicaId = this.currentAccount.lojaMaconicaId;
+            if (this.currentAccount !== undefined) {
+                if (this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
                     this.consulta.isLojaMaconica = true;
+                    if (this.currentAccount.lojaMaconicaId !== undefined) {
+                        this.consulta.lojaMaconicaId = this.currentAccount.lojaMaconicaId;
+                    }
+                }
+                if (this.currentAccount.authorities.find(x => x === 'ROLE_ESTABELECIMENTO_COMERCIAL')) {
+                    this.consulta.isEstabelecimento = true;
+                    if (this.currentAccount.estabelecimentoComercialId !== undefined) {
+                        this.consulta.estabelecimentoId = this.currentAccount.estabelecimentoComercialId;
+                    }
                 }
             }
         });
@@ -173,7 +188,9 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         this.router.navigate(parametros);
     }
     ngOnDestroy() {
-        if (this.eventSubscriber !== undefined) this.eventManager.destroy(this.eventSubscriber);
+        if (this.eventSubscriber !== undefined) {
+            this.eventManager.destroy(this.eventSubscriber);
+        }
     }
 
     trackId(index: number, item: IRelatorioCupomCmt) {
