@@ -58,6 +58,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAllByLojaMaconicaId( Long lojaMaconicaId);
 
+    Page<User> findAllByEstabelecimentoComercialId(Pageable pageable, Long estabelecimentoComercialId);
 
     @EntityGraph(attributePaths = "authorities")
     Page<User> findOneWithAuthoritiesByAuthoritiesIn(Pageable pageable, Set<Authority> auth);

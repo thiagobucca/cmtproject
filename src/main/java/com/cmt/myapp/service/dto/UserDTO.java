@@ -74,6 +74,10 @@ public class UserDTO {
 
     private String deviceId;
 
+    private Long estabelecimentoComercialId;
+
+    private String estabelecimento;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -102,6 +106,8 @@ public class UserDTO {
         this.dependente = user.getDependente();
         this.placet = user.getPlacet();
         this.deviceId = user.getDeviceId();
+        this.estabelecimentoComercialId = user.getEstabelecimentoComercialId();
+        this.estabelecimento = user.getEstabelecimento();
     }
 
     public Long getId() {
@@ -247,9 +253,6 @@ public class UserDTO {
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
 	}
-
-	
-	
 	
 	public String getDependente() {
 		return dependente;
@@ -294,7 +297,21 @@ public class UserDTO {
         this.deviceId = deviceId;
     }
 
+    public Long getEstabelecimentoComercialId() {
+		return estabelecimentoComercialId;
+	}
+
+	public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
+		this.estabelecimentoComercialId = estabelecimentoComercialId;
+    }
     
+    public String getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecicmento(String estabelecimento) {
+		this.estabelecimento = estabelecimento;
+    }
 
 	@Override
     public String toString() {
@@ -312,6 +329,7 @@ public class UserDTO {
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
             ", placet=" + placet +
+            ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
             "}";
     }
 

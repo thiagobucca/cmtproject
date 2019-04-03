@@ -113,6 +113,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "device_id")
     private String deviceId;
 
+    @Column(name = "estabelecimento_comercial_id")
+    private Long estabelecimentoComercialId;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
+	private EstabelecimentoComercial estabelecimento;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -328,6 +335,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             ", placet='" + placet  + '\'' +
+            ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
             "}";
     }
 
@@ -345,4 +353,25 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.placet = placet;
     }
 
+    /**
+     * @return the EstabelecimentoComercialId
+     */
+    public Long getEstabelecimentoComercialId() {
+        return estabelecimentoComercialId;
+    }
+
+    /**
+     * @param estabelecimentoComercialId the EstabelecimentoComercialId to set
+     */
+    public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId  = estabelecimentoComercialId;
+    }
+
+    public String getEstabelecimento() {
+		return estabelecimento == null ? null : estabelecimento.getNome();
+	}
+
+	public void setEstabelecimento(EstabelecimentoComercial estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
 }
