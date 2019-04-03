@@ -102,6 +102,10 @@ public class UserService {
             newUser.setLojaMaconicaId(userDTO.getLojaMaconicaId());
         }
 
+        if (userDTO.getEstabelecimentoComercialId() != null && userDTO.getEstabelecimentoComercialId() > 0) {
+            newUser.setEstabelecimentoComercialId(userDTO.getEstabelecimentoComercialId());
+        }
+
         newUser.setTipoPessoa(userDTO.getTipoPessoa());
         newUser.setPessoaDependenteId(userDTO.getPessoaDependenteId());
         newUser.setDataNascimento(userDTO.getDataNascimento());
@@ -143,6 +147,10 @@ public class UserService {
 
         if (userDTO.getLojaMaconicaId() != null && userDTO.getLojaMaconicaId() > 0) {
             user.setLojaMaconicaId(userDTO.getLojaMaconicaId());
+        }
+
+        if (userDTO.getEstabelecimentoComercialId() != null && userDTO.getEstabelecimentoComercialId() > 0) {
+            user.setEstabelecimentoComercialId(userDTO.getEstabelecimentoComercialId());
         }
 
         user.setTipoPessoa(userDTO.getTipoPessoa());
@@ -231,6 +239,7 @@ public class UserService {
                     user.setDataNascimento(userDTO.getDataNascimento());
                     user.setLojaMaconicaId(userDTO.getLojaMaconicaId());
                     user.setTelefone(userDTO.getTelefone());
+                    user.setEstabelecimentoComercialId(userDTO.getEstabelecimentoComercialId());
 
                     Set<Authority> managedAuthorities = user.getAuthorities();
                     managedAuthorities.clear();
