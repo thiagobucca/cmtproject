@@ -62,7 +62,7 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        if(managedUserVM.getTipoPessoa() == TipoPessoa.Dependente){
+        if(managedUserVM.getTipoPessoa() == TipoPessoa.Dependente && managedUserVM.getPlacet() != null){
 
             
                 Optional<User> macom = userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom, managedUserVM.getPlacet());
@@ -77,9 +77,9 @@ public class AccountResource {
         }
         else
         {
-            if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
+            //if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,managedUserVM.getPlacet()).isPresent()){
                 //throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
-            }
+            //}
         }
         
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
