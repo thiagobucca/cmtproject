@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import java.time.Instant;
 import java.util.*;
 
 
@@ -174,7 +176,10 @@ public class AccountResource {
      */
     @PostMapping(path = "/account/reset-password/init")
     @Timed
-    public void requestPasswordReset(@RequestBody String mail) {
+    public void requestPasswordReset(@RequestParam( value = "placet", required = false) String placet,
+    @RequestParam( value = "telefone", required = false) String telefone,
+    @RequestParam( value = "dataNascimento", required = false) Instant dataNascimento,
+    @RequestBody String mail) {
        mailService.sendPasswordResetMail(
            userService.requestPasswordReset(mail)
                .orElseThrow(EmailNotFoundException::new)
