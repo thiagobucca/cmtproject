@@ -174,7 +174,10 @@ public class AccountResource {
      */
     @PostMapping(path = "/account/reset-password/init")
     @Timed
-    public void requestPasswordReset(@RequestBody String mail) {
+    public void requestPasswordReset(@RequestParam( value = "placet", required = false) String placet,
+    @RequestParam( value = "telefone", required = false) String telefone,
+    @RequestParam( value = "dataNascimento", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dataNascimento,
+    @RequestBody String mail) {
        mailService.sendPasswordResetMail(
            userService.requestPasswordReset(mail)
                .orElseThrow(EmailNotFoundException::new)
