@@ -10,6 +10,8 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { GrupoComercialService } from './grupo-comercial.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
     selector: 'jhi-grupo-comercial',
     templateUrl: './grupo-comercial.component.html'
@@ -37,7 +39,9 @@ export class GrupoComercialComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -47,7 +51,12 @@ export class GrupoComercialComponent implements OnInit, OnDestroy {
             this.predicate = data.pagingParams.predicate;
         });
     }
-
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
     loadAll() {
         this.grupoComercialService
             .query({
@@ -60,7 +69,10 @@ export class GrupoComercialComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
-
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;

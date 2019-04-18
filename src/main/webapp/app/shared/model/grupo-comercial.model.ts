@@ -6,6 +6,6 @@ export interface IGrupoComercial {
 
 export class GrupoComercial implements IGrupoComercial {
     constructor(public id?: number, public nome?: string, public status?: boolean) {
-        this.status = this.status || false;
+        this.status = this.status || true;
     }
 }

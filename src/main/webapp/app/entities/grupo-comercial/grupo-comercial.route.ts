@@ -37,9 +37,9 @@ export const grupoComercialRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.grupoComercial.home.title'
+            pageTitle: 'Grupo Comercial'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const grupoComercialRoute: Routes = [
             grupoComercial: GrupoComercialResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.grupoComercial.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Grupo Comercial'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,8 +62,8 @@ export const grupoComercialRoute: Routes = [
             grupoComercial: GrupoComercialResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.grupoComercial.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Grupo Comercial'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -74,8 +74,8 @@ export const grupoComercialRoute: Routes = [
             grupoComercial: GrupoComercialResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.grupoComercial.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Grupo Comercial'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -89,8 +89,8 @@ export const grupoComercialPopupRoute: Routes = [
             grupoComercial: GrupoComercialResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.grupoComercial.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Grupo Comercial'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
