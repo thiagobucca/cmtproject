@@ -70,6 +70,11 @@ public class EstabelecimentoComercial implements Serializable {
     @JoinColumn(name = "estabelecimento_matriz_id", insertable = false, updatable = false, nullable = true)
     private EstabelecimentoComercial matriz;
 
+
+    @Column(name = "grupo_id")
+    private Long grupoId;
+    
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -248,6 +253,21 @@ public class EstabelecimentoComercial implements Serializable {
     public void setEstabelecimentoMatrizId(Long estabelecimentoMatrizId) {
         this.estabelecimentoMatrizId = estabelecimentoMatrizId;
     }
+
+    public Long getGrupoId() {
+        return grupoId;
+    }
+
+    public EstabelecimentoComercial grupoId(Long grupoId) {
+        this.grupoId = grupoId;
+        return this;
+    }
+
+    public void setGrupoId(Long grupoId) {
+        this.grupoId = grupoId;
+    }
+
+    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -285,6 +305,7 @@ public class EstabelecimentoComercial implements Serializable {
             ", bolAtivo='" + isBolAtivo() + "'" +
             ", categoriaEstabelecimentoId=" + getCategoriaEstabelecimentoId() +
             ", estabelecimentoMatrizId=" + getEstabelecimentoMatrizId() +
+            ", grupoId=" + getGrupoId() +
             "}";
     }
 }
