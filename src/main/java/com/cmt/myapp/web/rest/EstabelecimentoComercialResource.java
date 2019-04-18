@@ -279,4 +279,29 @@ public class EstabelecimentoComercialResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+        /**
+     * GET /users : get all estabelecimentos.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/estabelecimento-comercials/categoria/{categoria_id}")
+    @Timed
+    public ResponseEntity<List<EstabelecimentoComercial>> getAllEstabelecimentoByIdAndStatus(@PathVariable Long categoria_id,
+            Pageable pageable,
+            @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
+            if(bolAtivo == null)
+                bolAtivo = true;
+
+
+                if(pageable == null || pageable.getPageSize() ==20){
+                    pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
+                }
+                
+        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findAllByCategoriaIdAndBolAtivo(pageable,
+                categoria_id, bolAtivo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 }
