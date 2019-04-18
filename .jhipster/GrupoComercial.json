@@ -1,0 +1,26 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20190418010643",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "grupo_comercial",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -27,6 +27,7 @@ import { CmtprojectUsuarioportalModule } from './usuarioportal/usuarioportal.mod
 import { CmtprojectMembroModule } from './membro/membro.module';
 import { CmtprojectRelatorioCupomCmtModule } from './relatorio-cupom-cmt/relatorio-cupom-cmt.module';
 import { CmtprojectRelatorioContasPagarReceberModule } from './relatorio-contas-pagar-receber/relatorio-contas-pagar-receber.module';
+import { CmtprojectGrupoComercialModule } from './grupo-comercial/grupo-comercial.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -59,6 +60,7 @@ import { CmtprojectRelatorioContasPagarReceberModule } from './relatorio-contas-
         CmtprojectMembroModule,
         CmtprojectRelatorioCupomCmtModule,
         CmtprojectRelatorioContasPagarReceberModule,
+        CmtprojectGrupoComercialModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

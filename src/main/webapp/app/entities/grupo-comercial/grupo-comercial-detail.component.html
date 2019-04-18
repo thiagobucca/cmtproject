@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="grupoComercial">
+            <h2><span jhiTranslate="cmtprojectApp.grupoComercial.detail.title">Grupo Comercial</span> {{grupoComercial.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cmtprojectApp.grupoComercial.nome">Nome</span></dt>
+                <dd>
+                    <span>{{grupoComercial.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="cmtprojectApp.grupoComercial.status">Status</span></dt>
+                <dd>
+                    <span>{{grupoComercial.status}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/grupo-comercial', grupoComercial.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
