@@ -116,6 +116,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "estabelecimento_comercial_id")
     private Long estabelecimentoComercialId;
 
+    @Column(name = "grupo_id")
+    private Long grupoId;
+
     @OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
 	private EstabelecimentoComercial estabelecimento;
@@ -300,8 +303,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.dependente = dependente;
     }
     
+    public Long getGrupoId() {
+        return grupoId;
+    }
 
-    
+    public void setGrupoId(Long grupoId) {
+        this.grupoId = grupoId;
+    }
 
 	@Override
     public boolean equals(Object o) {
@@ -336,6 +344,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
             ", placet='" + placet  + '\'' +
             ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
+            ", grupolId=" + getGrupoId() +
             "}";
     }
 
