@@ -15,6 +15,9 @@ import { JhiAlertService } from 'ng-jhipster';
 import { ICategoriaEstabelecimento } from 'app/shared/model/categoria-estabelecimento.model';
 import { CategoriaEstabelecimentoService } from 'app/entities/categoria-estabelecimento';
 
+import { IGrupoComercial } from 'app/shared/model/grupo-comercial.model';
+import { GrupoComercialService } from 'app/entities/grupo-comercial/grupo-comercial.service';
+
 import { GenericValidator } from 'app/shared/util/validacoes';
 
 import { AuxiliarService } from 'app/shared/services/auxiliar.service';
@@ -29,6 +32,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
     contatoEstabelecimento: IContatoEstabelecimento;
     estabelecimentoComercial: IEstabelecimentoComercial;
     estabelecimentos: IEstabelecimentoComercial[];
+    grupos: IGrupoComercial[];
     isSaving: boolean;
     categorias: ICategoriaEstabelecimento[];
     indexEdit: number;
@@ -44,7 +48,8 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         private categoriaEstabelecimentoService: CategoriaEstabelecimentoService,
         private contatoEstabelecimentoService: ContatoEstabelecimentoService,
         private auxService: AuxiliarService,
-        private ref: ChangeDetectorRef
+        private ref: ChangeDetectorRef,
+        private grupoComercialService: GrupoComercialService
     ) {
         this.isBase64 = true;
         this.indexEdit = -1;
@@ -94,6 +99,13 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
         this.categoriaEstabelecimentoService.query({ bolAtivo: true, size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ICategoriaEstabelecimento[]>) => {
                 this.categorias = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+
+        this.grupoComercialService.query({ bolAtivo: true, size: 1000, sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IGrupoComercial[]>) => {
+                this.grupos = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

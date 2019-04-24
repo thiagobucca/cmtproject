@@ -1,0 +1,22 @@
+{
+    "cmtprojectApp": {
+        "grupoComercial": {
+            "home": {
+                "title": "Grupo Comercials",
+                "createLabel": "Criar novo Grupo Comercial",
+                "createOrEditLabel": "Criar ou editar Grupo Comercial"
+            },
+            "created": "Um novo Grupo Comercial foi criado com o identificador {{ param }}",
+            "updated": "Um Grupo Comercial foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Grupo Comercial foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Grupo Comercial {{ id }}?"
+            },
+            "detail": {
+                "title": "Grupo Comercial"
+            },
+            "nome": "Nome",
+            "status": "Status"
+        }
+    }
+}

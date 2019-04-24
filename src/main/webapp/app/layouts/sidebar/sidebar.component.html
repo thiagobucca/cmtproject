@@ -96,6 +96,15 @@
             </a>
 
         </li>
+        <li routerLinkActive="active" class="nav-item" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+
+            <a class="dropdown-item" routerLink="grupo-comercial">
+
+                <i class="now-ui-icons shopping_bag-16"></i>
+                <span>Grupo Comercial</span>
+            </a>
+
+        </li>
 
     </ul>
 </div>
