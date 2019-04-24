@@ -37,9 +37,9 @@ export const cupomRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            defaultSort: 'data,desc',
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const cupomRoute: Routes = [
             cupom: CupomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,8 +62,8 @@ export const cupomRoute: Routes = [
             cupom: CupomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -74,8 +74,8 @@ export const cupomRoute: Routes = [
             cupom: CupomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -89,8 +89,8 @@ export const cupomPopupRoute: Routes = [
             cupom: CupomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.cupom.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Cupons'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

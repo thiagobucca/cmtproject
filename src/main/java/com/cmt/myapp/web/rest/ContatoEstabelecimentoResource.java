@@ -124,4 +124,18 @@ public class ContatoEstabelecimentoResource {
         contatoEstabelecimentoRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+               /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/contato-estabelecimentos/estabelecimento/{estabelecimento_comercial_id}")
+    @Timed
+    public ResponseEntity<List<ContatoEstabelecimento>> getAllUsersByTipo(@PathVariable Long estabelecimento_comercial_id, Pageable pageable) {
+        final Page<ContatoEstabelecimento> page = contatoEstabelecimentoRepository.findAllByEstabelecimentoComercialId(pageable, estabelecimento_comercial_id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contato-estabelecimentos");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }

@@ -10,6 +10,9 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { TipoOperacaoService } from './tipo-operacao.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-tipo-operacao',
     templateUrl: './tipo-operacao.component.html'
@@ -37,7 +40,9 @@ export class TipoOperacaoComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -47,8 +52,15 @@ export class TipoOperacaoComponent implements OnInit, OnDestroy {
             this.predicate = data.pagingParams.predicate;
         });
     }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
 
     loadAll() {
+        this.loading = true;
         this.tipoOperacaoService
             .query({
                 page: this.page - 1,
@@ -56,11 +68,22 @@ export class TipoOperacaoComponent implements OnInit, OnDestroy {
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<ITipoOperacao[]>) => this.paginateTipoOperacaos(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<ITipoOperacao[]>) => {
+                    this.paginateTipoOperacaos(res.body, res.headers);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                }
             );
     }
-
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;

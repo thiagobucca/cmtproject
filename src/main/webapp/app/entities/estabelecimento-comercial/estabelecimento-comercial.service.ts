@@ -26,6 +26,10 @@ export class EstabelecimentoComercialService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IEstabelecimentoComercial>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+    findByStatus(status: boolean, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IEstabelecimentoComercial[]>(`${this.resourceUrl}/status/${status}`, { params: options, observe: 'response' });
+    }
 
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);

@@ -1,7 +1,8 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,31 +24,37 @@ public class EstabelecimentoComercial implements Serializable {
     private Boolean bolMatriz;
 
     @Column(name = "cod_cnpj")
+    @NotBlank(message="Informe o CPNJ.")
     private String codCnpj;
 
     @Column(name = "nome")
+    @NotBlank(message = "Informe o nome do estabelecimento comercial")
     private String nome;
 
     @Column(name = "endereco")
+    @NotBlank(message = "Informe o endereco do estabelecimento comercial")
     private String endereco;
 
     @Column(name = "telefone")
+    @NotBlank(message = "Informe o telefone do estabelecimento")
     private String telefone;
 
     @Lob
     @Column(name = "logo")
-    private byte[] logo;
+    private String logo;
 
     @Column(name = "logo_content_type")
     private String logoContentType;
 
     @Column(name = "taxa_convenio")
+    @NotNull(message="Informe a taxa em % do convênio")
     private Double taxaConvenio;
 
     @Column(name = "bol_ativo")
     private Boolean bolAtivo;
 
     @Column(name = "categoria_estabelecimento_id")
+    @NotNull(message="Informe a categoria do estabelecimento comercial")
     private Long categoriaEstabelecimentoId;
     
     //objeto categoria STEP 1 - CRIAR o relacionamento dos obejetos pelo coluna de FK
@@ -63,6 +70,15 @@ public class EstabelecimentoComercial implements Serializable {
     @JoinColumn(name = "estabelecimento_matriz_id", insertable = false, updatable = false, nullable = true)
     private EstabelecimentoComercial matriz;
 
+
+    @Column(name = "grupo_id")
+    private Long grupoId;
+
+   //objeto Grupo STEP 1 - CRIAR o relacionamento dos obejetos pelo coluna de FK
+   @OneToOne(fetch = FetchType.EAGER)
+   @JoinColumn(name = "grupo_id", insertable = false, updatable = false)
+   private Grupo nomeGrupo;    
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -75,7 +91,8 @@ public class EstabelecimentoComercial implements Serializable {
     //STEP 2 - Criar o get do atributo que deseja retornar no json o nome fica igual ao da assinatura removendo o prefixo 'get'
     //getNome da categoria pro swagger
     public String getCategoria() {
-        return categoria.getNome();
+        return  categoria == null ? null :
+         categoria.getNome();
     }
     
     //STEP 3 - criar o set do objeto q vem no select do banco
@@ -163,16 +180,16 @@ public class EstabelecimentoComercial implements Serializable {
         this.telefone = telefone;
     }
 
-    public byte[] getLogo() {
+    public String getLogo() {
         return logo;
     }
 
-    public EstabelecimentoComercial logo(byte[] logo) {
+    public EstabelecimentoComercial logo(String logo) {
         this.logo = logo;
         return this;
     }
 
-    public void setLogo(byte[] logo) {
+    public void setLogo(String logo) {
         this.logo = logo;
     }
 
@@ -240,6 +257,37 @@ public class EstabelecimentoComercial implements Serializable {
     public void setEstabelecimentoMatrizId(Long estabelecimentoMatrizId) {
         this.estabelecimentoMatrizId = estabelecimentoMatrizId;
     }
+
+    public Long getGrupoId() {
+        return grupoId;
+    }
+
+    public EstabelecimentoComercial grupoId(Long grupoId) {
+        this.grupoId = grupoId;
+        return this;
+    }
+
+    public void setGrupoId(Long grupoId) {
+        this.grupoId = grupoId;
+    }
+
+
+
+    //STEP 2 - Criar o get do atributo que deseja retornar no json o nome fica igual ao da assinatura removendo o prefixo 'get'
+    //getNome da NomeGrupo pro swagger
+    public String getNomeGrupo() {
+        return  nomeGrupo == null ? null :
+         nomeGrupo.getNome();
+    }
+    
+    //STEP 3 - criar o set do objeto q vem no select do banco
+    //set categoria do fetch do banco
+    public EstabelecimentoComercial nomeGrupo(Grupo nomeGrupo) {
+        this.nomeGrupo = nomeGrupo;
+        return this;
+    }    
+
+    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -277,6 +325,7 @@ public class EstabelecimentoComercial implements Serializable {
             ", bolAtivo='" + isBolAtivo() + "'" +
             ", categoriaEstabelecimentoId=" + getCategoriaEstabelecimentoId() +
             ", estabelecimentoMatrizId=" + getEstabelecimentoMatrizId() +
+            ", grupoId=" + getGrupoId() +
             "}";
     }
 }

@@ -1,31 +1,47 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-parametrizacao-heading" jhiTranslate="cmtprojectApp.parametrizacao.home.createOrEditLabel">Create or edit a Parametrizacao</h2>
+<div class="row ">
+    <div class="col-12">
+        
+            <form name="editForm" role="form" novalidate  (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-parametrizacao-heading">{{parametrizacao.id>0?"Editar":"Criar"}} Parametrização</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!parametrizacao.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="parametrizacao.id" readonly />
+                <div class="form-group row" [hidden]="!parametrizacao.id">
+                    <div class="col-md-1">
+
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="parametrizacao.id"
+                            readonly />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.parametrizacao.diaCobrancaConvenio" for="field_diaCobrancaConvenio">Dia Cobranca Convenio</label>
-                    <input type="number" class="form-control" name="diaCobrancaConvenio" id="field_diaCobrancaConvenio"
-                        [(ngModel)]="parametrizacao.diaCobrancaConvenio" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.parametrizacao.diaPagamentoLoja" for="field_diaPagamentoLoja">Dia Pagamento Loja</label>
-                    <input type="number" class="form-control" name="diaPagamentoLoja" id="field_diaPagamentoLoja"
-                        [(ngModel)]="parametrizacao.diaPagamentoLoja" />
+                <div class="form-group row">
+                    <div class="col-md-5">
+
+                        <label class="form-control-label" for="field_diaCobrancaConvenio">Dia Cobrança Convênio</label>
+                        <input type="number" class="form-control" name="diaCobrancaConvenio" id="field_diaCobrancaConvenio"
+                            [(ngModel)]="parametrizacao.diaCobrancaConvenio"  required />
+                            <div class="text-danger" 
+                            [hidden]="parametrizacao.diaCobrancaConvenio && parametrizacao.diaCobrancaConvenio>0 && parametrizacao.diaCobrancaConvenio<=31">
+                                <span>O valor deve ser maior que 0 e menor ou igual a 31.</span>
+                            </div>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.parametrizacao.diaPagamentoLoja"
+                            for="field_diaPagamentoLoja">Dia Pagamento Loja</label>
+                        <input type="number" class="form-control" name="diaPagamentoLoja" id="field_diaPagamentoLoja"
+                            [(ngModel)]="parametrizacao.diaPagamentoLoja"  required />
+                            <div class="text-danger" 
+                            [hidden]="parametrizacao.diaPagamentoLoja && parametrizacao.diaPagamentoLoja>0 && parametrizacao.diaPagamentoLoja<=31">
+                                <span>O valor deve ser maior que 0 e menor ou igual a 31.</span>
+                            </div>
+                    </div>
                 </div>
 
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || (parametrizacao.diaPagamentoLoja<=0 || parametrizacao.diaPagamentoLoja>31) ||(parametrizacao.diaCobrancaConvenio<=0 || parametrizacao.diaCobrancaConvenio>31)" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

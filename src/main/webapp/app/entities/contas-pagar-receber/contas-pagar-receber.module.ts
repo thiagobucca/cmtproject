@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { NgxCurrencyModule } from 'ngx-currency';
 import { CmtprojectSharedModule } from 'app/shared';
 import {
     ContasPagarReceberComponent,
@@ -14,8 +14,19 @@ import {
 
 const ENTITY_STATES = [...contasPagarReceberRoute, ...contasPagarReceberPopupRoute];
 
+export const customCurrencyMaskConfig = {
+    align: 'right',
+    allowNegative: false,
+    allowZero: true,
+    decimal: ',',
+    precision: 2,
+    prefix: 'R$ ',
+    suffix: '',
+    thousands: '.',
+    nullable: true
+};
 @NgModule({
-    imports: [CmtprojectSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [CmtprojectSharedModule, RouterModule.forChild(ENTITY_STATES), NgxCurrencyModule.forRoot(customCurrencyMaskConfig)],
     declarations: [
         ContasPagarReceberComponent,
         ContasPagarReceberDetailComponent,

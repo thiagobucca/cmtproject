@@ -37,9 +37,9 @@ export const agendaEventosRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            defaultSort: 'data,asc',
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const agendaEventosRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,8 +62,8 @@ export const agendaEventosRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -74,8 +74,8 @@ export const agendaEventosRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -89,8 +89,8 @@ export const agendaEventosPopupRoute: Routes = [
             agendaEventos: AgendaEventosResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.agendaEventos.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Agenda de Eventos'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

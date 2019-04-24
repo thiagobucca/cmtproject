@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes, CanActivate } from '@angular/router';
 import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
-
+import { HttpResponse } from '@angular/common/http';
 import { Principal, User, UserService } from 'app/core';
 import { UserMgmtComponent } from './user-management.component';
 import { UserMgmtDetailComponent } from './user-management-detail.component';
 import { UserMgmtUpdateComponent } from './user-management-update.component';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserResolve implements CanActivate {
@@ -23,7 +24,10 @@ export class UserMgmtResolve implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['login'] ? route.params['login'] : null;
         if (id) {
-            return this.service.find(id);
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<User>) => response.ok),
+                map((user: HttpResponse<User>) => user.body)
+            );
         }
         return new User();
     }
@@ -37,7 +41,8 @@ export const userMgmtRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            pageTitle: 'userManagement.home.title',
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Usuários',
             defaultSort: 'id,asc'
         }
     },
@@ -48,7 +53,8 @@ export const userMgmtRoute: Routes = [
             user: UserMgmtResolve
         },
         data: {
-            pageTitle: 'userManagement.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Usuários'
         }
     },
     {
@@ -56,6 +62,10 @@ export const userMgmtRoute: Routes = [
         component: UserMgmtUpdateComponent,
         resolve: {
             user: UserMgmtResolve
+        },
+        data: {
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Novo Usuário'
         }
     },
     {
@@ -63,6 +73,10 @@ export const userMgmtRoute: Routes = [
         component: UserMgmtUpdateComponent,
         resolve: {
             user: UserMgmtResolve
+        },
+        data: {
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Edição Usuário'
         }
     }
 ];

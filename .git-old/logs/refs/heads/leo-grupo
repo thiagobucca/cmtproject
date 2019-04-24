@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 a666842840f7cd74829e0dc5d8f23a0026531432 cmtdev <leonardofelix2004@hotmail.com> 1555553614 -0300	branch: Created from HEAD
+a666842840f7cd74829e0dc5d8f23a0026531432 b40e2b523da3a8bae644c0f05807367d489a77d7 cmtdev <leonardofelix2004@hotmail.com> 1555553630 -0300	commit: Adicionado a entidade grupo
+b40e2b523da3a8bae644c0f05807367d489a77d7 fc2ddddc5e9cfbb58a05bcc9ec816a775e3b1e56 cmtdev <leonardofelix2004@hotmail.com> 1555555263 -0300	commit: Adicionado campo grupo_id na entidade estabelecimento comervial
+fc2ddddc5e9cfbb58a05bcc9ec816a775e3b1e56 139391b4687a0218215dcbb1b57198c4be53bb22 cmtdev <leonardofelix2004@hotmail.com> 1556022170 -0300	commit: Implementado retorno do grupoid no login

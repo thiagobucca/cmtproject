@@ -33,7 +33,7 @@ export const jobHistoryRoute: Routes = [
         path: 'job-history',
         component: JobHistoryComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.jobHistory.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const jobHistoryRoute: Routes = [
             jobHistory: JobHistoryResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.jobHistory.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const jobHistoryRoute: Routes = [
             jobHistory: JobHistoryResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.jobHistory.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const jobHistoryRoute: Routes = [
             jobHistory: JobHistoryResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.jobHistory.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const jobHistoryPopupRoute: Routes = [
             jobHistory: JobHistoryResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'cmtprojectApp.jobHistory.home.title'
         },
         canActivate: [UserRouteAccessService],

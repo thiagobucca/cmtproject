@@ -10,6 +10,9 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { LojaMaconicaService } from './loja-maconica.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-loja-maconica',
     templateUrl: './loja-maconica.component.html'
@@ -29,7 +32,7 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-
+    roleLoja: any;
     constructor(
         private lojaMaconicaService: LojaMaconicaService,
         private parseLinks: JhiParseLinks,
@@ -37,7 +40,9 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -46,9 +51,21 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.roleLoja = {
+            isLojaMaconica: false,
+            codLoja: undefined
+        };
+    }
+
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
     }
 
     loadAll() {
+        this.loading = true;
         this.lojaMaconicaService
             .query({
                 page: this.page - 1,
@@ -56,9 +73,21 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<ILojaMaconica[]>) => this.paginateLojaMaconicas(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<ILojaMaconica[]>) => {
+                    this.paginateLojaMaconicas(res.body, res.headers);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                }
             );
+    }
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
     }
 
     loadPage(page: number) {
@@ -95,6 +124,12 @@ export class LojaMaconicaComponent implements OnInit, OnDestroy {
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            if (this.currentAccount !== undefined && this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
+                if (this.currentAccount.lojaMaconicaId !== undefined) {
+                    this.roleLoja.codLoja = this.currentAccount.lojaMaconicaId;
+                }
+                this.roleLoja.isLojaMaconica = true;
+            }
         });
         this.registerChangeInLojaMaconicas();
     }

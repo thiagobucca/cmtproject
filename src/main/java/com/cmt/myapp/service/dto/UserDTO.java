@@ -65,6 +65,18 @@ public class UserDTO {
     private TipoPessoa tipoPessoa;
 
     private Set<String> authorities;
+    
+    private String dependente;
+    
+    private String loja;
+
+    private String placet;
+
+    private String deviceId;
+
+    private Long estabelecimentoComercialId;
+
+    private String estabelecimento;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -90,6 +102,12 @@ public class UserDTO {
         this.lojaMaconicaId = user.getLojaMaconicaId();
         this.dataNascimento = user.getDataNascimento();
         this.tipoPessoa = user.getTipoPessoa();
+        this.loja = user.getLojaMaconica();
+        this.dependente = user.getDependente();
+        this.placet = user.getPlacet();
+        this.deviceId = user.getDeviceId();
+        this.estabelecimentoComercialId = user.getEstabelecimentoComercialId();
+        this.estabelecimento = user.getEstabelecimento();
     }
 
     public Long getId() {
@@ -235,6 +253,65 @@ public class UserDTO {
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
 	}
+	
+	public String getDependente() {
+		return dependente;
+	}
+
+	public void setDependente(String dependente) {
+		this.dependente = dependente;
+	}
+
+	public String getLoja() {
+		return loja;
+	}
+
+	public void setLoja(String loja) {
+		this.loja = loja;
+    }
+    /**
+     * @return the placet
+     */
+    public String getPlacet() {
+        return placet;
+    }
+
+    /**
+     * @param placet the placet to set
+     */
+    public void setPlacet(String placet) {
+        this.placet = placet;
+    }
+
+    /**
+     * @return the deviceId
+     */
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    /**
+     * @param deviceId the deviceId to set
+     */
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public Long getEstabelecimentoComercialId() {
+		return estabelecimentoComercialId;
+	}
+
+	public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
+		this.estabelecimentoComercialId = estabelecimentoComercialId;
+    }
+    
+    public String getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecicmento(String estabelecimento) {
+		this.estabelecimento = estabelecimento;
+    }
 
 	@Override
     public String toString() {
@@ -251,6 +328,10 @@ public class UserDTO {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", placet=" + placet +
+            ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
             "}";
     }
+
+    
 }

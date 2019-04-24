@@ -2,6 +2,9 @@ package com.cmt.myapp.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import com.cmt.myapp.domain.enumeration.StatusCupom;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -31,13 +34,32 @@ public class Cupom implements Serializable {
 
     @Lob
     @Column(name = "foto")
-    private byte[] foto;
+    private String foto;
 
     @Column(name = "foto_content_type")
     private String fotoContentType;
 
+    @NotNull(message = "Informe o estabelecimento")
     @Column(name = "estabelecimento_comercial_id")
     private Long estabelecimentoComercialId;
+
+    @NotNull(message = "Informe o usuário")
+    @Column(name = "usuario_id")
+    private Long usuarioId;
+    
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
+    private EstabelecimentoComercial estabelecimento;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "usuario_id", insertable = false, updatable = false, nullable = true)
+    private User usuario;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    //@NotBlank(message = "Informe o status do cupom")
+    private StatusCupom statusCupom;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -87,16 +109,16 @@ public class Cupom implements Serializable {
         this.numero = numero;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public Cupom foto(byte[] foto) {
+    public Cupom foto(String foto) {
         this.foto = foto;
         return this;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
@@ -113,6 +135,33 @@ public class Cupom implements Serializable {
         this.fotoContentType = fotoContentType;
     }
 
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public Cupom usuarioId(Long usuarioid) {
+        this.usuarioId = usuarioid;
+        return this;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public StatusCupom getStatusCupom() {
+        statusCupom = statusCupom == null ? StatusCupom.Ativo : statusCupom;
+        return statusCupom;
+    }
+
+    public Cupom statusCupom(StatusCupom statusCupom) {
+        this.statusCupom = statusCupom;
+        return this;
+    }
+
+    public void setStatusCupom(StatusCupom statusCupom) {
+        this.statusCupom = statusCupom;
+    }
+
     public Long getEstabelecimentoComercialId() {
         return estabelecimentoComercialId;
     }
@@ -124,6 +173,36 @@ public class Cupom implements Serializable {
 
     public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
         this.estabelecimentoComercialId = estabelecimentoComercialId;
+    }
+    
+    public String getEstabelecimento() {
+        return estabelecimento == null ? null : estabelecimento.getNome();
+    }
+
+    public Double getValorCMT() {
+        return estabelecimento == null ? null : (this.valor * (this.estabelecimento.getTaxaConvenio()/100))/2;
+    }
+
+    public Double getValorLoja() {
+        return estabelecimento == null ? null : (this.valor * (this.estabelecimento.getTaxaConvenio()/100))/2;
+    }
+
+    public Double getTaxaConvenio() {
+        return estabelecimento == null ? null : this.estabelecimento.getTaxaConvenio();
+    }
+
+    public String getUsuario() {
+        return usuario == null ? null : usuario.getFirstName();
+    }
+    
+    public Cupom matriz(EstabelecimentoComercial estabelecimento) {
+        this.estabelecimento = estabelecimento;
+        return this;
+    }
+
+    public Cupom usuario(User usuario) {
+        this.usuario = usuario;
+        return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -157,6 +236,8 @@ public class Cupom implements Serializable {
             ", foto='" + getFoto() + "'" +
             ", fotoContentType='" + getFotoContentType() + "'" +
             ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
+            ", usuarioId=" + getUsuarioId() +
+            ", status='" + getStatusCupom() + "'" +
             "}";
     }
 }

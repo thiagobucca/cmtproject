@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import javax.validation.constraints.Email;
-
+import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -86,11 +86,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "telefone")
     private String telefone;
 
+    @Column(name = "placet")
+    private String placet;
+
     @Column(name = "pessoa_dependente_id")
     private Long pessoaDependenteId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "pessoa_dependente_id", insertable = false, updatable = false, nullable = true)
+	private User dependente;
 
     @Column(name = "loja_maconica_id")
     private Long lojaMaconicaId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "loja_maconica_id", insertable = false, updatable = false, nullable = true)
+	private LojaMaconica loja;
 
     @Column(name = "data_nascimento")
     private Instant dataNascimento;
@@ -98,6 +109,19 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_pessoa")
     private TipoPessoa tipoPessoa;
+
+    @Column(name = "device_id")
+    private String deviceId;
+
+    @Column(name = "estabelecimento_comercial_id")
+    private Long estabelecimentoComercialId;
+
+    @Column(name = "grupo_id")
+    private Long grupoId;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
+	private EstabelecimentoComercial estabelecimento;
 
     @JsonIgnore
     @ManyToMany
@@ -156,6 +180,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public String getImageUrl() {
@@ -247,16 +279,39 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	}
 
 	public TipoPessoa getTipoPessoa() {
-		return tipoPessoa;
+		return tipoPessoa == null ? null : tipoPessoa;
 	}
 
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
 	}
 	
+	public String getLojaMaconica() {
+		return loja == null ? null : loja.getNome();
+	}
+
+	public void setLoja(LojaMaconica loja) {
+		this.loja = loja;
+	}
 	
 
-    @Override
+    public String getDependente() {
+    	return dependente == null ? null : dependente.getFirstName();
+	}
+
+	public void setDependente(User dependente) {
+		this.dependente = dependente;
+    }
+    
+    public Long getGrupoId() {
+        return grupoId;
+    }
+
+    public void setGrupoId(Long grupoId) {
+        this.grupoId = grupoId;
+    }
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -287,6 +342,45 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
+            ", placet='" + placet  + '\'' +
+            ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
+            ", grupolId=" + getGrupoId() +
             "}";
     }
+
+    /**
+     * @return the placet
+     */
+    public String getPlacet() {
+        return placet;
+    }
+
+    /**
+     * @param placet the placet to set
+     */
+    public void setPlacet(String placet) {
+        this.placet = placet;
+    }
+
+    /**
+     * @return the EstabelecimentoComercialId
+     */
+    public Long getEstabelecimentoComercialId() {
+        return estabelecimentoComercialId;
+    }
+
+    /**
+     * @param estabelecimentoComercialId the EstabelecimentoComercialId to set
+     */
+    public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
+        this.estabelecimentoComercialId  = estabelecimentoComercialId;
+    }
+
+    public String getEstabelecimento() {
+		return estabelecimento == null ? null : estabelecimento.getNome();
+	}
+
+	public void setEstabelecimento(EstabelecimentoComercial estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
 }

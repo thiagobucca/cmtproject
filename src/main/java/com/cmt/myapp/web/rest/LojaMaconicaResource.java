@@ -2,6 +2,7 @@ package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.LojaMaconica;
+import com.cmt.myapp.domain.User;
 import com.cmt.myapp.repository.LojaMaconicaRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
@@ -10,6 +11,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -51,8 +53,16 @@ public class LojaMaconicaResource {
     public ResponseEntity<LojaMaconica> createLojaMaconica(@RequestBody LojaMaconica lojaMaconica) throws URISyntaxException {
         log.debug("REST request to save LojaMaconica : {}", lojaMaconica);
         if (lojaMaconica.getId() != null) {
-            throw new BadRequestAlertException("A new lojaMaconica cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new lojaMaconica cannot already have an ID", ENTITY_NAME, "cnpjexists");
         }
+
+        Optional<LojaMaconica> existingCnpj = lojaMaconicaRepository.findOneByCodCnpj(lojaMaconica.getCodCnpj());
+
+        if (existingCnpj.isPresent()) {
+            throw new BadRequestAlertException("CNPJ ja cadastrado, favor informar um diferente", ENTITY_NAME,
+                    "cnpjexists");
+        }
+
         LojaMaconica result = lojaMaconicaRepository.save(lojaMaconica);
         return ResponseEntity.created(new URI("/api/loja-maconicas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -75,6 +85,22 @@ public class LojaMaconicaResource {
         if (lojaMaconica.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+         // Consulta o cadastro do estabelcimento comercial antes da edicao
+         Optional<LojaMaconica> existingCnpj = lojaMaconicaRepository.findById(lojaMaconica.getId());
+
+         log.debug("existingCnpj - 1 {} ",existingCnpj.get().getCodCnpj());
+         log.debug("lojaMaconica {}",lojaMaconica.getCodCnpj());
+
+         if (!existingCnpj.get().getCodCnpj().equals(lojaMaconica.getCodCnpj())) {
+
+             existingCnpj = lojaMaconicaRepository.findOneByCodCnpj(lojaMaconica.getCodCnpj());
+ 
+             if (existingCnpj.isPresent()) {
+                 throw new BadRequestAlertException("CNPJ ja cadastrado, favor informar um diferente", ENTITY_NAME,"cnpjexists");
+             }
+         }
+
         LojaMaconica result = lojaMaconicaRepository.save(lojaMaconica);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, lojaMaconica.getId().toString()))
@@ -89,9 +115,22 @@ public class LojaMaconicaResource {
      */
     @GetMapping("/loja-maconicas")
     @Timed
-    public ResponseEntity<List<LojaMaconica>> getAllLojaMaconicas(Pageable pageable) {
+    public ResponseEntity<List<LojaMaconica>> getAllLojaMaconicas(Pageable pageable,
+            @RequestParam( value = "bolAtivo", required = false) Boolean bolAtivo) {
         log.debug("REST request to get a page of LojaMaconicas");
-        Page<LojaMaconica> page = lojaMaconicaRepository.findAll(pageable);
+
+        if(pageable == null || pageable.getPageSize() ==20){
+            pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
+        }
+
+        
+        if(bolAtivo == null)
+        {
+            bolAtivo = true;
+        }     
+
+        Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable,bolAtivo);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -123,5 +162,26 @@ public class LojaMaconicaResource {
 
         lojaMaconicaRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    /**
+     * GET /users : get all lojas-maconicas.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/loja-maconicas/status/{bolAtivo}")
+    @Timed
+    public ResponseEntity<List<LojaMaconica>> getAllUsersByStatus(@PathVariable boolean bolAtivo, Pageable pageable) {
+
+        
+        if(pageable == null || pageable.getPageSize() ==20){
+            pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
+        }
+
+
+        final Page<LojaMaconica> page = lojaMaconicaRepository.findAllByBolAtivo(pageable, bolAtivo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/loja-maconicas/status/");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

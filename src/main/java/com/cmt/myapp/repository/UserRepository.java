@@ -1,5 +1,6 @@
 package com.cmt.myapp.repository;
 
+import com.cmt.myapp.domain.Authority;
 import com.cmt.myapp.domain.User;
 import com.cmt.myapp.domain.enumeration.TipoPessoa;
 
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.time.Instant;
 
 /**
@@ -40,7 +42,28 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByLoginNot(Pageable pageable, String login);
     
     Page<User> findAllByTipoPessoa(Pageable pageable, TipoPessoa tipoPessoa);
+
+    List<User> findAllByTipoPessoa(TipoPessoa tipoPessoa);
     
     Page<User> findAllByActivated(Pageable pageable, boolean bolAtivo);
+
+    Optional<User> findOneByTipoPessoaAndPlacet(TipoPessoa tipoPessoa, String placet);
+    
+    //List<User> findAllByLojaMaconicaId(Long lojaMaconicaId);
+    
+    Optional<User> findOneByIdAndPlacet(Long id, String placet);
+    
+    @EntityGraph(attributePaths = "authorities")
+    Page<User> findAllWithAuthoritiesByLojaMaconicaId(Pageable pageable, Long lojaMaconicaId);
+
+    List<User> findAllByLojaMaconicaId( Long lojaMaconicaId);
+
+    Page<User> findAllByEstabelecimentoComercialId(Pageable pageable, Long estabelecimentoComercialId);
+
+    @EntityGraph(attributePaths = "authorities")
+    Page<User> findOneWithAuthoritiesByAuthoritiesIn(Pageable pageable, Set<Authority> auth);
+
+    @EntityGraph(attributePaths = "authorities")
+    Page<User> findOneWithAuthoritiesByLojaMaconicaIdAndAuthoritiesIn(Pageable pageable, Long lojaMaconicaId, Set<Authority> auth);
     
 }

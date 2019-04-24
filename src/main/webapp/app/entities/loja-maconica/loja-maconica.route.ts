@@ -37,9 +37,9 @@ export const lojaMaconicaRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.lojaMaconica.home.title'
+            pageTitle: 'Loja Maçônica'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const lojaMaconicaRoute: Routes = [
             lojaMaconica: LojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.lojaMaconica.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Loja Maçônica'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,8 +62,8 @@ export const lojaMaconicaRoute: Routes = [
             lojaMaconica: LojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.lojaMaconica.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Loja Maçônica'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -74,8 +74,8 @@ export const lojaMaconicaRoute: Routes = [
             lojaMaconica: LojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.lojaMaconica.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA'],
+            pageTitle: 'Loja Maçônica'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -89,8 +89,8 @@ export const lojaMaconicaPopupRoute: Routes = [
             lojaMaconica: LojaMaconicaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.lojaMaconica.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Loja Maçônica'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

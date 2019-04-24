@@ -18,6 +18,6 @@ export class LojaMaconica implements ILojaMaconica {
         public numero?: number,
         public bolAtivo?: boolean
     ) {
-        this.bolAtivo = this.bolAtivo || false;
+        this.bolAtivo = this.bolAtivo || true;
     }
 }

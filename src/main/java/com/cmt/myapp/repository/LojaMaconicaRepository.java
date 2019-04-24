@@ -1,5 +1,7 @@
 package com.cmt.myapp.repository;
 
+import java.util.Optional;
+
 import com.cmt.myapp.domain.LojaMaconica;
 import com.cmt.myapp.domain.User;
 
@@ -18,5 +20,6 @@ public interface LojaMaconicaRepository extends JpaRepository<LojaMaconica, Long
 	
 
     Page<LojaMaconica> findAllByBolAtivo(Pageable pageable, boolean bolAtivo);
+    Optional<LojaMaconica> findOneByCodCnpj(String codCnpj);
 
 }

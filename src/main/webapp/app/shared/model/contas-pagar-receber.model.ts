@@ -12,8 +12,13 @@ export interface IContasPagarReceber {
     statusLancamento?: StatusLancamento;
     usuarioId?: number;
     lojaMaconicaId?: number;
+    lojaMaconica?: string;
+    estabelecimento?: string;
     estabelecimentoComercialId?: number;
     tipoOperacaoId?: number;
+    tipoOperacao?: string;
+    usuario?: string;
+    tipoLancamento?: string;
 }
 
 export class ContasPagarReceber implements IContasPagarReceber {
@@ -25,6 +30,11 @@ export class ContasPagarReceber implements IContasPagarReceber {
         public usuarioId?: number,
         public lojaMaconicaId?: number,
         public estabelecimentoComercialId?: number,
-        public tipoOperacaoId?: number
+        public tipoOperacaoId?: number,
+        public estabelecimento?: string,
+        public tipoOperacao?: string,
+        public lojaMaconica?: string,
+        public usuario?: string,
+        public tipoLancamento?: string
     ) {}
 }

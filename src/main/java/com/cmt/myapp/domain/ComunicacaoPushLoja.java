@@ -1,7 +1,7 @@
 package com.cmt.myapp.domain;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,10 +20,15 @@ public class ComunicacaoPushLoja implements Serializable {
     private Long id;
 
     @Column(name = "comunicacao_push_id")
+    @NotNull(message="Informe o ID do Push")
     private Long comunicacaoPushId;
 
     @Column(name = "loja_maconica_id")
     private Long lojaMaconicaId;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "loja_maconica_id", insertable = false, updatable = false, nullable = true)
+	private LojaMaconica loja;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -59,6 +64,15 @@ public class ComunicacaoPushLoja implements Serializable {
     public void setLojaMaconicaId(Long lojaMaconicaId) {
         this.lojaMaconicaId = lojaMaconicaId;
     }
+    public String getLojaMaconica() {
+		return loja == null ? null : loja.getNome();
+	}
+
+	public ComunicacaoPushLoja categoria(LojaMaconica loja) {
+		this.loja = loja;
+		return this;
+	}
+	
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

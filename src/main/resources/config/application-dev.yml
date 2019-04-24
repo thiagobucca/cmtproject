@@ -58,11 +58,17 @@ spring:
             hibernate.generate_statistics: true
     liquibase:
         contexts: dev
-    mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+    mail: # specific JHipster mail property, for standard properties see MailProperties
+        host: smtp.gmail.com
+        port: 587
+        username: app.jhipster@gmail.com    #Replace this field with your Gmail username.
+        password: app123app           #Replace this field with your Gmail password.
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com   
     messages:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
@@ -114,7 +120,7 @@ jhipster:
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: cmtproject@localhost
-        base-url: http://127.0.0.1:8080
+        base-url: http://cmtweb.ddns.net
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true

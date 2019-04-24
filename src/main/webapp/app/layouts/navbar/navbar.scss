@@ -8,7 +8,7 @@ Navbar
 }
 
 .jh-navbar {
-    background-color: #353d47;
+    background-color: #1e623e;
     padding: 0.2em 1em;
     .profile-image {
         margin: -10px 0px;
@@ -19,7 +19,7 @@ Navbar
     .dropdown-item.active,
     .dropdown-item.active:focus,
     .dropdown-item.active:hover {
-        background-color: #353d47;
+        background-color: #1e623e;
     }
     .dropdown-toggle::after {
         margin-left: 0.15em;
@@ -75,4 +75,9 @@ Logo styles
             background-size: contain;
         }
     }
+}
+
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:active {
+    color: #fff;
 }

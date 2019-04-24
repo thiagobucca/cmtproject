@@ -1,45 +1,64 @@
-<div class="row justify-content-center">
-    <div class="col-8">
+<div class="row ">
+    <div class="col-12">
         <div *ngIf="lojaMaconica">
-            <h2><span jhiTranslate="cmtprojectApp.lojaMaconica.detail.title">Loja Maconica</span> {{lojaMaconica.id}}</h2>
+            <h2><span jhiTranslate="cmtprojectApp.lojaMaconica.detail.title">Loja Maçônica</span> {{lojaMaconica.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.codCnpj">Cod Cnpj</span></dt>
-                <dd>
-                    <span>{{lojaMaconica.codCnpj}}</span>
-                </dd>
                 <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.nome">Nome</span></dt>
                 <dd>
                     <span>{{lojaMaconica.nome}}</span>
+                    <jhi-boolean [value]="lojaMaconica.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                    </jhi-boolean>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.endereco">Endereco</span></dt>
+                <dt>CNPJ</dt>
+                <dd>
+                    <span>{{lojaMaconica.codCnpj | mask: '00.000.000/0000-00'}}</span>
+                </dd>
+                <dt>Endereço</dt>
                 <dd>
                     <span>{{lojaMaconica.endereco}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.telefone">Telefone</span></dt>
                 <dd>
-                    <span>{{lojaMaconica.telefone}}</span>
+                    <span>{{lojaMaconica.telefone | mask: '(00) 0 0000-0000'}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.numero">Numero</span></dt>
+                <dt><span>Número</span></dt>
                 <dd>
-                    <span>{{lojaMaconica.numero}}</span>
+                    <span>{{lojaMaconica.numero }}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.lojaMaconica.bolAtivo">Bol Ativo</span></dt>
+                <dt><span>Contato</span></dt>
                 <dd>
-                    <span>{{lojaMaconica.bolAtivo}}</span>
+                    <div class="table-responsive" *ngIf="contatolojas">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th><span>Nome</span> </th>
+                                    <th><span>Telefone</span> </th>
+                                    <th><span>Email</span> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of contatolojas ;trackBy: trackById; let i = index">
+
+                                    <td>{{item.nome}} </td>
+                                    <td>{{item.telefone | mask: '(00) 0 0000-0000'}}</td>
+                                    <td>{{item.email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </dd>
+
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/loja-maconica', lojaMaconica.id, 'edit']" 
+            class="btn btn-primary" *ngIf="!roleLoja.isLojaMaconica || roleLoja.codLoja ==lojaMaconica.id">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

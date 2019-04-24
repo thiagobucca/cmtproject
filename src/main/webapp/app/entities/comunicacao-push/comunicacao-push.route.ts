@@ -37,9 +37,9 @@ export const comunicacaoPushRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const comunicacaoPushRoute: Routes = [
             comunicacaoPush: ComunicacaoPushResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,23 +62,23 @@ export const comunicacaoPushRoute: Routes = [
             comunicacaoPush: ComunicacaoPushResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'comunicacao-push/:id/edit',
-        component: ComunicacaoPushUpdateComponent,
-        resolve: {
-            comunicacaoPush: ComunicacaoPushResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService]
     }
+    // {
+    //     path: 'comunicacao-push/:id/edit',
+    //     component: ComunicacaoPushUpdateComponent,
+    //     resolve: {
+    //         comunicacaoPush: ComunicacaoPushResolve
+    //     },
+    //     data: {
+    //         authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+    //         pageTitle: 'Comunicação Push'
+    //     },
+    //     canActivate: [UserRouteAccessService]
+    // }
 ];
 
 export const comunicacaoPushPopupRoute: Routes = [
@@ -89,8 +89,8 @@ export const comunicacaoPushPopupRoute: Routes = [
             comunicacaoPush: ComunicacaoPushResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.comunicacaoPush.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Comunicação Push'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

@@ -1,11 +1,21 @@
 <jhi-page-ribbon></jhi-page-ribbon>
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
-<div class="container-fluid">
-    <div class="card jh-card">
-        <router-outlet></router-outlet>
-        <router-outlet name="popup"></router-outlet>
+
+<jhi-loading [hidden]="!isLoading"></jhi-loading>
+<div class="wrapper" [ngSwitch]="isAuthenticated()">
+
+    <div class="sidebar" data-color="green" data-background-color="white" *ngSwitchCase="'true'">
+        <router-outlet name="sidebar"></router-outlet>        
     </div>
-    <jhi-footer></jhi-footer>
+    <div [ngClass]="isAuthenticated()==='true'?'main-panel':'container-fluid'">
+        <div>
+            <router-outlet name="navbar"></router-outlet>
+        </div>
+
+
+        <div class="card jh-card">
+            <router-outlet ></router-outlet>
+            <router-outlet name="popup" ></router-outlet>
+        </div>
+        <jhi-footer></jhi-footer>       
+    </div>
 </div>

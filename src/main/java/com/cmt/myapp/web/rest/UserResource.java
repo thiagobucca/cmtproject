@@ -1,6 +1,7 @@
 package com.cmt.myapp.web.rest;
 
 import com.cmt.myapp.config.Constants;
+import com.cmt.myapp.domain.Authority;
 import com.cmt.myapp.domain.User;
 import com.cmt.myapp.domain.enumeration.TipoPessoa;
 import com.cmt.myapp.repository.UserRepository;
@@ -25,6 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.spring5.ISpringTemplateEngine;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -88,7 +90,6 @@ public class UserResource {
      */
     @PostMapping("/users")
     @Timed
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
         log.debug("REST request to save User : {}", userDTO);
 
@@ -99,8 +100,27 @@ public class UserResource {
             throw new LoginAlreadyUsedException();
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
-        } else {
+        } 
+        else {
+            if(userDTO.getTipoPessoa() == TipoPessoa.Dependente){
+
+                    Optional<User> macom = userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom, userDTO.getPlacet());
+
+                    if(macom.isPresent()){
+                        userDTO.setLojaMaconicaId(macom.get().getLojaMaconicaId());
+                        userDTO.setPessoaDependenteId(macom.get().getId());
+                    }else
+                        throw new BadRequestAlertException("Não foi encontrado Maçom para o Placet informado", "userManagement", "idexists");
+            }
+            else
+            {
+                if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                    throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
+                }
+            }
+
             User newUser = userService.createUser(userDTO);
+            
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
@@ -118,7 +138,6 @@ public class UserResource {
      */
     @PutMapping("/users")
     @Timed
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("REST request to update User : {}", userDTO);
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
@@ -129,10 +148,38 @@ public class UserResource {
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new LoginAlreadyUsedException();
         }
+
+        //Consulta o cadastro do usuario antes da edicao
+        existingUser = userRepository.findById(userDTO.getId());
+
+        //Verifica se o usuario macom editou o campo PLACET
+        if (userDTO.getTipoPessoa() == TipoPessoa.Macom && (userDTO.getPlacet() != existingUser.get().getPlacet()))
+        {
+            //Verifica se o numero do placet esta vinculado a outro macom
+            if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
+            }
+            
+        }
+
+        //Verifica se o usuario trocou de tipo Pessoa (Macom )
+        if (userDTO.getTipoPessoa() != existingUser.get().getTipoPessoa())
+        {
+            //Se trocou o tipo de pessoa para Dependente
+            if(userDTO.getTipoPessoa() == TipoPessoa.Dependente && !userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet não encontrado, favor informar um valido", "userManagement", "idexists");
+            }
+            //Verifica se o numero do placet esta vinculado a outro macom
+            else if(userDTO.getTipoPessoa() == TipoPessoa.Macom && userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){
+                throw new BadRequestAlertException("Placet ja cadastrado, favor informar um diferente", "userManagement", "placetexists");
+            }
+            
+        }
+
         Optional<UserDTO> updatedUser = userService.updateUser(userDTO);
 
         return ResponseUtil.wrapOrNotFound(updatedUser,
-            HeaderUtil.createAlert("userManagement.updated", userDTO.getLogin()));
+        HeaderUtil.createAlert("userManagement.updated", userDTO.getLogin()));
     }
 
     /**
@@ -143,8 +190,14 @@ public class UserResource {
      */
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
-        final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
+    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable, @RequestParam( value = "roles", required = false)
+    String roles,
+    @RequestParam( value = "lojaMaconicaId", required = false)
+    Long lojaMaconicaId) {
+        if(roles == null)
+            roles = "";
+        
+        final Page<UserDTO> page = userService.getAllManagedUsers(pageable, roles, lojaMaconicaId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -154,7 +207,7 @@ public class UserResource {
      */
     @GetMapping("/users/authorities")
     @Timed
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\") or hasRole(\"" + AuthoritiesConstants.USER + "\")")
     public List<String> getAuthorities() {
         return userService.getAuthorities();
     }
@@ -216,5 +269,34 @@ public class UserResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-    
+
+    /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/users/lojaMaconica/{lojaMaconicaId}")
+    @Timed
+    public ResponseEntity<List<UserDTO>> getAllUsersByLojaMaconicaId(@PathVariable Long lojaMaconicaId, Pageable pageable) {
+
+        final Page<UserDTO> page = userRepository.findAllWithAuthoritiesByLojaMaconicaId(pageable, lojaMaconicaId).map(UserDTO::new);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET /users : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/users/estabelecimentoComercial/{estabelecimentoComercialId}")
+    @Timed
+    public ResponseEntity<List<User>> getAllUsersByEstabelecimentoComercialId(@PathVariable Long estabelecimentoComercialId, Pageable pageable) {
+
+        final Page<User> page = userRepository.findAllByEstabelecimentoComercialId(pageable, estabelecimentoComercialId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }

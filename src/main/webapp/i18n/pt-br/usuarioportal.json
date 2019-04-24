@@ -1,0 +1,36 @@
+{
+    "cmtprojectApp": {
+        "usuarioportal": {
+            "home": {
+                "title": "Usuarioportals",
+                "createLabel": "Criar novo Usuarioportal",
+                "createOrEditLabel": "Criar ou editar Usuarioportal"
+            },
+            "created": "Um novo Usuarioportal foi criado com o identificador {{ param }}",
+            "updated": "Um Usuarioportal foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Usuarioportal foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Usuarioportal {{ id }}?"
+            },
+            "detail": {
+                "title": "Usuarioportal"
+            },
+            "login": "Login",
+            "firstName": "First Name",
+            "email": "Email",
+            "activated": "Activated",
+            "langKey": "Lang Key",
+            "authorities": "Authorities",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "password": "Password",
+            "dataNascimento": "Data Nascimento",
+            "lojaMaconicaId": "Loja Maconica Id",
+            "telefone": "Telefone",
+            "tipoPessoa": "Tipo Pessoa",
+            "placet": "Placet"
+        }
+    }
+}

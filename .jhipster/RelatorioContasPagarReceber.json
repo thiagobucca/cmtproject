@@ -1,0 +1,18 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190228125838",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "relatorio_contas_pagar_receber",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
+}

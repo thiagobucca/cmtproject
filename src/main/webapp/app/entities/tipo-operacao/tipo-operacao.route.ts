@@ -37,9 +37,9 @@ export const tipoOperacaoRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const tipoOperacaoRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,8 +62,8 @@ export const tipoOperacaoRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -74,8 +74,8 @@ export const tipoOperacaoRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -89,8 +89,8 @@ export const tipoOperacaoPopupRoute: Routes = [
             tipoOperacao: TipoOperacaoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.tipoOperacao.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Tipo Operação'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

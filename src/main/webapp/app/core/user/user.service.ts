@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import * as moment from 'moment';
+import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IUser } from './user.model';
+import { TipoPessoa } from 'app/shared/model/pessoa.model';
 
+type EntityArrayResponseType = HttpResponse<IUser[]>;
 @Injectable({ providedIn: 'root' })
 export class UserService {
     public resourceUrl = SERVER_API_URL + 'api/users';
@@ -21,12 +24,26 @@ export class UserService {
     }
 
     find(login: string): Observable<HttpResponse<IUser>> {
-        return this.http.get<IUser>(`${this.resourceUrl}/${login}`, { observe: 'response' });
+        return this.http
+            .get<IUser>(`${this.resourceUrl}/${login}`, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IUser>) => this.convertDateFromServer(res)));
+    }
+
+    findByTipo(tipo: TipoPessoa): Observable<EntityArrayResponseType> {
+        return this.http.get<IUser[]>(`${this.resourceUrl}/tipo/${tipo}`, { observe: 'response' });
+    }
+    findByStatus(status: boolean, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IUser[]>(`${this.resourceUrl}/status/${status}`, { params: options, observe: 'response' });
     }
 
     query(req?: any): Observable<HttpResponse<IUser[]>> {
         const options = createRequestOption(req);
         return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
+    queryIdLoja(req?: any, id?: number): Observable<HttpResponse<IUser[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<IUser[]>(`${this.resourceUrl}/lojaMaconica/${id}`, { params: options, observe: 'response' });
     }
 
     delete(login: string): Observable<HttpResponse<any>> {
@@ -35,5 +52,12 @@ export class UserService {
 
     authorities(): Observable<string[]> {
         return this.http.get<string[]>(SERVER_API_URL + 'api/users/authorities');
+    }
+
+    protected convertDateFromServer(res: HttpResponse<IUser>): HttpResponse<IUser> {
+        if (res.body) {
+            res.body.dataNascimento = res.body.dataNascimento != null ? moment(res.body.dataNascimento) : null;
+        }
+        return res;
     }
 }

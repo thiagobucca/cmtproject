@@ -56,6 +56,9 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
+    #storageDir: /home/cmt/storage/
+    storageDir: /home/cmtdev/cmt/storage/
+    
 
 server:
     servlet:

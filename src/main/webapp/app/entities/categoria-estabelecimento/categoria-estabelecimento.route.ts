@@ -37,9 +37,9 @@ export const categoriaEstabelecimentoRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
             defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const categoriaEstabelecimentoRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,8 +62,8 @@ export const categoriaEstabelecimentoRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -74,8 +74,8 @@ export const categoriaEstabelecimentoRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -89,8 +89,8 @@ export const categoriaEstabelecimentoPopupRoute: Routes = [
             categoriaEstabelecimento: CategoriaEstabelecimentoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.categoriaEstabelecimento.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Categoria Estabelecimento'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

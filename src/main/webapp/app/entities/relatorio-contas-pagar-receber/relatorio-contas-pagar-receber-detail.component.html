@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-12">
+        <div *ngIf="relatorioContasPagarReceber">
+            <h2><span> Contas a Pagar e a Receber </span> {{relatorioContasPagarReceber.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <div *ngIf="relatorioContasPagarReceber.estabelecimento">
+
+                    <dt><span>Estabelecimento</span></dt>
+                    <dd>
+                        <span>{{relatorioContasPagarReceber.estabelecimento}}</span>
+                    </dd>
+                </div>
+                <div *ngIf="relatorioContasPagarReceber.lojaMaconica">
+
+                    <dt><span>Loja Maçônica</span></dt>
+                    <dd>
+                        <span>{{relatorioContasPagarReceber.lojaMaconica}}</span>
+                    </dd>
+                </div>
+
+                <dt><span>Data e Hora</span></dt>
+                <dd>
+                    <span>{{relatorioContasPagarReceber.data| date: 'dd/MM/yyyy HH:mm'}}</span>
+                </dd>
+
+                <dt><span>Valor</span></dt>
+                <dd>
+                    <span>{{relatorioContasPagarReceber.valor | currency:'BRL':true:'1.2-2'}}</span>
+                </dd>
+                <dt><span>Tipo Operação</span></dt>
+                <dd>
+                    <span>{{relatorioContasPagarReceber.tipoOperacao}}</span>
+                </dd>
+                <dt><span>Tipo Lançamento</span></dt>
+                <dd>
+                    <span>{{relatorioContasPagarReceber.tipoLancamento}}</span>
+                </dd>                
+            </dl>
+
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+    </div>
+</div>

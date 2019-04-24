@@ -1,8 +1,8 @@
-<div class="row justify-content-center">
+<div class="row">
     <div class="col-8">
         <div *ngIf="user">
             <h2>
-                <span jhiTranslate="userManagement.detail.title">User</span> [<b>{{user.login}}</b>]
+                <span >Usuário</span> [<b>{{user.login}}</b>]
             </h2>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="userManagement.login">Login</span></dt>
@@ -37,6 +37,31 @@
                             <span class="badge badge-info">{{authority}}</span>
                         </li>
                     </ul>
+                </dd>
+                <dt><span >Telefone</span></dt>
+                <dd>
+                    <span>{{user.telefone | mask: '(00) 0 0000-0000'}}</span>
+                </dd>
+                <dt><span >Email</span></dt>
+                <dd>
+                    <span>{{user.email}}</span>
+                </dd>
+                <dt><span >Tipo Pessoa</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'cmtprojectApp.TipoPessoa.' + user.tipoPessoa}}">{{user.tipoPessoa}}</span>
+                </dd>
+                
+                <dt><span>Data Nascimento</span></dt>
+                <dd>
+                    <span>{{user.dataNascimento| date: 'dd/MM/yyyy'}}</span>
+                </dd>                
+                <dt>Dependente</dt>
+                <dd>
+                    <span>{{user.dependente}}</span>
+                </dd>
+                <dt>Loja Maçonica</dt>
+                <dd>
+                    <span>{{user.loja}}</span>
                 </dd>
             </dl>
             <button type="submit"

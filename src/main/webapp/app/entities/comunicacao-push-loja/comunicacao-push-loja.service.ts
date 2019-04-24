@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IComunicacaoPushLoja } from 'app/shared/model/comunicacao-push-loja.model';
+import { IComunicacaoPush } from 'app/shared/model/comunicacao-push.model';
 
 type EntityResponseType = HttpResponse<IComunicacaoPushLoja>;
 type EntityArrayResponseType = HttpResponse<IComunicacaoPushLoja[]>;
@@ -25,6 +26,9 @@ export class ComunicacaoPushLojaService {
 
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IComunicacaoPushLoja>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+    findByIdPush(id: number): Observable<EntityArrayResponseType> {
+        return this.http.get<IComunicacaoPush[]>(`${this.resourceUrl}/comunicacaopush/${id}`, { observe: 'response' });
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {

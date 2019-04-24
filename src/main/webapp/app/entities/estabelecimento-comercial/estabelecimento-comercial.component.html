@@ -1,76 +1,70 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="cmtprojectApp.estabelecimentoComercial.home.title">Estabelecimento Comercials</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-estabelecimento-comercial" [routerLink]="['/estabelecimento-comercial/new']">
+        <span>Estabelecimento Comercial</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-estabelecimento-comercial"
+            [routerLink]="['/estabelecimento-comercial/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cmtprojectApp.estabelecimentoComercial.home.createLabel">
-            Create new Estabelecimento Comercial
-            </span>
+            Novo
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <br/>
+    <br />
     <div class="table-responsive" *ngIf="estabelecimentoComercials">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolMatriz"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolMatriz">Bol Matriz</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="codCnpj"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.codCnpj">Cod Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="endereco"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="logo"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.logo">Logo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="taxaConvenio"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.taxaConvenio">Taxa Convenio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="bolAtivo"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.bolAtivo">Bol Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="categoriaEstabelecimentoId"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.categoriaEstabelecimentoId">Categoria Estabelecimento Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="estabelecimentoMatrizId"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.estabelecimentoMatrizId">Estabelecimento Matriz Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="id">ID <fa-icon [icon]="'sort'"></fa-icon>
+                    </th> 
+                    <th jhiSortBy="nome"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.nome">Nome</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="endereco">Endereço <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="telefone"><span jhiTranslate="cmtprojectApp.estabelecimentoComercial.telefone">Telefone</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    
+                    <th class="text-center" jhiSortBy="taxaConvenio">Tx. Convênio <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="categoria"><span >Categoria</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th class="text-center" jhiSortBy="bolAtivo">Status <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let estabelecimentoComercial of estabelecimentoComercials ;trackBy: trackId">
-                <td><a [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ]">{{estabelecimentoComercial.id}}</a></td>
-                <td>{{estabelecimentoComercial.bolMatriz}}</td>
-                <td>{{estabelecimentoComercial.codCnpj}}</td>
-                <td>{{estabelecimentoComercial.nome}}</td>
-                <td>{{estabelecimentoComercial.endereco}}</td>
-                <td>{{estabelecimentoComercial.telefone}}</td>
-                <td>
-                    <a *ngIf="estabelecimentoComercial.logo" (click)="openFile(estabelecimentoComercial.logoContentType, estabelecimentoComercial.logo)">
-                        <img [src]="'data:' + estabelecimentoComercial.logoContentType + ';base64,' + estabelecimentoComercial.logo" style="max-height: 30px;" alt="estabelecimentoComercial image"/>
-                    </a>
-                    <span *ngIf="estabelecimentoComercial.logo">{{estabelecimentoComercial.logoContentType}}, {{byteSize(estabelecimentoComercial.logo)}}</span>
-                </td>
-                <td>{{estabelecimentoComercial.taxaConvenio}}</td>
-                <td>{{estabelecimentoComercial.bolAtivo}}</td>
-                <td>{{estabelecimentoComercial.categoriaEstabelecimentoId}}</td>
-                <td>{{estabelecimentoComercial.estabelecimentoMatrizId}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'estabelecimento-comercial/'+ estabelecimentoComercial.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                <tr *ngFor="let estabelecimentoComercial of estabelecimentoComercials ;trackBy: trackId">
+                    <td><a [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ]">{{estabelecimentoComercial.id}}</a></td>                   
+                    <td>{{estabelecimentoComercial.nome}}</td>
+                    <td>{{estabelecimentoComercial.endereco}}</td>
+                    <td>{{estabelecimentoComercial.telefone| mask: '(00) 0 0000-0000'}}</td>                    
+                    <td class="text-center">{{estabelecimentoComercial.taxaConvenio}}%</td>
+                    <td>{{estabelecimentoComercial.categoria}}</td>
+                    <td class="text-center"> <jhi-boolean
+                        [value]="estabelecimentoComercial.bolAtivo"
+                        [textTrue]="'Ativo'"
+                        [textFalse]="'Inativo'">
+                    </jhi-boolean></td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" (click)="detalhar(['/estabelecimento-comercial', estabelecimentoComercial.id, 'view' ])"
+                                class="btn btn-link btn-sm" title="Visualizar">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                            </button>
+                            <button type="submit" [routerLink]="['/estabelecimento-comercial', estabelecimentoComercial.id, 'edit']"
+                                class="btn btn-link btn-sm" title="Editar">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </button>
+                            <button type="submit" [routerLink]="['/', { outlets: { popup: 'estabelecimento-comercial/'+ estabelecimentoComercial.id + '/delete'} }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-link btn-sm" title="Deletar">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -79,7 +73,8 @@
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

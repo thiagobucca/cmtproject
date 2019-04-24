@@ -1,46 +1,50 @@
-<div class="row justify-content-center">
-    <div class="col-8">
+<div class="row ">
+    <div class="col-12">
         <div *ngIf="cupom">
-            <h2><span jhiTranslate="cmtprojectApp.cupom.detail.title">Cupom</span> {{cupom.id}}</h2>
+            <h2><span>Cupom</span> {{cupom.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="cmtprojectApp.cupom.data">Data</span></dt>
                 <dd>
-                    <span>{{cupom.data}}</span>
+                    <span>{{cupom.data | date: 'dd/MM/yyyy HH:mm'}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.cupom.valor">Valor</span></dt>
                 <dd>
-                    <span>{{cupom.valor}}</span>
+                    <span>{{cupom.valor | currency:'BRL':true:'1.2-2'}}</span>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.cupom.numero">Numero</span></dt>
+                <dt><span>Número</span></dt>
                 <dd>
                     <span>{{cupom.numero}}</span>
                 </dd>
                 <dt><span jhiTranslate="cmtprojectApp.cupom.foto">Foto</span></dt>
                 <dd>
                     <div *ngIf="cupom.foto">
-                        <a (click)="openFile(cupom.fotoContentType, cupom.foto)">
-                            <img [src]="'data:' + cupom.fotoContentType + ';base64,' + cupom.foto" style="max-width: 100%;" alt="cupom image"/>
-                        </a>
-                        {{cupom.fotoContentType}}, {{byteSize(cupom.foto)}}
+                        <a [href]="cupom.foto" target="_black">
+                            <img [src]="cupom.foto" style="    max-height: 200px; max-width: 200px;" alt="cupom image" />
+                        </a><br>
+                        {{cupom.foto}}, {{byteSize(cupom.foto)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="cmtprojectApp.cupom.estabelecimentoComercialId">Estabelecimento Comercial Id</span></dt>
+                <dt><span>Estabelecimento Comercial</span></dt>
                 <dd>
-                    <span>{{cupom.estabelecimentoComercialId}}</span>
+                    <span>{{cupom.estabelecimento}}</span>
+                </dd> 
+                <dt><span>Usuário</span></dt>
+                <dd>
+                    <span>{{cupom.usuario}}</span>
                 </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{cupom.statusCupom}}</span>
+                </dd>               
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/cupom', cupom.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/cupom', cupom.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

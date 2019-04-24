@@ -1,0 +1,27 @@
+0000000000000000000000000000000000000000 23c201001f03c1b62b6b1aa9455872e98a3d60f3 cmtdev <leonardofelix2004@hotmail.com> 1552650751 -0300	clone: from https://github.com/thiagobucca/cmtproject.git
+23c201001f03c1b62b6b1aa9455872e98a3d60f3 486d859f0485c465ccc8c68fa14ddd7754725a4f cmtdev <leonardofelix2004@hotmail.com> 1552650803 -0300	checkout: moving from master to hml
+486d859f0485c465ccc8c68fa14ddd7754725a4f e8f1e74634667096bf438318ad881fccfb4a70ed cmtdev <leonardofelix2004@hotmail.com> 1552650815 -0300	checkout: moving from hml to leo-novosAjustes
+e8f1e74634667096bf438318ad881fccfb4a70ed 486d859f0485c465ccc8c68fa14ddd7754725a4f cmtdev <leonardofelix2004@hotmail.com> 1552650819 -0300	merge hml: Fast-forward
+486d859f0485c465ccc8c68fa14ddd7754725a4f f850a8038772e2ce72c3c43b5f2035466bdcb531 cmtdev <leonardofelix2004@hotmail.com> 1552656646 -0300	commit: Adicionado o campo status no cupom
+f850a8038772e2ce72c3c43b5f2035466bdcb531 72d3af17fc9801a3cc351c8e12cce2146c734184 cmtdev <leonardofelix2004@hotmail.com> 1553168249 -0300	pull origin hml: Fast-forward
+72d3af17fc9801a3cc351c8e12cce2146c734184 483b0daa156a2d76604128242abe3ad9598a2cb7 cmtdev <leonardofelix2004@hotmail.com> 1553169023 -0300	commit: Retirado save do cupom do try catch de geracao da imagem
+483b0daa156a2d76604128242abe3ad9598a2cb7 486d859f0485c465ccc8c68fa14ddd7754725a4f cmtdev <leonardofelix2004@hotmail.com> 1553169057 -0300	checkout: moving from leo-novosAjustes to hml
+486d859f0485c465ccc8c68fa14ddd7754725a4f 72d3af17fc9801a3cc351c8e12cce2146c734184 cmtdev <leonardofelix2004@hotmail.com> 1553169066 -0300	pull origin hml: Fast-forward
+72d3af17fc9801a3cc351c8e12cce2146c734184 483b0daa156a2d76604128242abe3ad9598a2cb7 cmtdev <leonardofelix2004@hotmail.com> 1553169070 -0300	merge leo-novosAjustes: Fast-forward
+483b0daa156a2d76604128242abe3ad9598a2cb7 e28a59f6b65f089d7a26918902e75bd862418178 cmtdev <leonardofelix2004@hotmail.com> 1554252961 -0300	pull origin hml: Fast-forward
+e28a59f6b65f089d7a26918902e75bd862418178 e28a59f6b65f089d7a26918902e75bd862418178 cmtdev <leonardofelix2004@hotmail.com> 1554252978 -0300	checkout: moving from hml to leo-userEstabelecimento
+e28a59f6b65f089d7a26918902e75bd862418178 2ca6b84051a2bb18c11adeab87a315e381771e11 cmtdev <leonardofelix2004@hotmail.com> 1554258976 -0300	commit: Implementado o campo estabelecimento comercial na api User
+2ca6b84051a2bb18c11adeab87a315e381771e11 e28a59f6b65f089d7a26918902e75bd862418178 cmtdev <leonardofelix2004@hotmail.com> 1554259081 -0300	checkout: moving from leo-userEstabelecimento to hml
+e28a59f6b65f089d7a26918902e75bd862418178 2ca6b84051a2bb18c11adeab87a315e381771e11 cmtdev <leonardofelix2004@hotmail.com> 1554259092 -0300	merge leo-userEstabelecimento: Fast-forward
+2ca6b84051a2bb18c11adeab87a315e381771e11 4cdb2b6466e8984ea46110f3fc10bf0c9d478425 cmtdev <leonardofelix2004@hotmail.com> 1554336211 -0300	pull origin hml: Fast-forward
+4cdb2b6466e8984ea46110f3fc10bf0c9d478425 2ca6b84051a2bb18c11adeab87a315e381771e11 cmtdev <leonardofelix2004@hotmail.com> 1554336232 -0300	checkout: moving from hml to leo-userEstabelecimento
+2ca6b84051a2bb18c11adeab87a315e381771e11 4cdb2b6466e8984ea46110f3fc10bf0c9d478425 cmtdev <leonardofelix2004@hotmail.com> 1554336246 -0300	pull origin hml: Fast-forward
+4cdb2b6466e8984ea46110f3fc10bf0c9d478425 08d37fb3d23691ffcea470d1cd84d8b05bb9a064 cmtdev <leonardofelix2004@hotmail.com> 1554338526 -0300	commit: Adicionado 3 campos no reset da senha
+08d37fb3d23691ffcea470d1cd84d8b05bb9a064 4cdb2b6466e8984ea46110f3fc10bf0c9d478425 cmtdev <leonardofelix2004@hotmail.com> 1554338556 -0300	checkout: moving from leo-userEstabelecimento to hml
+4cdb2b6466e8984ea46110f3fc10bf0c9d478425 a666842840f7cd74829e0dc5d8f23a0026531432 cmtdev <leonardofelix2004@hotmail.com> 1555542423 -0300	pull origin hml: Fast-forward
+a666842840f7cd74829e0dc5d8f23a0026531432 a666842840f7cd74829e0dc5d8f23a0026531432 cmtdev <leonardofelix2004@hotmail.com> 1555553614 -0300	checkout: moving from hml to leo-grupo
+a666842840f7cd74829e0dc5d8f23a0026531432 b40e2b523da3a8bae644c0f05807367d489a77d7 cmtdev <leonardofelix2004@hotmail.com> 1555553630 -0300	commit: Adicionado a entidade grupo
+b40e2b523da3a8bae644c0f05807367d489a77d7 fc2ddddc5e9cfbb58a05bcc9ec816a775e3b1e56 cmtdev <leonardofelix2004@hotmail.com> 1555555263 -0300	commit: Adicionado campo grupo_id na entidade estabelecimento comervial
+fc2ddddc5e9cfbb58a05bcc9ec816a775e3b1e56 a666842840f7cd74829e0dc5d8f23a0026531432 cmtdev <leonardofelix2004@hotmail.com> 1556021518 -0300	checkout: moving from leo-grupo to hml
+a666842840f7cd74829e0dc5d8f23a0026531432 fc2ddddc5e9cfbb58a05bcc9ec816a775e3b1e56 cmtdev <leonardofelix2004@hotmail.com> 1556021532 -0300	checkout: moving from hml to leo-grupo
+fc2ddddc5e9cfbb58a05bcc9ec816a775e3b1e56 139391b4687a0218215dcbb1b57198c4be53bb22 cmtdev <leonardofelix2004@hotmail.com> 1556022170 -0300	commit: Implementado retorno do grupoid no login

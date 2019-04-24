@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
+<div class="row ">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-perfil-usuario-heading" jhiTranslate="cmtprojectApp.perfilUsuario.home.createOrEditLabel">Create or edit a Perfil Usuario</h2>
+            <h2 id="jhi-perfil-usuario-heading" >{{perfilUsuario.id>0?"Editar":"Criar"}} Perfil Usuário</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!perfilUsuario.id">
@@ -13,19 +13,19 @@
                     <label class="form-control-label" jhiTranslate="cmtprojectApp.perfilUsuario.nomePerfil" for="field_nomePerfil">Nome Perfil</label>
                     <input type="text" class="form-control" name="nomePerfil" id="field_nomePerfil"
                         [(ngModel)]="perfilUsuario.nomePerfil" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.perfilUsuario.bolAtivo" for="field_bolAtivo">Bol Ativo</label>
-                    <input type="checkbox" class="form-control" name="bolAtivo" id="field_bolAtivo"
+                </div>                
+                <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="bolAtivo" id="field_bolAtivo"
                         [(ngModel)]="perfilUsuario.bolAtivo" />
-                </div>
+                        <label class="form-check-label"  for="field_bolAtivo">Ativo</label>
+                    </div>
 
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

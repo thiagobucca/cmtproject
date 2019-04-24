@@ -37,9 +37,9 @@ export const contasPagarReceberRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            defaultSort: 'data,asc',
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -50,8 +50,8 @@ export const contasPagarReceberRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -62,8 +62,8 @@ export const contasPagarReceberRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -74,8 +74,8 @@ export const contasPagarReceberRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -89,8 +89,8 @@ export const contasPagarReceberPopupRoute: Routes = [
             contasPagarReceber: ContasPagarReceberResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cmtprojectApp.contasPagarReceber.home.title'
+            authorities: ['ROLE_USER', 'ROLE_ADMIN'],
+            pageTitle: 'Contas Pagar/Receber'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

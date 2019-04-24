@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { errorRoute, navbarRoute } from './layouts';
+import { errorRoute, navbarRoute, sidebarRoute, loadingRoute } from './layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 
-const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
+const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, loadingRoute, ...errorRoute];
 
 @NgModule({
     imports: [
@@ -12,7 +12,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                 ...LAYOUT_ROUTES,
                 {
                     path: 'admin',
-                    loadChildren: './admin/admin.module#CmtprojectAdminModule'
+                    loadChildren: './admin/admin.module#CmtprojectAdminModule',
+                    data: {
+                        authorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_LOJA_MACONICA', 'ROLE_ESTABELECIMENTO_COMERCIAL']
+                    }
                 }
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }

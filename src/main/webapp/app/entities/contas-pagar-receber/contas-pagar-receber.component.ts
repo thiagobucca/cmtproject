@@ -10,6 +10,9 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ContasPagarReceberService } from './contas-pagar-receber.service';
 
+import { AuxiliarService } from 'app/shared/services/auxiliar.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     selector: 'jhi-contas-pagar-receber',
     templateUrl: './contas-pagar-receber.component.html'
@@ -37,18 +40,27 @@ export class ContasPagarReceberComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private auxService: AuxiliarService,
+        private ref: ChangeDetectorRef
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
+            this.reverse = false;
             this.predicate = data.pagingParams.predicate;
         });
     }
+    get loading(): boolean {
+        return this.auxService.isLoading;
+    }
+    set loading(status: boolean) {
+        this.auxService.isLoading = status;
+    }
 
     loadAll() {
+        this.loading = true;
         this.contasPagarReceberService
             .query({
                 page: this.page - 1,
@@ -56,9 +68,21 @@ export class ContasPagarReceberComponent implements OnInit, OnDestroy {
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<IContasPagarReceber[]>) => this.paginateContasPagarRecebers(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<IContasPagarReceber[]>) => {
+                    this.paginateContasPagarRecebers(res.body, res.headers);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                }
             );
+    }
+    detalhar(parametros: []) {
+        this.loading = true;
+        this.router.navigate(parametros);
     }
 
     loadPage(page: number) {
@@ -113,8 +137,8 @@ export class ContasPagarReceberComponent implements OnInit, OnDestroy {
 
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
+        if (this.predicate !== 'data') {
+            result.push('data');
         }
         return result;
     }

@@ -1,0 +1,117 @@
+<div>
+    <h2 id="page-heading">
+        <span>Relatório Cupom X CMT</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <form name="editForm" role="form" novalidate (ngSubmit)="consultar()" #editForm="ngForm">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label class="form-control-label" for="field_data">Data Inicial</label>
+
+                        <input id="field_dataIni" type="date" class="form-control" name="dataIni" [(ngModel)]="consulta.dataIni"
+                            required max="9999-12-31" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-control-label" for="field_data">Data Fim</label>
+
+                        <input id="field_dataFim" type="date" class="form-control" name="dataFim" [(ngModel)]="consulta.dataFim"
+                            required max="9999-12-31" />
+                    </div>
+                    <div class="col-md-2" [hidden]="!consulta.isEstabelecimento">
+                        <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success"
+                            style="margin-top: 24px;">
+                            <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span>Buscar</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="consulta.isEstabelecimento">
+                    <div class="col-md-5">
+                        <div>
+                        <label class="form-control-label" for="field_estabelecimentoComercialId">Estabelecimento
+                            Comercial</label>
+                        <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
+                            [(ngModel)]="consulta.estabelecimentoId">
+                            <option [ngValue]="undefined"  selected>Selecione...</option>
+                            <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div [hidden]="consulta.isLojaMaconica">
+                        <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçônica</label>
+                        <select class="form-control" id="field_lojaMaconicaId" 
+                        name="region" [(ngModel)]="consulta.lojaMaconicaId"
+                        >
+                            <option [ngValue]="undefined"  selected>Selecione...</option>
+                            <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success"
+                            style="margin-top: 24px;">
+                            <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span>Buscar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive" *ngIf="relatorioCupomCmts">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+
+                    <th jhiSortBy="estabelecimentoComercialId"><span>Estabelecimento</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="data"><span>Data</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th class="text-center"><span>Cupom</span></th>
+                    <th  class="text-right"><span>Valor</span></th>
+                    <th class="text-center"><span>Tx. Convênio(%)</span></th>
+                    <th  class="text-right"><span>Valor Loja Maçônica</span></th>
+                    <th  class="text-right"><span>Valor CMT</span></th>
+                    <th  class="text-right"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                [infiniteScrollDistance]="0">
+                <tr *ngFor="let relatorioCupomCmt of relatorioCupomCmts ;trackBy: trackId">
+                    <td>{{relatorioCupomCmt.estabelecimento}}</td>
+                    <td>{{relatorioCupomCmt.data | date: 'dd/MM/yyyy HH:mm'}}</td>
+                    <td class="text-center">{{relatorioCupomCmt.numero}}</td>
+                    <td class="text-right">{{relatorioCupomCmt.valor | currency:'BRL':true:'1.2-2'}}</td>
+                    <td class="text-center">{{relatorioCupomCmt.taxaConvenio}}%</td>
+                    <td class="text-right">{{relatorioCupomCmt.valorLoja | currency:'BRL':true:'1.2-2'}}</td>
+                    <td class="text-right">{{relatorioCupomCmt.valorCMT | currency:'BRL':true:'1.2-2'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" (click)="detalhar(['/relatorio-cupom-cmt', relatorioCupomCmt.id, 'view' ])"
+                                class="btn btn-link btn-sm" title="Vizualizar">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="relatorioCupomCmts!=undefined && relatorioCupomCmts.length>0">
+                <tr>
+                    <td><b>TOTAIS</b></td>
+                    <td></td>
+                    <td ></td>
+                    <td class="text-right">{{totalValor | currency:'BRL':true:'1.2-2'}}</td>
+                    <td class="text-center"></td>
+                    <td class="text-right">{{totalValorLoja | currency:'BRL':true:'1.2-2'}}</td>
+                    <td class="text-right">{{totalValorCMT | currency:'BRL':true:'1.2-2'}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

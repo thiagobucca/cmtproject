@@ -19,12 +19,18 @@ import { CmtprojectAccountModule } from './account/account.module';
 import { CmtprojectEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AccordionModule, RatingModule, CalendarModule, ButtonModule } from 'primeng/primeng';
-
-import { DragDropModule } from 'primeng/dragdrop';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import {
+    JhiMainComponent,
+    SidebarComponent,
+    LoadingComponent,
+    NavbarComponent,
+    FooterComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    ErrorComponent
+} from './layouts';
 
 @NgModule({
     imports: [
@@ -44,14 +50,18 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         CmtprojectAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         CmtprojectEntityModule,
-        BrowserAnimationsModule,
-        AccordionModule,
-        RatingModule,
-        CalendarModule,
-        ButtonModule,
-        DragDropModule
+        BrowserAnimationsModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        SidebarComponent,
+        NavbarComponent,
+        LoadingComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        ActiveMenuDirective,
+        FooterComponent
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

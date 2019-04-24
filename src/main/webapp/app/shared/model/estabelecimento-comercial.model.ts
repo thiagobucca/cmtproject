@@ -10,7 +10,9 @@ export interface IEstabelecimentoComercial {
     taxaConvenio?: number;
     bolAtivo?: boolean;
     categoriaEstabelecimentoId?: number;
+    categoria?: string;
     estabelecimentoMatrizId?: number;
+    matriz?: string;
 }
 
 export class EstabelecimentoComercial implements IEstabelecimentoComercial {
@@ -26,9 +28,11 @@ export class EstabelecimentoComercial implements IEstabelecimentoComercial {
         public taxaConvenio?: number,
         public bolAtivo?: boolean,
         public categoriaEstabelecimentoId?: number,
-        public estabelecimentoMatrizId?: number
+        public estabelecimentoMatrizId?: number,
+        public categoria?: string,
+        public matriz?: string
     ) {
         this.bolMatriz = this.bolMatriz || false;
-        this.bolAtivo = this.bolAtivo || false;
+        this.bolAtivo = this.bolAtivo || true;
     }
 }

@@ -1,6 +1,7 @@
 package com.cmt.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.cmt.myapp.domain.Authority;
 import com.cmt.myapp.domain.Usuario;
 import com.cmt.myapp.repository.UsuarioRepository;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
@@ -12,15 +13,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Usuario.
@@ -91,6 +92,9 @@ public class UsuarioResource {
     @Timed
     public ResponseEntity<List<Usuario>> getAllUsuarios(Pageable pageable) {
         log.debug("REST request to get a page of Usuarios");
+        //Page<Usuario> page = usuarioRepository.findAll(pageable);
+
+        
         Page<Usuario> page = usuarioRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/usuarios");
         return ResponseEntity.ok().headers(headers).body(page.getContent());

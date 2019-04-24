@@ -1,0 +1,84 @@
+<div>
+        <h2>
+            <span id="user-management-page-heading" >Membros</span>
+            <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['./new']"
+            *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <fa-icon [icon]="'plus'"></fa-icon> Novo</button>
+        </h2>
+        <jhi-alert></jhi-alert>
+        <div class="form-group row" [hidden]="consulta.isLojaMaconica">               
+                <div class="col-md-5">
+                    <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçônica</label>
+                    <select class="form-control" id="field_lojaMaconicaId" name="region" [(ngModel)]="consulta.lojaMaconicaId"
+                    (ngModelChange)="onChangeLoja($event)"
+                    >
+                        <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
+                    </select>
+                </div>               
+            </div>
+        <div class="table-responsive" *ngIf="users">
+            <table class="table table-striped">
+                <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <th jhiSortBy="id">ID<fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th class="text-center">Status</th>
+                        <th><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="users">
+                    <tr *ngFor="let user of users; trackBy: trackIdentity" >
+                        <td><a [routerLink]="['./', user.login, 'view']">{{user.id}}</a></td>
+                        <td>{{user.login}}</td>
+                        <td>{{user.email}}</td>
+                        <td class="text-center">
+                                <jhi-boolean [value]="user.activated" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                                    </jhi-boolean>
+                          
+                        </td>
+                        <td>
+                            <div *ngFor="let authority of user.authorities">
+                                <span class="badge badge-info">{{ authority }}</span>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-link btn-sm"
+                                    title="Visualizar">
+                                    <fa-icon [icon]="'eye'"></fa-icon>
+                                </button>
+                                <button type="submit" [routerLink]="['./', user.login, 'edit']" queryParamsHandling="merge"
+                                    class="btn btn-link btn-sm" title="Editar"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                </button>
+                                <button type="button" (click)="deleteUser(user)" class="btn btn-link btn-sm" [disabled]="currentAccount.login === user.login"
+                                    title="Deletar"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="users">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                    [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+    

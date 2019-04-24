@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 e8f1e74634667096bf438318ad881fccfb4a70ed cmtdev <leonardofelix2004@hotmail.com> 1552650815 -0300	branch: Created from refs/remotes/origin/leo-novosAjustes
+e8f1e74634667096bf438318ad881fccfb4a70ed 486d859f0485c465ccc8c68fa14ddd7754725a4f cmtdev <leonardofelix2004@hotmail.com> 1552650819 -0300	merge hml: Fast-forward
+486d859f0485c465ccc8c68fa14ddd7754725a4f f850a8038772e2ce72c3c43b5f2035466bdcb531 cmtdev <leonardofelix2004@hotmail.com> 1552656646 -0300	commit: Adicionado o campo status no cupom
+f850a8038772e2ce72c3c43b5f2035466bdcb531 72d3af17fc9801a3cc351c8e12cce2146c734184 cmtdev <leonardofelix2004@hotmail.com> 1553168249 -0300	pull origin hml: Fast-forward
+72d3af17fc9801a3cc351c8e12cce2146c734184 483b0daa156a2d76604128242abe3ad9598a2cb7 cmtdev <leonardofelix2004@hotmail.com> 1553169023 -0300	commit: Retirado save do cupom do try catch de geracao da imagem

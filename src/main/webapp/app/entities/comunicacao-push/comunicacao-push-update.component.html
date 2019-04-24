@@ -1,38 +1,65 @@
-<div class="row justify-content-center">
-    <div class="col-8">
+<div class="row ">
+    <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-comunicacao-push-heading" jhiTranslate="cmtprojectApp.comunicacaoPush.home.createOrEditLabel">Create or edit a Comunicacao Push</h2>
+            <h2 id="jhi-comunicacao-push-heading">{{comunicacaoPush.id>0?"Editar":"Criar"}} Comunicação Push</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!comunicacaoPush.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="comunicacaoPush.id" readonly />
+                <div class="form-group row" [hidden]="!comunicacaoPush.id">
+                    <div class="col-md-1">
+
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="comunicacaoPush.id"
+                            readonly />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.comunicacaoPush.titulo" for="field_titulo">Titulo</label>
-                    <input type="text" class="form-control" name="titulo" id="field_titulo"
-                        [(ngModel)]="comunicacaoPush.titulo" />
+                <div class="form-group row">
+                    <div class="col-md-5">
+
+                        <label class="form-control-label" for="field_titulo">Título</label>
+                        <input type="text" class="form-control" name="titulo" id="field_titulo" [(ngModel)]="comunicacaoPush.titulo"
+                            required />
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-control-label" for="field_subTitulo">Subtítulo</label>
+                        <input type="text" class="form-control" name="subTitulo" id="field_subTitulo" [(ngModel)]="comunicacaoPush.subTitulo"
+                            required maxlength="100" />
+
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.comunicacaoPush.conteudoPush" for="field_conteudoPush">Conteudo Push</label>
-                    <input type="text" class="form-control" name="conteudoPush" id="field_conteudoPush"
-                        [(ngModel)]="comunicacaoPush.conteudoPush" />
+                <div class="form-group row">
+                    <div class="col-md-10">
+
+                        <label class="form-control-label" for="field_conteudoPush">Conteúdo Push</label>
+                        <textarea rows="4" cols="50" [(ngModel)]="comunicacaoPush.conteudoPush" class="form-control"
+                            name="conteudoPush" id="field_conteudoPush" maxlength="1000"></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.comunicacaoPush.tipoPessoa" for="field_tipoPessoa">Tipo Pessoa</label>
-                    <select class="form-control" name="tipoPessoa" [(ngModel)]="comunicacaoPush.tipoPessoa" id="field_tipoPessoa" >
-                        <option value="Macom">{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
-                        <option value="Dependente">{{'cmtprojectApp.TipoPessoa.Dependente' | translate}}</option>
-                    </select>
+                <div class="form-group row">
+                    <div class="col-md-5">
+
+                        <label class="form-control-label" for="field_tipoPessoa">Selecionar Público</label>
+                        <select class="form-control" name="tipoPessoa" [(ngModel)]="comunicacaoPush.tipoPessoa" id="field_tipoPessoa">
+                            <option value="Macom">{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
+                            <option value="Dependente">{{'cmtprojectApp.TipoPessoa.Dependente' | translate}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label>Loja</label>
+                        <select class="form-control" multiple name="loja" [(ngModel)]="itemSelecionado" >
+                            <option value="0" (click)="selecionarLoja(0)">Todas</option>
+                            <option [ngValue]="item.id" *ngFor="let item of lojas; trackBy: trackById" (click)="selecionarLoja(item.id)">{{item.nome}}</option>
+                        </select>
+                        <span *ngIf='lojasSelecionadas===undefined || lojasSelecionadas.length===0' class="text-danger">Ao menos uma loja deve ser selecionada.</span>
+                    </div>
                 </div>
+
 
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving ||lojasSelecionadas===undefined || lojasSelecionadas.length===0" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

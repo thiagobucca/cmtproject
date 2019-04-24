@@ -1,60 +1,82 @@
-<div class="row justify-content-center">
-    <div class="col-8">
+<div class="row">
+    <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-contas-pagar-receber-heading" jhiTranslate="cmtprojectApp.contasPagarReceber.home.createOrEditLabel">Create or edit a Contas Pagar Receber</h2>
+            <h2 id="jhi-contas-pagar-receber-heading">{{contasPagarReceber.id>0?"Editar":"Criar"}} Contas Pagar
+                Receber</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!contasPagarReceber.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="contasPagarReceber.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.data" for="field_data">Data</label>
-                    <div class="d-flex">
-                        <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data"
-                        />
+                <div class="form-group row" [hidden]="!contasPagarReceber.id">
+                    <div class="col-md-1">
+
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="contasPagarReceber.id"
+                            readonly />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.valor" for="field_valor">Valor</label>
-                    <input type="number" class="form-control" name="valor" id="field_valor"
-                        [(ngModel)]="contasPagarReceber.valor" />
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.data" for="field_data">Data</label>
+
+                        <input id="field_data" type="date" class="form-control" name="data" [(ngModel)]="data" required
+                            max="9999-12-31" />
+                    </div>
+                    <div class="col-md-2">
+
+                        <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.valor" for="field_valor">Valor</label>
+                        <input type="text" class="form-control" currencyMask name="valor" id="field_valor" [(ngModel)]="contasPagarReceber.valor"
+                            required />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-control-label" for="field_statusLancamento">Status Lançamento</label>
+                        <select class="form-control" name="statusLancamento" [(ngModel)]="contasPagarReceber.statusLancamento"
+                            id="field_statusLancamento" required>
+                            <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                            <option value="Aberto">{{'cmtprojectApp.StatusLancamento.Aberto' | translate}}</option>
+                            <option value="Baixado">{{'cmtprojectApp.StatusLancamento.Baixado' | translate}}</option>
+                        </select>
+                    </div>
+                    
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.statusLancamento" for="field_statusLancamento">Status Lancamento</label>
-                    <select class="form-control" name="statusLancamento" [(ngModel)]="contasPagarReceber.statusLancamento" id="field_statusLancamento" >
-                        <option value="Aberto">{{'cmtprojectApp.StatusLancamento.Aberto' | translate}}</option>
-                        <option value="Baixado">{{'cmtprojectApp.StatusLancamento.Baixado' | translate}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.usuarioId" for="field_usuarioId">Usuario Id</label>
-                    <input type="number" class="form-control" name="usuarioId" id="field_usuarioId"
-                        [(ngModel)]="contasPagarReceber.usuarioId" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.lojaMaconicaId" for="field_lojaMaconicaId">Loja Maconica Id</label>
-                    <input type="number" class="form-control" name="lojaMaconicaId" id="field_lojaMaconicaId"
-                        [(ngModel)]="contasPagarReceber.lojaMaconicaId" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.estabelecimentoComercialId" for="field_estabelecimentoComercialId">Estabelecimento Comercial Id</label>
-                    <input type="number" class="form-control" name="estabelecimentoComercialId" id="field_estabelecimentoComercialId"
-                        [(ngModel)]="contasPagarReceber.estabelecimentoComercialId" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cmtprojectApp.contasPagarReceber.tipoOperacaoId" for="field_tipoOperacaoId">Tipo Operacao Id</label>
-                    <input type="number" class="form-control" name="tipoOperacaoId" id="field_tipoOperacaoId"
-                        [(ngModel)]="contasPagarReceber.tipoOperacaoId" />
+                <div class="form-group row">
+                        <div class="col-md-5"><label class="form-control-label" for="field_tipoOperacaoId">Tipo Operação</label>
+                            <select class="form-control" id="field_tipoOperacaoId" name="tipoOperacaoId" required
+                                [(ngModel)]="contasPagarReceber.tipoOperacaoId">
+                                <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                                <option [ngValue]="item.id" *ngFor="let item of tipoOperacoes; trackBy: trackById">{{item.nomeOperacao}}</option>
+                            </select></div>
                 </div>
 
+
+                <div class="form-group row">
+
+                <div class="col-md-5">
+                    <label class="form-control-label" for="field_lojaMaconicaId">Loja Maçônica</label>
+                    <select class="form-control" id="field_lojaMaconicaId" name="lojaMaconicaId" [required]="isLoja"
+                        [disabled]="contasPagarReceber.estabelecimentoComercialId !==undefined && contasPagarReceber.estabelecimentoComercialId !==null"
+                        (ngModelChange)="onChangeLojaMaconica($event)" [(ngModel)]="contasPagarReceber.lojaMaconicaId">
+                        <option [ngValue]="undefined" selected>Selecione...</option>
+                        <option [ngValue]="loja.id" *ngFor="let loja of lojas; trackBy: trackById">{{loja.nome}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label class="form-control-label" for="field_estabelecimentoComercialId">Estabelecimento Comercial</label>
+                    <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
+                        [required]="isEstabelecimento" [disabled]="contasPagarReceber.lojaMaconicaId !== undefined &&contasPagarReceber.lojaMaconicaId !== null"
+                        (ngModelChange)="onChangeEstabelecimentoComercial($event)" [(ngModel)]="contasPagarReceber.estabelecimentoComercialId">
+                        <option [ngValue]="undefined" selected>Selecione...</option>
+                        <option [ngValue]="item.id" *ngFor="let item of estabelecimentos; trackBy: trackById">{{item.nome}}</option>
+                    </select>
+                </div>
+
+                </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
