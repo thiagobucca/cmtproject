@@ -323,7 +323,7 @@ public class EstabelecimentoComercialResource {
                     pageable = PageRequest.of(0, Integer.MAX_VALUE,pageable.getSort());
                 }
                 
-        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findByGrupoId(pageable,grupo_id, bolAtivo);
+        final Page<EstabelecimentoComercial> page = estabelecimentoComercialRepository.findByGrupoIdAndBolAtivo(pageable,grupo_id, bolAtivo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estabelecimento-comercials");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

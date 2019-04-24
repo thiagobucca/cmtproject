@@ -121,7 +121,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "estabelecimento_comercial_id", insertable = false, updatable = false, nullable = true)
-	private EstabelecimentoComercial estabelecimento;
+    private EstabelecimentoComercial estabelecimento;
+    
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "grupo_id", insertable = false, updatable = false, nullable = true)
+	private Grupo nomeGrupo;
 
     @JsonIgnore
     @ManyToMany
@@ -382,5 +386,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setEstabelecimento(EstabelecimentoComercial estabelecimento) {
 		this.estabelecimento = estabelecimento;
-	}
+    }
+    
+    public String getNomeGrupo() {
+		return nomeGrupo == null ? null : nomeGrupo.getNome();
+    }
+    
+    public void setNomeGrupo(Grupo nomeGrupo) {
+		this.nomeGrupo = nomeGrupo;
+    }
 }

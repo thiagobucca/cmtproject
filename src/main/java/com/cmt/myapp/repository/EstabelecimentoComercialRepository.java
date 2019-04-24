@@ -24,7 +24,7 @@ public interface EstabelecimentoComercialRepository extends JpaRepository<Estabe
     Page<EstabelecimentoComercial> findAllByCategoriaIdAndBolAtivo(Pageable pageable, Long categoria_id, Boolean bolAtivo);
     Optional<EstabelecimentoComercial> findOneByCodCnpj(String codCnpj);
     List<EstabelecimentoComercial> findByEstabelecimentoMatrizId(Long id);
-    Page<EstabelecimentoComercial> findByGrupoId(Pageable pageable,Long grupoId, Boolean bolAtivo);
+    Page<EstabelecimentoComercial> findByGrupoIdAndBolAtivo(Pageable pageable,Long grupoId, Boolean bolAtivo);
     
     
 }
