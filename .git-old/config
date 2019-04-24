@@ -1,0 +1,17 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/thiagobucca/cmtproject.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "hml"]
+	remote = origin
+	merge = refs/heads/hml
+[branch "leo-novosAjustes"]
+	remote = origin
+	merge = refs/heads/leo-novosAjustes
