@@ -32,7 +32,7 @@
                     </td>
                     <td>{{grupoComercial.nome}}</td>
                     <td>
-                        <jhi-boolean [value]="grupoComercial.status" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
+                        <jhi-boolean [value]="grupoComercial.bolAtivo" [textTrue]="'Ativo'" [textFalse]="'Inativo'">
                         </jhi-boolean>
                     </td>
                     <td class="text-right">
@@ -46,7 +46,7 @@
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </button>
                             <button type="submit"
-                            (click)="detalhar(['/', { outlets: { popup: 'grupo-comercial/'+ grupoComercial.id + '/delete'} }])"
+                            [routerLink]="['/', { outlets: { popup: 'grupo-comercial/'+ grupoComercial.id + '/delete'} }]"
                                 replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" title="Deletar">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>

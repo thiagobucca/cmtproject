@@ -11,7 +11,7 @@ type EntityArrayResponseType = HttpResponse<IGrupoComercial[]>;
 
 @Injectable({ providedIn: 'root' })
 export class GrupoComercialService {
-    public resourceUrl = SERVER_API_URL + 'api/grupo-comercials';
+    public resourceUrl = SERVER_API_URL + 'api/grupos';
 
     constructor(private http: HttpClient) {}
 
