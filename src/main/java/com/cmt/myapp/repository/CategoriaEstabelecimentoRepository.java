@@ -22,7 +22,7 @@ public interface CategoriaEstabelecimentoRepository extends JpaRepository<Catego
 
     public List<CategoriaEstabelecimento> findAllByBolAtivo(Boolean bolAtivo);
 
-    @Query("select new com.cmt.myapp.service.dto.CategoriaEstabelecimentoDTO(a.id, a.nome, COUNT(c.id))  FROM CategoriaEstabelecimento a, EstabelecimentoComercial c WHERE c.categoriaEstabelecimentoId = a.id GROUP BY a.id, a.nome")
+    @Query("select new com.cmt.myapp.service.dto.CategoriaEstabelecimentoDTO(a.id, a.nome, COUNT(c.id))  FROM CategoriaEstabelecimento a, EstabelecimentoComercial c WHERE c.categoriaEstabelecimentoId = a.id AND c.bolAtivo = true GROUP BY a.id, a.nome ")
     public List<CategoriaEstabelecimentoDTO> findCategorias();
 
 }

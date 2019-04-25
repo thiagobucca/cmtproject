@@ -89,7 +89,7 @@ public class CupomResource {
                     "duplicate");
         }
 
-        
+
         try {
 
           /*  if(cupom.getFoto().startsWith("/9j")){
@@ -100,7 +100,7 @@ public class CupomResource {
                 log.debug("base64 -2:" + cupom.getFoto());
             }
 */
-            
+
             String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8) + System.currentTimeMillis(),
                     "jpg");
             Files.createDirectories(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name).getParent());
@@ -111,11 +111,11 @@ public class CupomResource {
             FileOutputStream fs = new FileOutputStream(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name);
             fs.write(imageByte);
             fs.close();
-        
 
 
 
-            
+
+
             /*
             Files.write(Paths.get(storageDir + "cupom/" + cupom.getUsuarioId() + "/" + name),
                     Base64.getDecoder().decode(cupom.getFoto().getBytes(StandardCharsets.UTF_8)));
@@ -124,13 +124,13 @@ public class CupomResource {
 
 
 
-            
+
 
 
 /*
             BufferedImage originalImage = ImageIO.read(new File(cupom.getFoto()));
             int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-            
+
             BufferedImage resizeImageJpg = resizeImage(originalImage, type);
 		    ImageIO.write(resizeImageJpg, "jpg", new File(cupom.getFoto())); */
 
@@ -158,7 +158,7 @@ public class CupomResource {
         return resizedImage;
     }
 
-        
+
     /**
      * PUT /cupoms : Updates an existing cupom.
      *
@@ -185,9 +185,9 @@ public class CupomResource {
         if (!existingCupom.get().getData().equals(cupom.getData())
                 || !existingCupom.get().getValor().equals(cupom.getValor())
                 || !existingCupom.get().getNumero().equals(cupom.getNumero())
-                || !existingCupom.get().getEstabelecimentoComercialId().equals(cupom.getEstabelecimentoComercialId())) 
+                || !existingCupom.get().getEstabelecimentoComercialId().equals(cupom.getEstabelecimentoComercialId()))
         {
-            
+
             existingCupom = cupomRepository.findOneByDataAndValorAndNumeroAndEstabelecimentoComercialId(cupom.getData(),
                     cupom.getValor(), cupom.getNumero(), cupom.getEstabelecimentoComercialId());
 
@@ -196,8 +196,8 @@ public class CupomResource {
                         "duplicate");
             }
         }
-        
-        
+
+
 
         try {
 
@@ -238,6 +238,7 @@ public class CupomResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+
 
     /**
      * GET /cupoms/:id : get the "id" cupom.
@@ -284,11 +285,11 @@ public class CupomResource {
         {
             status  = StatusCupom.Ativo;
         }
-        
+
         log.debug("REST request Cupom Ativos : {}", usuario_id);
 
         final Page<Cupom> page = cupomRepository.findAllByUsuarioIdAndStatusCupom(pageable, usuario_id,status);
-                
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cupoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -305,15 +306,16 @@ public class CupomResource {
             @RequestParam(value = "data_inicial") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicial,
             @RequestParam(value = "data_final") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFinal,
             @RequestParam(value = "estabelecimentoId", required = false) Long estabelecimentoId,
+            @RequestParam(value = "grupoId", required = false) Long grupoId,
             @RequestParam(value = "lojaMaconicaId", required = false) Long lojaId, Pageable pageable) {
         dataFinal.setHours(23);
         dataFinal.setMinutes(59);
         dataFinal.setSeconds(59);
         Page<Cupom> page = null;
 
-        if (estabelecimentoId != null)
-            page = cupomRepository.findByDataBetweenAndEstabelecimentoComercialId(pageable, dataInicial.toInstant(),
-                    dataFinal.toInstant(), estabelecimentoId);
+        if (grupoId != null)
+            page = cupomRepository.findByDataBetweenAndGrupo(pageable, grupoId, dataInicial.toInstant(),
+                    dataFinal.toInstant());
         else if (lojaId != null)
             page = cupomRepository.findByDataBetweenAndUsuarioLojaMaconicaId(pageable, dataInicial.toInstant(),
                     dataFinal.toInstant(), lojaId);

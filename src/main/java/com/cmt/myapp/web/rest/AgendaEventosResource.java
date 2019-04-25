@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,9 +89,18 @@ public class AgendaEventosResource {
      */
     @GetMapping("/agenda-eventos")
     @Timed
-    public ResponseEntity<List<AgendaEventos>> getAllAgendaEventos(Pageable pageable) {
+    public ResponseEntity<List<AgendaEventos>> getAllAgendaEventos(Pageable pageable,
+    @RequestParam( value = "bol_app", required = false) Boolean bolApp) {
         log.debug("REST request to get a page of AgendaEventos");
-        Page<AgendaEventos> page = agendaEventosRepository.findAll(pageable);
+        Page<AgendaEventos> page = null;
+
+        if(bolApp != null && bolApp){
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_MONTH, -1);
+            page = agendaEventosRepository.findAllByDataAfter(cal.getTime().toInstant());
+        }else{
+            page = agendaEventosRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/agenda-eventos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
