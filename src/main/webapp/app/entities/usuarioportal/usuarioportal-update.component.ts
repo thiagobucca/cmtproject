@@ -62,6 +62,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
             this.user.tipoPessoa = <TipoPessoa>'Macom';
             this.data = user.dataNascimento != null ? user.dataNascimento.format(DATE_FORMAT) : null;
             this.authoritiesSelecionado = user.authorities;
+            if (user.grupoId != null && user.grupoId != undefined) this.loadRelacaoEstabelecimento(user.grupoId);
             this.ref.detectChanges();
         });
         this.authorities = [];
@@ -72,18 +73,6 @@ export class UsuarioportalUpdateComponent implements OnInit {
             this.languages = languages;
         });
 
-        this.estabelecimentoComercialService.query({ sort: ['nome,asc'] }).subscribe(
-            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
-                this.estabelecimentos = res.body;
-                this.loading = false;
-                this.ref.detectChanges();
-            },
-            (res: HttpErrorResponse) => {
-                this.onError(res.message);
-                this.loading = false;
-                this.ref.detectChanges();
-            }
-        );
         this.lojaMaconicaService.findByStatus(true, { size: 1000, sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
@@ -108,6 +97,21 @@ export class UsuarioportalUpdateComponent implements OnInit {
         window.history.back();
     }
 
+    loadRelacaoEstabelecimento(event) {
+        this.loading = true;
+        this.estabelecimentoComercialService.getByGrupo(event, { sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                this.estabelecimentos = res.body;
+                this.loading = false;
+                this.ref.detectChanges();
+            },
+            (res: HttpErrorResponse) => {
+                this.onError(res.message);
+                this.loading = false;
+                this.ref.detectChanges();
+            }
+        );
+    }
     save() {
         this.isSaving = true;
         this.user.langKey = 'pt-br';

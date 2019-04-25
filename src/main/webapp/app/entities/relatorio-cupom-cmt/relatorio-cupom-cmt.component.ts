@@ -193,7 +193,8 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     }
 
     loadRelacaoEstabelecimento(event) {
-        this.estabelecimentoComercialService.query({ grupoId: event, sort: ['nome,asc'] }).subscribe(
+        this.loading = true;
+        this.estabelecimentoComercialService.getByGrupo(event, { sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<IEstabelecimentoComercial[]>) => {
                 this.estabelecimentos = res.body;
                 this.loading = false;

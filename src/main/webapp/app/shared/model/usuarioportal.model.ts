@@ -25,7 +25,7 @@ export interface IUsuarioPortal {
     placet?: string;
     estabelecimentoComercialId?: number;
     grupoId?: number;
-    grupoNome?: string;
+    nomeGrupo?: string;
 }
 
 export class UsuarioPortal implements IUsuarioPortal {

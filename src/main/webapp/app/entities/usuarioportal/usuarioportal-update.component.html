@@ -91,7 +91,9 @@
                 <div class="col-md-5">
 
                     <label class="form-control-label" for="field_grupoId">Grupo Comercial</label>
-                    <select class="form-control" id="field_grupoId" name="grupoId" [(ngModel)]="user.grupoId" >
+                    <select class="form-control" id="field_grupoId" name="grupoId"
+                    (ngModelChange)="loadRelacaoEstabelecimento($event)"
+                    [(ngModel)]="user.grupoId" >
                         <option [ngValue]="undefined" disabled selected>Selecione...</option>
                         <option [ngValue]="item.id" *ngFor="let item of grupos; trackBy: trackById">{{item.nome}}
                         </option>

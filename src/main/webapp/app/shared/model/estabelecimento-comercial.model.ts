@@ -14,7 +14,7 @@ export interface IEstabelecimentoComercial {
     estabelecimentoMatrizId?: number;
     matriz?: string;
     grupoId?: number;
-    grupoNome?: string;
+    nomeGrupo?: string;
 }
 
 export class EstabelecimentoComercial implements IEstabelecimentoComercial {
