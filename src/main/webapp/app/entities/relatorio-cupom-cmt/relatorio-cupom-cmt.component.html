@@ -20,16 +20,27 @@
                         <input id="field_dataFim" type="date" class="form-control" name="dataFim" [(ngModel)]="consulta.dataFim"
                             required max="9999-12-31" />
                     </div>
-                    <div class="col-md-2" [hidden]="!consulta.isEstabelecimento">
+                    <div class="col-md-2" [hidden]="!consulta.isGrupo">
                         <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success"
                             style="margin-top: 24px;">
                             <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span>Buscar</span>
                         </button>
                     </div>
                 </div>
-                <div class="form-group row" [hidden]="consulta.isEstabelecimento">
+                <div class="form-group row" [hidden]="consulta.isGrupo">
+                        <div class="col-md-5">
+
+                                <label class="form-control-label" for="field_grupoId">Grupo Comercial</label>
+                                <select class="form-control" id="field_grupoId" name="grupoId" [(ngModel)]="consulta.grupoId"
+                                (ngModelChange)="loadRelacaoEstabelecimento($event)"  >
+                                    <option [ngValue]="undefined" disabled selected>Selecione...</option>
+                                    <option [ngValue]="item.id" *ngFor="let item of grupos; trackBy: trackById">{{item.nome}}
+                                    </option>
+                                </select>
+            
+                            </div>
                     <div class="col-md-5">
-                        <div>
+                        <div [hidden]="consulta.isEstabelecimento">
                         <label class="form-control-label" for="field_estabelecimentoComercialId">Estabelecimento
                             Comercial</label>
                         <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"

@@ -19,6 +19,9 @@ import { LojaMaconicaService } from 'app/entities/loja-maconica';
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
 
+import { IGrupoComercial } from 'app/shared/model/grupo-comercial.model';
+import { GrupoComercialService } from 'app/entities/grupo-comercial/grupo-comercial.service';
+
 @Component({
     selector: 'jhi-relatorio-cupom-cmt',
     templateUrl: './relatorio-cupom-cmt.component.html'
@@ -40,6 +43,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     estabelecimentos: IEstabelecimentoComercial[];
     lojas: ILojaMaconica[];
     consulta: any;
+    grupos: IGrupoComercial[];
     constructor(
         private relatorioCupomCmtService: RelatorioCupomCmtService,
         private jhiAlertService: JhiAlertService,
@@ -50,7 +54,8 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         private router: Router,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
         private lojaMaconicaService: LojaMaconicaService,
-        private principal: Principal
+        private principal: Principal,
+        private grupoComercialService: GrupoComercialService
     ) {
         this.totalValor = 0;
         this.totalValorLoja = 0;
@@ -67,9 +72,11 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             dataIni: '',
             dataFim: '',
             estabelecimentoId: undefined,
+            grupoId: undefined,
             lojaMaconicaId: undefined,
             isLojaMaconica: false,
-            isEstabelecimento: false
+            isEstabelecimento: false,
+            isGrupo: false
         };
     }
     consultar() {
@@ -149,25 +156,27 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
                     }
                 }
                 if (this.currentAccount.authorities.find(x => x === 'ROLE_ESTABELECIMENTO_COMERCIAL')) {
-                    this.consulta.isEstabelecimento = true;
+                    this.consulta.isGrupo = true;
+                    if (this.currentAccount.grupoId !== undefined) {
+                        this.consulta.grupoId = this.currentAccount.grupoId;
+                    }
                     if (this.currentAccount.estabelecimentoComercialId !== undefined) {
+                        this.consulta.isEstabelecimento = true;
                         this.consulta.estabelecimentoId = this.currentAccount.estabelecimentoComercialId;
+                        if (this.consulta.isGrupo) {
+                            this.loadRelacaoEstabelecimento(this.consulta.grupoId);
+                        }
                     }
                 }
             }
         });
-        this.estabelecimentoComercialService.query({ sort: ['nome,asc'] }).subscribe(
-            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
-                this.estabelecimentos = res.body;
-                this.loading = false;
-                this.ref.detectChanges();
+        this.grupoComercialService.query({ bolAtivo: true, size: 1000, sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IGrupoComercial[]>) => {
+                this.grupos = res.body;
             },
-            (res: HttpErrorResponse) => {
-                this.onError(res.message);
-                this.loading = false;
-                this.ref.detectChanges();
-            }
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
+
         this.lojaMaconicaService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
@@ -181,6 +190,21 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             }
         );
         this.registerChangeInRelatorioCupomCmts();
+    }
+
+    loadRelacaoEstabelecimento(event) {
+        this.estabelecimentoComercialService.query({ grupoId: event, sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                this.estabelecimentos = res.body;
+                this.loading = false;
+                this.ref.detectChanges();
+            },
+            (res: HttpErrorResponse) => {
+                this.onError(res.message);
+                this.loading = false;
+                this.ref.detectChanges();
+            }
+        );
     }
     detalhar(parametros: []) {
         sessionStorage.setItem('dadosConsulta', JSON.stringify(this.consulta));

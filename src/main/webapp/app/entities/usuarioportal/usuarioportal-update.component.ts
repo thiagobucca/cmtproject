@@ -16,6 +16,9 @@ import { ChangeDetectorRef } from '@angular/core';
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
 
+import { IGrupoComercial } from 'app/shared/model/grupo-comercial.model';
+import { GrupoComercialService } from 'app/entities/grupo-comercial/grupo-comercial.service';
+
 @Component({
     selector: 'jhi-usuarioportal-update',
     templateUrl: './usuarioportal-update.component.html'
@@ -30,6 +33,7 @@ export class UsuarioportalUpdateComponent implements OnInit {
     macons: IUsuarioPortal[];
     estabelecimentos: IEstabelecimentoComercial[];
     data: string;
+    grupos: IGrupoComercial[];
     constructor(
         private languageHelper: JhiLanguageHelper,
         private userService: UsuarioportalService,
@@ -38,7 +42,8 @@ export class UsuarioportalUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private auxService: AuxiliarService,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
-        private ref: ChangeDetectorRef
+        private ref: ChangeDetectorRef,
+        private grupoComercialService: GrupoComercialService
     ) {
         this.authoritiesSelecionado = [];
     }
@@ -88,6 +93,12 @@ export class UsuarioportalUpdateComponent implements OnInit {
         this.userService.findByTipo(TipoPessoa.Macom).subscribe(
             (res: HttpResponse<IUsuarioPortal[]>) => {
                 this.macons = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.grupoComercialService.query({ bolAtivo: true, size: 1000, sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IGrupoComercial[]>) => {
+                this.grupos = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
