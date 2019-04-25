@@ -78,6 +78,10 @@ public class UserDTO {
 
     private String estabelecimento;
 
+    private Long grupoId;
+
+    private String nomeGrupo;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -108,6 +112,9 @@ public class UserDTO {
         this.deviceId = user.getDeviceId();
         this.estabelecimentoComercialId = user.getEstabelecimentoComercialId();
         this.estabelecimento = user.getEstabelecimento();
+
+        this.grupoId = user.getGrupoId();
+        this.nomeGrupo = user.getNomeGrupo();
     }
 
     public Long getId() {
@@ -304,6 +311,14 @@ public class UserDTO {
 	public void setEstabelecimentoComercialId(Long estabelecimentoComercialId) {
 		this.estabelecimentoComercialId = estabelecimentoComercialId;
     }
+
+    public Long getGrupoId() {
+		return grupoId;
+	}
+
+	public void setGrupoId(Long grupoId) {
+		this.grupoId = grupoId;
+    }
     
     public String getEstabelecimento() {
 		return estabelecimento;
@@ -312,6 +327,15 @@ public class UserDTO {
 	public void setEstabelecicmento(String estabelecimento) {
 		this.estabelecimento = estabelecimento;
     }
+
+    public String getNomeGrupo() {
+		return nomeGrupo;
+	}
+
+	public void setNomeGrupo(String nomeGrupo) {
+		this.nomeGrupo = nomeGrupo;
+    }
+
 
 	@Override
     public String toString() {
@@ -330,6 +354,7 @@ public class UserDTO {
             ", authorities=" + authorities +
             ", placet=" + placet +
             ", estabelecimentoComercialId=" + getEstabelecimentoComercialId() +
+            ", grupoId=" + getGrupoId() +
             "}";
     }
 

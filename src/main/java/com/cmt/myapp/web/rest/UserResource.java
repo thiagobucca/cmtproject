@@ -141,9 +141,11 @@ public class UserResource {
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("REST request to update User : {}", userDTO);
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
+
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new EmailAlreadyUsedException();
         }
+
         existingUser = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new LoginAlreadyUsedException();
@@ -153,7 +155,7 @@ public class UserResource {
         existingUser = userRepository.findById(userDTO.getId());
 
         //Verifica se o usuario macom editou o campo PLACET
-        if (userDTO.getTipoPessoa() == TipoPessoa.Macom && (userDTO.getPlacet() != existingUser.get().getPlacet()))
+        if (userDTO.getTipoPessoa() == TipoPessoa.Macom && (!userDTO.getPlacet().equalsIgnoreCase(existingUser.get().getPlacet())))
         {
             //Verifica se o numero do placet esta vinculado a outro macom
             if(userRepository.findOneByTipoPessoaAndPlacet(TipoPessoa.Macom,userDTO.getPlacet()).isPresent()){

@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 e28a59f6b65f089d7a26918902e75bd862418178 cmtdev <leonardofelix2004@hotmail.com> 1554252978 -0300	branch: Created from HEAD
+e28a59f6b65f089d7a26918902e75bd862418178 2ca6b84051a2bb18c11adeab87a315e381771e11 cmtdev <leonardofelix2004@hotmail.com> 1554258976 -0300	commit: Implementado o campo estabelecimento comercial na api User
+2ca6b84051a2bb18c11adeab87a315e381771e11 4cdb2b6466e8984ea46110f3fc10bf0c9d478425 cmtdev <leonardofelix2004@hotmail.com> 1554336246 -0300	pull origin hml: Fast-forward
+4cdb2b6466e8984ea46110f3fc10bf0c9d478425 08d37fb3d23691ffcea470d1cd84d8b05bb9a064 cmtdev <leonardofelix2004@hotmail.com> 1554338526 -0300	commit: Adicionado 3 campos no reset da senha
