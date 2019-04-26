@@ -312,7 +312,9 @@ public class CupomResource {
         dataFinal.setMinutes(59);
         dataFinal.setSeconds(59);
         Page<Cupom> page = null;
-
+        if (estabelecimentoId != null)
+            page = cupomRepository.findByDataBetweenAndEstabelecimentoComercialId(pageable, dataInicial.toInstant(),
+                    dataFinal.toInstant(), estabelecimentoId);
         if (grupoId != null)
             page = cupomRepository.findByDataBetweenAndGrupo(pageable, grupoId, dataInicial.toInstant(),
                     dataFinal.toInstant());
