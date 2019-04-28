@@ -97,7 +97,7 @@ public class AgendaEventosResource {
         if(bolApp != null && bolApp){
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DAY_OF_MONTH, -1);
-            page = agendaEventosRepository.findAllByDataAfter(cal.getTime().toInstant());
+            page = agendaEventosRepository.findAllByDataAfter(pageable, cal.getTime().toInstant());
         }else{
             page = agendaEventosRepository.findAll(pageable);
         }

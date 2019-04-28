@@ -5,6 +5,7 @@ import java.time.Instant;
 import com.cmt.myapp.domain.AgendaEventos;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AgendaEventosRepository extends JpaRepository<AgendaEventos, Long> {
 
-    public Page<AgendaEventos> findAllByDataAfter(Instant data);
+    public Page<AgendaEventos> findAllByDataAfter(Pageable pageable, Instant data);
 
 }
