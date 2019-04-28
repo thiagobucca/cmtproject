@@ -103,7 +103,8 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
                     data_inicial: this.consulta.dataIni,
                     data_final: this.consulta.dataFim,
                     estabelecimentoId: this.consulta.estabelecimentoId === undefined ? '' : this.consulta.estabelecimentoId,
-                    lojaMaconicaId: this.consulta.lojaMaconicaId === undefined ? '' : this.consulta.lojaMaconicaId
+                    lojaMaconicaId: this.consulta.lojaMaconicaId === undefined ? '' : this.consulta.lojaMaconicaId,
+                    grupoId: this.consulta.grupoId === undefined ? '' : this.consulta.grupoId
                 })
                 .subscribe(
                     (res: HttpResponse<IRelatorioCupomCmt[]>) => {
@@ -151,21 +152,22 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             if (this.currentAccount !== undefined) {
                 if (this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
                     this.consulta.isLojaMaconica = true;
-                    if (this.currentAccount.lojaMaconicaId !== undefined) {
+                    if (this.currentAccount.lojaMaconicaId !== undefined && this.currentAccount.lojaMaconicaId !== null) {
                         this.consulta.lojaMaconicaId = this.currentAccount.lojaMaconicaId;
                     }
                 }
                 if (this.currentAccount.authorities.find(x => x === 'ROLE_ESTABELECIMENTO_COMERCIAL')) {
                     this.consulta.isGrupo = true;
-                    if (this.currentAccount.grupoId !== undefined) {
+                    if (this.currentAccount.grupoId !== undefined && this.currentAccount.grupoId !== null) {
                         this.consulta.grupoId = this.currentAccount.grupoId;
+                        this.loadRelacaoEstabelecimento(this.consulta.grupoId);
                     }
-                    if (this.currentAccount.estabelecimentoComercialId !== undefined) {
+                    if (
+                        this.currentAccount.estabelecimentoComercialId !== undefined &&
+                        this.currentAccount.estabelecimentoComercialId !== null
+                    ) {
                         this.consulta.isEstabelecimento = true;
                         this.consulta.estabelecimentoId = this.currentAccount.estabelecimentoComercialId;
-                        if (this.consulta.isGrupo) {
-                            this.loadRelacaoEstabelecimento(this.consulta.grupoId);
-                        }
                     }
                 }
             }

@@ -98,19 +98,23 @@ export class UsuarioportalUpdateComponent implements OnInit {
     }
 
     loadRelacaoEstabelecimento(event) {
-        this.loading = true;
-        this.estabelecimentoComercialService.getByGrupo(event, { sort: ['nome,asc'] }).subscribe(
-            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
-                this.estabelecimentos = res.body;
-                this.loading = false;
-                this.ref.detectChanges();
-            },
-            (res: HttpErrorResponse) => {
-                this.onError(res.message);
-                this.loading = false;
-                this.ref.detectChanges();
-            }
-        );
+        if (event != null && event != undefined) {
+            this.loading = true;
+            this.estabelecimentoComercialService.getByGrupo(event, { sort: ['nome,asc'] }).subscribe(
+                (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                    this.estabelecimentos = res.body;
+                    this.loading = false;
+                    this.ref.detectChanges();
+                },
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.loading = false;
+                    this.ref.detectChanges();
+                }
+            );
+        } else {
+            this.estabelecimentos = [];
+        }
     }
     save() {
         this.isSaving = true;
