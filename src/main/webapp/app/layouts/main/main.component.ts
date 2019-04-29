@@ -39,11 +39,6 @@ export class JhiMainComponent implements OnInit {
         }
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
         const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
-
-        // if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
-        //     let ps = new PerfectScrollbar(elemMainPanel);
-        //     ps = new PerfectScrollbar(elemSidebar);
-        // }
     }
     isMac(): boolean {
         let bool = false;
@@ -54,11 +49,6 @@ export class JhiMainComponent implements OnInit {
     }
 
     isAuthenticated(): boolean {
-        if (this.auxService.isAutenticado) {
-            this.des_classe = 'main-panel';
-        } else {
-            this.des_classe = 'container-fluid';
-        }
         return this.auxService.isAutenticado;
     }
 }

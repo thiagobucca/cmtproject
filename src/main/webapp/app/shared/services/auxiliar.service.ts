@@ -12,7 +12,7 @@ export class AuxiliarService {
     }
 
     get isAutenticado(): boolean {
-        return this._storage.getItem('isAutenticado') ? this._storage.getItem('isAutenticado') : false;
+        return this._storage.getItem('isAutenticado') ? this._storage.getItem('isAutenticado') == 'true' : false;
     }
     set isAutenticado(value: boolean) {
         this._storage.setItem('isAutenticado', value);
