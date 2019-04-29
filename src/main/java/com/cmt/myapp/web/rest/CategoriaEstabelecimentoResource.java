@@ -3,6 +3,7 @@ package com.cmt.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.cmt.myapp.domain.CategoriaEstabelecimento;
 import com.cmt.myapp.repository.CategoriaEstabelecimentoRepository;
+import com.cmt.myapp.service.dto.CategoriaEstabelecimentoDTO;
 import com.cmt.myapp.web.rest.errors.BadRequestAlertException;
 import com.cmt.myapp.web.rest.util.HeaderUtil;
 import com.cmt.myapp.web.rest.util.PaginationUtil;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,18 +96,45 @@ public class CategoriaEstabelecimentoResource {
         log.debug("REST request to get a page of CategoriaEstabelecimentos");
         Page<CategoriaEstabelecimento> page = null;
 
+
         if(pageable == null || pageable.getPageSize() ==20){
             pageable = PageRequest.of(0, Integer.MAX_VALUE);
         }
-
         if(bolAtivo != null)
             page = categoriaEstabelecimentoRepository.findAllByBolAtivo(pageable, bolAtivo);
         else
-
             page = categoriaEstabelecimentoRepository.findAll(pageable);
+
+
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categoria-estabelecimentos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * GET  /categoria-estabelecimentos : get all the categoriaEstabelecimentos.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of categoriaEstabelecimentos in body
+     */
+    @GetMapping("/categoria-estabelecimentos-app")
+    @Timed
+    public ResponseEntity<List<CategoriaEstabelecimentoDTO>> getAllCategoriaEstabelecimentos() {
+        log.debug("REST request to get a page of CategoriaEstabelecimentos");
+        Page<CategoriaEstabelecimento> page = null;
+            List<CategoriaEstabelecimentoDTO> lista =  new ArrayList<>();
+            CategoriaEstabelecimentoDTO todas = new CategoriaEstabelecimentoDTO();
+            todas.setId(0l);
+            todas.setNome("Todas");
+            todas.setEstabelecimentos(0l);
+            lista.add(todas);
+             lista.addAll(categoriaEstabelecimentoRepository.findCategorias());
+
+             lista.forEach(item -> {
+                todas.setEstabelecimentos(todas.getEstabelecimentos()+item.getEstabelecimentos());
+             });
+
+            return ResponseEntity.ok().body(lista);
     }
 
     /**

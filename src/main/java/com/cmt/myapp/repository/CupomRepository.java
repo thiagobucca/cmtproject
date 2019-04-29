@@ -30,11 +30,14 @@ public interface CupomRepository extends JpaRepository<Cupom, Long> {
     public Page<Cupom> findByDataBetween(Pageable pageable, Instant dataInicial, Instant dataFinal);
 
     public Page<Cupom> findByDataBetweenAndEstabelecimentoComercialId(Pageable pageable, Instant dataInicial, Instant dataFinal, Long estabelecimentoId);
-    
+
     public Page<Cupom> findByDataBetweenAndUsuarioLojaMaconicaId(Pageable pageable, Instant dataInicial, Instant dataFinal, Long lojaMaconicaId);
 
     public Optional<Cupom> findOneByDataAndValorAndNumeroAndEstabelecimentoComercialId(Instant data, Number valor, String numero, Long estabelecimentoId);
-    
+
+    @Query(value = "select c from Cupom c INNER JOIN EstabelecimentoComercial e ON c.estabelecimentoComercialId = e.id  where e.grupoId = ?1 AND c.data between ?2 and ?3",
+    countQuery = "select COUNT(c.id) from Cupom c INNER JOIN EstabelecimentoComercial e ON c.estabelecimentoComercialId = e.id  where e.grupoId = ?1 AND c.data between ?2 and ?3")
+    public Page<Cupom> findByDataBetweenAndGrupo(Pageable pageable, Long grupoId, Instant dataInicio, Instant dataFim);
 }
 
 
