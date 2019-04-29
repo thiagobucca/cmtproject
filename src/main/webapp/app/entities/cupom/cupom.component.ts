@@ -122,7 +122,7 @@ export class CupomComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
-    detalhar(parametros: []) {
+    detalhar(parametros: [string, any?, string?]) {
         this.loading = true;
         this.router.navigate(parametros);
     }

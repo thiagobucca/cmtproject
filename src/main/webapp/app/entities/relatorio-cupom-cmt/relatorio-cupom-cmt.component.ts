@@ -209,7 +209,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             }
         );
     }
-    detalhar(parametros: []) {
+    detalhar(parametros: [string, any?, string?]) {
         sessionStorage.setItem('dadosConsulta', JSON.stringify(this.consulta));
         this.loading = true;
         this.router.navigate(parametros);
@@ -249,5 +249,9 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackById(index: number, item: any) {
+        return item.id;
     }
 }

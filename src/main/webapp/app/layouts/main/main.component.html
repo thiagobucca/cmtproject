@@ -6,7 +6,7 @@
     <div class="sidebar" data-color="green" data-background-color="white" *ngSwitchCase="'true'">
         <router-outlet name="sidebar"></router-outlet>        
     </div>
-    <div [ngClass]="isAuthenticated()==='true'?'main-panel':'container-fluid'">
+    <div  [ngClass]="des_classe">
         <div>
             <router-outlet name="navbar"></router-outlet>
         </div>

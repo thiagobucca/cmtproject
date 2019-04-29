@@ -8,6 +8,7 @@ import { AuxiliarService } from 'app/shared/services/auxiliar.service';
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
+    des_classe: any;
     constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router, private auxService: AuxiliarService) {}
 
     get isLoading(): boolean {
@@ -53,6 +54,11 @@ export class JhiMainComponent implements OnInit {
     }
 
     isAuthenticated(): boolean {
+        if (this.auxService.isAutenticado) {
+            this.des_classe = 'main-panel';
+        } else {
+            this.des_classe = 'container-fluid';
+        }
         return this.auxService.isAutenticado;
     }
 }

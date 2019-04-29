@@ -49,7 +49,7 @@ export class ParametrizacaoComponent implements OnInit, OnDestroy {
             }
         );
     }
-    detalhar(parametros: []) {
+    detalhar(parametros: [string, any?, string?]) {
         this.loading = true;
         this.router.navigate(parametros);
     }
