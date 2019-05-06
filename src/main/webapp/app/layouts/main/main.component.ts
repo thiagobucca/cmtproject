@@ -8,6 +8,7 @@ import { AuxiliarService } from 'app/shared/services/auxiliar.service';
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
+    des_classe: any;
     constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router, private auxService: AuxiliarService) {}
 
     get isLoading(): boolean {
@@ -38,11 +39,6 @@ export class JhiMainComponent implements OnInit {
         }
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
         const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
-
-        // if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
-        //     let ps = new PerfectScrollbar(elemMainPanel);
-        //     ps = new PerfectScrollbar(elemSidebar);
-        // }
     }
     isMac(): boolean {
         let bool = false;

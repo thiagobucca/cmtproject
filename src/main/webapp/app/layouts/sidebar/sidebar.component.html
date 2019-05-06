@@ -81,15 +81,17 @@
             </a>
         </li>
         <li routerLinkActive="active" class="nav-item">
-            <a routerLink="relatorio-contas-pagar-receber" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+            <a routerLink="relatorio-contas-pagar-receber"
+             *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
                 <i class="now-ui-icons files_paper"></i>
                 <span>Relatório Contas Pagar/Receber</span>
             </a>
 
         </li>
-        <li routerLinkActive="active" class="nav-item" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+        <li routerLinkActive="active" class="nav-item" 
+        *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
 
-            <a class="dropdown-item" routerLink="usuarioportal">
+            <a  routerLink="usuarioportal">
 
                 <i class="now-ui-icons users_circle-08"></i>
                 <span>Usuário Portal</span>
@@ -98,7 +100,7 @@
         </li>
         <li routerLinkActive="active" class="nav-item" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
 
-            <a class="dropdown-item" routerLink="grupo-comercial">
+            <a  routerLink="grupo-comercial">
 
                 <i class="now-ui-icons shopping_bag-16"></i>
                 <span>Grupo Comercial</span>

@@ -89,6 +89,18 @@
 
             <div class="form-group row">
                 <div class="col-md-5">
+
+                    <label class="form-control-label" for="field_grupoId">Grupo Comercial</label>
+                    <select class="form-control" id="field_grupoId" name="grupoId"
+                    (ngModelChange)="loadRelacaoEstabelecimento($event)"
+                    [(ngModel)]="user.grupoId" >
+                        <option [ngValue]="undefined" selected>Selecione...</option>
+                        <option [ngValue]="item.id" *ngFor="let item of grupos; trackBy: trackById">{{item.nome}}
+                        </option>
+                    </select>
+
+                </div>
+                <div class="col-md-5">
                     <label class="form-control-label" for="field_estabelecimentoComercialId">Estabelecimento
                         Comercial</label>
                     <select class="form-control" id="field_estabelecimentoComercialId" name="estabelecimentoComercialId"
@@ -98,13 +110,14 @@
                             {{item.nome}}</option>
                     </select>
                 </div>
+
             </div>
             <div class="form-group row">
                 <div class="col-md-2" style="display: none;">
 
                     <label class="form-control-label" for="field_tipoPessoa">Tipo Pessoa</label>
                     <select class="form-control" name="tipoPessoa" [(ngModel)]="user.tipoPessoa" id="field_tipoPessoa"
-                        (ngModelChange)="onChangeTipoPessoa($event)" disabled>
+                         disabled>
                         <option value="Macom" selected>{{'cmtprojectApp.TipoPessoa.Macom' | translate}}</option>
                         <option value="Dependente">{{'cmtprojectApp.TipoPessoa.Dependente' | translate}}</option>
                     </select>

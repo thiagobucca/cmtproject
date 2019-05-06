@@ -36,6 +36,11 @@ export class EstabelecimentoComercialService {
         return this.http.get<IEstabelecimentoComercial[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
 
+    getByGrupo(grupoId: number, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IEstabelecimentoComercial[]>(`${this.resourceUrl}/grupo/${grupoId}`, { params: options, observe: 'response' });
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

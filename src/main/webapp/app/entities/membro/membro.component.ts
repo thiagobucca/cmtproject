@@ -187,7 +187,7 @@ export class MembroComponent implements OnInit, OnDestroy {
                 );
         } */
     }
-    detalhar(parametros: []) {
+    detalhar(parametros: [string, any?, string?]) {
         this.loading = true;
         this.router.navigate(parametros);
         sessionStorage.setItem('consultaMembro', JSON.stringify(this.consulta));
@@ -196,6 +196,9 @@ export class MembroComponent implements OnInit, OnDestroy {
     onChangeLoja(value: any) {
         this.consulta.lojaMaconicaId = value === undefined ? '' : value;
         this.loadAll();
+    }
+    trackById(index: number, item: any) {
+        return item.id;
     }
     trackIdentity(index, item: Membro) {
         return item.id;

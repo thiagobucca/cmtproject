@@ -24,6 +24,9 @@ export interface IUsuarioPortal {
     loja?: string;
     placet?: string;
     estabelecimentoComercialId?: number;
+    estabelecimento?: string;
+    grupoId?: number;
+    nomeGrupo?: string;
 }
 
 export class UsuarioPortal implements IUsuarioPortal {
@@ -48,7 +51,11 @@ export class UsuarioPortal implements IUsuarioPortal {
         public tipoPessoa?: TipoPessoa,
         public dependente?: string,
         public loja?: string,
-        public placet?: string
+        public placet?: string,
+        public nomeGrupo?: string,
+        public estabelecimento?: string,
+        public estabelecimentoComercialId?: number,
+        public grupoId?: number
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;

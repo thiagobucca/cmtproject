@@ -69,7 +69,7 @@ export class GrupoComercialComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
-    detalhar(parametros: []) {
+    detalhar(parametros: [string, any?, string?]) {
         this.loading = true;
         this.router.navigate(parametros);
     }

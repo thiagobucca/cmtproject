@@ -13,6 +13,8 @@ export interface IEstabelecimentoComercial {
     categoria?: string;
     estabelecimentoMatrizId?: number;
     matriz?: string;
+    grupoId?: number;
+    nomeGrupo?: string;
 }
 
 export class EstabelecimentoComercial implements IEstabelecimentoComercial {

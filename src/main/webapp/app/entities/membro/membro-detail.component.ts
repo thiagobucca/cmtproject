@@ -27,4 +27,6 @@ export class MembroDetailComponent implements OnInit {
     set loading(status: boolean) {
         this.auxService.isLoading = status;
     }
+
+    onChangeTipoPessoa(event) {}
 }

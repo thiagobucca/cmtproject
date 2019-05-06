@@ -162,7 +162,7 @@ export class RelatorioContasPagarReceberComponent implements OnInit, OnDestroy {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-    detalhar(parametros: []) {
+    detalhar(parametros: [string, any?, string?]) {
         sessionStorage.setItem('dadosConsultaConta', JSON.stringify(this.consulta));
         this.loading = true;
         this.router.navigate(parametros);

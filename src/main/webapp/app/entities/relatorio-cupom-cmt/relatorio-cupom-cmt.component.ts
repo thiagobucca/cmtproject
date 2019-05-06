@@ -19,6 +19,9 @@ import { LojaMaconicaService } from 'app/entities/loja-maconica';
 import { IEstabelecimentoComercial } from 'app/shared/model/estabelecimento-comercial.model';
 import { EstabelecimentoComercialService } from 'app/entities/estabelecimento-comercial';
 
+import { IGrupoComercial } from 'app/shared/model/grupo-comercial.model';
+import { GrupoComercialService } from 'app/entities/grupo-comercial/grupo-comercial.service';
+
 @Component({
     selector: 'jhi-relatorio-cupom-cmt',
     templateUrl: './relatorio-cupom-cmt.component.html'
@@ -40,6 +43,7 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
     estabelecimentos: IEstabelecimentoComercial[];
     lojas: ILojaMaconica[];
     consulta: any;
+    grupos: IGrupoComercial[];
     constructor(
         private relatorioCupomCmtService: RelatorioCupomCmtService,
         private jhiAlertService: JhiAlertService,
@@ -50,7 +54,8 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         private router: Router,
         private estabelecimentoComercialService: EstabelecimentoComercialService,
         private lojaMaconicaService: LojaMaconicaService,
-        private principal: Principal
+        private principal: Principal,
+        private grupoComercialService: GrupoComercialService
     ) {
         this.totalValor = 0;
         this.totalValorLoja = 0;
@@ -67,9 +72,11 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             dataIni: '',
             dataFim: '',
             estabelecimentoId: undefined,
+            grupoId: undefined,
             lojaMaconicaId: undefined,
             isLojaMaconica: false,
-            isEstabelecimento: false
+            isEstabelecimento: false,
+            isGrupo: false
         };
     }
     consultar() {
@@ -96,7 +103,8 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
                     data_inicial: this.consulta.dataIni,
                     data_final: this.consulta.dataFim,
                     estabelecimentoId: this.consulta.estabelecimentoId === undefined ? '' : this.consulta.estabelecimentoId,
-                    lojaMaconicaId: this.consulta.lojaMaconicaId === undefined ? '' : this.consulta.lojaMaconicaId
+                    lojaMaconicaId: this.consulta.lojaMaconicaId === undefined ? '' : this.consulta.lojaMaconicaId,
+                    grupoId: this.consulta.grupoId === undefined ? '' : this.consulta.grupoId
                 })
                 .subscribe(
                     (res: HttpResponse<IRelatorioCupomCmt[]>) => {
@@ -144,30 +152,33 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
             if (this.currentAccount !== undefined) {
                 if (this.currentAccount.authorities.find(x => x === 'ROLE_LOJA_MACONICA')) {
                     this.consulta.isLojaMaconica = true;
-                    if (this.currentAccount.lojaMaconicaId !== undefined) {
+                    if (this.currentAccount.lojaMaconicaId !== undefined && this.currentAccount.lojaMaconicaId !== null) {
                         this.consulta.lojaMaconicaId = this.currentAccount.lojaMaconicaId;
                     }
                 }
                 if (this.currentAccount.authorities.find(x => x === 'ROLE_ESTABELECIMENTO_COMERCIAL')) {
-                    this.consulta.isEstabelecimento = true;
-                    if (this.currentAccount.estabelecimentoComercialId !== undefined) {
+                    this.consulta.isGrupo = true;
+                    if (this.currentAccount.grupoId !== undefined && this.currentAccount.grupoId !== null) {
+                        this.consulta.grupoId = this.currentAccount.grupoId;
+                        this.loadRelacaoEstabelecimento(this.consulta.grupoId);
+                    }
+                    if (
+                        this.currentAccount.estabelecimentoComercialId !== undefined &&
+                        this.currentAccount.estabelecimentoComercialId !== null
+                    ) {
+                        this.consulta.isEstabelecimento = true;
                         this.consulta.estabelecimentoId = this.currentAccount.estabelecimentoComercialId;
                     }
                 }
             }
         });
-        this.estabelecimentoComercialService.query({ sort: ['nome,asc'] }).subscribe(
-            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
-                this.estabelecimentos = res.body;
-                this.loading = false;
-                this.ref.detectChanges();
+        this.grupoComercialService.query({ bolAtivo: true, size: 1000, sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IGrupoComercial[]>) => {
+                this.grupos = res.body;
             },
-            (res: HttpErrorResponse) => {
-                this.onError(res.message);
-                this.loading = false;
-                this.ref.detectChanges();
-            }
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
+
         this.lojaMaconicaService.query({ sort: ['nome,asc'] }).subscribe(
             (res: HttpResponse<ILojaMaconica[]>) => {
                 this.lojas = res.body;
@@ -182,7 +193,23 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
         );
         this.registerChangeInRelatorioCupomCmts();
     }
-    detalhar(parametros: []) {
+
+    loadRelacaoEstabelecimento(event) {
+        this.loading = true;
+        this.estabelecimentoComercialService.getByGrupo(event, { sort: ['nome,asc'] }).subscribe(
+            (res: HttpResponse<IEstabelecimentoComercial[]>) => {
+                this.estabelecimentos = res.body;
+                this.loading = false;
+                this.ref.detectChanges();
+            },
+            (res: HttpErrorResponse) => {
+                this.onError(res.message);
+                this.loading = false;
+                this.ref.detectChanges();
+            }
+        );
+    }
+    detalhar(parametros: [string, any?, string?]) {
         sessionStorage.setItem('dadosConsulta', JSON.stringify(this.consulta));
         this.loading = true;
         this.router.navigate(parametros);
@@ -222,5 +249,9 @@ export class RelatorioCupomCmtComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackById(index: number, item: any) {
+        return item.id;
     }
 }

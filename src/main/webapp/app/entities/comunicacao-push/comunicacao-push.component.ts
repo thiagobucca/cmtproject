@@ -87,7 +87,7 @@ export class ComunicacaoPushComponent implements OnInit, OnDestroy {
             this.transition();
         }
     }
-    detalhar(parametros: []) {
+    detalhar(parametros: [string, any?, string?]) {
         this.loading = true;
         this.router.navigate(parametros);
     }
