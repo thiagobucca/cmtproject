@@ -17,6 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AgendaEventosRepository extends JpaRepository<AgendaEventos, Long> {
 
-    public Page<AgendaEventos> findAllByDataAfter(Pageable pageable, Instant data);
+    public Page<AgendaEventos> findAllByDataAfterOrderByDataAsc(Pageable pageable, Instant data);
 
 }

@@ -94,10 +94,11 @@ public class AgendaEventosResource {
         log.debug("REST request to get a page of AgendaEventos");
         Page<AgendaEventos> page = null;
 
+        
         if(bolApp != null && bolApp){
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DAY_OF_MONTH, -1);
-            page = agendaEventosRepository.findAllByDataAfter(pageable, cal.getTime().toInstant());
+            page = agendaEventosRepository.findAllByDataAfterOrderByDataAsc(pageable, cal.getTime().toInstant());
         }else{
             page = agendaEventosRepository.findAll(pageable);
         }
