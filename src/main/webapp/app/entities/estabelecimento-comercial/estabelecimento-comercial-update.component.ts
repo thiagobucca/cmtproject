@@ -138,6 +138,7 @@ export class EstabelecimentoComercialUpdateComponent implements OnInit {
             this.estabelecimentoComercial.categoria = null;
             if (this.estabelecimentoComercial.id !== undefined) {
                 this.estabelecimentoComercial.matriz = null;
+                this.estabelecimentoComercial.nomeGrupo = null;
 
                 this.subscribeToSaveResponse(this.estabelecimentoComercialService.update(this.estabelecimentoComercial));
             } else {
